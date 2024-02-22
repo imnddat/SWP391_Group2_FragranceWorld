@@ -13,7 +13,7 @@ public class Brand {
     /*Brand ID*/
     private String name;
     /*Brand Name*/
-    private String makebtFrom;
+    private String makebyFrom;
     /*Brand makebtFrom*/
 
     public Brand() {
@@ -22,7 +22,7 @@ public class Brand {
     public Brand(int id, String name, String makebtFrom) {
         this.id = id;
         this.name = name;
-        this.makebtFrom = makebtFrom;
+        this.makebyFrom = makebtFrom;
     }
 
     public int getId() {
@@ -42,11 +42,11 @@ public class Brand {
     }
 
     public String getMakebtFrom() {
-        return makebtFrom;
+        return makebyFrom;
     }
 
     public void setMakebtFrom(String makebtFrom) {
-        this.makebtFrom = makebtFrom;
+        this.makebyFrom = makebtFrom;
     }
     
     

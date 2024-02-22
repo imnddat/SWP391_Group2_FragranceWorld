@@ -5,12 +5,18 @@
 
 package Controller;
 
+import DAO.BrandDAO;
+import DAO.ProductDAO;
+import Model.Brand;
+import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.Vector;
 
 /**
  *
@@ -53,26 +59,35 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+         HttpSession session = request.getSession();
+        String service = request.getParameter("service");
+        Vector<Brand> brands = (new BrandDAO()).getAll();
+        request.setAttribute("allBrands", brands);
+
+        if (session.getAttribute("numberProductsInCart") == null) {
+            session.setAttribute("numberProductsInCart", 0);
+        }
+        
+        if (service == null) {
+            service = "listAllProducts";
+        }
+
+        if (service.equals("listAllProducts")) {
+            Vector<Product> products = (new ProductDAO()).getAll();
+            request.setAttribute("allProducts", products);
+
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
+        @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("index.jsp");
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
+   
     @Override
     public String getServletInfo() {
         return "Short description";

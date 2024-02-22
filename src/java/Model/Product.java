@@ -13,26 +13,27 @@ public class Product {
     private int id;
     /*Product ID*/
     private String description;
-    /*User Name*/
+    private int genderID;
     private String nameProduct;
-    
     private String codeProduct;
-
-    /*User Mail*/
+    private int discount;
     private String scent;
-    /*User Name*/
+    private int brandID;
     private String defaultImg;
-    /*User mobile*/
+  
 
     public Product() {
     }
 
-    public Product(int id, String description, String nameProduct, String codeProduct, String scent, String defaultImg) {
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg) {
         this.id = id;
         this.description = description;
+        this.genderID = genderID;
         this.nameProduct = nameProduct;
         this.codeProduct = codeProduct;
+        this.discount = discount;
         this.scent = scent;
+        this.brandID = brandID;
         this.defaultImg = defaultImg;
     }
 
@@ -52,6 +53,14 @@ public class Product {
         this.description = description;
     }
 
+    public int getGenderID() {
+        return genderID;
+    }
+
+    public void setGenderID(int genderID) {
+        this.genderID = genderID;
+    }
+
     public String getNameProduct() {
         return nameProduct;
     }
@@ -68,12 +77,28 @@ public class Product {
         this.codeProduct = codeProduct;
     }
 
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
     public String getScent() {
         return scent;
     }
 
     public void setScent(String scent) {
         this.scent = scent;
+    }
+
+    public int getBrandID() {
+        return brandID;
+    }
+
+    public void setBrandID(int brandID) {
+        this.brandID = brandID;
     }
 
     public String getDefaultImg() {
@@ -83,9 +108,4 @@ public class Product {
     public void setDefaultImg(String defaultImg) {
         this.defaultImg = defaultImg;
     }
-   
-    
-    
- 
-
 }

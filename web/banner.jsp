@@ -26,7 +26,7 @@
         <!-- include the site stylesheet -->
         <link rel="stylesheet" href="css/responsive.css">
     </head>
-    <body>
+    <body>  
         <!-- banner frame start here -->
         <div class="banner-frame">
             <!-- banner-1 start here -->
@@ -35,7 +35,7 @@
                 <div class="holder">
                     <h2>MY SMALL WRITING <br>DESK</h2>
                     <div class="txts">
-                        <a class="btn-shop" href="product-detail.html">
+                        <a class="btn-shop" href="productdetail.jsp">
                             <span>shop now</span>
                             <i class="fa fa-angle-right"></i>
                         </a>
@@ -86,7 +86,6 @@
             <!-- banner-4 end here -->
         </div>
         <!-- banner frame end here -->
-
 
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
