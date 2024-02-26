@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Thinkpad
@@ -15,16 +17,17 @@ public class Brand {
     /*Brand Name*/
     private String makebyFrom;
     /*Brand makebtFrom*/
-
+   
     public Brand() {
     }
 
-    public Brand(int id, String name, String makebtFrom) {
+    public Brand(int id, String name, String makebyFrom) {
         this.id = id;
         this.name = name;
-        this.makebyFrom = makebtFrom;
+        this.makebyFrom = makebyFrom;
+       
     }
-
+   
     public int getId() {
         return id;
     }
@@ -48,7 +51,7 @@ public class Brand {
     public void setMakebtFrom(String makebtFrom) {
         this.makebyFrom = makebtFrom;
     }
-    
-    
+
+   
     
 }

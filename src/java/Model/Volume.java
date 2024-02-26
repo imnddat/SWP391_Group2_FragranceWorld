@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.Vector;
+
 /**
  *
  * @author Thinkpad
@@ -11,6 +13,7 @@ package Model;
 public class Volume {
     private int id;
     private String capacity;
+    private int productID;
     private double price;
     private int stock;
     private int sold;
@@ -18,9 +21,10 @@ public class Volume {
     public Volume() {
     }
 
-    public Volume(int id, String capacity, double price, int stock, int sold) {
+    public Volume(int id, String capacity, int productID, double price, int stock, int sold) {
         this.id = id;
         this.capacity = capacity;
+        this.productID = productID;
         this.price = price;
         this.stock = stock;
         this.sold = sold;
@@ -40,6 +44,14 @@ public class Volume {
 
     public void setCapacity(String capacity) {
         this.capacity = capacity;
+    }
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public double getPrice() {

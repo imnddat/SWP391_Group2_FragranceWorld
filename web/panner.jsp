@@ -49,8 +49,7 @@
                                         <span class="bar small"></span>
                                         <span class="bar"></span>
                                     </a>
-                                </li>
-                                <li><a href="#" class="icon-magnifier"></a></li>
+                                </li>                                  
                                 <li class="drop">
                                     <a href="#" class="icon-heart cart-opener"><span style="margin-bottom: -3px;" class="num">3</span></a>
                                     <!-- mt drop start here -->
@@ -184,8 +183,8 @@
                                                             <strong class="title"><a href="product-grid-view.html" class="mt-subopener">cacloainuoc</a></strong>
                                                             <div class="sub-drop">
                                                                 <ul>
-                                                                    <li><a href="product-grid-view.html">Product Grid View</a></li>
-                                                                    <li><a href="product-list-view.html">Product List View</a></li>
+                                                                    <li><a href="listProductView.jsp">Product Dior</a></li>
+                                                                    <li><a href="product-list-view.html">Product Gucci</a></li>
                                                                     <li><a href="product-detail.html">Product Detail</a></li>
                                                                 </ul>
                                                             </div>
@@ -307,93 +306,32 @@
             <!-- mt bottom bar end here -->
             <span class="mt-side-over"></span>
         </header><!-- mt header style4 end here -->
-
+        <div class="mt-side-menu">
+				<!-- mt holder start here -->
+				<div class="mt-holder">
+					<a href="#" class="side-close"><span></span><span></span></a>
+					<strong class="mt-side-title">MY ACCOUNT</strong>
+					<!-- mt side widget start here -->
+					<div class="mt-side-widget">
+						<header>
+                                                    <a href="registerpage.jsp"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">SIGN UP</button></span></a>
+						</header>	
+					</div>
+					<!-- mt side widget end here -->
+					<div class="or-divider"><span class="txt">or</span></div>
+					<!-- mt side widget start here -->
+					<div class="mt-side-widget">
+						<header>
+                                                    <a href="loginpage.jsp"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">LOGIN</button></span></a>
+						</header>
+					</div>
+					<!-- mt side widget end here -->
+				</div>
+				<!-- mt holder end here -->
+			</div><!-- mt side menu end here -->
+        
+        
         <!-- Header -->    
-
-        <!-- mt search popup start here -->
-        <div class="mt-search-popup">
-            <div class="mt-holder">
-                <a href="#" class="search-close"><span></span><span></span></a>
-                <div class="mt-frame">
-                    <form action="#">
-                        <fieldset>
-                            <input type="text" placeholder="Search...">
-                            <span class="icon-microphone"></span>
-                            <button class="icon-magnifier" type="submit"></button>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div><!-- mt search popup end here -->
-
-
-
-        <!-- mt main slider start here -->
-        <div class="mt-main-slider">
-            <!-- slider banner-slider start here -->
-            <div class="slider banner-slider">
-                <!-- holder start here -->
-                <div class="holder text-center" style="background-image: url(http://placehold.it/1920x585);">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="text centerize">
-                                    <strong class="title">FURNITURE DESIGNS IDEAS</strong>
-                                    <h1>LIGHTING</h1>
-                                    <h2>PENDANT LAMPS</h2>
-                                    <div class="txt">
-                                        <p>Consectetur adipisicing elit. Beatae accusamus, optio, repellendus inventore</p>
-                                    </div>
-                                    <a href="product-detail.html" class="shop">shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- holder end here -->
-
-                <!-- holder start here -->
-                <div class="holder text-center" style="background-image: url(http://placehold.it/1920x585);">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="text right">
-                                    <strong class="title">FURNITURE DESIGNS IDEAS</strong>
-                                    <h1>LOUNGE CHAIRS</h1>
-                                    <h2>SW DAYBED</h2>
-                                    <div class="txt">
-                                        <p>Consectetur adipisicing elit. Beatae accusamus, optio, repellendus inventore</p>
-                                    </div>
-                                    <a href="product-detail.html" class="shop">shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- holder end here -->
-
-                <!-- holder start here -->
-                <div class="holder text-center" style="background-image: url(http://placehold.it/1920x585);">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="text">
-                                    <strong class="title">FURNITURE DESIGNS IDEAS</strong>
-                                    <h1>CARDBOARD</h1>
-                                    <h2> Sofas and Armchairs</h2>
-                                    <div class="txt">
-                                        <p>Consectetur adipisicing elit. Beatae accusamus, optio, repellendus inventore</p>
-                                    </div>
-                                    <a href="product-detail.html" class="shop">shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- holder end here -->
-            </div>
-            <!-- slider regular end here -->
-        </div><!-- mt main slider end here -->
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->

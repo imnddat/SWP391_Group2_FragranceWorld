@@ -4,6 +4,9 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Thinkpad
@@ -20,8 +23,9 @@ public class Product {
     private String scent;
     private int brandID;
     private String defaultImg;
-  
-
+    private ArrayList<Volume> volumes;
+    private ArrayList<Brand> brands;
+    private ArrayList<Gender> genders;
     public Product() {
     }
 
@@ -37,6 +41,48 @@ public class Product {
         this.defaultImg = defaultImg;
     }
 
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, ArrayList<Volume> volumes) {
+        this.id = id;
+        this.description = description;
+        this.genderID = genderID;
+        this.nameProduct = nameProduct;
+        this.codeProduct = codeProduct;
+        this.discount = discount;
+        this.scent = scent;
+        this.brandID = brandID;
+        this.defaultImg = defaultImg;
+        this.volumes = volumes;
+    }
+
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, ArrayList<Volume> volumes, ArrayList<Brand> brands) {
+        this.id = id;
+        this.description = description;
+        this.genderID = genderID;
+        this.nameProduct = nameProduct;
+        this.codeProduct = codeProduct;
+        this.discount = discount;
+        this.scent = scent;
+        this.brandID = brandID;
+        this.defaultImg = defaultImg;
+        this.volumes = volumes;
+        this.brands = brands;
+    }
+
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, ArrayList<Volume> volumes, ArrayList<Brand> brands, ArrayList<Gender> genders) {
+        this.id = id;
+        this.description = description;
+        this.genderID = genderID;
+        this.nameProduct = nameProduct;
+        this.codeProduct = codeProduct;
+        this.discount = discount;
+        this.scent = scent;
+        this.brandID = brandID;
+        this.defaultImg = defaultImg;
+        this.volumes = volumes;
+        this.brands = brands;
+        this.genders = genders;
+    }
+    
     public int getId() {
         return id;
     }
@@ -108,4 +154,31 @@ public class Product {
     public void setDefaultImg(String defaultImg) {
         this.defaultImg = defaultImg;
     }
+
+    public ArrayList<Volume> getVolumes() {
+        return volumes;
+    }
+
+    public void setVolumes(ArrayList<Volume> volumes) {
+        this.volumes = volumes;
+    }
+
+    public ArrayList<Brand> getBrands() {
+        return brands;
+    }
+
+    public void setBrands(ArrayList<Brand> brands) {
+        this.brands = brands;
+    }
+
+    public ArrayList<Gender> getGenders() {
+        return genders;
+    }
+
+    public void setGenders(ArrayList<Gender> genders) {
+        this.genders = genders;
+    }
+    
+    
+    
 }

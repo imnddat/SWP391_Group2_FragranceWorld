@@ -9,12 +9,20 @@
         <servlet-class>Controller.HomeController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CustomerController</servlet-name>
-        <servlet-class>Controller.CustomerController</servlet-class>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>Controller.ResetPasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterController</servlet-name>
-        <servlet-class>Controller.RegisterController</servlet-class>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>Controller.ChangePasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProductViewController</servlet-name>
+        <servlet-class>Controller.ListProductViewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewUserProfile</servlet-name>
+        <servlet-class>Controller.viewUserProfile</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -25,12 +33,23 @@
         <url-pattern>/HomeController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CustomerController</servlet-name>
-        <url-pattern>/CustomerController</url-pattern>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/ResetPasswordController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterController</servlet-name>
-        <url-pattern>/RegisterController</url-pattern>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePasswordController</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>HomeController</welcome-file>
+    </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>ListProductViewController</servlet-name>
+        <url-pattern>/ListProductViewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewUserProfile</servlet-name>
+        <url-pattern>/viewUserProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

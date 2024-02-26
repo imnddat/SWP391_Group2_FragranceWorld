@@ -87,7 +87,7 @@
                           </div>
                           <div>
                                <button type="submit" class="btn-type1">Login</button>
-                               <a href="registerpage.jsp" > <button type="submit" class="btn-type1">Register Me</button></a>
+                               <a href="registerpage.jsp"> <button type="submit" class="btn-type1">Register Me</button></a>
                           </div>
                          
                           

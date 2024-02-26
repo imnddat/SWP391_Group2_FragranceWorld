@@ -5,12 +5,17 @@
 
 package Controller;
 
+import DAO.UserDAO;
+import Model.User;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,18 +32,55 @@ public class UserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+//        response.setContentType("text/html;charset=UTF-8");
+//         try (PrintWriter out = response.getWriter()) {
+//            String service = request.getParameter("service");
+//            UserDAO userInterface = new UserDAO();
+//            /*Log in*/
+//            if (service.equalsIgnoreCase("login")) {
+//                String userMail = request.getParameter("userMail");
+//                String mess = "";
+//                String password = request.getParameter("password");
+//                User log = null;
+//
+//                UserRoleDAO userRoleDAO = new UserRoleDAOImpl();
+//
+//                log = userInterface.getUserLogin(userMail, password);
+//                //validate user log in, if wrong, re-login
+//                if (log == null) {
+//                    mess = "Sorry, username and/or password are/is invalid!";
+//                    request.setAttribute("mess", mess);
+//                    sendDispatcher(request, response, "login/login.jsp");
+//                    return;
+//                    //if loged in, get user role and forward to homepage with their role    
+//                } else {
+//                    request.getSession().setAttribute("currUser", log);
+//                    request.getSession().setAttribute("role", userRoleDAO.getUserRoleById(log.getRoleId()));
+//                }
+//                out.print(mess);
+//                request.getRequestDispatcher("index.jsp").forward(request, response);
+//            }
+//            /* Log out */
+//            if (service.equalsIgnoreCase("logout")) {
+//                request.getSession().removeAttribute("currUser");
+//                sendDispatcher(request, response, "index.jsp");
+//            }
+//
+//        } catch (Exception ex) {
+//            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+//            request.setAttribute("errorMess", ex.toString());
+//            request.getRequestDispatcher("error.jsp").forward(request, response);
+//        }
+    }
+
+    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher(path);
+            rd.forward(request, response);
+
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(UserController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     } 
 

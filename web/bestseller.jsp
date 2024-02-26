@@ -4,6 +4,7 @@
     Author     : Thinkpad
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,20 +34,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 mt-heading text-uppercase">
-                        <h2 class="heading">BEST SELLER</h2>
-                        <p>EXCEPTEUR SINT OCCAECAT</p>
+                        <h2 class="heading">BEST SELLER </h2>
+                       
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="bestseller-slider">
+                            <c:forEach items="${requestScope.MaxPriceProducts}" var="p">                              
                             <div class="slide">
-                                <!-- mt product1 center start here -->
+                              
                                 <div class="mt-product1 large">
                                     <div class="box">
                                         <div class="b1">
                                             <div class="b2">
-                                                <a href="product-detail.html"><img src="http://placehold.it/275x285" alt="image description"></a>
+                                                <a href="product-detail.html"><img src="${p.getDefaultImg()}" alt="image description" style="height: 275; width: 285"></a>
                                                 <span class="caption">
                                                     <span class="best-price">Best Price</span>
                                                 </span>
@@ -59,122 +61,12 @@
                                         </div>
                                     </div>
                                     <div class="txt">
-                                        <strong class="title"><a href="product-detail.html">Bombi Chair</a></strong>
-                                        <span class="price"><i class="fa fa-eur"></i> <span>399,00</span></span>
+                                        <strong class="title"><a href="product-detail.html">${p.getNameProduct()}</a></strong>
+                                        <span class="price"><i class="fa fa-eur"></i> <span>${p.getVolumes().get(0).getPrice()}</span></span>
                                     </div>
-                                </div><!-- mt product1 center end here -->
+                                </div> 
                             </div>
-                            <div class="slide">
-                                <!-- mt product1 center start here -->
-                                <div class="mt-product1 large">
-                                    <div class="box">
-                                        <div class="b1">
-                                            <div class="b2">
-                                                <a href="product-detail.html"><img src="http://placehold.it/275x285" alt="image description"></a>
-                                                <ul class="links add">
-                                                    <li><a href="#"><i class="icon-handbag"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="txt">
-                                        <strong class="title"><a href="product-detail.html">Marvelous Modern 3 Seater</a></strong>
-                                        <span class="price"><i class="fa fa-eur"></i> <span>599,00</span></span>
-                                    </div>
-                                </div><!-- mt product1 center end here -->
-                            </div>
-                            <div class="slide">
-                                <!-- mt product1 center start here -->
-                                <div class="mt-product1 large">
-                                    <div class="box">
-                                        <div class="b1">
-                                            <div class="b2">
-                                                <a href="product-detail.html"><img src="http://placehold.it/275x285" alt="image description"></a>
-                                                <ul class="links add">
-                                                    <li><a href="#"><i class="icon-handbag"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="txt">
-                                        <strong class="title"><a href="product-detail.html">Puff  Armchair</a></strong>
-                                        <span class="price"><i class="fa fa-eur"></i> <span>200,00</span></span>
-                                    </div>
-                                </div><!-- mt product1 center end here -->
-                            </div>
-                            <div class="slide">
-                                <!-- mt product1 center start here -->
-                                <div class="mt-product1 large">
-                                    <div class="box">
-                                        <div class="b1">
-                                            <div class="b2">
-                                                <a href="product-detail.html"><img src="http://placehold.it/275x285" alt="image description"></a>
-                                                <span class="caption">
-                                                    <span class="best-price">Best Price</span>
-                                                </span>
-                                                <ul class="links add">
-                                                    <li><a href="#"><i class="icon-handbag"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="txt">
-                                        <strong class="title"><a href="product-detail.html">Bombi Chair</a></strong>
-                                        <span class="price"><i class="fa fa-eur"></i> <span>399,00</span></span>
-                                    </div>
-                                </div><!-- mt product1 center end here -->
-                            </div>
-                            <div class="slide">
-                                <!-- mt product1 center start here -->
-                                <div class="mt-product1 large">
-                                    <div class="box">
-                                        <div class="b1">
-                                            <div class="b2">
-                                                <a href="product-detail.html"><img src="http://placehold.it/275x285" alt="image description"></a>
-                                                <ul class="links add">
-                                                    <li><a href="#"><i class="icon-handbag"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="txt">
-                                        <strong class="title"><a href="product-detail.html">Marvelous Modern 3 Seater</a></strong>
-                                        <span class="price"><i class="fa fa-eur"></i> <span>599,00</span></span>
-                                    </div>
-                                </div><!-- mt product1 center end here -->
-                            </div>
-                            <div class="slide">
-                                <!-- mt product1 center start here -->
-                                <div class="mt-product1 large">
-                                    <div class="box">
-                                        <div class="b1">
-                                            <div class="b2">
-                                                <a href="product-detail.html"><img src="http://placehold.it/275x285" alt="image description"></a>
-                                                <span class="caption">
-                                                    <span class="off">15% Off</span>
-                                                </span>
-                                                <ul class="links add">
-                                                    <li><a href="#"><i class="icon-handbag"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="txt">
-                                        <strong class="title"><a href="product-detail.html">Puff  Armchair</a></strong>
-                                        <span class="price"><i class="fa fa-eur"></i> <span>200,00</span></span>
-                                    </div>
-                                </div><!-- mt product1 center end here -->
-                            </div>
+                              </c:forEach>                            
                         </div>
                     </div>
                 </div>

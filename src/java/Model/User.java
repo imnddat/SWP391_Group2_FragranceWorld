@@ -22,12 +22,13 @@ public class User {
     /*User Name*/
     private String address;
     /*User mobile*/
-    private int phone;
+    private String phone;
     /*User status*/
     private int roleID;
     /*User Role Entity*/
     private int banned;
     /*Banner User Entity*/
+    private String dob;
     
     /**
      * Blank constructor
@@ -47,7 +48,7 @@ public class User {
      * @param roleID
      * @param banned
      */
-    public User(int id, String username, String password, String email, String name, String address, int phone, int roleID, int banned) {
+    public User(int id, String username, String password, String email, String name, String address, String phone, int roleID, int banned) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -58,6 +59,20 @@ public class User {
         this.roleID = roleID;
         this.banned = banned;
     }
+
+    public User(int id, String username, String password, String email, String name, String address, String phone, int roleID, int banned, String dob) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.roleID = roleID;
+        this.banned = banned;
+        this.dob = dob;
+    }
+    
 
   
     /**
@@ -173,7 +188,7 @@ public class User {
      *
      * @return
      */
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
@@ -182,7 +197,7 @@ public class User {
      *
      * @param phone
      */
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -221,5 +236,14 @@ public class User {
     public void setBanned(int banned) {
         this.banned = banned;
     }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+    
 
 }

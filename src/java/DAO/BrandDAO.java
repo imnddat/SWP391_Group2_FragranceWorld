@@ -22,7 +22,7 @@ public class BrandDAO extends DBConnection {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<Brand> brands = new Vector<>();
-        String sql = "select * from [brand]";
+        String sql = "select * from [Brand]";
         try {
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
@@ -56,7 +56,7 @@ public class BrandDAO extends DBConnection {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Brand brand = null;
-        String sql = "select * from [brand] where id = ?";
+        String sql = "select * from [Brand] where id = ?";
         try {
             stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
@@ -83,5 +83,31 @@ public class BrandDAO extends DBConnection {
             }
         }
         return null;
+    }
+    
+    
+     public Vector<Brand> filterByBrand(String filter, Vector<Brand> brands) {
+        Vector<Brand> BrandAfterFilter = new Vector<>();
+
+        if (filter.equals("brand-all")) {
+            return brands;
+        }
+        String[] filterSplits = filter.split("[-]");
+        int brandId = Integer.parseInt(filterSplits[1]);
+        BrandAfterFilter = filterBrand(brandId, brands);
+
+        return BrandAfterFilter;
+    }
+     
+    private Vector<Brand> filterBrand(int id, Vector<Brand> brands) {
+
+        Vector<Brand> BrandAfterFilter = new Vector<>();
+        for (Brand brand : brands) {
+              if (brand.getId()== id) {
+                BrandAfterFilter.add(brand);
+            }
+        }
+ 
+        return BrandAfterFilter;
     }
 }
