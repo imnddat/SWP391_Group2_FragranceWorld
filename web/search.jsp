@@ -57,41 +57,45 @@
                     <div class="tabs-slider">
                         <!-- slide start here -->
                         <c:forEach items="${requestScope.allProducts}" var="p" > 
-
-                            <div class="slide">
-                                <!-- mt product1 center start here -->
-                                <div class="mt-product1 mt-paddingbottom20" >                               
-                                    <div class="box">
-                                        <div class="b1">
-                                            <div class="b2">                                        
-                                                <a href="product-detail.html">
-                                                    <img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215">
-                                                </a>                                          
-                                                <span class="caption">
-                                                    <span class="new">NEW</span>
-                                                </span>
-                                                <ul class="mt-stars">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                                <ul class="links">
-                                                    <li><a href="#"><i class="icon-handbag"></i><span>Add to Cart</span></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
-                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
-                                                </ul>
+                            <form class="addToCartForm" action="cart" method="post">
+                                <div class="slide">
+                                    <!-- mt product1 center start here -->
+                                    <div class="mt-product1 mt-paddingbottom20" >                               
+                                        <div class="box">
+                                            <div class="b1">
+                                                <div class="b2">                                        
+                                                    <a href="product-detail.html">
+                                                        <img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215">
+                                                    </a>                                          
+                                                    <span class="caption">
+                                                        <span class="new">NEW</span>
+                                                    </span>
+                                                    <ul class="mt-stars">
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                    <ul class="links">
+                                                        <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">dd to Cart</button></span></a></li>
+                                                        <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                        <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>                               
-                                    <div class="txt">
-                                        <strong class="title"><a href="product-detail.html" >${p.getNameProduct()}</a></strong>                                    
-                                    </div>                              
-                                </div> 
+                                        </div>                               
+                                        <div class="txt">
+                                            <strong class="title"><a href="product-detail.html" >${p.getNameProduct()}</a></strong> 
+                                            <input type="hidden" name="id" value="${p.getId()}" />
+                                            <input type="hidden" name="quantity" value="1" />
+                                            <input type="hidden" name="price" value="287.00" />
+                                        </div>                              
+                                    </div> 
 
-                                <!-- mt product1 center start here -->
-                                <!-- mt product1 center end here -->
-                            </div>
+                                    <!-- mt product1 center start here -->
+                                    <!-- mt product1 center end here -->
+                                </div>
+                            </form>
                         </c:forEach>
 
                         <!-- slide end here -->  

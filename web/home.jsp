@@ -3,7 +3,7 @@
     Created on : Jan 30, 2024, 11:16:23 PM
     Author     : Thinkpad
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +62,10 @@
             </div><!-- W1 end here -->
             <span id="back-top" class="fa fa-arrow-up"></span>
         </div>
+        
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
+        
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->

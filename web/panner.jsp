@@ -3,7 +3,7 @@
     Created on : Feb 6, 2024, 7:59:31 PM
     Author     : Thinkpad
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,62 +98,53 @@
                                     <span class="mt-mdropover"></span>
                                 </li>
                                 <li class="drop">
-                                    <a href="#" class="cart-opener">
-                                        <span class="icon-handbag"></span>
-                                        <span class="num">3</span>
-                                    </a>
-                                    <!-- mt drop start here -->
-                                    <div class="mt-drop">
-                                        <!-- mt drop sub start here -->
-                                        <div class="mt-drop-sub">
-                                            <!-- mt side widget start here -->
-                                            <div class="mt-side-widget">
-                                                <!-- cart row start here -->
-                                                <div class="cart-row">
-                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                                    <div class="mt-h">
-                                                        <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                                        <span class="mt-h-title">Qty: 1</span>
-                                                    </div>
-                                                    <a href="#" class="close fa fa-times"></a>
-                                                </div><!-- cart row end here -->
-                                                <!-- cart row start here -->
-                                                <div class="cart-row">
-                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                                    <div class="mt-h">
-                                                        <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                                        <span class="mt-h-title">Qty: 1</span>
-                                                    </div>
-                                                    <a href="#" class="close fa fa-times"></a>
-                                                </div><!-- cart row end here -->
-                                                <!-- cart row start here -->
-                                                <div class="cart-row">
-                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                                    <div class="mt-h">
-                                                        <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                                        <span class="mt-h-title">Qty: 1</span>
-                                                    </div>
-                                                    <a href="#" class="close fa fa-times"></a>
-                                                </div><!-- cart row end here -->
-                                                <!-- cart row total start here -->
-                                                <div class="cart-row-total">
-                                                    <span class="mt-total">Sub Total</span>
-                                                    <span class="mt-total-txt"><i class="fa fa-eur" aria-hidden="true"></i> 799,00</span>
+                                            <a href="#" class="cart-opener cartItemOpen">
+                                                <span class="icon-handbag"></span>
+                                                <c:set var="size" value="${empty sessionScope.cartsize ? 0 : sessionScope.cartsize}"/>
+                                                <span class="num" id="cart-size">${size}</span>
+                                            </a>
+                                            <!-- mt drop start here -->
+                                            <div class="mt-drop">
+                                                <!-- mt drop sub start here -->
+                                                <div class="mt-drop-sub">
+                                                    <!-- mt side widget start here -->
+                                                    <div class="mt-side-widget">
+                                                        <div class="cartItem" style="max-height: 270px; overflow-y: auto">
+                                                            <!-- cart row start here -->
+
+
+                                                            <c:forEach var="i" items="${sessionScope.cart}">
+                                                                <div class="cart-row">
+                                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
+                                                                    <%--<a href="#" class="img"><img src="${i.getPtoduct().getDefaultImg()}" alt="image" class="img-responsive"></a>--%>
+                                                                    <div class="mt-h">
+                                                                        <span class="mt-h-title"><a href="#">${i.getProduct().getNameProduct()}</a></span>
+                                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i>${i.getPrice()}</span>
+                                                                        <span class="mt-h-title">${i.getQuantity()}</span>
+                                                                    </div>
+                                                                    <!--<a href="#" class="close fa fa-times"></a>-->
+                                                                </div><!-- cart row end here -->
+                                                            </c:forEach>
+
+                                                        </div>
+                                                        <!-- cart row total start here -->
+                                                        <div class="cart-row-total">
+                                                            <span class="mt-total">Sub Total</span>
+                                                            <span class="mt-total-txt" id="total-money"><i class="fa fa-eur" aria-hidden="true"></i>${sessionScope.totalMoney}</span>
+                                                        </div>
+                                                        <!-- cart row total end here -->
+                                                        <div class="cart-btn-row">
+                                                            <a href="${pageContext.request.contextPath}/cart" class="btn-type2">VIEW CART</a>
+                                                            <a href="#" class="btn-type3">CHECKOUT</a>
+                                                        </div>
+
+
+                                                    </div><!-- mt side widget end here -->
                                                 </div>
-                                                <!-- cart row total end here -->
-                                                <div class="cart-btn-row">
-                                                    <a href="#" class="btn-type2">VIEW CART</a>
-                                                    <a href="#" class="btn-type3">CHECKOUT</a>
-                                                </div>
-                                            </div><!-- mt side widget end here -->
-                                        </div>
-                                        <!-- mt drop sub end here -->
-                                    </div><!-- mt drop end here -->
-                                    <span class="mt-mdropover"></span>
-                                </li>
+                                                <!-- mt drop sub end here -->
+                                            </div><!-- mt drop end here -->
+                                            <span class="mt-mdropover"></span>
+                                        </li>
                                 <li>
                                     <a href="#" class="bar-opener side-opener">
                                         <span class="bar"></span>
