@@ -41,12 +41,13 @@ $(document).ready(function () {
 
                     for (var i = 0; i < cart.length; i++) {
                         // Console log để kiểm tra giá trị
-                        console.log("Name:", cart[i].productName);
-                        console.log("Price:", cart[i].productPrice);
-                        console.log("Quantity:", cart[i].productQuantity);
+                        console.log("img1:", cart[i].productImg);
+                        console.log("Name1:", cart[i].productName);
+                        console.log("Price1:", cart[i].productPrice);
+                        console.log("Quantity123:", cart[i].productQuantity);
                         var cartRowHtml = `
     <div class="cart-row">
-        <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
+        <a href="#" class="img"><img src="` + cart[i].productImg + `" alt="image" class="img-responsive"></a>
         <div class="mt-h">
             <span class="mt-h-title"><a href="#">` + cart[i].productName + `</a></span>
             <span class="price"><i class="fa fa-eur" aria-hidden="true"></i>` + cart[i].productPrice + `</span>
