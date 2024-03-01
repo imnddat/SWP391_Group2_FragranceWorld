@@ -80,8 +80,8 @@
 
                                             <c:forEach var="i" items="${sessionScope.cart}">
                                                 <div class="cart-row">
-                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                                        <%--<a href="#" class="img"><img src="${i.getPtoduct().getDefaultImg()}" alt="image" class="img-responsive"></a>--%>
+                                                    <!--<a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>-->
+                                                    <a href="#" class="img"><img src="${i.getProduct().getDefaultImg()}" alt="image" class="img-responsive"></a>
                                                     <div class="mt-h">
                                                         <span class="mt-h-title"><a href="#">${i.getProduct().getNameProduct()}</a></span>
                                                         <span class="price"><i class="fa fa-eur" aria-hidden="true"></i>${i.getPrice()}</span>
@@ -270,7 +270,7 @@
         <!-- mt side widget start here -->
         <div class="mt-side-widget">
             <header>
-                <a href="register"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">SIGN UP</button></span></a>
+                <a href="registerpage.jsp"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">SIGN UP</button></span></a>
             </header>	
         </div>
         <!-- mt side widget end here -->
