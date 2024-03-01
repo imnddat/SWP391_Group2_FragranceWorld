@@ -73,7 +73,14 @@ public class User {
         this.dob = dob;
     }
     
-
+    public User(String username, String password, String email, String name, String address, String phone) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
   
     /**
      * Get user id

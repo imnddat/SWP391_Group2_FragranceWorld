@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -361,6 +363,22 @@ public class UserDAO extends DBConnection {
         }
 
         return updatedUser;
+    }
+    
+    public void createUser(User user){
+        String query = "INSERT INTO [dbo].[User]([username],[password],[email],[name],[address],[phone],[roleID],[banned]) " +
+                       "VALUES (?,?,?,?,?,?,3,0)";
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getName());
+            preparedStatement.setString(5, user.getAddress());
+            preparedStatement.setString(6, user.getPhone());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
 //    public static void main(String[] args) throws Exception {
