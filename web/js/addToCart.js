@@ -49,7 +49,7 @@ $(document).ready(function () {
     <div class="cart-row">
         <a href="#" class="img"><img src="` + cart[i].productImg + `" alt="image" class="img-responsive"></a>
         <div class="mt-h">
-            <span class="mt-h-title"><a href="#">` + cart[i].productName + `</a></span>
+            <span class="mt-h-title"><a href="#">` + cart[i].productName + `(` + cart[i].productVolume + `)`+ `</a></span>
             <span class="price"><i class="fa fa-eur" aria-hidden="true"></i>` + cart[i].productPrice + `</span>
             <span class="mt-h-title">` + cart[i].productQuantity + `</span>
         </div>
