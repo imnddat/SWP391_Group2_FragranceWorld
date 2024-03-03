@@ -12,14 +12,32 @@ public class Item {
     private Product product;
     private int quantity;
     private double price;
+    private String volume;
 
     public Item() {
     }
 
+    public Item(Product product, int quantity, double price, String volume) {
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+        this.volume = volume;
+    }
+
+    
+    
     public Item(Product product, int quantity, double price) {
         this.product = product;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public void setVolume(String volume) {
+        this.volume = volume;
     }
 
     public Product getProduct() {

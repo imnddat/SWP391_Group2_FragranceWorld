@@ -90,7 +90,10 @@ public class ManageCart extends HttpServlet {
         String pQuantity = request.getParameter("quantity");
         String pId = request.getParameter("id");
         String pPrice = request.getParameter("price");
-
+        String pVolume = request.getParameter("volume");
+        
+        System.out.println("volume111:    "+pVolume);
+        
         int id, quantity;
         double price;
         try {
@@ -104,7 +107,7 @@ public class ManageCart extends HttpServlet {
             if (quantity == 0) {
                 cart.removeItem(id);
             } else {
-                Item item = new Item(p, quantity, price);
+                Item item = new Item(p, quantity, price, pVolume);
                 cart.addItem(item);
             }
         } catch (Exception e) {
@@ -137,6 +140,7 @@ public class ManageCart extends HttpServlet {
             itemObject.addProperty("productName", item.getProduct().getNameProduct());
             itemObject.addProperty("productPrice", item.getPrice());
             itemObject.addProperty("productQuantity", item.getQuantity());
+            itemObject.addProperty("productVolume", item.getVolume());
             //itemObject.addProperty("totalIteamPrice", item.getTotal(item.getQuantity(), item.getPrice()));
             cartArray.add(itemObject);
         }

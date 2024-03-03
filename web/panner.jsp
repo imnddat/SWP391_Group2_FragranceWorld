@@ -83,7 +83,7 @@
                                                     <!--<a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>-->
                                                     <a href="#" class="img"><img src="${i.getProduct().getDefaultImg()}" alt="image" class="img-responsive"></a>
                                                     <div class="mt-h">
-                                                        <span class="mt-h-title"><a href="#">${i.getProduct().getNameProduct()}</a></span>
+                                                        <span class="mt-h-title"><a href="#">${i.getProduct().getNameProduct()} (${i.getVolume()})</a></span>
                                                         <span class="price"><i class="fa fa-eur" aria-hidden="true"></i>${i.getPrice()}</span>
                                                         <span class="mt-h-title">${i.getQuantity()}</span>
                                                     </div>
