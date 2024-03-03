@@ -46,6 +46,10 @@ public class Item {
         this.price = price;
     }
     
+    public double getTotal(){
+        return quantity*price;
+    }
+    
     public double getTotal(int quantity, double price){
         return quantity*price;
     }

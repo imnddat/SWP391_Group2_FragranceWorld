@@ -32,6 +32,10 @@
         <servlet-name>register</servlet-name>
         <servlet-class>Controller.Register</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkout</servlet-name>
+        <servlet-class>Controller.CheckOut</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -66,6 +70,10 @@
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkout</servlet-name>
+        <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
