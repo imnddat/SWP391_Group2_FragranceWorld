@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="css/main.css">
         <!-- include the site stylesheet -->
         <link rel="stylesheet" href="css/responsive.css">
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
     </head>
     <body>
         <!-- main container of all the page elements -->
@@ -94,6 +95,7 @@
                                                 <textarea class="form-control" placeholder="Order Notes"></textarea>
                                             </div>
                                             <input type="text" style="display: none;" id="paymentOption" name="paymentOption" value="Pay In Cash">
+                                            <input type="number" style="display: none;" id="paymentAmount" name="paymentAmount" value="${requestScope.ordertotal}">
                                         </fieldset>
                                     </form>
                                     <!-- Bill Detail of the Page end -->
@@ -107,7 +109,7 @@
                                                     <div class="text-wrap pull-left">
                                                         <strong class="title">PRODUCTS</strong>
                                                         <c:forEach var="item" items="${sessionScope.cart}">
-                                                            <span>${item.product.getNameProduct()}       x${item.getQuantity()}</span>
+                                                            <span>${item.product.getNameProduct()}(${item.getVolume()}ml)      x${item.getQuantity()}</span>
                                                         </c:forEach>
                                                     </div>
                                                     <div class="text-wrap txt text-right pull-right">
@@ -189,8 +191,8 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading" role="tab" id="headingThree">
                                                     <h4 class="panel-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" onclick="paymentSelection('Credit Card')">
-                                                            CREDIT CARD (VISA, MASTERCARD)
+                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" onclick="paymentSelection('Vn Pay')">
+                                                            VN Pay
                                                             <span class="check"><i class="fa fa-check"></i></span>
                                                         </a>
                                                     </h4>
@@ -236,6 +238,32 @@
                 form.submit();
             });
         </script>
-
+        <script src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
+        <script type="text/javascript">
+            $("#billDetail").submit(function () {
+                var postData = $("#billDetail").serialize();
+                var submitUrl = $("#billDetail").attr("action");
+                $.ajax({
+                    type: "POST",
+                    url: submitUrl,
+                    data: postData,
+                    dataType: 'JSON',
+                    success: function (x) {
+                        if (x.code === '00') {
+                            if (window.vnpay) {
+                                vnpay.open({width: 768, height: 600, url: x.data});
+                            } else {
+                                location.href = x.data;
+                            }
+                            return false;
+                        } else {
+                            alert(x.Message);
+                        }
+                    }
+                });
+                return false;
+            });
+        </script>
+        
     </body>
 </html>

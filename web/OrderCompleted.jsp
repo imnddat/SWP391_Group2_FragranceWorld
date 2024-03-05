@@ -25,8 +25,13 @@
                 margin: 10px;
             }
             .ordertext{
-                margin-top: 0px;
-                margin-bottom: 30px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+            .greenCounter{
+                border-color: #3fa047 !important;
+                color: white !important;
+                background-color: #3fa047 !important;
             }
         </style>
     </head>
@@ -59,7 +64,7 @@
                                             <strong class="title">Check Out</strong>
                                         </li>
                                         <li class="active">
-                                            <span class="counter">03</span>
+                                            <span class="greenCounter counter">03</span>
                                             <strong class="title">Order Complete</strong>
                                         </li>
                                     </ul>
@@ -75,7 +80,11 @@
                                 <div class="col-xs-12 col-sm-8 col-sm-push-2">
                                     <div class="holder" style="margin: 0;">
                                         <div class="mt-side-widget">
+                                            <div class="text-center">
+                                                <img src="images/green tick.png" alt="alt" style="width: 80px; display: inline"/>
+                                            </div>
                                             <h1 class="text-center ordertext">ORDER COMPLETE</h1>
+                                            <p class="text-center">Your Order ID: ${requestScope.orderid}</p>
                                             <div class="text-center">
                                                 <button class="btn optionbutton" onclick="goToViewOrder()">View My Order</button>
                                                 <button class="btn optionbutton" onclick="goToHomepage()">Go to Homepage</button>

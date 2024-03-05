@@ -81,7 +81,7 @@ public class CheckOut extends HttpServlet {
         } else {
             Cart cart = new Cart((List) list);
             request.setAttribute("subtotal", cart.getTotalMoney());
-            request.setAttribute("ordertotal", "Coming Soon");
+            request.setAttribute("ordertotal", cart.getTotalMoney());
         }
         request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
     }
@@ -99,12 +99,20 @@ public class CheckOut extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Object list = session.getAttribute("cart");
+        int orderId;
 
         if (list != null) {
             Cart cart = new Cart((List) list);
             OrderDAO order = new OrderDAO();
             String address = request.getParameter("address");
-            order.createOrder(address, cart);
+            String payment = request.getParameter("paymentOption");
+            orderId = order.createOrder(address, cart, payment);
+            request.setAttribute("orderid", orderId);
+            if(payment.equalsIgnoreCase("VN Pay")){
+                PaymentServlet ps = new PaymentServlet();
+                ps.doPost(request, response);
+                return;
+            }
         } else {
             System.out.println("Cart is empty!");
         }
@@ -120,5 +128,6 @@ public class CheckOut extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
 
 }
