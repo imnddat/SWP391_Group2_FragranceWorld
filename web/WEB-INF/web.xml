@@ -29,16 +29,8 @@
         <servlet-class>Controller.ManageCart</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DetailProductController</servlet-name>
-        <servlet-class>Controller.DetailProductController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Review</servlet-name>
-        <servlet-class>Controller.Review</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>test</servlet-name>
-        <servlet-class>Controller.test</servlet-class>
+        <servlet-name>ProductDetailController</servlet-name>
+        <servlet-class>Controller.ProductDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -72,16 +64,8 @@
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DetailProductController</servlet-name>
-        <url-pattern>/DetailProductController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Review</servlet-name>
-        <url-pattern>/Review</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>test</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <servlet-name>ProductDetailController</servlet-name>
+        <url-pattern>/ProductDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

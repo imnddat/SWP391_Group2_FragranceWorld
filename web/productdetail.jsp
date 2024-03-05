@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +26,7 @@
         <link rel="stylesheet" href="css/main.css">
         <!-- include the site stylesheet -->
         <link rel="stylesheet" href="css/responsive.css">
+        <script src="js/productDetail.js" defer></script>
     </head>
     <body>
         <!-- main container of all the page elements -->
@@ -114,27 +116,20 @@
                                         <!-- Comment List of the Page end -->
                                         <!-- Product Slider of the Page -->
                                         <div class="product-slider">
-                                            <div class="slide">
-                                                <img src="${p.getDefaultImg()}" alt="image descrption">
-                                            </div>
-                                            <div class="slide">
-                                                <img src="${p.getDefaultImg()}" alt="image descrption">
-                                            </div>
-                                            <div class="slide">
-                                                <img src="${p.getDefaultImg()}" alt="image descrption">
-                                            </div>
-                                            <div class="slide">
-                                                <img src="${p.getDefaultImg()}" alt="image descrption">
-                                            </div>
+                                            <c:forEach items="${image}" var="i">
+                                                <div class="slide">
+                                                    <img src="http://localhost:8080/FragranceWorld/images/${i}" alt="image descrption">
+                                                </div>
+                                            </c:forEach>
                                         </div>
                                         <!-- Product Slider of the Page end -->
                                         <!-- Pagg Slider of the Page -->
                                         <ul class="list-unstyled slick-slider pagg-slider">
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
+                                            <c:forEach items="${image}" var="i">
+                                                <div class="slide">
+                                                    <li><div class="img"><img src="http://localhost:8080/FragranceWorld/images/${i}" alt="image description"></div></li>
+                                                </div>
+                                            </c:forEach>
                                         </ul>
                                         <!-- Pagg Slider of the Page end -->
                                     </div>
@@ -147,7 +142,7 @@
                                             <li>Products</li>
                                         </ul>
                                         <!-- Breadcrumbs of the Page end -->
-                                        <h2>${p.getNameProduct()}</h2>
+                                        <h2>${product.nameProduct}</h2>
                                         <!-- Rank Rating of the Page -->
                                         <div class="rank-rating">
                                             <ul class="list-unstyled rating-list">
@@ -164,12 +159,25 @@
                                             <li><a href="#"><i class="fa fa-exchange"></i>COMPARE</a></li>
                                             <li><a href="#"><i class="fa fa-heart"></i>ADD TO WISHLIST</a></li>
                                         </ul>
-                                        <div class="txt-wrap">
-                                            <p>${p.getDescription()}</p>
+                                        <p>${brand}</p>
+                                        <p>${gender}</p>
+                                        <p>${scent}</p>
+                                        <br>
+                                        <div class="button-holder">
+                                            <c:forEach items="${volume}" var="v">
+                                                <button onclick="updatePrice(this)" value='${v.id}'>
+                                                    ${v.price}
+                                                </button>
+                                            </c:forEach>
                                         </div>
-                                        <div class="text-holder">
-                                            <span class="price">${v.getPrice()} <del>${v.getPrice()+ 10}</del></span>
+                                        <br>
+                                        <br>
+                                        <div class="text-holder" style="display: flex;">
+                                            <span id="field-price" class="price" value="${priceId}">$ ${price} </span>
+                                            <del id="field-discount" value="${discount}">${discount * price}</del>
                                         </div>
+
+
                                         <!-- Product Form of the Page -->
                                         <form action="#" class="product-form">
                                             <fieldset>
@@ -200,9 +208,7 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div id="tab1">
-                                            <p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair. </p>
-                                            <p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair. <br>Solid oak construction.<br> Back in plywood (2  faces oak veneer) or upholstered in fabric, leather or eco-leather.<br> Seat upholstered in fabric, leather or eco-leather. <br> H 830 x L 585 x P 540 mm.</p>
-                                        </div>
+                                            <p>${product.description}</p>									</div>
                                         <div id="tab2">
                                             <p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair. </p>
                                             <p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair. <br>Solid oak construction.<br> Back in plywood (2  faces oak veneer) or upholstered in fabric, leather or eco-leather.<br> Seat upholstered in fabric, leather or eco-leather. <br> H 830 x L 585 x P 540 mm.</p>
