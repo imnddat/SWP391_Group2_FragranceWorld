@@ -118,7 +118,7 @@
                                 <div class="row border rowItem">
                                     <div class="col-xs-12 col-sm-2">
                                         <div class="img-holder">
-<!--                                            <img src="images/img42.jpg" alt="image description">-->
+                                            <!--                                            <img src="images/img42.jpg" alt="image description">-->
                                             <img src="${i.getProduct().getDefaultImg()}" alt="image description">
                                         </div>
                                     </div>
@@ -282,7 +282,7 @@
                         success: function (response) {
                             console.log("Cart updated successfully");
                             // Cập nhật giao diện người dùng
-                            $(".total-money").text(response.totalMoney.toFixed(2));
+                            $("#total-money").text(response.totalMoney.toFixed(2));
                             $("#cart-size").text(response.cartsize);
 
                             // Cập nhật giao diện người dùng với danh sách sản phẩm mới từ máy chủ
@@ -296,27 +296,27 @@
 
                 function updateCartUI(cart) {
                     // Xóa nội dung cũ của giỏ hàng
-                    $(".cartUI").empty();
+                    $(".cartItem").empty();
                     // Thêm sản phẩm mới vào giỏ hàng
 
                     for (var i = 0; i < cart.length; i++) {
                         // Console log để kiểm tra giá trị
-//                        console.log("Name:", cart[i].productName);
-//                        console.log("Price:", cart[i].productPrice);
-//                        console.log("Quantity:", cart[i].productQuantity);
+                        console.log("img1:", cart[i].productImg);
+                        console.log("Name1:", cart[i].productName);
+                        console.log("Price1:", cart[i].productPrice);
+                        console.log("Quantity123:", cart[i].productQuantity);
                         var cartRowHtml = `
     <div class="cart-row">
-        <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
+        <a href="#" class="img"><img src="` + cart[i].productImg + `" alt="image" class="img-responsive"></a>
         <div class="mt-h">
-            <span class="mt-h-title"><a href="#">` + cart[i].productName + `</a></span>
+            <span class="mt-h-title"><a href="#">` + cart[i].productName + `(` + cart[i].productVolume + `)` + `</a></span>
             <span class="price"><i class="fa fa-eur" aria-hidden="true"></i>` + cart[i].productPrice + `</span>
             <span class="mt-h-title">` + cart[i].productQuantity + `</span>
         </div>
-        <a href="#" class="close fa fa-times"></a>
     </div><!-- cart row end here -->
 `;
 
-                        $(".cartUI").append(cartRowHtml);
+                        $(".cartItem").append(cartRowHtml);
                     }
                 }
             });

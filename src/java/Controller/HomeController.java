@@ -6,9 +6,12 @@ package Controller;
 
 import DAO.BrandDAO;
 import DAO.ProductDAO;
+import DAO.UserDAO;
 import DAO.VolumeDAO;
 import Model.Brand;
+import Model.Item;
 import Model.Product;
+import Model.User;
 import Model.Volume;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +20,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,6 +36,19 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        UserDAO userDao = new UserDAO();
+        ArrayList<Item> wishlist = null;
+        User user = (User) session.getAttribute("currentUser");
+        if (user != null) {
+            try {
+                wishlist = userDao.getUserWishList(user.getId());
+                session.setAttribute("wishlist", wishlist);
+                session.setAttribute("wishlistsize", wishlist.size());
+            } catch (SQLException ex) {
+                Logger.getLogger(ManageWishlist.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        
         String service = request.getParameter("service");
         Vector<Brand> brands = (new BrandDAO()).getAll();
         request.setAttribute("allBrands", brands);

@@ -4,13 +4,17 @@
  */
 package DAO;
 
+import Model.Item;
+import Model.Product;
 import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -364,10 +368,10 @@ public class UserDAO extends DBConnection {
 
         return updatedUser;
     }
-    
-    public void createUser(User user){
-        String query = "INSERT INTO [dbo].[User]([username],[password],[email],[name],[address],[phone],[roleID],[banned]) " +
-                       "VALUES (?,?,?,?,?,?,3,0)";
+
+    public void createUser(User user) {
+        String query = "INSERT INTO [dbo].[User]([username],[password],[email],[name],[address],[phone],[roleID],[banned]) "
+                + "VALUES (?,?,?,?,?,?,3,0)";
         try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
@@ -380,6 +384,108 @@ public class UserDAO extends DBConnection {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    public ArrayList<Item> getUserWishList(int userId) throws SQLException {
+        ProductDAO pdao = new ProductDAO();
+        ArrayList<Item> itemList = new ArrayList<>();
+
+        String query = "SELECT p.*, w.volume FROM Wishlist w JOIN Products p ON w.productID = p.id WHERE w.userID = ?";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(query);  ResultSet resultSet = preparedStatement.executeQuery()) {
+            preparedStatement.setInt(1, userId);
+
+            while (resultSet.next()) {
+                int productId = resultSet.getInt("id");
+                Product product = pdao.getProductsById(productId);
+                String volume = resultSet.getString("volume");
+                Double price = pdao.getProductPrice(productId, volume);
+                Item item = new Item(product, price, volume);
+
+                // Thêm các thuộc tính sản phẩm khác nếu cần
+                itemList.add(item);
+            }
+            return itemList;
+        } catch (SQLException e) {
+            System.out.println("loi khi lay wishlist");
+            // Xử lý ngoại lệ hoặc throw lại nếu cần thiết
+            throw e;
+        }
+    }
+    
+    public boolean updateUserWishlist(int userId, int productId, String volume, String action){
+        LocalDate date = LocalDate.now();
+        if(action.equalsIgnoreCase("deleteAll")){
+            removeAllUserWishlist(userId);
+        } else if (action.equalsIgnoreCase("add")){
+            addUserWishlist(userId, productId, volume, date);
+        } else if (action.equalsIgnoreCase("remove")){
+            removeUserWishlist(userId, productId);
+        }
+        return false;
+    }
+    
+    public boolean removeAllUserWishlist(int userId){
+        // Chuỗi SQL để xóa tất cả Wishlist của một người dùng
+        String deleteSQL = "DELETE FROM Wishlist WHERE userId = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            // Thiết lập tham số cho câu lệnh SQL
+            preparedStatement.setInt(1, userId);
+
+            // Thực hiện câu lệnh xóa
+            preparedStatement.executeUpdate();
+
+            // Kiểm tra xem có bản ghi nào bị xóa không
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Hoặc xử lý lỗi theo nhu cầu của bạn
+            return false;
+        }
+    }
+    
+    public boolean addUserWishlist(int userId, int productId, String volume, LocalDate date){
+        // Chuỗi SQL để thêm mới một mục vào Wishlist
+        String insertSQL = "INSERT INTO Wishlist (userID, productID, favoriteDate, volume) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+            // Thiết lập tham số cho câu lệnh SQL
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, productId);
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            preparedStatement.setString(4, volume);
+
+            // Thực hiện câu lệnh INSERT
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Trả về true nếu có ít nhất một dòng được thêm vào bảng
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("không thêm được sản phẩm vào wishlist"); // Hoặc xử lý lỗi theo nhu cầu của bạn
+            return false;
+        }
+    }
+    
+    public boolean removeUserWishlist(int userId, int productId){
+        // Chuỗi SQL để xóa một mục từ Wishlist
+        String deleteSQL = "DELETE FROM Wishlist WHERE userID = ? AND productID = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            // Thiết lập tham số cho câu lệnh SQL
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, productId);
+
+            // Thực hiện câu lệnh DELETE
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Trả về true nếu có ít nhất một dòng bị xóa
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Hoặc xử lý lỗi theo nhu cầu của bạn
+            return false;
+        }
+    }
+    
+    
 
 //    public static void main(String[] args) throws Exception {
 //        UserDAO dao = new UserDAO();

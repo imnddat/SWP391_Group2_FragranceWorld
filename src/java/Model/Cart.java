@@ -42,12 +42,14 @@ public class Cart {
         return null;
     }
     
-    public void addItem(Item t){
+    public boolean addItem(Item t){
         if(getItemById(t.getProduct().getId())!=null){
             Item m = getItemById(t.getProduct().getId());
             m.setQuantity(t.getQuantity());
+            return false;
         }else{
             itemList.add(t);
+            return true;
         }
     }
     

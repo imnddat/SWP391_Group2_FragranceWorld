@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Model.Product;
 import Model.Volume;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -533,26 +534,68 @@ public class ProductDAO extends DBConnection {
         try {
             ArrayList<Product> list = new ArrayList<>();
             PreparedStatement stm = connection.prepareStatement(sql);
-           
+
             stm.setDouble(1, Double.valueOf(priceFrom));
             stm.setDouble(2, Double.valueOf(priceTo));
             stm.setString(3, "%" + search + "%");
             stm.setInt(4, Integer.valueOf(brandid));
-            stm.setInt(5, (index-1)*pageSize);
-            stm.setInt(6, pageSize); 
+            stm.setInt(5, (index - 1) * pageSize);
+            stm.setInt(6, pageSize);
             ResultSet rs = stm.executeQuery();
-            
+
             while (rs.next()) {
                 Product u = new Product();
                 list.add(u);
             }
             return list;
         } catch (Exception e) {
-            
+
         }
         return null;
 
     }
+
+    public double getProductPrice(int productId, String volume) {
+        double price = 0.0;
+
+        try {
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
+
+            // Truy vấn cơ sở dữ liệu để lấy giá sản phẩm dựa trên productId và volume
+            String query = "SELECT v.price, s.discount, se.startdate, se.enddate "
+                    + "FROM Volume v "
+                    + "LEFT JOIN sale s ON v.productID = s.productID "
+                    + "LEFT JOIN saleEvent se ON s.sid = se.sid "
+                    + "WHERE v.productID = ? AND v.capacity = ? AND (se.startdate IS NULL OR se.startdate <= ?) AND (se.enddate IS NULL OR se.enddate >= ?)";
+
+            try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, productId);
+                preparedStatement.setString(2, volume);
+                preparedStatement.setDate(3, java.sql.Date.valueOf(currentDate));
+                preparedStatement.setDate(4, java.sql.Date.valueOf(currentDate));
+
+                try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        double basePrice = resultSet.getDouble("price");
+                        Integer discount = (Integer) resultSet.getObject("discount");
+
+                        // Kiểm tra nếu có sự kiện giảm giá và ngày nằm trong khoảng startdate và enddate
+                        if (discount == null) {
+                            price = basePrice;
+                        } else {
+                            price = basePrice - (basePrice * (discount / 100));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("lỗi không lấy được giá sản phẩm");
+        }
+
+        return price;
+    }
+
 //    public static void main(String[] args) {
 //        //trace log
 //        System.out.println(new ProductDAO().getProductsByKeywords(s));

@@ -5,9 +5,11 @@
 package Controller;
 
 import DAO.ProductDAO;
+import DAO.UserDAO;
 import Model.Cart;
 import Model.Item;
 import Model.Product;
+import Model.User;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.IOException;
@@ -17,14 +19,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author THAISON
  */
-public class ManageCart extends HttpServlet {
+public class ManageWishlist extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +48,10 @@ public class ManageCart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddToCart</title>");
+            out.println("<title>Servlet ManageWishlist</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddToCart at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManageWishlist at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,8 +69,35 @@ public class ManageCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
-        //response.sendRedirect(request.getContextPath() + "/view/shoppingCart.jsp");
+//        HttpSession session = request.getSession();
+//        UserDAO userDao = new UserDAO();
+//        ArrayList<Item> wishlist = null;
+//        User user = (User) session.getAttribute("currentUser");
+//        if (user != null) {
+//            try {
+//                wishlist = userDao.getUserWishList(user.getId());
+//                session.setAttribute("wishlist", wishlist);
+//                session.setAttribute("wishlistsize", wishlist.size());
+//            } catch (SQLException ex) {
+//                Logger.getLogger(ManageWishlist.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } else {
+//            session.setAttribute("wishlist", wishlist);
+//            session.setAttribute("wishlistsize", "0");
+//        }
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("currentUser");
+        String action = request.getParameter("action");
+        if (action != null) {
+            session.removeAttribute("wishlist");
+            session.removeAttribute("wishlistsize");
+            if(user != null){
+                UserDAO userDao = new UserDAO();
+                userDao.updateUserWishlist(user.getId(), 0, "", "deleteAll");
+            }
+        } else {
+            request.getRequestDispatcher("wishlist.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -80,8 +112,8 @@ public class ManageCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Object o = session.getAttribute("wishlist");
         Cart cart = new Cart();
-        Object o = session.getAttribute("cart");
 
         if (o != null) {
             cart = new Cart((List) o);
@@ -91,11 +123,12 @@ public class ManageCart extends HttpServlet {
         String pId = request.getParameter("id");
         String pPrice = request.getParameter("price");
         String pVolume = request.getParameter("volume");
-        
-        System.out.println("volume111:    "+pVolume);
-        
+
         int id, quantity;
         double price;
+        User user = (User) session.getAttribute("currentUser");
+        UserDAO userDao = new UserDAO();
+
         try {
             id = Integer.parseInt(pId);
             quantity = Integer.parseInt(pQuantity);
@@ -106,34 +139,27 @@ public class ManageCart extends HttpServlet {
             //double price = p.getPrice();
             if (quantity == 0) {
                 cart.removeItem(id);
+                if (user != null) {
+                    userDao.updateUserWishlist(user.getId(), id, pVolume, "remove");
+                }
             } else {
                 Item item = new Item(p, quantity, price, pVolume);
-                cart.addItem(item);
+                if (cart.addItem(item) && user != null) {
+                    userDao.updateUserWishlist(user.getId(), id, pVolume, "add");
+                }
             }
         } catch (Exception e) {
             quantity = 1;
         }
-
-//        for (Item i : cart.getItemList()) {
-//            System.out.println(i);
-//        }
-
-        double totalMoney = cart.getTotalMoney();
         List<Item> list = cart.getItemList();
-        session.setAttribute("cart", list);
-        session.setAttribute("cartsize", list.size());
-        session.setAttribute("totalMoney", totalMoney);
+        session.setAttribute("wishlist", list);
+        session.setAttribute("wishlistsize", list.size());
 
-        //String targetJSP = "view/homePage.jsp";
-        //request.getRequestDispatcher("view/homePage.jsp").forward(request, response);
-        //response.sendRedirect(request.getContextPath());
-        // Chuẩn bị dữ liệu phản hồi JSON
         JsonObject jsonResponse = new JsonObject();
-        jsonResponse.addProperty("totalMoney", totalMoney);
-        jsonResponse.addProperty("cartsize", list.size());
+        jsonResponse.addProperty("wishlistsize", list.size());
 
         // Chuyển đổi danh sách sản phẩm thành mảng JSON
-        JsonArray cartArray = new JsonArray();
+        JsonArray wishlist = new JsonArray();
         for (Item item : list) {
             JsonObject itemObject = new JsonObject();
             itemObject.addProperty("productImg", item.getProduct().getDefaultImg());
@@ -142,14 +168,15 @@ public class ManageCart extends HttpServlet {
             itemObject.addProperty("productQuantity", item.getQuantity());
             itemObject.addProperty("productVolume", item.getVolume());
             //itemObject.addProperty("totalIteamPrice", item.getTotal(item.getQuantity(), item.getPrice()));
-            cartArray.add(itemObject);
+            wishlist.add(itemObject);
         }
-        jsonResponse.add("cart", cartArray);
+        jsonResponse.add("wishlist", wishlist);
 
         // Trả về dữ liệu JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jsonResponse.toString());
+
     }
 
     /**
