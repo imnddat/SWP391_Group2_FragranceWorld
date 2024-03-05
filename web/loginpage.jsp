@@ -1,19 +1,19 @@
 <%-- 
-    Document   : loginpage
-    Created on : Feb 21, 2024, 8:34:46 AM
+    Document   : productdetail
+    Created on : Feb 18, 2024, 2:06:21 PM
     Author     : Thinkpad
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-          <!-- set the encoding of your site -->
+        <!-- set the encoding of your site -->
         <meta charset="utf-8">
         <!-- set the viewport width and initial-scale on mobile devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SWPgroup2</title>
-        <!-- include the site stylesheet -->
+        <title>Schön. | eCommerce HTML5 Template</title>
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
         <!-- include the site stylesheet -->
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -27,168 +27,388 @@
         <link rel="stylesheet" href="css/responsive.css">
     </head>
     <body>
-           <%@include file = "panner.jsp" %>
-      <!-- Main of the Page -->
-      <main id="mt-main">
-        <!-- Mt Content Banner of the Page -->
-        <section class="mt-contact-banner" style="background-image: url(http://placehold.it/1920x205);">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12 text-center">
-                <h1>login</h1>
-                <nav class="breadcrumbs">
-                  <ul class="list-unstyled">
-                    <li><a href="index.html">home <i class="fa fa-angle-right"></i></a></li>
-                    <li>login</li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Mt Content Banner of the Page end -->
-        <!-- Mt About Section of the Page -->
-        <section class="mt-about-sec" style="padding-bottom: 0;">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="txt">
-                  <h2>login</h2>
-                  <p>Morbi in erat malesuada, sollicitudin massa at, tristique nisl. Maecenas id eros scelerisque, vulputate tortor quis, efficitur arcu sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Umco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit sse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat <strong>Vestibulum sit amet metus euismod, condimentum lectus id, ultrices sem.</strong></p>
+        <!-- main container of all the page elements -->
+        <div id="wrapper">
+            <!-- Page Loader -->
+            <div id="pre-loader" class="loader-container">
+                <div class="loader">
+                    <img src="images/svg/rings.svg" alt="loader">
                 </div>
-              </div>
             </div>
-          </div>
-        </section>
-        <!-- Mt About Section of the Page -->
-        
-        
-        
-        
-        
-        <!-- Mt Detail Section of the Page -->
-        <section class="mt-detail-sec toppadding-zero">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                <div class="holder" style="margin: 0;">
-                    <div class="mt-side-widget">
-                      <header>
-                        <h2 style="margin: 0 0 5px;">SIGN IN</h2>
-                        <p>Welcome back! Sign in to Your Account</p>
-                      </header>
-                      <form action="#">
-                        <fieldset>
-                          <input type="text" placeholder="Username or email address" class="input">
-                          <input type="password" placeholder="Password" class="input">
-                          <div class="box">
-                            <span class="left"><input class="checkbox" type="checkbox" id="check1"><label for="check1">Remember Me</label></span>
-                            <a href="#" class="help">Help?</a>
-                          </div>
-                          <div>
-                               <button type="submit" class="btn-type1">Login</button>
-                               <a href="registerpage.jsp"> <button type="submit" class="btn-type1">Register Me</button></a>
-                          </div>
-                         
-                          
-                        </fieldset>
-                      </form>
+            <!-- W1 start here -->
+            <div class="w1">
+                <%@include file = "panner.jsp" %>
+                <!-- mt side menu start here -->
+                <div class="mt-side-menu">
+                    <!-- mt holder start here -->
+                    <div class="mt-holder">
+                        <a href="#" class="side-close"><span></span><span></span></a>
+                        <strong class="mt-side-title">MY ACCOUNT</strong>
+                        <!-- mt side widget start here -->
+                        <div class="mt-side-widget">
+                            <header>
+                                <span class="mt-side-subtitle">SIGN IN</span>
+                                <p>Welcome back! Sign in to Your Account</p>
+                            </header>
+                            <form action="#">
+                                <fieldset>
+                                    <input type="text" placeholder="Username or email address" class="input">
+                                    <input type="password" placeholder="Password" class="input">
+                                    <div class="box">
+                                        <span class="left"><input class="checkbox" type="checkbox" id="check1"><label for="check1">Remember Me</label></span>
+                                        <a href="#" class="help">Help?</a>
+                                    </div>
+                                    <button type="submit" class="btn-type1">Login</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <!-- mt side widget end here -->
+                        <div class="or-divider"><span class="txt">or</span></div>
+                        <!-- mt side widget start here -->
+                        <div class="mt-side-widget">
+                            <header>
+                                <span class="mt-side-subtitle">CREATE NEW ACCOUNT</span>
+                                <p>Create your very own account</p>
+                            </header>
+                            <form action="#">
+                                <fieldset>
+                                    <input type="text" placeholder="Username or email address" class="input">
+                                    <button type="submit" class="btn-type1">Register</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <!-- mt side widget end here -->
                     </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Mt Detail Section of the Page end -->
-        
-        
-        
-        
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <!-- banner frame start here -->
-              <div class="banner-frame toppadding-zero">
-                <!-- banner 5 white start here -->
-                <div class="banner-5 white wow fadeInLeft" data-wow-delay="0.4s">
-                  <img src="http://placehold.it/590x565" alt="image description">
-                  <div class="holder">
-                    <div class="texts">
-                      <strong class="title">FURNITURE DESIGNS IDEAS</strong>
-                      <h3><strong>New</strong> Collection</h3>
-                      <p>Consectetur adipisicing elit. Beatae accusamus, optio, repellendus inventore</p>
-                      <span class="price-add">$ 79.00</span>
+                    <!-- mt holder end here -->
+                </div><!-- mt side menu end here -->
+                <!-- mt search popup start here -->
+                <div class="mt-search-popup">
+                    <div class="mt-holder">
+                        <a href="#" class="search-close"><span></span><span></span></a>
+                        <div class="mt-frame">
+                            <form action="#">
+                                <fieldset>
+                                    <input type="text" placeholder="Search...">
+                                    <span class="icon-microphone"></span>
+                                    <button class="icon-magnifier" type="submit"></button>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
-                  </div>
-                </div><!-- banner 5 white end here -->
-                <!-- banner 6 white start here -->
-                <div class="banner-6 white wow fadeInRight" data-wow-delay="0.4s">
-                  <img src="http://placehold.it/275x565" alt="image description">
-                  <div class="holder">
-                    <strong class="sub-title">SOFAS &amp; ARMCHAIRS</strong>
-                    <h3>3 Seater Leather Sofa</h3>
-                    <span class="offer">
-                      <span class="price-less">$ 659.00</span>
-                      <span class="prices">$ 499.00</span>
-                    </span>
-                    <a href="product-detail.html" class="btn-shop">
-                      <span>shop now</span>
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                  </div>
-                </div><!-- banner 5 white end here -->
-                <!-- banner box two start here -->
-                <div class="banner-box two">
-                  <!-- banner 7 right start here -->
-                  <div class="banner-7 right wow fadeInUp" data-wow-delay="0.4s">
-                    <img src="http://placehold.it/295x275" alt="image description">
-                    <div class="holder">
-                      <h2><strong>ACRYLIC FABRIC <br>BEAN BAG</strong></h2>
-                      <ul class="mt-stars">
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star-o"></i></li>
-                      </ul>
-                      <div class="price-tag">
-                        <span class="price">$ 99.00</span>
-                        <a class="shop-now" href="product-detail.html">SHOP NOW</a>
-                      </div>
+                </div><!-- mt search popup end here -->
+                <!-- mt main start here -->
+                <main id="mt-main">
+                    <!-- Mt Product Detial of the Page -->
+                    <section class="mt-product-detial wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- Slider of the Page -->
+                                    <div class="slider">
+                                        <!-- Comment List of the Page -->
+                                        <ul class="list-unstyled comment-list">
+                                            <li><a href="#"><i class="fa fa-heart"></i>27</a></li>
+                                            <li><a href="#"><i class="fa fa-comments"></i>12</a></li>
+                                            <li><a href="#"><i class="fa fa-share-alt"></i>14</a></li>
+                                        </ul>
+                                        <!-- Comment List of the Page end -->
+                                        <!-- Product Slider of the Page -->
+                                        <div class="product-slider">
+                                            <div class="slide">
+                                                <img src="http://placehold.it/610x490" alt="image descrption">
+                                            </div>
+                                            <div class="slide">
+                                                <img src="http://placehold.it/610x490" alt="image descrption">
+                                            </div>
+                                            <div class="slide">
+                                                <img src="http://placehold.it/610x490" alt="image descrption">
+                                            </div>
+                                            <div class="slide">
+                                                <img src="http://placehold.it/610x490" alt="image descrption">
+                                            </div>
+                                        </div>
+                                        <!-- Product Slider of the Page end -->
+                                        <!-- Pagg Slider of the Page -->
+                                        <ul class="list-unstyled slick-slider pagg-slider">
+                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
+                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
+                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
+                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
+                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
+                                        </ul>
+                                        <!-- Pagg Slider of the Page end -->
+                                    </div>
+                                    <!-- Slider of the Page end -->
+                                    <!-- Detail Holder of the Page -->
+                                    <div class="detial-holder">
+                                        <!-- Breadcrumbs of the Page -->
+                                        <ul class="list-unstyled breadcrumbs">
+                                            <li><a href="#">Chairs <i class="fa fa-angle-right"></i></a></li>
+                                            <li>Products</li>
+                                        </ul>
+                                        <!-- Breadcrumbs of the Page end -->
+                                        <h2>KAILA FABRIC CHAIR</h2>
+                                        <!-- Rank Rating of the Page -->
+                                        <div class="rank-rating">
+                                            <ul class="list-unstyled rating-list">
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                                            </ul>
+                                            <span class="total-price">Reviews (12)</span>
+                                        </div>
+                                        <!-- Rank Rating of the Page end -->
+                                        <ul class="list-unstyled list">
+                                            <li><a href="#"><i class="fa fa-share-alt"></i>SHARE</a></li>
+                                            <li><a href="#"><i class="fa fa-exchange"></i>COMPARE</a></li>
+                                            <li><a href="#"><i class="fa fa-heart"></i>ADD TO WISHLIST</a></li>
+                                        </ul>
+                                        <div class="txt-wrap">
+                                            <p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair.</p>
+                                            <p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair.</p>
+                                        </div>
+                                        <div class="text-holder">
+                                            <span class="price">$ 79.00 <del>399,00</del></span>
+                                        </div>
+                                        <!-- Product Form of the Page -->
+                                        <form action="#" class="product-form">
+                                            <fieldset>
+                                                <div class="row-val">
+                                                    <label for="qty">qty</label>
+                                                    <input type="number" id="qty" placeholder="1">
+                                                </div>
+                                                <div class="row-val">
+                                                    <button type="submit">ADD TO CART</button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                        <!-- Product Form of the Page end -->
+                                    </div>
+                                    <!-- Detail Holder of the Page end -->
+                                </div>
+                            </div>
+                        </div>
+                    </section><!-- Mt Product Detial of the Page end -->
+                    <div class="product-detail-tab wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <ul class="mt-tabs text-center text-uppercase">
+                                        <li><a href="#tab1" class="active">DESCRIPTION</a></li>
+                                        <li><a href="#tab2">INFORMATION</a></li>
+                                        <li><a href="#tab3">REVIEWS (12)</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab1">
+                                            <p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair. </p>
+                                            <p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair. <br>Solid oak construction.<br> Back in plywood (2  faces oak veneer) or upholstered in fabric, leather or eco-leather.<br> Seat upholstered in fabric, leather or eco-leather. <br> H 830 x L 585 x P 540 mm.</p>
+                                        </div>
+                                        <div id="tab2">
+                                            <p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair. </p>
+                                            <p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair. <br>Solid oak construction.<br> Back in plywood (2  faces oak veneer) or upholstered in fabric, leather or eco-leather.<br> Seat upholstered in fabric, leather or eco-leather. <br> H 830 x L 585 x P 540 mm.</p>
+                                        </div>
+                                        <div id="tab3">
+                                            <div class="product-comment">
+                                                <div class="mt-box">
+                                                    <div class="mt-hold">
+                                                        <ul class="mt-star">
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                        </ul>
+                                                        <span class="name">John Wick</span>
+                                                        <time datetime="2016-01-01">09:10 Nov, 19 2016</time>
+                                                    </div>
+                                                    <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit sse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                                                </div>
+                                                <div class="mt-box">
+                                                    <div class="mt-hold">
+                                                        <ul class="mt-star">
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                        </ul>
+                                                        <span class="name">John Wick</span>
+                                                        <time datetime="2016-01-01">09:10 Nov, 19 2016</time>
+                                                    </div>
+                                                    <p>Usmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit sse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                                                </div>
+                                                <form action="#" class="p-commentform">
+                                                    <fieldset>
+                                                        <h2>Add  Comment</h2>
+                                                        <div class="mt-row">
+                                                            <label>Rating</label>
+                                                            <ul class="mt-star">
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="mt-row">
+                                                            <label>Name</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                        <div class="mt-row">
+                                                            <label>E-Mail</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                        <div class="mt-row">
+                                                            <label>Review</label>
+                                                            <textarea class="form-control"></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn-type4">ADD REVIEW</button>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div><!-- banner 7 right end here -->
-                  <!-- banner 8 start here -->
-                  <div class="banner-8 wow fadeInDown" data-wow-delay="0.4s">
-                    <img src="http://placehold.it/295x275" alt="image description">
-                    <div class="holder">
-                      <h2><strong>CHAIR WITH <br>ARMRESTS</strong></h2>
-                      <ul class="mt-stars">
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star-o"></i></li>
-                      </ul>
-                      <div class="price-tag">
-                        <span class="price-off">$ 129.00</span>
-                        <span class="price">$ 99.00</span>
-                        <a class="btn-shop" href="product-detail.html">
-                          <span>HURRY UP!</span> 
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
+                    <!-- related products start here -->
+                    <div class="related-products wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h2>RELATED PRODUCTS</h2>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <!-- mt product1 center start here -->
+                                            <div class="mt-product1 mt-paddingbottom20">
+                                                <div class="box">
+                                                    <div class="b1">
+                                                        <div class="b2">
+                                                            <a href="product-detail.html"><img src="http://placehold.it/215x215" alt="image description"></a>
+                                                            <span class="caption">
+                                                                <span class="new">NEW</span>
+                                                            </span>
+                                                            <ul class="mt-stars">
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                            <ul class="links">
+                                                                <li><a href="#"><i class="icon-handbag"></i><span>Add to Cart</span></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="txt">
+                                                    <strong class="title"><a href="product-detail.html">Puff Chair</a></strong>
+                                                    <span class="price"><i class="fa fa-eur"></i> <span>287,00</span></span>
+                                                </div>
+                                            </div><!-- mt product1 center end here -->
+                                            <!-- mt product1 center start here -->
+                                            <div class="mt-product1 mt-paddingbottom20">
+                                                <div class="box">
+                                                    <div class="b1">
+                                                        <div class="b2">
+                                                            <a href="product-detail.html"><img src="http://placehold.it/215x215" alt="image description"></a>
+                                                            <ul class="links">
+                                                                <li><a href="#"><i class="icon-handbag"></i><span>Add to Cart</span></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="txt">
+                                                    <strong class="title"><a href="product-detail.html">Bombi Chair</a></strong>
+                                                    <span class="price"><i class="fa fa-eur"></i> <span>399,00</span></span>
+                                                </div>
+                                            </div><!-- mt product1 center end here -->
+                                            <!-- mt product1 center start here -->
+                                            <div class="mt-product1 mt-paddingbottom20">
+                                                <div class="box">
+                                                    <div class="b1">
+                                                        <div class="b2">
+                                                            <a href="product-detail.html"><img src="http://placehold.it/215x215" alt="image description"></a>
+                                                            <ul class="links">
+                                                                <li><a href="#"><i class="icon-handbag"></i><span>Add to Cart</span></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="txt">
+                                                    <strong class="title"><a href="product-detail.html">Wood Chair</a></strong>
+                                                    <span class="price"><i class="fa fa-eur"></i> <span>198,00</span></span>
+                                                </div>
+                                            </div><!-- mt product1 center end here -->
+                                            <!-- mt product1 center start here -->
+                                            <div class="mt-product1 mt-paddingbottom20">
+                                                <div class="box">
+                                                    <div class="b1">
+                                                        <div class="b2">
+                                                            <a href="product-detail.html"><img src="http://placehold.it/215x215" alt="image description"></a>
+                                                            <span class="caption">
+                                                                <span class="off">15% Off</span>
+                                                                <span class="new">NEW</span>
+                                                            </span>
+                                                            <ul class="mt-stars">
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                            <ul class="links">
+                                                                <li><a href="#"><i class="icon-handbag"></i><span>Add to Cart</span></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="txt">
+                                                    <strong class="title"><a href="product-detail.html">Bombi Chair</a></strong>
+                                                    <span class="price"><i class="fa fa-eur"></i> <span>200,00</span></span>
+                                                </div>
+                                            </div><!-- mt product1 center end here -->
+                                            <!-- mt product1 center start here -->
+                                            <div class="mt-product1 mt-paddingbottom20">
+                                                <div class="box">
+                                                    <div class="b1">
+                                                        <div class="b2">
+                                                            <a href="product-detail.html"><img src="http://placehold.it/215x215" alt="image description"></a>
+                                                            <ul class="links">
+                                                                <li><a href="#"><i class="icon-handbag"></i><span>Add to Cart</span></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                                <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="txt">
+                                                    <strong class="title"><a href="product-detail.html">Bombi Chair</a></strong>
+                                                    <span class="price"><i class="fa fa-eur"></i> <span>200,00</span></span>
+                                                </div>
+                                            </div><!-- mt product1 center end here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- related products end here -->
                     </div>
-                  </div><!-- banner 8 start here -->
-                </div>
-              </div><!-- banner frame end here -->
-            </div>
-          </div>
+                </main><!-- mt main end here -->
+                <%@include file = "footer.jsp" %>  	
+            </div><!-- W1 end here -->
+            <span id="back-top" class="fa fa-arrow-up"></span>
         </div>
-      </main><!-- Main of the Page end -->
-      <%@include file = "footer.jsp" %>   
-  <!-- include jQuery -->
-  <script src="js/jquery.js"></script>
-  <!-- include jQuery -->
-  <script src="js/plugins.js"></script>
-  <!-- include jQuery -->
-  <script src="js/jquery.main.js"></script>
+        <!-- include jQuery -->
+        <script src="js/jquery.js"></script>
+        <!-- include jQuery -->
+        <script src="js/plugins.js"></script>
+        <!-- include jQuery -->
+        <script src="js/jquery.main.js"></script>
     </body>
 </html>
+

@@ -553,6 +553,24 @@ public class ProductDAO extends DBConnection {
         return null;
 
     }
+
+//DetailProductController QAnh
+    public Product getProductById(String id) {
+        try {
+
+            String sql = "SELECT * FROM Products WHERE id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Product p = new Product(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8),rs.getString(9));
+                return p;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 //    public static void main(String[] args) {
 //        //trace log
 //        System.out.println(new ProductDAO().getProductsByKeywords(s));

@@ -127,7 +127,31 @@ public class VolumeDAO extends DBConnection{
         }
         return null;
     }
-      
-      
+
+  
+//DetailProductController QAnh
+    public Volume getVolumeByPidAndCap(String id, String capacity) {
+        try {
+
+            String sql = "SELECT * FROM Volume WHERE productID = 1 and capacity = '30'";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                int idd = rs.getInt("id");
+                String capacityy = rs.getString("capacity");
+                int productID = rs.getInt("productID");
+                double price = rs.getDouble("price");
+                int stock = rs.getInt("stock");
+                int sold = rs.getInt("sold");
+
+                Volume v = new Volume(idd, capacityy, productID, price, stock, sold);
+                return v;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }  
       
 }
