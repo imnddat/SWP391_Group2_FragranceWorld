@@ -24,6 +24,10 @@
         <servlet-name>viewUserProfile</servlet-name>
         <servlet-class>Controller.viewUserProfile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetailProductController</servlet-name>
+        <servlet-class>Controller.DetailProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -50,6 +54,10 @@
     <servlet-mapping>
         <servlet-name>viewUserProfile</servlet-name>
         <url-pattern>/viewUserProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailProductController</servlet-name>
+        <url-pattern>/DetailProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

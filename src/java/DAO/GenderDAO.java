@@ -8,6 +8,7 @@ import Model.Gender;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,10 +18,10 @@ import java.util.logging.Logger;
  * @author Thinkpad
  */
 public class GenderDAO extends DBConnection{
-     public Vector<Gender> getAll() {
+     public ArrayList<Gender> getAll() {
         PreparedStatement stm = null;
         ResultSet rs = null;
-        Vector<Gender> genders = new Vector<>();
+        ArrayList<Gender> genders = new ArrayList<>();
         String sql = "select * from [Gender]";
         try {
             stm = connection.prepareStatement(sql);

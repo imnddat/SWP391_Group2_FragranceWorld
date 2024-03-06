@@ -4,6 +4,7 @@
     Author     : Thinkpad
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@
         <meta charset="utf-8">
         <!-- set the viewport width and initial-scale on mobile devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Schön. | eCommerce HTML5 Template</title>
+        
         <!-- include the site stylesheet -->
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
         <!-- include the site stylesheet -->
@@ -29,9 +30,6 @@
 
     <body>
         <!-- W1 start here -->
-
-
-
         <!-- mt header style4 start here -->
         <header id="mt-header" class="style4">
             <!-- mt bottom bar start here -->
@@ -67,24 +65,7 @@
                                                     </div>
                                                     <a href="#" class="close fa fa-times"></a>
                                                 </div><!-- cart row end here -->
-                                                <!-- cart row start here -->
-                                                <div class="cart-row">
-                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                                    <div class="mt-h">
-                                                        <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                                    </div>
-                                                    <a href="#" class="close fa fa-times"></a>
-                                                </div><!-- cart row end here -->
-                                                <!-- cart row start here -->
-                                                <div class="cart-row">
-                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                                    <div class="mt-h">
-                                                        <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                                    </div>
-                                                    <a href="#" class="close fa fa-times"></a>
-                                                </div><!-- cart row end here -->
+                                             
                                                 <!-- cart row total start here -->
                                                 <div class="cart-row-total">
                                                     <span class="mt-total">Add them all</span>
@@ -118,26 +99,7 @@
                                                     </div>
                                                     <a href="#" class="close fa fa-times"></a>
                                                 </div><!-- cart row end here -->
-                                                <!-- cart row start here -->
-                                                <div class="cart-row">
-                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                                    <div class="mt-h">
-                                                        <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                                        <span class="mt-h-title">Qty: 1</span>
-                                                    </div>
-                                                    <a href="#" class="close fa fa-times"></a>
-                                                </div><!-- cart row end here -->
-                                                <!-- cart row start here -->
-                                                <div class="cart-row">
-                                                    <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                                    <div class="mt-h">
-                                                        <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                                        <span class="mt-h-title">Qty: 1</span>
-                                                    </div>
-                                                    <a href="#" class="close fa fa-times"></a>
-                                                </div><!-- cart row end here -->
+                                                
                                                 <!-- cart row total start here -->
                                                 <div class="cart-row-total">
                                                     <span class="mt-total">Sub Total</span>
@@ -180,24 +142,27 @@
                                                     <!-- mt col3 start here -->
                                                     <div class="mt-col-3">
                                                         <div class="sub-dropcont">
-                                                            <strong class="title"><a href="product-grid-view.html" class="mt-subopener">cacloainuoc</a></strong>
+                                                            <strong class="title"><a href="product-grid-view.html" class="mt-subopener">Gender Product</a></strong>
+                                                         
+                                                               
                                                             <div class="sub-drop">
                                                                 <ul>
-                                                                    <li><a href="listProductView.jsp">Product Dior</a></li>
-                                                                    <li><a href="product-list-view.html">Product Gucci</a></li>
-                                                                    <li><a href="product-detail.html">Product Detail</a></li>
+                                                                    <li><a href="ListProductViewController?id=1">Product Boy</a></li>
+                                                                    <li><a href="ListProductViewController?id=2">Product Girl</a></li>
+                                                                    <li><a href="ListProductViewController?id=3">Product Unisex</a></li>
                                                                 </ul>
                                                             </div>
+                                                           
+                                                            
                                                         </div>
                                                         <div class="sub-dropcont">
-                                                            <strong class="title"><a href="#" class="mt-subopener">Stock</a></strong>
+                                                            <strong class="title"><a href="#" class="mt-subopener">CAPACITY</a></strong>
                                                             <div class="sub-drop">
                                                                 <ul>
-                                                                    <li><a href="404-page.html">Stock1</a></li>
-                                                                    <li><a href="404-page2.html">Stock2</a></li>
-                                                                    <li><a href="404-page2.html">Stock2</a></li>
-                                                                    <li><a href="404-page2.html">Stock2</a></li>
-
+                                                                    <li><a href="ListProductViewController?volumeSearchCapacity=30">30ml</a></li>
+                                                                    <li><a href="ListProductViewController?volumeSearchCapacity=50">50ml</a></li>
+                                                                    <li><a href="ListProductViewController?volumeSearchCapacity=100">100ml</a></li>
+                                                                    
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -207,25 +172,25 @@
                                                     <!-- mt col3 start here -->
                                                     <div class="mt-col-3">
                                                         <div class="sub-dropcont">
-                                                            <strong class="title"><a href="#" class="mt-subopener">Mau sac</a></strong>
+                                                            <strong class="title"><a href="#" class="mt-subopener">SCENT</a></strong>
                                                             <div class="sub-drop">
                                                                 <ul>
-                                                                    <li><a href="about-us.html">About</a></li>
-                                                                    <li><a href="about-us.html">About</a></li>
-                                                                    <li><a href="about-us.html">About</a></li>
-                                                                    <li><a href="about-us.html">About</a></li>
+                                                                    <li><a href="ListProductViewController?productSearchScent=Floral Fruity">Floral Fruity</a></li>
+                                                                    <li><a href="ListProductViewController?productSearchScent=Floral Woody Musk">Floral Woody Musk</a></li>
+                                                                    <li><a href="ListProductViewController?productSearchScent=Woody Spicy">Woody Spicy</a></li>
+                                                                    <li><a href="ListProductViewController?productSearchScent=Aromantic Fougere"> Aromantic Fougere </a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                        
                                                         <div class="sub-dropcont">
-                                                            <strong class="title"><a href="#" class="mt-subopener">gia tien</a></strong>
+                                                            <strong class="title"><a href="#" class="mt-subopener">Make By From</a></strong>
                                                             <div class="sub-drop">
                                                                 <ul>
-                                                                    <li><a href="coming-soon.html">Coming Soon</a></li>
-                                                                    <li><a href="coming-soon2.html">Coming Soon2</a></li>
-                                                                    <li><a href="about-us.html">About</a></li>
-                                                                    <li><a href="about-us.html">About</a></li>
+                                                                    <li><a href="ListProductViewController?brandSortMakebyFrom=America">America</a></li>
+                                                                    <li><a href="ListProductViewController?brandSortMakebyFrom=France">France</a></li>
+                                                                    <li><a href="ListProductViewController?brandSortMakebyFrom=Italy">Italy</a></li>
+                                                                    <li><a href="ListProductViewController?brandSortMakebyFrom=Arabic">Arabic</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -235,20 +200,16 @@
                                                     <!-- mt col3 start here -->
                                                     <div class="mt-col-3">
                                                         <div class="sub-dropcont">
-                                                            <strong class="title"><a href="#" class="mt-subopener">hang nuoc hoa</a></strong>
+                                                            <strong class="title"><a href="#" class="mt-subopener">PERFUME BRAND</a></strong>
                                                             <div class="sub-drop">
                                                                 <ul>
-                                                                    <li><a href="#">Kitchen Taps</a></li>
-                                                                    <li><a href="#">Breakfast time</a></li>
-                                                                    <li><a href="#">Cooking</a></li>
+                                                                    <li><a href="#?brandID">Gucci</a></li>
+                                                                    <li><a href="#">Dior</a></li>
+                                                                    <li><a href="#">Icss</a></li>
                                                                     <li><a href="#">Food Storage Boxes</a></li>
                                                                     <li><a href="#">Spice Jars</a></li>
                                                                     <li><a href="#">Napskins</a></li>
-                                                                    <li><a href="#">Oven Gloves</a></li>
-                                                                    <li><a href="#">Placemats</a></li>
-                                                                    <li><a href="#">Cooking</a></li>
-                                                                    <li><a href="#">Food Storage Boxes</a></li>
-                                                                    <li><a href="#">Spice Jars</a></li>
+                                                                    
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -258,7 +219,7 @@
                                                     <!-- mt col3 start here -->
                                                     <div class="mt-col-3 promo">
                                                         <div class="mt-promobox">
-                                                            <a href="#"><img src="http://placehold.it/295x320" alt="promo banner" class="img-responsive"></a>
+                                                            <a href="#"><img src="images/banner3.png" alt="promo banner" class="img-responsive" style="height: 285; width: 275"></a>
                                                         </div>
                                                     </div>
                                                     <!-- mt col3 end here -->
