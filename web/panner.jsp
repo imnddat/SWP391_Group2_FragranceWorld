@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- mt logo start here -->
-                    <div class="mt-logo"><a href="#"><img src="images/mt-logo.png" alt="schon"></a></div>
+                    <div class="mt-logo"><a href="HomeController"><img src="images/mt-logo.png" alt="schon"></a></div>
                     <!-- mt icon list start here -->
                     <ul class="mt-icon-list">
                         <li class="hidden-lg hidden-md">
@@ -99,7 +99,7 @@
                                         <!-- cart row total end here -->
                                         <div class="cart-btn-row">
                                             <a href="${pageContext.request.contextPath}/cart" class="btn-type2">VIEW CART</a>
-                                            <a href="#" class="btn-type3">CHECKOUT</a>
+                                            <a href="checkout" class="btn-type3">CHECKOUT</a>
                                         </div>
 
 
@@ -121,7 +121,7 @@
                     <nav id="nav">
                         <ul>
                             <li>
-                                <a class="drop-link" href="homepage1.html">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
+                                <a class="drop-link" href="HomeController">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
 
                             </li>
                             <li class="drop">
@@ -269,7 +269,7 @@
         <!-- mt side widget start here -->
         <div class="mt-side-widget">
             <header>
-                <a href="registerpage.jsp"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">SIGN UP</button></span></a>
+                <a href="register"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">SIGN UP</button></span></a>
             </header>	
         </div>
         <!-- mt side widget end here -->

@@ -214,7 +214,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <a href="#" class="process-btn">PROCEED TO CHECKOUT <i class="fa fa-check"></i></a>
+                                    <a href="checkout" class="process-btn">PROCEED TO CHECKOUT <i class="fa fa-check"></i></a>
                                 </div>
                             </div>
                         </div>
