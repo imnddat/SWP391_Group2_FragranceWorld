@@ -209,9 +209,12 @@ public class ProductDAO extends DBConnection {
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class
@@ -596,10 +599,10 @@ public class ProductDAO extends DBConnection {
         return price;
     }
 
-//    public static void main(String[] args) {
-//        //trace log
-//        System.out.println(new ProductDAO().getProductsByKeywords(s));
-//    }
+    public static void main(String[] args) {
+        //trace log
+        System.out.println(new ProductDAO().getProductsById(1));
+    }
 //  public Vector<Product> sortProducts(Vector<Product> products, String sortBy) {
 //        if (sortBy.equals("priceLowHigh")) {
 //            products.sort(Comparator.comparing(Product::getPrice));

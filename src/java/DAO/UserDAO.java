@@ -58,45 +58,42 @@ public class UserDAO extends DBConnection {
     /**
      * get user from User table Using name and password
      *
+     * @param username
      * @param userName is an String
      * @param password is an String
      * @return <code>User</code> object.
      * @throws java.lang.Exception
      */
-    public User getUserLogin(String userName, String password) throws Exception {
-        Connection conn = null;
-        /* Result set returned by the sqlserver */
-        ResultSet rs = null;
-        /* Prepared statement for executing sql queries */
-        PreparedStatement pre = null;
-
-        String sql = "SELECT * FROM [User] WHERE username = ? and password = ? ";
+    public User getUserLogin(String username, String password) throws Exception {
         try {
-            conn = getConnection();
-            pre = conn.prepareStatement(sql);
-            pre.setString(1, userName);
-            pre.setString(2, password);
-            rs = pre.executeQuery();
-            if (rs.next()) {
-                User loginUser = new User(rs.getInt("id"),
-                        rs.getString("userName"),
-                        rs.getString("password"),
-                        rs.getString("email"),
-                        rs.getString("name"),
-                        rs.getString("address"),
-                        rs.getString("phone"),
-                        rs.getInt("roleID"),
-                        rs.getInt("banned"));
-                return loginUser;
+            // Thực hiện truy vấn để lấy thông tin người dùng từ bảng
+            String query = "SELECT * FROM [dbo].[User] WHERE username = ? AND password = ?";
+            try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+
+                try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                    // Nếu có kết quả từ truy vấn, tạo đối tượng User và trả về
+                    if (resultSet.next()) {
+                        User user = new User();
+                        user.setId(resultSet.getInt("id"));
+                        user.setUsername(resultSet.getString("username"));
+                        user.setPassword(resultSet.getString("password"));
+                        user.setEmail(resultSet.getString("email"));
+                        user.setName(resultSet.getString("name"));
+                        user.setAddress(resultSet.getString("address"));
+                        user.setPhone(resultSet.getString("phone"));
+                        user.setRoleID(resultSet.getInt("roleID"));
+                        user.setBanned(resultSet.getInt("banned"));
+                        return user;
+                    }
+                }
             }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(pre);
-            closeConnection(conn);
+        } catch (SQLException e) {
+//            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
         }
-        return null;
+
+        return null; // Trả về null nếu không tìm thấy người dùng
     }
 
     /**
@@ -391,9 +388,9 @@ public class UserDAO extends DBConnection {
 
         String query = "SELECT p.*, w.volume FROM Wishlist w JOIN Products p ON w.productID = p.id WHERE w.userID = ?";
 
-        try ( PreparedStatement preparedStatement = connection.prepareStatement(query);  ResultSet resultSet = preparedStatement.executeQuery()) {
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(query); ) {
             preparedStatement.setInt(1, userId);
-
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int productId = resultSet.getInt("id");
                 Product product = pdao.getProductsById(productId);
@@ -487,10 +484,9 @@ public class UserDAO extends DBConnection {
     
     
 
-//    public static void main(String[] args) throws Exception {
-//        UserDAO dao = new UserDAO();
-//        for (User u : dao.getTrueAllUserPaging(1, "userMail", "fpt", "sortMail", "asc")) {
-//            System.out.println(u.getUserMail());
-//        }
-//    }
+    public static void main(String[] args) throws Exception {
+        UserDAO dao = new UserDAO();
+        System.out.println(dao.getUserWishList(5));
+        //System.out.println(dao.getUserLogin("son", "123"));
+    }
 }

@@ -7,6 +7,7 @@ package Controller;
 import DAO.BrandDAO;
 import DAO.ProductDAO;
 import DAO.UserDAO;
+
 import DAO.VolumeDAO;
 import Model.Brand;
 import Model.Item;
@@ -39,6 +40,7 @@ public class HomeController extends HttpServlet {
         UserDAO userDao = new UserDAO();
         ArrayList<Item> wishlist = null;
         User user = (User) session.getAttribute("currentUser");
+        //System.out.println("userid: "+ user.getId());
         if (user != null) {
             try {
                 wishlist = userDao.getUserWishList(user.getId());

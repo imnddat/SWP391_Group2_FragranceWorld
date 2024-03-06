@@ -251,6 +251,11 @@ public class User {
     public void setDob(String dob) {
         this.dob = dob;
     }
-    
 
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", name=" + name + ", address=" + address + ", phone=" + phone + ", roleID=" + roleID + ", banned=" + banned + ", dob=" + dob + '}';
+    }
+    
+    
 }
