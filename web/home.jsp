@@ -65,6 +65,8 @@
         
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
+        <script src="${pageContext.request.contextPath}/js/addToWishlist.js"></script>
+        
         
         <!-- include jQuery -->
         <script src="${pageContext.request.contextPath}/js/jquery.js"></script>

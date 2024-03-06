@@ -26,7 +26,9 @@ public class Product {
     private ArrayList<Volume> volumes;
     private ArrayList<Brand> brands;
     private ArrayList<Gender> genders;
+    
     public Product() {
+        
     }
 
     public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg) {

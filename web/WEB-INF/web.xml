@@ -39,6 +39,8 @@
     <servlet>
         <servlet-name>Payment</servlet-name>
         <servlet-class>Controller.PaymentServlet</servlet-class>
+        <servlet-name>ManageWishlist</servlet-name>
+        <servlet-class>Controller.ManageWishlist</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -82,6 +84,8 @@
     <servlet-mapping>
         <servlet-name>Payment</servlet-name>
         <url-pattern>/payment</url-pattern>
+        <servlet-name>ManageWishlist</servlet-name>
+        <url-pattern>/wishlist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

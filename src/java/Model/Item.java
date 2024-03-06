@@ -17,6 +17,14 @@ public class Item {
     public Item() {
     }
 
+    public Item(Product product, double price, String volume) {
+        this.product = product;
+        this.price = price;
+        this.volume = volume;
+    }
+    
+    
+
     public Item(Product product, int quantity, double price, String volume) {
         this.product = product;
         this.quantity = quantity;

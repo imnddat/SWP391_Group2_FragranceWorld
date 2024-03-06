@@ -16,44 +16,43 @@
                             </a>
                         </li>                                  
                         <li class="drop">
-                            <a href="#" class="icon-heart cart-opener"><span style="margin-bottom: -3px;" class="num">3</span></a>
+<%--                            <c:set var="wsize" value="${empty sessionScope.wishlistsize ? 0 : sessionScope.wishlistsize}"/>
+                            <a href="#" class="icon-heart wishlist-opener"><span style="margin-bottom: -3px;" class="num" id="wishlist-size">${wsize}</span></a>--%>
+                            <a href="#" class="cart-opener wishlistItemOpen">
+                                <span class="icon-heart"></span>
+                                <c:set var="wsize" value="${empty sessionScope.wishlistsize ? 0 : sessionScope.wishlistsize}"/>
+                                <span class="num" id="wishlist-size">${wsize}</span>
+                            </a>
+                            
                             <!-- mt drop start here -->
                             <div class="mt-drop">
                                 <!-- mt drop sub start here -->
                                 <div class="mt-drop-sub">
                                     <!-- mt side widget start here -->
                                     <div class="mt-side-widget">
-                                        <!-- cart row start here -->
-                                        <div class="cart-row">
-                                            <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                            <div class="mt-h">
-                                                <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                            </div>
-                                            <a href="#" class="close fa fa-times"></a>
-                                        </div><!-- cart row end here -->
-                                        <!-- cart row start here -->
-                                        <div class="cart-row">
-                                            <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                            <div class="mt-h">
-                                                <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                            </div>
-                                            <a href="#" class="close fa fa-times"></a>
-                                        </div><!-- cart row end here -->
-                                        <!-- cart row start here -->
-                                        <div class="cart-row">
-                                            <a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>
-                                            <div class="mt-h">
-                                                <span class="mt-h-title"><a href="#">Marvelous Modern 3 Seater</a></span>
-                                                <span class="price"><i class="fa fa-eur" aria-hidden="true"></i> 599,00</span>
-                                            </div>
-                                            <a href="#" class="close fa fa-times"></a>
-                                        </div><!-- cart row end here -->
-                                        <!-- cart row total start here -->
+                                        
+                                        <div class="wishlistItem" style="max-height: 270px; overflow-y: auto">
+                                            <!-- cart row start here -->
+
+
+                                            <c:forEach var="i" items="${sessionScope.wishlist}">
+                                                <div class="cart-row">
+                                                    <!--<a href="#" class="img"><img src="http://placehold.it/75x75" alt="image" class="img-responsive"></a>-->
+                                                    <a href="#" class="img"><img src="${i.getProduct().getDefaultImg()}" alt="image" class="img-responsive"></a>
+                                                    <div class="mt-h">
+                                                        <span class="mt-h-title"><a href="#">${i.getProduct().getNameProduct()} (${i.getVolume()})</a></span>
+                                                        <span class="price"><i class="fa fa-eur" aria-hidden="true"></i>${i.getPrice()}</span>                   
+                                                    </div>
+                                                    <!--<a href="#" class="close fa fa-times"></a>-->
+                                                </div><!-- cart row end here -->
+                                            </c:forEach>
+
+                                        </div>
+                                        
+                                        
                                         <div class="cart-row-total">
-                                            <span class="mt-total">Add them all</span>
-                                            <span class="mt-total-txt"><a href="#" class="btn-type2">add to CART</a></span>
+                                            <a href="#" class="btn-type2" onclick="confirmDelete()">Delete all</a>
+                                            <span class="mt-total-txt"><a href="${pageContext.request.contextPath}/wishlist" class="btn-type2">view list</a></span>
                                         </div>
                                         <!-- cart row total end here -->
                                     </div><!-- mt side widget end here -->
@@ -285,3 +284,44 @@
     </div>
     <!-- mt holder end here -->
 </div><!-- mt side menu end here -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+function confirmDelete(event) {
+    event = event || window.event;
+    event.stopPropagation();
+
+    var confirmed = confirm("Delete all?");
+    if (confirmed) {
+        var contextPath = "${pageContext.request.contextPath}";
+        var servletPath = "/wishlist";
+        var deleteAllUrl = contextPath + servletPath;
+        var action1 = "deleteAll";
+
+        // S? d?ng AJAX ?? g?i yêu c?u xóa
+        $.ajax({
+            type: "GET",
+            url: deleteAllUrl,
+            data: {
+                action: action1
+            },
+            success: function () {
+                // C?p nh?t giao di?n ng??i dùng ho?c th?c hi?n các hành ??ng c?n thi?t sau khi xóa
+                console.log("Delete successful");
+                $("#wishlist-size").text(0);
+                $(".wishlistItem").empty();
+            },
+            error: function () {
+                console.error("Error deleting wishlist");
+            }
+        });
+    }
+
+    // Ng?n ch?n hành vi m?c ??nh c?a th? <a>
+    event.preventDefault();
+    return false;
+}
+</script>
+
+
+
+
