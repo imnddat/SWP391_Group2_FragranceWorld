@@ -92,7 +92,7 @@
                                                 <input type="checkbox"> Ship to a different address?
                                             </div>
                                             <div class="form-group">
-                                                <textarea class="form-control" placeholder="Order Notes"></textarea>
+                                                <textarea class="form-control" name="note" placeholder="Order Notes"></textarea>
                                             </div>
                                             <input type="text" style="display: none;" id="paymentOption" name="paymentOption" value="Pay In Cash">
                                             <input type="number" style="display: none;" id="paymentAmount" name="paymentAmount" value="${requestScope.ordertotal}">
@@ -140,7 +140,7 @@
                                                 <div class="txt-holder">
                                                     <strong class="title sub-title pull-left">ORDER TOTAL</strong>
                                                     <div class="txt pull-right">
-                                                        <span><i class="fa fa-eur"></i> ${requestScope.ordertotal}</span>
+                                                        <span><i class="fa fa-eur"></i> ${sessionScope.ordertotal}</span>
                                                     </div>
                                                 </div>
                                             </li>

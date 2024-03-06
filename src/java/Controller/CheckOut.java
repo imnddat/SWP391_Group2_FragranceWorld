@@ -81,7 +81,7 @@ public class CheckOut extends HttpServlet {
         } else {
             Cart cart = new Cart((List) list);
             request.setAttribute("subtotal", cart.getTotalMoney());
-            request.setAttribute("ordertotal", cart.getTotalMoney());
+            session.setAttribute("ordertotal", cart.getTotalMoney());
         }
         request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
     }
@@ -104,13 +104,23 @@ public class CheckOut extends HttpServlet {
         if (list != null) {
             Cart cart = new Cart((List) list);
             OrderDAO order = new OrderDAO();
+            String name = request.getParameter("address");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String note = request.getParameter("note");
             String address = request.getParameter("address");
             String payment = request.getParameter("paymentOption");
             orderId = order.createOrder(address, cart, payment);
             request.setAttribute("orderid", orderId);
             if(payment.equalsIgnoreCase("VN Pay")){
-                PaymentServlet ps = new PaymentServlet();
-                ps.doPost(request, response);
+                //PaymentServlet ps = new PaymentServlet();
+                //ps.doPost(request, response);
+                session.setAttribute("order_name", name);
+                session.setAttribute("order_email", email);
+                session.setAttribute("order_phone", phone);
+                session.setAttribute("order_note", note);
+                session.setAttribute("order_address", address);
+                response.sendRedirect("payment");
                 return;
             }
         } else {

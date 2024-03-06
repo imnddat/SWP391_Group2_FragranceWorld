@@ -71,7 +71,8 @@ public class PaymentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        request.getRequestDispatcher("test/vnpay_pay.jsp").forward(request, response);
     }
 
     /**
@@ -88,9 +89,10 @@ public class PaymentServlet extends HttpServlet {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
-        
-        long amount = ((long) Double.parseDouble(request.getParameter("paymentAmount"))) * 100;
-
+        //long amount = Integer.parseInt(request.getParameter("amount"))*100;
+        //System.out.println(request.getParameter("paymentAmount"));
+        long amount = ((long) Double.parseDouble(request.getParameter("amount"))) * 1000000;
+        //System.out.println("The price: "+amount);
         String bankCode = "";
 
         String vnp_TxnRef = Config.getRandomNumber(8);
@@ -112,7 +114,7 @@ public class PaymentServlet extends HttpServlet {
         vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
         vnp_Params.put("vnp_OrderType", orderType);
 
-        vnp_Params.put("vnp_Locale", "vn");
+        vnp_Params.put("vnp_Locale", "en");
 
         vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
