@@ -19,7 +19,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
-
 /**
  *
  * @author THAISON
@@ -80,6 +79,7 @@ public class ManageCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        ProductDAO pd = new ProductDAO();
         Cart cart = new Cart();
         Object o = session.getAttribute("cart");
 
@@ -91,17 +91,20 @@ public class ManageCart extends HttpServlet {
         String pId = request.getParameter("id");
         String pPrice = request.getParameter("price");
         String pVolume = request.getParameter("volume");
-        
-        System.out.println("volume111:    "+pVolume);
-        
         int id, quantity;
         double price;
+
+        //System.out.println(pQuantity+pId+pPrice+pVolume);
+        // System.out.println("volume111:    "+pVolume);
         try {
             id = Integer.parseInt(pId);
             quantity = Integer.parseInt(pQuantity);
-            price = Double.parseDouble(pPrice);
-
-            ProductDAO pd = new ProductDAO();
+            if (pVolume == null) {
+                pVolume = "30";
+                price = pd.getProductPrice(id, pVolume);
+            } else {
+                price = Double.parseDouble(pPrice);
+            }
             Product p = pd.getProductsById(id);
             //double price = p.getPrice();
             if (quantity == 0) {
@@ -117,7 +120,6 @@ public class ManageCart extends HttpServlet {
 //        for (Item i : cart.getItemList()) {
 //            System.out.println(i);
 //        }
-
         double totalMoney = cart.getTotalMoney();
         List<Item> list = cart.getItemList();
         session.setAttribute("cart", list);

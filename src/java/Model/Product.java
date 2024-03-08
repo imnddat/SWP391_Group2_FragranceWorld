@@ -23,9 +23,11 @@ public class Product {
     private String scent;
     private int brandID;
     private String defaultImg;
+    Brand brands;
+    Gender genders;
     private ArrayList<Volume> volumes;
-    private ArrayList<Brand> brands;
-    private ArrayList<Gender> genders;
+    private ArrayList<Sale> sales;
+
     
     public Product() {
         
@@ -43,6 +45,37 @@ public class Product {
         this.defaultImg = defaultImg;
     }
 
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, Brand brands, ArrayList<Volume> volumes) {
+        this.id = id;
+        this.description = description;
+        this.genderID = genderID;
+        this.nameProduct = nameProduct;
+        this.codeProduct = codeProduct;
+        this.discount = discount;
+        this.scent = scent;
+        this.brandID = brandID;
+        this.defaultImg = defaultImg;
+        this.brands = brands;
+        this.volumes = volumes;
+    }
+
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, Gender genders, ArrayList<Volume> volumes) {
+        this.id = id;
+        this.description = description;
+        this.genderID = genderID;
+        this.nameProduct = nameProduct;
+        this.codeProduct = codeProduct;
+        this.discount = discount;
+        this.scent = scent;
+        this.brandID = brandID;
+        this.defaultImg = defaultImg;
+        this.genders = genders;
+        this.volumes = volumes;
+    }
+
+ 
+
+ 
     public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, ArrayList<Volume> volumes) {
         this.id = id;
         this.description = description;
@@ -56,7 +89,7 @@ public class Product {
         this.volumes = volumes;
     }
 
-    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, ArrayList<Volume> volumes, ArrayList<Brand> brands) {
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, ArrayList<Volume> volumes, ArrayList<Sale> sales) {
         this.id = id;
         this.description = description;
         this.genderID = genderID;
@@ -67,10 +100,10 @@ public class Product {
         this.brandID = brandID;
         this.defaultImg = defaultImg;
         this.volumes = volumes;
-        this.brands = brands;
+        this.sales = sales;
     }
 
-    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, ArrayList<Volume> volumes, ArrayList<Brand> brands, ArrayList<Gender> genders) {
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, Brand brands, Gender genders, ArrayList<Volume> volumes) {
         this.id = id;
         this.description = description;
         this.genderID = genderID;
@@ -80,11 +113,16 @@ public class Product {
         this.scent = scent;
         this.brandID = brandID;
         this.defaultImg = defaultImg;
-        this.volumes = volumes;
         this.brands = brands;
         this.genders = genders;
+        this.volumes = volumes;
     }
+
+  
+
     
+ 
+
     public int getId() {
         return id;
     }
@@ -157,6 +195,7 @@ public class Product {
         this.defaultImg = defaultImg;
     }
 
+  
     public ArrayList<Volume> getVolumes() {
         return volumes;
     }
@@ -165,21 +204,34 @@ public class Product {
         this.volumes = volumes;
     }
 
-    public ArrayList<Brand> getBrands() {
+    public Brand getBrands() {
         return brands;
     }
 
-    public void setBrands(ArrayList<Brand> brands) {
+    public void setBrands(Brand brands) {
         this.brands = brands;
     }
 
-    public ArrayList<Gender> getGenders() {
+    public ArrayList<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(ArrayList<Sale> sales) {
+        this.sales = sales;
+    }
+
+    public Gender getGenders() {
         return genders;
     }
 
-    public void setGenders(ArrayList<Gender> genders) {
+    public void setGenders(Gender genders) {
         this.genders = genders;
     }
+
+    
+
+
+   
     
     
     

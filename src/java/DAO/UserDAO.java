@@ -388,7 +388,7 @@ public class UserDAO extends DBConnection {
 
         String query = "SELECT p.*, w.volume FROM Wishlist w JOIN Products p ON w.productID = p.id WHERE w.userID = ?";
 
-        try ( PreparedStatement preparedStatement = connection.prepareStatement(query); ) {
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(query);) {
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -408,24 +408,24 @@ public class UserDAO extends DBConnection {
             throw e;
         }
     }
-    
-    public boolean updateUserWishlist(int userId, int productId, String volume, String action){
+
+    public boolean updateUserWishlist(int userId, int productId, String volume, String action) {
         LocalDate date = LocalDate.now();
-        if(action.equalsIgnoreCase("deleteAll")){
+        if (action.equalsIgnoreCase("deleteAll")) {
             removeAllUserWishlist(userId);
-        } else if (action.equalsIgnoreCase("add")){
+        } else if (action.equalsIgnoreCase("add")) {
             addUserWishlist(userId, productId, volume, date);
-        } else if (action.equalsIgnoreCase("remove")){
+        } else if (action.equalsIgnoreCase("remove")) {
             removeUserWishlist(userId, productId);
         }
         return false;
     }
-    
-    public boolean removeAllUserWishlist(int userId){
+
+    public boolean removeAllUserWishlist(int userId) {
         // Chuỗi SQL để xóa tất cả Wishlist của một người dùng
         String deleteSQL = "DELETE FROM Wishlist WHERE userId = ?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
             // Thiết lập tham số cho câu lệnh SQL
             preparedStatement.setInt(1, userId);
 
@@ -439,12 +439,12 @@ public class UserDAO extends DBConnection {
             return false;
         }
     }
-    
-    public boolean addUserWishlist(int userId, int productId, String volume, LocalDate date){
+
+    public boolean addUserWishlist(int userId, int productId, String volume, LocalDate date) {
         // Chuỗi SQL để thêm mới một mục vào Wishlist
         String insertSQL = "INSERT INTO Wishlist (userID, productID, favoriteDate, volume) VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
             // Thiết lập tham số cho câu lệnh SQL
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, productId);
@@ -461,12 +461,12 @@ public class UserDAO extends DBConnection {
             return false;
         }
     }
-    
-    public boolean removeUserWishlist(int userId, int productId){
+
+    public boolean removeUserWishlist(int userId, int productId) {
         // Chuỗi SQL để xóa một mục từ Wishlist
         String deleteSQL = "DELETE FROM Wishlist WHERE userID = ? AND productID = ?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
             // Thiết lập tham số cho câu lệnh SQL
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, productId);
@@ -481,8 +481,6 @@ public class UserDAO extends DBConnection {
             return false;
         }
     }
-    
-    
 
     public static void main(String[] args) throws Exception {
         UserDAO dao = new UserDAO();

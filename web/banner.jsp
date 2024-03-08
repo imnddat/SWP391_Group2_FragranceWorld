@@ -1,22 +1,20 @@
-
-
 <!-- mt main slider start here -->
 <div class="mt-main-slider">
     <!-- slider banner-slider start here -->
     <div class="slider banner-slider">
         <!-- holder start here -->
-        <div class="holder text-center" style="background-image: url(http://placehold.it/1920x585);">
+        <div class="holder text-center" style="background-image: url(images/banner1.png);height: 1920; width: 585">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="text centerize">
                             <strong class="title">FURNITURE DESIGNS IDEAS</strong>
-                            <h1>LIGHTING</h1>
-                            <h2>PENDANT LAMPS</h2>
+                            <h1></h1>
+                            <h2></h2>
                             <div class="txt">
-                                <p>Consectetur adipisicing elit. Beatae accusamus, optio, repellendus inventore</p>
+                                <p></p>
                             </div>
-                            <a href="product-detail.html" class="shop">shop now</a>
+                            <a href="productdetail.jsp" class="shop">shop now</a>
                         </div>
                     </div>
                 </div>
@@ -70,7 +68,7 @@
 <div class="banner-frame">
     <!-- banner-1 start here -->
     <div class="banner-1 wow fadeInLeft" data-wow-delay="0.4s">
-        <img alt="image description" src="http://placehold.it/385x480">
+        <img alt="image description" src="images/banner2.png">
         <div class="holder">
             <h2>MY SMALL WRITING <br>DESK</h2>
             <div class="txts">
@@ -90,7 +88,7 @@
     <div class="banner-box first">
         <!-- banner-2 start here -->
         <div class="banner-2 wow fadeInUp" data-wow-delay="0.4s">
-            <img alt="image description" src="http://placehold.it/385x225">
+            <img alt="image description" src="images/banner3.png">
             <div class="holder">
                 <h2>MODULAR LOUNGE <br>TEAK</h2>
                 <span class="price">$ 129.00</span>
@@ -100,10 +98,10 @@
 
         <!-- banner-3 start here -->
         <div class="banner-3 right wow fadeInDown" data-wow-delay="0.4s">
-            <img alt="image description" src="http://placehold.it/385x225">
+            <img alt="image description" src="images/banner4.png">
             <div class="holder">
-                <h2>Modular technical <br>fabric sofa</h2>
-                <a href="product-detail.html" class="shop">SHOP NOW</a>
+
+                <a href="product-detail.html" class="shop" style="color: red;">SHOP NOW</a>
             </div>
         </div>
         <!-- banner-3 end here -->
@@ -112,7 +110,7 @@
 
     <!-- banner-4 start here -->
     <div class="banner-4 hidden-sm wow fadeInRight" data-wow-delay="0.4s">
-        <img alt="image description" src="http://placehold.it/385x480">
+        <img alt="image description" src="images/banner5.png">
         <div class="holder">
             <h2>Direct light <br>pendant lamp</h2>
             <span class="price">$ 129.00</span>

@@ -8265,7 +8265,7 @@ a:hover {
 	vertical-align: top;
 }
 
-.mt-pagination ul a {
+.mt-pagination ul a.active {
 	color: #bababa;
 	display: block;
 	padding: 5px 10px;

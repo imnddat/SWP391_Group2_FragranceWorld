@@ -8,6 +8,7 @@ import Model.Brand;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,10 +19,10 @@ import java.util.logging.Logger;
  */
 public class BrandDAO extends DBConnection {
 
-    public Vector<Brand> getAll() {
+    public ArrayList<Brand> getAll() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
-        Vector<Brand> brands = new Vector<>();
+        ArrayList<Brand> brands = new ArrayList<>();
         String sql = "select * from [Brand]";
         try {
             stm = connection.prepareStatement(sql);
@@ -40,9 +41,9 @@ public class BrandDAO extends DBConnection {
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
                 
             } catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class
@@ -52,7 +53,7 @@ public class BrandDAO extends DBConnection {
         return null;
     }
     
-    public Brand getBrandById(int id) {
+    public Brand getBrandById(int id) throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Brand brand = null;
@@ -73,9 +74,9 @@ public class BrandDAO extends DBConnection {
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
                 
             } catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class
@@ -85,6 +86,11 @@ public class BrandDAO extends DBConnection {
         return null;
     }
     
+    public  ArrayList<Brand> getSoldVolumeByBrand(){
+        
+        return null;
+    
+    }
     
      public Vector<Brand> filterByBrand(String filter, Vector<Brand> brands) {
         Vector<Brand> BrandAfterFilter = new Vector<>();

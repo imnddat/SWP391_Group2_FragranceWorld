@@ -14,22 +14,24 @@ public class Feedback {
     private int id;
     private String content;
     private Date feedbackDate;
-    private int like;
-    private int dislike;
+    private int star;
     private int userID;
     private int orderID;
+    private int productID;
+    private String ing;
 
     public Feedback() {
     }
 
-    public Feedback(int id, String content, Date feedbackDate, int like, int dislike, int userID, int orderID) {
+    public Feedback(int id, String content, Date feedbackDate, int star, int userID, int orderID, int productID, String ing) {
         this.id = id;
         this.content = content;
         this.feedbackDate = feedbackDate;
-        this.like = like;
-        this.dislike = dislike;
+        this.star = star;
         this.userID = userID;
         this.orderID = orderID;
+        this.productID = productID;
+        this.ing = ing;
     }
 
     public int getId() {
@@ -56,20 +58,12 @@ public class Feedback {
         this.feedbackDate = feedbackDate;
     }
 
-    public int getLike() {
-        return like;
+    public int getStar() {
+        return star;
     }
 
-    public void setLike(int like) {
-        this.like = like;
-    }
-
-    public int getDislike() {
-        return dislike;
-    }
-
-    public void setDislike(int dislike) {
-        this.dislike = dislike;
+    public void setStar(int star) {
+        this.star = star;
     }
 
     public int getUserID() {
@@ -87,7 +81,24 @@ public class Feedback {
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
-    
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    public String getIng() {
+        return ing;
+    }
+
+    public void setIng(String ing) {
+        this.ing = ing;
+    }
+
+   
     
     
 }

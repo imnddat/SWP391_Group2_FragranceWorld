@@ -17,8 +17,9 @@ import java.util.logging.Logger;
  *
  * @author Thinkpad
  */
-public class VolumeDAO extends DBConnection{
-      public Vector<Volume> getAll() {
+public class VolumeDAO extends DBConnection {
+
+    public Vector<Volume> getAll() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<Volume> volume = new Vector<>();
@@ -27,12 +28,12 @@ public class VolumeDAO extends DBConnection{
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id");                 
-               String capacity = rs.getString("capacity");
-                int productID = rs.getInt("productID"); 
-               double price = rs.getDouble("price");
-              int stock = rs.getInt("stock"); 
-              int sold = rs.getInt("sold"); 
+                int id = rs.getInt("id");
+                String capacity = rs.getString("capacity");
+                int productID = rs.getInt("productID");
+                double price = rs.getDouble("price");
+                int stock = rs.getInt("stock");
+                int sold = rs.getInt("sold");
 
                 volume.add(new Volume(id, capacity, productID, price, stock, sold));
             }
@@ -43,9 +44,9 @@ public class VolumeDAO extends DBConnection{
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
 
             } catch (SQLException ex) {
                 Logger.getLogger(VolumeDAO.class
@@ -54,8 +55,8 @@ public class VolumeDAO extends DBConnection{
         }
         return null;
     }
-      
-      public Vector<Volume> filterByPrice(String filter, Vector<Volume> volumes) {
+
+    public Vector<Volume> filterByPrice(String filter, Vector<Volume> volumes) {
         Vector<Volume> VolumeAfterFilter = new Vector<>();
 
         switch (filter) {
@@ -77,57 +78,40 @@ public class VolumeDAO extends DBConnection{
 
         return VolumeAfterFilter;
     }
-      private Vector<Volume> filterPrice(double min, double max, Vector<Volume> volumes) {
+
+    private Vector<Volume> filterPrice(double min, double max, Vector<Volume> volumes) {
         Vector<Volume> VolumeAfterFilter = new Vector<>();
 
-          for (Volume volume1 : volumes) {
-              if (volume1.getPrice()< max && volume1.getPrice() > min) {
+        for (Volume volume1 : volumes) {
+            if (volume1.getPrice() < max && volume1.getPrice() > min) {
                 VolumeAfterFilter.add(volume1);
             }
-          }  
+        }
         return VolumeAfterFilter;
     }
-      
-      
-  public Volume getProductByPrice(int productId ) {
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        Volume volume = null;
-        String sql = "select * from Volume \n" +
-"left join Products on Volume.productID = Products.id where price = ?";
+
+    public Volume getVolumeByPidAndCap(String id, String capacity) {
         try {
-            stm = connection.prepareStatement(sql);
-            stm.setInt(1, productId);
-            rs = stm.executeQuery();
-            while (rs.next()) {
-               int id = rs.getInt("id");                 
-               String capacity = rs.getString("capacity");
-                int productID = rs.getInt("productID"); 
-               double price = rs.getDouble("price");
-              int stock = rs.getInt("stock"); 
-              int sold = rs.getInt("sold"); 
 
-               volume = new Volume(id, capacity, productID, price, stock, sold);
+            String sql = "SELECT * FROM Volume WHERE productID = 1 and capacity = '30'";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                int idd = rs.getInt("id");
+                String capacityy = rs.getString("capacity");
+                int productID = rs.getInt("productID");
+                double price = rs.getDouble("price");
+                int stock = rs.getInt("stock");
+                int sold = rs.getInt("sold");
+
+                Volume v = new Volume(idd, capacityy, productID, price, stock, sold);
+                return v;
             }
-            return volume;
-
         } catch (SQLException ex) {
-            Logger.getLogger(VolumeDAO.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                stm.close();
-                rs.close();
-                connection.close();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(VolumeDAO.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-      
-      
-      
+
 }

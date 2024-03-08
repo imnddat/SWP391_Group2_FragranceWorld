@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- mt logo start here -->
-                    <div class="mt-logo"><a href="HomeController"><img src="images/mt-logo.png" alt="schon"></a></div>
+                    <div class="mt-logo"><a href="#"><img src="images/mt-logo.png" alt="schon"></a></div>
                     <!-- mt icon list start here -->
                     <ul class="mt-icon-list">
                         <li class="hidden-lg hidden-md">
@@ -16,21 +16,21 @@
                             </a>
                         </li>                                  
                         <li class="drop">
-<%--                            <c:set var="wsize" value="${empty sessionScope.wishlistsize ? 0 : sessionScope.wishlistsize}"/>
-                            <a href="#" class="icon-heart wishlist-opener"><span style="margin-bottom: -3px;" class="num" id="wishlist-size">${wsize}</span></a>--%>
+                            <%--                            <c:set var="wsize" value="${empty sessionScope.wishlistsize ? 0 : sessionScope.wishlistsize}"/>
+                                                        <a href="#" class="icon-heart wishlist-opener"><span style="margin-bottom: -3px;" class="num" id="wishlist-size">${wsize}</span></a>--%>
                             <a href="#" class="cart-opener wishlistItemOpen">
                                 <span class="icon-heart"></span>
                                 <c:set var="wsize" value="${empty sessionScope.wishlistsize ? 0 : sessionScope.wishlistsize}"/>
                                 <span class="num" id="wishlist-size">${wsize}</span>
                             </a>
-                            
+
                             <!-- mt drop start here -->
                             <div class="mt-drop">
                                 <!-- mt drop sub start here -->
                                 <div class="mt-drop-sub">
                                     <!-- mt side widget start here -->
                                     <div class="mt-side-widget">
-                                        
+
                                         <div class="wishlistItem" style="max-height: 270px; overflow-y: auto">
                                             <!-- cart row start here -->
 
@@ -48,8 +48,8 @@
                                             </c:forEach>
 
                                         </div>
-                                        
-                                        
+
+
                                         <div class="cart-row-total">
                                             <a href="#" class="btn-type2" onclick="confirmDelete()">Delete all</a>
                                             <span class="mt-total-txt"><a href="${pageContext.request.contextPath}/wishlist" class="btn-type2">view list</a></span>
@@ -121,7 +121,7 @@
                     <nav id="nav">
                         <ul>
                             <li>
-                                <a class="drop-link" href="HomeController">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
+                                <a class="drop-link" href="homepage1.html">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
 
                             </li>
                             <li class="drop">
@@ -135,23 +135,26 @@
                                             <!-- mt col3 start here -->
                                             <div class="mt-col-3">
                                                 <div class="sub-dropcont">
-                                                    <strong class="title"><a href="product-grid-view.html" class="mt-subopener">cacloainuoc</a></strong>
+                                                    <strong class="title"><a href="product-grid-view.html" class="mt-subopener">Gender Product</a></strong>
+
+
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="listProductView.jsp">Product Dior</a></li>
-                                                            <li><a href="product-list-view.html">Product Gucci</a></li>
-                                                            <li><a href="product-detail.html">Product Detail</a></li>
+                                                            <li><a href="ListProductViewController?id=1">Product Boy</a></li>
+                                                            <li><a href="ListProductViewController?id=2">Product Girl</a></li>
+                                                            <li><a href="ListProductViewController?id=3">Product Unisex</a></li>
                                                         </ul>
                                                     </div>
+
+
                                                 </div>
                                                 <div class="sub-dropcont">
-                                                    <strong class="title"><a href="#" class="mt-subopener">Stock</a></strong>
+                                                    <strong class="title"><a href="#" class="mt-subopener">CAPACITY</a></strong>
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="404-page.html">Stock1</a></li>
-                                                            <li><a href="404-page2.html">Stock2</a></li>
-                                                            <li><a href="404-page2.html">Stock2</a></li>
-                                                            <li><a href="404-page2.html">Stock2</a></li>
+                                                            <li><a href="ListProductViewController?volumeSearchCapacity=30">30ml</a></li>
+                                                            <li><a href="ListProductViewController?volumeSearchCapacity=50">50ml</a></li>
+                                                            <li><a href="ListProductViewController?volumeSearchCapacity=100">100ml</a></li>
 
                                                         </ul>
                                                     </div>
@@ -162,25 +165,25 @@
                                             <!-- mt col3 start here -->
                                             <div class="mt-col-3">
                                                 <div class="sub-dropcont">
-                                                    <strong class="title"><a href="#" class="mt-subopener">Mau sac</a></strong>
+                                                    <strong class="title"><a href="#" class="mt-subopener">SCENT</a></strong>
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="about-us.html">About</a></li>
-                                                            <li><a href="about-us.html">About</a></li>
-                                                            <li><a href="about-us.html">About</a></li>
-                                                            <li><a href="about-us.html">About</a></li>
+                                                            <li><a href="ListProductViewController?productSearchScent=Floral Fruity">Floral Fruity</a></li>
+                                                            <li><a href="ListProductViewController?productSearchScent=Floral Woody Musk">Floral Woody Musk</a></li>
+                                                            <li><a href="ListProductViewController?productSearchScent=Woody Spicy">Woody Spicy</a></li>
+                                                            <li><a href="ListProductViewController?productSearchScent=Aromantic Fougere"> Aromantic Fougere </a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
 
                                                 <div class="sub-dropcont">
-                                                    <strong class="title"><a href="#" class="mt-subopener">gia tien</a></strong>
+                                                    <strong class="title"><a href="#" class="mt-subopener">Make By From</a></strong>
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                                                            <li><a href="coming-soon2.html">Coming Soon2</a></li>
-                                                            <li><a href="about-us.html">About</a></li>
-                                                            <li><a href="about-us.html">About</a></li>
+                                                            <li><a href="ListProductViewController?brandSortMakebyFrom=America">America</a></li>
+                                                            <li><a href="ListProductViewController?brandSortMakebyFrom=France">France</a></li>
+                                                            <li><a href="ListProductViewController?brandSortMakebyFrom=Italy">Italy</a></li>
+                                                            <li><a href="ListProductViewController?brandSortMakebyFrom=Arabic">Arabic</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -190,20 +193,16 @@
                                             <!-- mt col3 start here -->
                                             <div class="mt-col-3">
                                                 <div class="sub-dropcont">
-                                                    <strong class="title"><a href="#" class="mt-subopener">hang nuoc hoa</a></strong>
+                                                    <strong class="title"><a href="#" class="mt-subopener">PERFUME BRAND</a></strong>
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="#">Kitchen Taps</a></li>
-                                                            <li><a href="#">Breakfast time</a></li>
-                                                            <li><a href="#">Cooking</a></li>
+                                                            <li><a href="#?brandID">Gucci</a></li>
+                                                            <li><a href="#">Dior</a></li>
+                                                            <li><a href="#">Icss</a></li>
                                                             <li><a href="#">Food Storage Boxes</a></li>
                                                             <li><a href="#">Spice Jars</a></li>
                                                             <li><a href="#">Napskins</a></li>
-                                                            <li><a href="#">Oven Gloves</a></li>
-                                                            <li><a href="#">Placemats</a></li>
-                                                            <li><a href="#">Cooking</a></li>
-                                                            <li><a href="#">Food Storage Boxes</a></li>
-                                                            <li><a href="#">Spice Jars</a></li>
+
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -213,7 +212,7 @@
                                             <!-- mt col3 start here -->
                                             <div class="mt-col-3 promo">
                                                 <div class="mt-promobox">
-                                                    <a href="#"><img src="http://placehold.it/295x320" alt="promo banner" class="img-responsive"></a>
+                                                    <a href="#"><img src="images/banner3.png" alt="promo banner" class="img-responsive" style="height: 285; width: 275"></a>
                                                 </div>
                                             </div>
                                             <!-- mt col3 end here -->
@@ -269,7 +268,7 @@
         <!-- mt side widget start here -->
         <div class="mt-side-widget">
             <header>
-                <a href="register"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">SIGN UP</button></span></a>
+                <a href="registerpage.jsp"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">SIGN UP</button></span></a>
             </header>	
         </div>
         <!-- mt side widget end here -->
@@ -284,44 +283,42 @@
     </div>
     <!-- mt holder end here -->
 </div><!-- mt side menu end here -->
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-function confirmDelete(event) {
-    event = event || window.event;
-    event.stopPropagation();
+                                                function confirmDelete(event) {
+                                                    event = event || window.event;
+                                                    event.stopPropagation();
 
-    var confirmed = confirm("Delete all?");
-    if (confirmed) {
-        var contextPath = "${pageContext.request.contextPath}";
-        var servletPath = "/wishlist";
-        var deleteAllUrl = contextPath + servletPath;
-        var action1 = "deleteAll";
+                                                    var confirmed = confirm("Delete all?");
+                                                    if (confirmed) {
+                                                        var contextPath = "${pageContext.request.contextPath}";
+                                                        var servletPath = "/wishlist";
+                                                        var deleteAllUrl = contextPath + servletPath;
+                                                        var action1 = "deleteAll";
 
-        // S? d?ng AJAX ?? g?i yêu c?u xóa
-        $.ajax({
-            type: "GET",
-            url: deleteAllUrl,
-            data: {
-                action: action1
-            },
-            success: function () {
-                // C?p nh?t giao di?n ng??i dùng ho?c th?c hi?n các hành ??ng c?n thi?t sau khi xóa
-                console.log("Delete successful");
-                $("#wishlist-size").text(0);
-                $(".wishlistItem").empty();
-            },
-            error: function () {
-                console.error("Error deleting wishlist");
-            }
-        });
-    }
+                                                        // S? d?ng AJAX ?? g?i yêu c?u xóa
+                                                        $.ajax({
+                                                            type: "GET",
+                                                            url: deleteAllUrl,
+                                                            data: {
+                                                                action: action1
+                                                            },
+                                                            success: function () {
+                                                                // C?p nh?t giao di?n ng??i dùng ho?c th?c hi?n các hành ??ng c?n thi?t sau khi xóa
+                                                                console.log("Delete successful");
+                                                                $("#wishlist-size").text(0);
+                                                                $(".wishlistItem").empty();
+                                                            },
+                                                            error: function () {
+                                                                console.error("Error deleting wishlist");
+                                                            }
+                                                        });
+                                                    }
 
-    // Ng?n ch?n hành vi m?c ??nh c?a th? <a>
-    event.preventDefault();
-    return false;
-}
+                                                    // Ng?n ch?n hành vi m?c ??nh c?a th? <a>
+                                                    event.preventDefault();
+                                                    return false;
+                                                }
 </script>
-
-
-
 

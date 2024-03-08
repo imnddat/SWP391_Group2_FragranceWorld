@@ -56,6 +56,10 @@
         <servlet-name>test</servlet-name>
         <servlet-class>Controller.testServlet</servlet-class>       
     </servlet>
+    <servlet>
+        <servlet-name>DetailProductController</servlet-name>
+        <servlet-class>Controller.DetailProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -114,7 +118,10 @@
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
-        
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailProductController</servlet-name>
+        <url-pattern>/DetailProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
