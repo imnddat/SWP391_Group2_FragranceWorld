@@ -48,7 +48,7 @@
                                             </ul>
                                             <ul class="links">
                                                 <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>
-                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>
                                                 <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
                                             </ul>
                                         </div>
@@ -97,7 +97,7 @@
                                             </ul>
                                             <ul class="links">
                                                 <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>
-                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>
                                                 <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
                                             </ul>
                                         </div>
@@ -142,7 +142,7 @@
                                     </ul>
                                     <ul class="links">
                                         <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>
-                                        <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                        <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>
                                         <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
                                     </ul>
                                 </div>
@@ -183,7 +183,7 @@
                                             </ul>
                                             <ul class="links">
                                                 <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>
-                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>
                                                 <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
                                             </ul>
                                         </div>

@@ -61,56 +61,60 @@
 
         %>
         <!--Begin display -->
-        <jsp:include page="panner.jsp"/>
-        <div class="container">
-            <div class="table-responsive">
-                <div class="form-group">
-                    <label >Mã giao dịch thanh toán:</label>
-                    <label><%=request.getParameter("vnp_TxnRef")%></label>
-                </div>    
-                <div class="form-group">
-                    <label >Số tiền:</label>
-                    <label><%=request.getParameter("vnp_Amount")%></label>
-                </div>  
-                <div class="form-group">
-                    <label >Mô tả giao dịch:</label>
-                    <label><%=request.getParameter("vnp_OrderInfo")%></label>
-                </div> 
-                <div class="form-group">
-                    <label >Mã lỗi thanh toán:</label>
-                    <label><%=request.getParameter("vnp_ResponseCode")%></label>
-                </div> 
-                <div class="form-group">
-                    <label >Mã giao dịch tại CTT VNPAY-QR:</label>
-                    <label><%=request.getParameter("vnp_TransactionNo")%></label>
-                </div> 
-                <div class="form-group">
-                    <label >Mã ngân hàng thanh toán:</label>
-                    <label><%=request.getParameter("vnp_BankCode")%></label>
-                </div> 
-                <div class="form-group">
-                    <label >Thời gian thanh toán:</label>
-                    <label><%=request.getParameter("vnp_PayDate")%></label>
-                </div> 
-                <div class="form-group">
-                    <label >Tình trạng giao dịch:</label>
-                    <label>
-                        <%
-                            if (signValue.equals(vnp_SecureHash)) {
-                                if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                                    out.print("Thành công");
-                                } else {
-                                    out.print("Không thành công");
-                                }
+        <div id="wrapper">
+            <div class="w1">
+                <jsp:include page="panner.jsp"/>
+                <div class="container">
+                    <div class="table-responsive">
+                        <div class="form-group">
+                            <label >Mã giao dịch thanh toán:</label>
+                            <label><%=request.getParameter("vnp_TxnRef")%></label>
+                        </div>    
+                        <div class="form-group">
+                            <label >Số tiền:</label>
+                            <label><%=request.getParameter("vnp_Amount")%></label>
+                        </div>  
+                        <div class="form-group">
+                            <label >Mô tả giao dịch:</label>
+                            <label><%=request.getParameter("vnp_OrderInfo")%></label>
+                        </div> 
+                        <div class="form-group">
+                            <label >Mã lỗi thanh toán:</label>
+                            <label><%=request.getParameter("vnp_ResponseCode")%></label>
+                        </div> 
+                        <div class="form-group">
+                            <label >Mã giao dịch tại CTT VNPAY-QR:</label>
+                            <label><%=request.getParameter("vnp_TransactionNo")%></label>
+                        </div> 
+                        <div class="form-group">
+                            <label >Mã ngân hàng thanh toán:</label>
+                            <label><%=request.getParameter("vnp_BankCode")%></label>
+                        </div> 
+                        <div class="form-group">
+                            <label >Thời gian thanh toán:</label>
+                            <label><%=request.getParameter("vnp_PayDate")%></label>
+                        </div> 
+                        <div class="form-group">
+                            <label >Tình trạng giao dịch:</label>
+                            <label>
+                                <%
+                                    if (signValue.equals(vnp_SecureHash)) {
+                                        if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
+                                            out.print("Thành công");
+                                        } else {
+                                            out.print("Không thành công");
+                                        }
 
-                            } else {
-                                out.print("invalid signature");
-                            }
-                        %></label>
-                </div> 
+                                    } else {
+                                        out.print("invalid signature");
+                                    }
+                                %></label>
+                        </div> 
+                    </div>
+                </div>  
+                <jsp:include page="footer.jsp"/>
             </div>
-        </div>  
-        <jsp:include page="footer.jsp"/>
+        </div>
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->
         <script src="js/plugins.js"></script>

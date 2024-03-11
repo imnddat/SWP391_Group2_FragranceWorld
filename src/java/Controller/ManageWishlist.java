@@ -128,13 +128,17 @@ public class ManageWishlist extends HttpServlet {
         double price;
         User user = (User) session.getAttribute("currentUser");
         UserDAO userDao = new UserDAO();
-
+        ProductDAO pd = new ProductDAO();
         try {
             id = Integer.parseInt(pId);
             quantity = Integer.parseInt(pQuantity);
-            price = Double.parseDouble(pPrice);
+            if (pVolume == null) {
+                pVolume = "30";
+                price = pd.getProductPrice(id, pVolume);
+            } else {
+                price = Double.parseDouble(pPrice);
+            }
 
-            ProductDAO pd = new ProductDAO();
             Product p = pd.getProductsById(id);
             //double price = p.getPrice();
             if (quantity == 0) {

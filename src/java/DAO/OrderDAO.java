@@ -84,6 +84,16 @@ public class OrderDAO extends DBConnection {
                 System.err.println("Error in decreaseProductStock: \n" + e.toString());
             }
     }
+    
+    public void orderStatusPaid(int orderId){
+        String query = "UPDATE [dbo].[Order] SET [status] = 'paid' WHERE id = ?";
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, Integer.toString(orderId));
+                preparedStatement.executeUpdate();
+            } catch (Exception e) {
+                System.err.println("Error in orderStatusPaid: \n" + e.toString());
+            }
+    }
 
     LocalDate getToday() {
         LocalDate today = LocalDate.now(); //toString: yyyy-mm-dd

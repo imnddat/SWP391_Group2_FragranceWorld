@@ -115,6 +115,7 @@ public class CheckOut extends HttpServlet {
             if(payment.equalsIgnoreCase("VN Pay")){
                 //PaymentServlet ps = new PaymentServlet();
                 //ps.doPost(request, response);
+                session.setAttribute("orderid", orderId);
                 session.setAttribute("order_name", name);
                 session.setAttribute("order_email", email);
                 session.setAttribute("order_phone", phone);
