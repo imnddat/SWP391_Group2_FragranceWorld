@@ -99,7 +99,7 @@
                                         <!-- cart row total end here -->
                                         <div class="cart-btn-row">
                                             <a href="${pageContext.request.contextPath}/cart" class="btn-type2">VIEW CART</a>
-                                            <a href="checkout" class="btn-type3">CHECKOUT</a>
+                                            <a href="javascript:void(0);" onclick="checkCurrentUser()" class="btn-type3">CHECKOUT</a>
                                         </div>
 
 
@@ -263,22 +263,50 @@
 <div class="mt-side-menu">
     <!-- mt holder start here -->
     <div class="mt-holder">
-        <a href="#" class="side-close"><span></span><span></span></a>
-        <strong class="mt-side-title">MY ACCOUNT</strong>
-        <!-- mt side widget start here -->
-        <div class="mt-side-widget">
-            <header>
-                <a href="registerpage.jsp"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">SIGN UP</button></span></a>
-            </header>	
-        </div>
-        <!-- mt side widget end here -->
-        <div class="or-divider"><span class="txt">or</span></div>
-        <!-- mt side widget start here -->
-        <div class="mt-side-widget">
-            <header>
-                <a href="loginpage.jsp"><span class="mt-side-subtitle"><button type="submit" class="btn-type1">LOGIN</button></span></a>
-            </header>
-        </div>
+        <c:if test="${sessionScope.currentUser == null}">
+            <a href="#" class="side-close"><span></span><span></span></a>
+            <strong class="mt-side-title">MY ACCOUNT</strong>
+            <!-- mt side widget start here -->
+            <div class="mt-side-widget">
+                <header>
+                    <span class="mt-side-subtitle">SIGN IN</span>
+                    <p>Welcome back! Sign in to Your Account</p>
+                </header>
+                <!--<form>
+                    <fieldset>
+                        <input type="text" placeholder="Username or email address" class="input">
+                        <input type="password" placeholder="Password" class="input">
+                        <div class="box">
+                            <span class="left"><input class="checkbox" type="checkbox" id="check1"><label for="check1">Remember Me</label></span>
+                            <a href="#" class="help">Help?</a>
+                        </div>
+                        <button type="submit" class="btn-type1">Login</button>
+                    </fieldset>
+                </form>-->
+                <a href="login" class="btn-type1">Login</a>
+            </div>
+            <!-- mt side widget end here -->
+            <div class="or-divider"><span class="txt">or</span></div>
+            <!-- mt side widget start here -->
+            <div class="mt-side-widget">
+                <header>
+                    <span class="mt-side-subtitle">CREATE NEW ACCOUNT</span>
+                    <p>Create your very own account</p>
+                </header>
+                <form action="#">
+                    <fieldset>
+                        <input type="text" placeholder="Username or email address" class="input">
+                        <button type="submit" class="btn-type1">Register</button>
+                    </fieldset>
+                </form>
+            </div>
+        </c:if>
+
+        <c:if test="${sessionScope.currentUser ne null}">
+            <strong class="mt-side-title"> Xin chao ${sessionScope.currentUser.name}</strong>
+            <a href="profile">Edit profile</a>
+            <a href="signout">Sign Out</a>
+        </c:if>
         <!-- mt side widget end here -->
     </div>
     <!-- mt holder end here -->
@@ -322,3 +350,8 @@
                                                 }
 </script>
 
+<script>
+    var currentUser = '<%= session.getAttribute("currentUser") %>';
+    console.log("currentUser:", currentUser);
+</script>
+<script src="${pageContext.request.contextPath}/js/checkCurrentUser.js"></script>

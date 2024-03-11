@@ -143,18 +143,18 @@
                                 </div>
                             </c:forEach>
 
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <form action="#" class="coupon-form">
-                                        <fieldset>
-                                            <div class="mt-holder">
-                                                <input type="text" class="form-control" placeholder="Your Coupon Code">
-                                                <button type="submit">APPLY</button>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
+                            <!--                            <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <form action="#" class="coupon-form">
+                                                                    <fieldset>
+                                                                        <div class="mt-holder">
+                                                                            <input type="text" class="form-control" placeholder="Your Coupon Code">
+                                                                            <button type="submit">APPLY</button>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </form>
+                                                            </div>
+                                                        </div>-->
                         </div>
                     </div><!-- Mt Product Table of the Page end -->
                     <!-- Mt Detail Section of the Page -->
@@ -162,49 +162,49 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <h2>CALCULATE SHIPPING</h2>
-                                    <form action="#" class="bill-detail">
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <select class="form-control">
-                                                    <option value="1">Select Country</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <select class="form-control">
-                                                    <option value="1">State / Country</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <select class="form-control">
-                                                    <option value="1">Zip / Postal Code</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <button class="update-btn" type="submit">UPDATE TOTAL <i class="fa fa-refresh"></i></button>
-                                            </div>
-                                        </fieldset>
-                                    </form>
+                                    <!--                                    <h2>CALCULATE SHIPPING</h2>
+                                                                        <form action="#" class="bill-detail">
+                                                                            <fieldset>
+                                                                                <div class="form-group">
+                                                                                    <select class="form-control">
+                                                                                        <option value="1">Select Country</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <select class="form-control">
+                                                                                        <option value="1">State / Country</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <select class="form-control">
+                                                                                        <option value="1">Zip / Postal Code</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <button class="update-btn" type="submit">UPDATE TOTAL <i class="fa fa-refresh"></i></button>
+                                                                                </div>
+                                                                            </fieldset>
+                                                                        </form>-->
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <h2>CART TOTAL</h2>
                                     <ul class="list-unstyled block cart">
-                                        <li>
-                                            <div class="txt-holder">
-                                                <strong class="title sub-title pull-left">CART SUBTOTAL</strong>
-                                                <div class="txt pull-right">
-                                                    <span class="total-money">${sessionScope.totalMoney}</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="txt-holder">
-                                                <strong class="title sub-title pull-left">SHIPPING</strong>
-                                                <div class="txt pull-right">
-                                                    <strong>Free Shipping</strong>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        <!--                                        <li>
+                                                                                    <div class="txt-holder">
+                                                                                        <strong class="title sub-title pull-left">CART SUBTOTAL</strong>
+                                                                                        <div class="txt pull-right">
+                                                                                            <span class="total-money">${sessionScope.totalMoney}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>-->
+                                        <!--                                        <li>
+                                                                                    <div class="txt-holder">
+                                                                                        <strong class="title sub-title pull-left">SHIPPING</strong>
+                                                                                        <div class="txt pull-right">
+                                                                                            <strong>Free Shipping</strong>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>-->
                                         <li style="border-bottom: none;">
                                             <div class="txt-holder">
                                                 <strong class="title sub-title pull-left">CART TOTAL</strong>
@@ -214,7 +214,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <a href="checkout" class="process-btn">PROCEED TO CHECKOUT <i class="fa fa-check"></i></a>
+                                    <a href="javascript:void(0);" class="process-btn" onclick="checkCurrentUser()">PROCEED TO CHECKOUT <i class="fa fa-check"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -230,82 +230,82 @@
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $(".quantity-btn").on("click", function () {
-                    var action = $(this).data("action");
-                    var productId = $(this).data("product-id");
-                    var productPrice = $(this).data("product-price");
-                    var quantityInput = $(this).siblings(".quantity-input");
-                    var $totalItemPrice = $("#totalItemPrice_" + productId);
+                                        $(document).ready(function () {
+                                            $(".quantity-btn").on("click", function () {
+                                                var action = $(this).data("action");
+                                                var productId = $(this).data("product-id");
+                                                var productPrice = $(this).data("product-price");
+                                                var quantityInput = $(this).siblings(".quantity-input");
+                                                var $totalItemPrice = $("#totalItemPrice_" + productId);
 
-                    var currentQuantity = parseInt(quantityInput.val());
+                                                var currentQuantity = parseInt(quantityInput.val());
 
-                    if (action === "increase") {
-                        quantityInput.val(currentQuantity + 1);
-                        console.log("New Quantity:", quantityInput.val());
-                    } else if (action === "decrease" && currentQuantity > 1) {
-                        quantityInput.val(currentQuantity - 1);
-                        console.log("New Quantity:", quantityInput.val());
-                    } else if (action === "delete") {
-                        // Hiển thị hộp thoại xác nhận
-                        var confirmed = confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?");
-                        if (confirmed) {
-                            quantityInput.val(0);
-                            console.log("New Quantity:", quantityInput.val());
-                            $(this).closest(".rowItem").hide();
-                        } else {
-                            return;
-                        }
-                    }
+                                                if (action === "increase") {
+                                                    quantityInput.val(currentQuantity + 1);
+                                                    console.log("New Quantity:", quantityInput.val());
+                                                } else if (action === "decrease" && currentQuantity > 1) {
+                                                    quantityInput.val(currentQuantity - 1);
+                                                    console.log("New Quantity:", quantityInput.val());
+                                                } else if (action === "delete") {
+                                                    // Hiển thị hộp thoại xác nhận
+                                                    var confirmed = confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?");
+                                                    if (confirmed) {
+                                                        quantityInput.val(0);
+                                                        console.log("New Quantity:", quantityInput.val());
+                                                        $(this).closest(".rowItem").hide();
+                                                    } else {
+                                                        return;
+                                                    }
+                                                }
 
-                    // Tự động cập nhật thông tin giỏ hàng hoặc gửi yêu cầu Ajax đến máy chủ để cập nhật giỏ hàng.
-                    // Ở đây chỉ cập nhật giao diện người dùng mẫu.
-                    $totalItemPrice.text("€" + (quantityInput.val() * productPrice).toFixed(2));
-                    updateCart(productId, quantityInput.val(), productPrice);
-                });
+                                                // Tự động cập nhật thông tin giỏ hàng hoặc gửi yêu cầu Ajax đến máy chủ để cập nhật giỏ hàng.
+                                                // Ở đây chỉ cập nhật giao diện người dùng mẫu.
+                                                $totalItemPrice.text("€" + (quantityInput.val() * productPrice).toFixed(2));
+                                                updateCart(productId, quantityInput.val(), productPrice);
+                                            });
 
 
 
-                function updateCart(productId, newQuantity, productPrice) {
-                    var contextPath = "<%= request.getContextPath() %>";
-                    var servletPath = "/cart"; // Đường dẫn của Servlet cập nhật giỏ hàng
-                    var fullPath = contextPath + servletPath;
+                                            function updateCart(productId, newQuantity, productPrice) {
+                                                var contextPath = "<%= request.getContextPath() %>";
+                                                var servletPath = "/cart"; // Đường dẫn của Servlet cập nhật giỏ hàng
+                                                var fullPath = contextPath + servletPath;
 
-                    $.ajax({
-                        url: fullPath, // Đường dẫn của API hoặc servlet cập nhật giỏ hàng trên máy chủ
-                        type: 'POST',
-                        data: {
-                            id: productId,
-                            quantity: newQuantity,
-                            price: productPrice
-                        },
-                        success: function (response) {
-                            console.log("Cart updated successfully");
-                            // Cập nhật giao diện người dùng
-                            $("#total-money").text(response.totalMoney.toFixed(2));
-                            $("#cart-size").text(response.cartsize);
+                                                $.ajax({
+                                                    url: fullPath, // Đường dẫn của API hoặc servlet cập nhật giỏ hàng trên máy chủ
+                                                    type: 'POST',
+                                                    data: {
+                                                        id: productId,
+                                                        quantity: newQuantity,
+                                                        price: productPrice
+                                                    },
+                                                    success: function (response) {
+                                                        console.log("Cart updated successfully");
+                                                        // Cập nhật giao diện người dùng
+                                                        $(".total-money").text(response.totalMoney.toFixed(2));
+                                                        $("#cart-size").text(response.cartsize);
 
-                            // Cập nhật giao diện người dùng với danh sách sản phẩm mới từ máy chủ
-                            updateCartUI(response.cart);
-                        },
-                        error: function (error) {
-                            console.error("Error updating cart: " + error);
-                        }
-                    });
-                }
+                                                        // Cập nhật giao diện người dùng với danh sách sản phẩm mới từ máy chủ
+                                                        updateCartUI(response.cart);
+                                                    },
+                                                    error: function (error) {
+                                                        console.error("Error updating cart: " + error);
+                                                    }
+                                                });
+                                            }
 
-                function updateCartUI(cart) {
-                    // Xóa nội dung cũ của giỏ hàng
-                    $(".cartItem").empty();
-                    // Thêm sản phẩm mới vào giỏ hàng
+                                            function updateCartUI(cart) {
+                                                // Xóa nội dung cũ của giỏ hàng
+                                                $(".cartItem").empty();
+                                                // Thêm sản phẩm mới vào giỏ hàng
 
-                    for (var i = 0; i < cart.length; i++) {
-                        // Console log để kiểm tra giá trị
-                        console.log("img1:", cart[i].productImg);
-                        console.log("Name1:", cart[i].productName);
-                        console.log("Price1:", cart[i].productPrice);
-                        console.log("Quantity123:", cart[i].productQuantity);
-                        var cartRowHtml = `
+                                                for (var i = 0; i < cart.length; i++) {
+                                                    // Console log để kiểm tra giá trị
+                                                    console.log("img1:", cart[i].productImg);
+                                                    console.log("Name1:", cart[i].productName);
+                                                    console.log("Price1:", cart[i].productPrice);
+                                                    console.log("Quantity123:", cart[i].productQuantity);
+                                                    var cartRowHtml = `
     <div class="cart-row">
         <a href="#" class="img"><img src="` + cart[i].productImg + `" alt="image" class="img-responsive"></a>
         <div class="mt-h">
@@ -316,12 +316,20 @@
     </div><!-- cart row end here -->
 `;
 
-                        $(".cartItem").append(cartRowHtml);
-                    }
-                }
-            });
+                                                    $(".cartItem").append(cartRowHtml);
+                                                }
+                                            }
+                                        });
         </script>                            
 
+        <script>
+            var currentUser = '<%= session.getAttribute("currentUser") %>';
+            console.log("currentUser:", currentUser);
+        </script>
+        <script src="${pageContext.request.contextPath}/js/checkCurrentUser.js"></script>
+        
+
+        
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->

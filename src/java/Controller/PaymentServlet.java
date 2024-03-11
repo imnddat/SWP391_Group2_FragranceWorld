@@ -160,6 +160,7 @@ public class PaymentServlet extends HttpServlet {
         job.addProperty("message", "success");
         job.addProperty("data", paymentUrl);
         Gson gson = new Gson();
+        System.out.println("loi o dayyyyyyyyyy");
         response.getWriter().write(gson.toJson(job));
     }
 

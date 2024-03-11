@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class Config {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "http://localhost:8015/FragranceWorld/vnpay_return.jsp";
+    public static String vnp_ReturnUrl = "http://localhost:9999/FragranceWorld/vnpay_return.jsp";
     public static String vnp_TmnCode = "3VI4UXX0";
     public static String secretKey = "XUDSDYTICYTQTQYWOTZVAUISNRWNWDOG";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
