@@ -77,7 +77,7 @@
                                         <h2 style="margin: 0 0 5px;">SIGN IN</h2>
                                         <p>Welcome back! Sign in to Your Account</p>
                                     </header>
-                                    <p class="text-danger">${requestScope.errorMassage}</p>
+                                    <p id="login-alert" class="text-danger"></p>
                                     <form action="login" method="post">
                                         <fieldset>
                                             <input type="text" placeholder="Username or email address" name="username" class="input">
@@ -187,6 +187,10 @@
             </div>
         </main><!-- Main of the Page end -->
         <%@include file = "footer.jsp" %>   
+        
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/login.js"></script>
+        
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->

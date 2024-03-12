@@ -965,7 +965,7 @@ public class ProductDAO extends DBConnection {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, productId);
             preparedStatement.setString(2, volume);
-
+            
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     price = resultSet.getDouble("price");

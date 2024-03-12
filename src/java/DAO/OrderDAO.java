@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class OrderDAO extends DBConnection {
     public int createOrder(String address, Cart cart, String payment) {
         /*
-            Order status:
+        Order status:
         unpaid: sau khi chọn thanh toán bằng vnpay nhưng chưa thanh toán thành công (có thể vào "view my order" để thanh toán)
         paid: thanh toán vnpay thành công nhưng vẫn cần phải duyệt (không cần phải chuyển sang pending)
         pending: đang duyệt đơn hàng (cho lựa chọn trả tiền khi nhận hàng và chuyển khoản)

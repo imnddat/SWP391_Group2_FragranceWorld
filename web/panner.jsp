@@ -304,8 +304,17 @@
 
         <c:if test="${sessionScope.currentUser ne null}">
             <strong class="mt-side-title"> Xin chao ${sessionScope.currentUser.name}</strong>
-            <a href="profile">Edit profile</a>
-            <a href="signout">Sign Out</a>
+            <!--            <div class="text-center"><a href="profile" >Edit profile</a></div>
+                        <div class="text-center"><a href="signout" >Sign Out</a></div>-->
+            <ul class="list-group">
+                <li class="text-center">
+                    <a href="profile"><h2>Edit profile</h2></a>
+                </li>
+                <li class="text-center">
+                    <a href="signout"><h2>Sign Out</h2></a>
+                </li>
+            </ul>
+
         </c:if>
         <!-- mt side widget end here -->
     </div>
