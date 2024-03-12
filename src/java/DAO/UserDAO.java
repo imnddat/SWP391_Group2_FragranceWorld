@@ -39,7 +39,7 @@ public class UserDAO extends DBConnection {
                         rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        rs.getString("name"),
+                        rs.getString("fullname"),
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getInt("roleID"),
@@ -80,7 +80,7 @@ public class UserDAO extends DBConnection {
                         user.setUsername(resultSet.getString("username"));
                         user.setPassword(resultSet.getString("password"));
                         user.setEmail(resultSet.getString("email"));
-                        user.setName(resultSet.getString("name"));
+                        user.setName(resultSet.getString("fullname"));
                         user.setAddress(resultSet.getString("address"));
                         user.setPhone(resultSet.getString("phone"));
                         user.setRoleID(resultSet.getInt("roleID"));
@@ -122,7 +122,7 @@ public class UserDAO extends DBConnection {
                         rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        rs.getString("name"),
+                        rs.getString("fullname"),
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getInt("roleID"),
@@ -163,7 +163,7 @@ public class UserDAO extends DBConnection {
                         rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        rs.getString("name"),
+                        rs.getString("fullname"),
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getInt("roleID"),
@@ -196,7 +196,7 @@ public class UserDAO extends DBConnection {
                 + "   SET [username] = ?\n"
                 + "      ,[password] = ?\n"
                 + "      ,[email] = ?\n"
-                + "      ,[name] = ?\n"
+                + "      ,[fullname] = ?\n"
                 + "      ,[address] = ?\n"
                 + "      ,[phone] = ?\n"
                 + "      ,[roleID] = ?\n"
@@ -346,7 +346,7 @@ public class UserDAO extends DBConnection {
                 if (rs.next()) {
                     // Create a User object with the updated information
                     updatedUser = new User();
-                    updatedUser.setName(rs.getString("name"));
+                    updatedUser.setName(rs.getString("fullname"));
                     updatedUser.setDob(rs.getString("dob"));
                     updatedUser.setEmail(rs.getString("email"));
                     updatedUser.setPhone(rs.getString("phone"));
@@ -367,7 +367,7 @@ public class UserDAO extends DBConnection {
     }
 
     public void createUser(User user) {
-        String query = "INSERT INTO [dbo].[User]([username],[password],[email],[name],[address],[phone],[roleID],[banned]) "
+        String query = "INSERT INTO [dbo].[User]([username],[password],[email],[fullname],[address],[phone],[roleID],[banned]) "
                 + "VALUES (?,?,?,?,?,?,3,0)";
         try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user.getUsername());
