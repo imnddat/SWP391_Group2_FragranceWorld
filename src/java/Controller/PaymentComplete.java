@@ -84,7 +84,7 @@ public class PaymentComplete extends HttpServlet {
         if (signValue.equals(vnp_SecureHash)) {
             if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
                 OrderDAO od = new OrderDAO();
-                od.orderStatusPaid((int) session.getAttribute("orderid"));
+                od.orderStatusPaid(Integer.parseInt(request.getParameter("vnp_TxnRef")));
             }
         }
         session.removeAttribute("orderid");

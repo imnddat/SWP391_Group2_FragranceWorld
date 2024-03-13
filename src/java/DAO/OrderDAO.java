@@ -6,6 +6,7 @@ package DAO;
 
 import Model.Cart;
 import Model.Item;
+import Model.Order;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
  * @author Admin
  */
 public class OrderDAO extends DBConnection {
-    public int createOrder(String address, Cart cart, String payment) {
+    public int createOrder(Order order, Cart cart, String payment) {
         /*
         Order status:
         unpaid: sau khi chọn thanh toán bằng vnpay nhưng chưa thanh toán thành công (có thể vào "view my order" để thanh toán)
@@ -25,21 +26,25 @@ public class OrderDAO extends DBConnection {
         delivering: hàng đang chuyển phát
         completed: đơn đã hoàn thành (đã chuyển, đã thanh toán)
         */
-        float totalPrice = 0;
         int orderId = 0;
-        String query = "INSERT INTO [dbo].[Order] ([orderDate],[totalPrice],[status],[address],[paymentMedthod],[userID],[DeliverID],[discountID]) "
-                + "VALUES (?,?,?,?,?,NULL,NULL,NULL) "
+        String query = "INSERT INTO [dbo].[Order] ([orderDate],[totalPrice],[status],[address],[paymentMedthod],[userID],[DeliverID],[discountID],[reciverName],[phone],[email],[note]) "
+                + "VALUES (?,?,?,?,?,?,NULL,NULL,?,?,?,?) "
                 + "SELECT SCOPE_IDENTITY() AS ID;";
         try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, getToday().toString());
-            preparedStatement.setString(2, Float.toString(totalPrice));
+            preparedStatement.setString(2, Double.toString(order.getTotalPrice()));
             if(payment.equalsIgnoreCase("VN Pay")){
                 preparedStatement.setString(3, "unpaid");
             }else{
                 preparedStatement.setString(3, "pending");
             }
-            preparedStatement.setString(4, address);
+            preparedStatement.setString(4, order.getAddress());
             preparedStatement.setString(5, payment);
+            preparedStatement.setString(6, Integer.toString(order.getUserId()));
+            preparedStatement.setString(7, order.getReciverName());
+            preparedStatement.setString(8, order.getPhone());
+            preparedStatement.setString(9, order.getEmail());
+            preparedStatement.setString(10, order.getNote());
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {

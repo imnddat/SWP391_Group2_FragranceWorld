@@ -6,6 +6,7 @@ package Controller;
 
 import DAO.OrderDAO;
 import Model.Cart;
+import Model.Order;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -110,9 +111,12 @@ public class CheckOut extends HttpServlet {
             String note = request.getParameter("note");
             String address = request.getParameter("address");
             String payment = request.getParameter("paymentOption");
+            User user = (User)session.getAttribute("currentUser");
+            Order orderr = new Order(user.getId(),(double)session.getAttribute("ordertotal"), address, name, phone, email, note);
             if(payment.equalsIgnoreCase("VN Pay")){
                 //PaymentServlet ps = new PaymentServlet();
                 //ps.doPost(request, response);
+                session.setAttribute("orderObject", orderr);
                 session.setAttribute("order_name", name);
                 session.setAttribute("order_email", email);
                 session.setAttribute("order_phone", phone);
@@ -121,7 +125,7 @@ public class CheckOut extends HttpServlet {
                 response.sendRedirect("payment");
                 return;
             }
-            orderId = order.createOrder(address, cart, payment);
+            orderId = order.createOrder(orderr, cart, payment);
             session.setAttribute("orderid", orderId);
             request.setAttribute("orderid", orderId);
         } else {
