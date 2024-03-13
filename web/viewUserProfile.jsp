@@ -83,7 +83,13 @@
                 <div class="container rounded bg-white mt-5">
                     <div class="row">
                         <div class="col-md-4 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="img/default-avatar.jpg" width="90"><span class="font-weight-bold">${profile.username}</span><span class="text-black-50">${profile.email}</span><span>${profile.address}</span></div>
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                                
+                                <img class="rounded-circle mt-5" src="img/default-avatar.jpg" width="90">
+                                
+                                <span class="font-weight-bold">${profile.username}</span>
+                                <span class="text-black-50">${profile.email}</span>
+                                <span>${profile.address}</span></div>
                             <div class="row mt-2">
                                 <div class="col-md-6">
                                     <label for="username">Username</label>
@@ -114,7 +120,7 @@
                                     <div class="row mt-2">
                                         <div class="col-md-6">
                                             <label for="name">Name</label>
-                                            <input name="name" type="text" class="form-control" id="name" placeholder="Name" value="${sessionScope.user.name}}">
+                                            <input name="name" type="text" class="form-control" id="name" placeholder="Name" value="${sessionScope.user.name}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="dob">Date of Birth</label>

@@ -43,6 +43,21 @@ public class Product {
         this.defaultImg = defaultImg;
     }
 
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, Brand brands) {
+        this.id = id;
+        this.description = description;
+        this.genderID = genderID;
+        this.nameProduct = nameProduct;
+        this.codeProduct = codeProduct;
+        this.discount = discount;
+        this.scent = scent;
+        this.brandID = brandID;
+        this.defaultImg = defaultImg;
+        this.brands = brands;
+    }
+
+    
+    
     public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, Brand brands, ArrayList<Volume> volumes) {
         this.id = id;
         this.description = description;
@@ -116,9 +131,6 @@ public class Product {
         this.volumes = volumes;
     }
 
-  
-
-    
  
 
     public int getId() {

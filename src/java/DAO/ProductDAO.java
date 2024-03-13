@@ -100,16 +100,6 @@ public class ProductDAO extends DBConnection {
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                stm.close();
-                rs.close();
-                connection.close();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(ProductDAO.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return null;
     }
@@ -123,70 +113,44 @@ public class ProductDAO extends DBConnection {
 
     }
 
-    //    public ArrayList<Product> searchProducts(String searchTerm, int service_id, String sortOption) {
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        ArrayList<Product> list = new ArrayList<>();
-//        try {
-//            String query = " SELECT p.* FROM Products p ";
-//
-//            if (service_id > 0) {
-//                query += " JOIN Volume v ON p.id = v.productID\n"
-//                        + " WHERE p.nameProduct LIKE ? AND v.price = ? ";
-//            } else {
-//                query += " WHERE p.name LIKE ?";
-//            }
-//            if ("name_asc".equals(sortOption)) {
-//                query += " ORDER BY p.nameProduct ASC";
-//            } else if ("name_desc".equals(sortOption)) {
-//                query += " ORDER BY p.nameProduct DESC";
-//            } else if ("price_asc".equals(sortOption)) {
-//                query += " ORDER BY v.price ASC";
-//            } else if ("price_desc".equals(sortOption)) {
-//                query += " ORDER BY v.price DESC";
-//            }
-//
-//            stm = connection.prepareStatement(query);
-//            stm.setString(1, "%" + searchTerm + "%");
-//
-//            if (service_id > 0) {
-//                stm.setInt(2, service_id);
-//            }
-//
-//            rs = stm.executeQuery();
-//
-//            while (rs.next()) {
-//                int id = rs.getInt("id");
-//                String description = rs.getString("description");
-//                int genderID = rs.getInt("genderID");
-//                String nameProduct = rs.getString("nameProduct");
-//                String codeProduct = rs.getString("codeProduct");
-//                int discount = rs.getInt("discount");
-//                String scent = rs.getString("scent");
-//                int brandID = rs.getInt("brandID");
-//                String defaultImg = rs.getString("defaultImg");
-//                ArrayList<Volume> listV = getVolumesByProductId(id);
-//
-//                list.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, listV));
-//            }
-//            return list;
-//
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return list;
-//    }
-    public ArrayList<Product> getSearchListProductbySearch(String search, String brandid, String priceFrom, String priceTo,
-            String sortType) {
-        if (search == null) {
-            search = "";
+    //searchbyname
+    public Vector<Product> getSearchName(String s) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Vector<Product> products = new Vector<>();
+        String sql = "  select p.id,p.description,p.genderID, p.nameProduct,p.codeProduct,\n"
+                + "p.discount,p.scent ,p.brandID,p.defaultImg,v.price\n"
+                + "  from Products p\n"
+                + " inner join Volume v on p.id = v.productID\n"
+                + " where [nameProduct] like ?  ";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, "%" + s + "%");
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String description = rs.getString("description");
+                int genderID = rs.getInt("genderID");
+                String nameProduct = rs.getString("nameProduct");
+                String codeProduct = rs.getString("codeProduct");
+                int discount = rs.getInt("discount");
+                String scent = rs.getString("scent");
+                int brandID = rs.getInt("brandID");
+                String defaultImg = rs.getString("defaultImg");
+
+                products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg));
+            }
+            return products;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
-        if (priceFrom == null || priceFrom.isEmpty()) {
-            priceFrom = "0";
-        }
-        if (priceTo == null || priceTo.isEmpty()) {
-            priceTo = "999999";
-        }
+        return null;
+    }
+//sortby
+    public ArrayList<Product> getSearchListProductbySearch( String sortType) {
+        
         if (sortType == null || sortType.isEmpty()) {
             sortType = "-1";// dang loi
         }
@@ -199,10 +163,10 @@ public class ProductDAO extends DBConnection {
                 sortTypeString = "  order by p.[nameProduct] desc";
                 break;
             case "3":
-                sortTypeString = "  ORDER BY vp.price ASC ";
+                sortTypeString = "  ORDER BY v.price ASC ";
                 break;
             case "4":
-                sortTypeString = "  ORDER BY vp.price desc ";
+                sortTypeString = "  ORDER BY v.price desc ";
                 break;
             default:
 
@@ -210,17 +174,12 @@ public class ProductDAO extends DBConnection {
 
         String sql = " select * from Products p \n"
                 + "  join Volume v on p.id = v.productID \n"
-                + "  where v.price between ? and ? and p.nameProduct like ? and p.brandID = ? \n"
-                + sortType
-                + " offset ? rows fetch next ? rows only ";
+                + "  \n"
+                + sortType ;
         try {
             ArrayList<Product> list = new ArrayList<>();
-            PreparedStatement stm = connection.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);     
 
-            stm.setDouble(1, Double.valueOf(priceFrom));
-            stm.setDouble(2, Double.valueOf(priceTo));
-            stm.setString(3, "%" + search + "%");
-            stm.setString(4, "%" + brandid + "%");
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -244,6 +203,64 @@ public class ProductDAO extends DBConnection {
         return null;
 
     }
+    //Checkbox Brand
+
+    public ArrayList<Product> checkBoxBrand(int[] id) {
+
+        String sql = " select p.id,p.description,p.genderID, p.nameProduct,p.codeProduct,\n"
+                + "p.discount,p.scent ,p.brandID,p.defaultImg\n"
+                + "from Products p\n"
+                + "join Brand b on p.brandID = b.id\n"
+                + "where 1=1  ";
+        if (id != null) {
+            sql += " and p.brandID in{ ";
+            for (int i = 0; i < id.length; i++) {
+                sql += id[i] + ",";
+            }
+            if (sql.endsWith(",")) {
+                sql = sql.substring(0, sql.length() - 1);
+                sql += "}";
+            }
+        }
+        try {
+            ArrayList<Product> list = new ArrayList<>();
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Product p =new Product();
+                p.setId(rs.getInt("id"));
+                p.setDescription(rs.getString("description"));
+                p.setGenderID(rs.getInt("genderID")); 
+                p.setNameProduct(rs.getString("nameProduct"));
+                p.setCodeProduct(rs.getString("codeProduct"));
+                p.setDiscount(rs.getInt("discount"));
+                p.setScent(rs.getString("scent")) ;
+                p.setBrandID(rs.getInt("brandID"));
+                p.setDefaultImg(rs.getString("defaultImg")) ;
+                Brand brands = new Brand();
+                p.setBrands(brands);
+                list.add(p);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    //Checkbox Price
+    private Vector<Volume> filterPrice(double min, double max, Vector<Volume> volumes) {
+        Vector<Volume> VolumeAfterFilter = new Vector<>();
+
+        for (Volume volume1 : volumes) {
+            if (volume1.getPrice() < max && volume1.getPrice() > min) {
+                VolumeAfterFilter.add(volume1);
+            }
+        }
+        return VolumeAfterFilter;
+    }
 
     //--------------------------------PANNER---------------------------
     public ArrayList<Product> getALLProductByGender(String genderSearch, String volumeSearchCapacity, String volumeSort,
@@ -257,30 +274,30 @@ public class ProductDAO extends DBConnection {
                 + "join Gender g on p.genderID = g.id \n"
                 + "  join (select * from  Volume  where capacity = ?  ) vp on p.id = vp.[productID] \n"
                 + "  where p.genderID like ? \n"
-              //  + "  and p.brandID like ? \n"
                 + "  and b.makebyFrom like ? \n"
                 + "  and p.scent like ? \n"
-                + "  and p.[nameProduct] like ? \n"
+                + "  and p.brandID like ? \n"
+                //   + "  and p.[nameProduct] like ? \n"
                 + "  and p.id in (select v.[productID] from Volume v where v.[capacity] like '%30%' and v.price between -1 and 99999) ";
         try {
             stm = connection.prepareStatement(sql);
-            if(volumeSort != ""){
-           if(Integer.parseInt(volumeSort) == 30 ){
-                stm.setInt(1, Integer.parseInt(volumeSort));
-                stm.setString(2, '%'+genderSearch+ '%');
-               // stm.setString(3, '%'+volumeSort+ '%');
-                stm.setString(3, '%'+brandSortMakebyFrom+ '%');
-                stm.setString(4, '%'+productSearchScent+ '%');
-                stm.setString(5, '%'+brandSort+ '%');
-           }
-           }else if(volumeSort == ""){
+            if (volumeSort != "") {
+                if (Integer.parseInt(volumeSort) == 30) {
+                    stm.setInt(1, Integer.parseInt(volumeSort));
+                    stm.setString(2, '%' + genderSearch + '%');
+                    // stm.setString(3, '%'+volumeSort+ '%');
+                    stm.setString(3, '%' + brandSortMakebyFrom + '%');
+                    stm.setString(4, '%' + productSearchScent + '%');
+                    stm.setString(5, '%' + brandSort + '%');
+                }
+            } else if (volumeSort == "") {
                 stm.setInt(1, Integer.parseInt(volumeSearchCapacity));
-                stm.setString(2, '%'+genderSearch+ '%');
-               // stm.setString(3, '%'+volumeSort+ '%');
-                stm.setString(3, '%'+brandSortMakebyFrom+ '%');
-                stm.setString(4, '%'+productSearchScent+ '%');
-                stm.setString(5, '%'+brandSort+ '%');
-           }
+                stm.setString(2, '%' + genderSearch + '%');
+                // stm.setString(3, '%'+volumeSort+ '%');
+                stm.setString(3, '%' + brandSortMakebyFrom + '%');
+                stm.setString(4, '%' + productSearchScent + '%');
+                stm.setString(5, '%' + brandSort + '%');
+            }
             rs = stm.executeQuery();
             while (rs.next()) {
 
@@ -309,174 +326,7 @@ public class ProductDAO extends DBConnection {
 
         return null;
     }
-//
-//    public static void main(String[] args) {
-//        ProductDAO dao = new ProductDAO();
-//        ArrayList<Product> list = new ArrayList<>();
-//
-//        list = dao.getALLProductByGender("1","50","","","","");
-//        for (Product product : list) {
-//            System.out.println(product.getDescription());
-//        }
-//    }
-    
-    
-    
 
-//    public ArrayList<Product> getALLProductByVolumeCapacity(int cid) {
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        ArrayList<Product> products = new ArrayList<>();
-//
-//        String sql = " select p.id,p.description,p.genderID, p.nameProduct,p.codeProduct,\n"
-//                + "p.discount,p.scent ,p.brandID,p.defaultImg,v.price\n"
-//                + "from Products p\n"
-//                + "inner join Volume v on p.id = v.productID\n"
-//                + "where p.genderID = ?";
-//        try {
-//            stm = connection.prepareStatement(sql);
-//            stm.setInt(1, cid);
-//            rs = stm.executeQuery();
-//            while (rs.next()) {
-//
-//                int id = rs.getInt("id");
-//                String description = rs.getString("description");
-//                int genderID = rs.getInt("genderID");
-//                String nameProduct = rs.getString("nameProduct");
-//                String codeProduct = rs.getString("codeProduct");
-//                int discount = rs.getInt("discount");
-//                String scent = rs.getString("scent");
-//                int brandID = rs.getInt("brandID");
-//                String defaultImg = rs.getString("defaultImg");
-//                ArrayList<Volume> listV = getVolumesByProductId(id);
-//                products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, listV));
-//            }
-//            return products;
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProductDAO.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return null;
-//    }
-//
-//    public ArrayList<Product> getALLProductByVolumeScent(int sid) {
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        ArrayList<Product> products = new ArrayList<>();
-//
-//        String sql = "  select p.id,p.description,p.genderID, p.nameProduct,p.codeProduct,\n"
-//                + "p.discount,p.scent ,p.brandID,p.defaultImg,v.price\n"
-//                + "from Products p\n"
-//                + "inner join Volume v on p.id = v.productID\n"
-//                + "where p.scent = ? ";
-//        try {
-//            stm = connection.prepareStatement(sql);
-//            stm.setInt(1, sid);
-//            rs = stm.executeQuery();
-//            while (rs.next()) {
-//
-//                int id = rs.getInt("id");
-//                String description = rs.getString("description");
-//                int genderID = rs.getInt("genderID");
-//                String nameProduct = rs.getString("nameProduct");
-//                String codeProduct = rs.getString("codeProduct");
-//                int discount = rs.getInt("discount");
-//                String scent = rs.getString("scent");
-//                int brandID = rs.getInt("brandID");
-//                String defaultImg = rs.getString("defaultImg");
-//                ArrayList<Volume> listV = getVolumesByProductId(id);
-//                products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, listV));
-//            }
-//            return products;
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProductDAO.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return null;
-//    }
-//
-//    public ArrayList<Product> getALLProductByBrandMakeByFrom(int mid) {
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        ArrayList<Product> products = new ArrayList<>();
-//
-//        String sql = " select p.id,p.description,p.genderID, p.nameProduct,p.codeProduct, \n"
-//                + " p.discount,p.scent ,p.brandID,p.defaultImg,v.price \n"
-//                + " from Volume v \n"
-//                + " inner join Products p on v.productID = p.id \n"
-//                + " inner join Brand b on b.id = p.brandID \n"
-//                + " where b.makebyFrom = ? ";
-//        try {
-//            stm = connection.prepareStatement(sql);
-//            stm.setInt(1, mid);
-//            rs = stm.executeQuery();
-//            while (rs.next()) {
-//
-//                int id = rs.getInt("id");
-//                String description = rs.getString("description");
-//                int genderID = rs.getInt("genderID");
-//                String nameProduct = rs.getString("nameProduct");
-//                String codeProduct = rs.getString("codeProduct");
-//                int discount = rs.getInt("discount");
-//                String scent = rs.getString("scent");
-//                int brandID = rs.getInt("brandID");
-//                String defaultImg = rs.getString("defaultImg");
-//                ArrayList<Volume> listV = getVolumesByProductId(id);
-//                Brand brands = getBrandByProductId(id);
-//                products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, brands, listV));
-//            }
-//            return products;
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProductDAO.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return null;
-//    }
-//
-//    public ArrayList<Product> getALLProductByBrandId(int brid) {
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        ArrayList<Product> products = new ArrayList<>();
-//
-//        String sql = "  select p.id,p.description,p.genderID, p.nameProduct,p.codeProduct, \n"
-//                + " p.discount,p.scent ,p.brandID,p.defaultImg,v.price \n"
-//                + " from Products p \n"
-//                + " inner join Volume v on p.id = v.productID \n"
-//                + " where p.brandID = ? ";
-//        try {
-//            stm = connection.prepareStatement(sql);
-//            stm.setInt(1, brid);
-//            rs = stm.executeQuery();
-//            while (rs.next()) {
-//
-//                int id = rs.getInt("id");
-//                String description = rs.getString("description");
-//                int genderID = rs.getInt("genderID");
-//                String nameProduct = rs.getString("nameProduct");
-//                String codeProduct = rs.getString("codeProduct");
-//                int discount = rs.getInt("discount");
-//                String scent = rs.getString("scent");
-//                int brandID = rs.getInt("brandID");
-//                String defaultImg = rs.getString("defaultImg");
-//                ArrayList<Volume> listV = getVolumesByProductId(id);
-//                Brand brands = getBrandByProductId(id);
-//                products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, brands, listV));
-//            }
-//            return products;
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProductDAO.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return null;
-//    }
 //--------------------------------------------------------------
 //------------------------------------SEARCH-------------------------
 //search by name
@@ -892,7 +742,6 @@ public class ProductDAO extends DBConnection {
                 brand = new Brand(id, name, makebyFrom);
             }
             return brand;
-
         } catch (SQLException ex) {
             Logger.getLogger(VolumeDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -1044,6 +893,4 @@ public class ProductDAO extends DBConnection {
 //        }
 //        return products;
 //    }
-
-    
 }

@@ -60,101 +60,132 @@
                                 <!-- shop-widget filter-widget of the Page start here -->
                                 <section class="shop-widget filter-widget bg-grey">
                                     <h2>FILTER</h2>
+
+                                    <!-- search by name -->    
+                                    <form action="ListProductViewController" id="searchbyName">
+                                        <div class="input-group" style="display: flex">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Search by name"
+                                                name="searchbyName"
+                                                value="${searchbyNames}"
+                                                />
+                                            <div class="input-group-append">
+                                                <button class="search-button btn btn-primary" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <br>
+
+
                                     <span class="sub-title">Filter by Brands</span>
                                     <!-- nice-form start here -->
-                                    <form method="get" action="ListProductViewController">
+                                    <c:set var="listirand" value="${requestScope.listbrand}"/> 
+                                    <c:set var="cid" value="${requestScope.cid}"/> 
+                                    <form action="ListProductViewController">
                                         <ul class="list-unstyled nice-form">
-                                            <li>
-                                                <label for="check-1">
-                                                    <input id="check-1" name="brandID" value="" type="checkbox">
-                                                    <span class="fake-input"></span>
-                                                    <span class="fake-label">Alll</span>
-                                                </label>
-                                                <span class="num">2</span>
-                                            </li>
-                                            <li>
-                                                <label for="check-1">
-                                                    <input id="check-1" name="brandID" value="id brands" type="checkbox">
-                                                    <span class="fake-input"></span>
-                                                    <span class="fake-label">Casali</span>
-                                                </label>
-                                                <span class="num">2</span>
-                                            </li>
-
+                                            <c:forEach begin="0" end="${listirand.size()-1}" var="i">
+                                                <li>
+                                                    <label for="check-1">
+                                                        <input id="check-1" name="idbrands" value="${listirand.get(i).getId()}" type="checkbox"
+                                                               ${cid[i]?"checked":""} onclick="this.form.submit()"    >
+                                                        <span class="fake-input"></span>
+                                                        <span class="fake-label">${listirand.get(i).getName()}</span>
+                                                    </label>
+                                                </li>
+                                            </c:forEach>                                          
                                         </ul><!-- nice-form end here -->
                                     </form>
+
+
                                     <span class="sub-title">Filter by Price</span>
                                     <form method="get" action="ListProductViewController">
-                                        <div class="price-range">
-
-                                            <div class="range-slider">
-                                                <span class="dot"></span>
-                                                <span class="dot dot2"></span>
+                                        <div class="price">
+                                            <input type="checkbox"   name="price" id="price-all"
+                                                   onchange="filter(this.id)"
+                                                   <c:if test="${filterByPrice eq null}">checked</c:if>
+                                                   <c:if test="${filterByPrice eq 'price-all'}">checked</c:if>
+                                                       />
+                                                   <label class="custom-control-label" for="price-all">All Price </label >
                                             </div>
-                                            <span class="price">
-                                               From: <input type="number" name="priceFrom"> To <input type="number" name="priceTo"><br>   
-                                            </span>
-                                            <button type="submit" class="filter-btn">Filter</a></button>
-
-                                        </div>
-                                        <div>
-                                            Search: <input type="text" name="search"><br>
-                                        </div>
-                                    </form>
-                                </section><!-- shop-widget filter-widget of the Page end here -->
-                                <!-- shop-widget of the Page start here -->
-                                <section class="shop-widget">
-                                    <h2>PERFUME BRAND</h2>
-                                    <form method="get" action="ListProductViewController">
-                                        <!-- category list start here -->
-                                        <ul class="list-unstyled category-list">
-                                            <li>
-                                                <a href="#">
-                                                    <span class="name">CHAIRS</span>
-                                                    <span class="num">12</span>
-                                                </a>
-                                            </li>
-                                        </ul><!-- category list end here -->
-                                    </form>
-                                </section><!-- shop-widget of the Page end here -->
-
-                            </aside><!-- sidebar of the Page end here -->
-
-                            <div class="col-xs-12 col-sm-8 col-md-9 wow fadeInRight" data-wow-delay="0.4s">
-                                <!-- mt shoplist header start here -->
-                                <header class="mt-shoplist-header">
-                                    <!-- btn-box start here -->
-                                    <div class="btn-box">
-                                        <ul class="list-inline">
-                                            <li>
-                                                <a href="#" class="drop-link">
-                                                    Default Sorting <i aria-hidden="true" class="fa fa-angle-down"></i>
-                                                </a>
-                                                <div class="drop">
-                                                    <ul class="list-unstyled">
-                                                        <li value=" oder by p.[nameProduct] asc "><a href="/teenconroller?sortid=1">Name: Low to Hight </a></li>
-                                                        <li value=" oder by p.[nameProduct] desc "><a href="/teenconroller?sortid=2">Name: Hight to Low </a></li>
-                                                        <li value=" ORDER BY vp.price ASC "><a href="/teenconroller?sortid=3">Price: Low to Hight</a></li>
-                                                        <li value=" ORDER BY vp.price DESC "><a href="/teenconroller?sortid=3">Price: Hight to Low</a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li><a class="mt-viewswitcher" href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a></li>
-                                            <li><a class="mt-viewswitcher" href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div><!-- btn-box end here -->
-                                    <!-- mt-textbox start here -->
-                                    <div class="mt-textbox">
-                                        <p>View all product </p>
-                                    </div><!-- mt-textbox end here -->
-                                </header><!-- mt shoplist header end here -->
+                                            <div
+                                                class="price"
+                                                >
+                                                <input  type="checkbox" name="price"  id="price-500-750"
+                                                        onchange="filter(this.id)"
+                                                <c:if test="${filterByPrice eq 'price-500-750'}">checked</c:if>
+                                                    />
+                                                <label class="custom-control-label" for="price-500-750" >$500 - $750</label >
+                                            </div>
+                                            <div class="price" >
+                                                <input type="checkbox" name="price" id="price-750-1000"
+                                                       onchange="filter(this.id)"
+                                                <c:if test="${filterByPrice eq 'price-750-1000'}">checked</c:if>
+                                                    />
+                                                <label class="custom-control-label" for="price-750-1000" >$750 - $1000</label >
+                                            </div>
+                                            <div class="price">
+                                                <input
+                                                    type="checkbox" name="price" id="price-1000-1500"
+                                                    onchange="filter(this.id)"
+                                                <c:if test="${filterByPrice eq 'price-1000-1500'}">checked</c:if>
+                                                    />
+                                                <label class="custom-control-label" for="price-1000-1500">$1000 - $1500</label  >
+                                            </div>
+                                            <div class="price">
+                                                <input  type="checkbox" name="price"
+                                                        id="price-1500up" onchange="filter(this.id)"
+                                                <c:if test="${filterByPrice eq 'price-1500up'}">checked</c:if>
+                                                    />
+                                                <label  for="price-1500up">$1500+</label>
+                                            </div>
+                                        </form>
+                                    </section><!-- shop-widget filter-widget of the Page end here -->
+                                    <!-- shop-widget of the Page start here -->
 
 
+                                </aside><!-- sidebar of the Page end here -->
 
-                                <!-- mt productlisthold start here -->
+                                <div class="col-xs-12 col-sm-8 col-md-9 wow fadeInRight" data-wow-delay="0.4s">
+                                    <!-- mt shoplist header start here -->
+                                    <header class="mt-shoplist-header">
+                                        <!-- btn-box start here -->
+                                        <div class="btn-box">
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="#" class="drop-link">
+                                                        Default Sorting <i aria-hidden="true" class="fa fa-angle-down"></i>
+                                                    </a>
+                                                    <div class="drop">
+                                                        <ul class="list-unstyled">
+                                                        <li value=" oder by p.[nameProduct] asc "><a href="/ListProductViewController?sortType=1">Name: A-Z </a></li>
+                                                        <li value=" oder by p.[nameProduct] desc "><a href="/ListProductViewController?sortType=2">Name: Z-A</a></li>
+                                                        <li value=" ORDER BY vp.price ASC "><a href="/ListProductViewController?sortType=3">Price: Low to Hight</a></li>
+                                                        <li value=" ORDER BY vp.price DESC "><a href="/ListProductViewController?sortType=3">Price: Hight to Low</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li><a class="mt-viewswitcher" href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a></li>
+                                                <li><a class="mt-viewswitcher" href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </div><!-- btn-box end here -->
+                                        <!-- mt-textbox start here -->
+                                        <div class="mt-textbox">
+                                            <p>View all product </p>
+                                        </div><!-- mt-textbox end here -->
+                                    </header><!-- mt shoplist header end here -->
 
-                                <c:forEach items="${requestScope.listProduct}" var="p" >   
-                                    <ul class="mt-productlisthold list-inline">     
+                                    <!-- mt productlisthold start here -->
+
+
+                                    <ul class="mt-productlisthold list-inline"> 
+
+
+                                    <c:forEach items="${requestScope.listProduct}" var="p" > 
                                         <li>
 
                                             <!-- mt product1 large start here -->
@@ -183,19 +214,23 @@
                                                 </div>
                                             </div><!-- mt product1 center end here -->
 
-                                        </li>	 
-                                    </ul><!-- mt productlisthold end here -->      
-                                </c:forEach> 
-
+                                        </li>	
+                                    </c:forEach> 
+                                </ul><!-- mt productlisthold end here -->      
 
                                 <!-- mt pagination start here -->
-                                <c:forEach begin="${1}" end="${requestScope.num}" step="1" var="i">
-                                    <nav class="mt-pagination">
-                                        <ul class="list-inline">
-                                            <li><a class="${i==page?"active":""}" href="ListProductViewController?id=${requestScope.id}&page=${i}">${i}</a></li>       
-                                        </ul>
-                                    </nav><!-- mt pagination end here -->
-                                </c:forEach> 
+
+                                <nav class="mt-pagination">
+
+                                    <ul class="list-inline">
+                                        <c:set var="k" value="${requestScope.searchbyName}"/> 
+                                        <c:forEach begin="${1}" end="${requestScope.num}" step="1" var="i">
+                                            <li><a class="${i==page?"active":""}" href="ListProductViewController?id=${requestScope.id}&page=${i}&searchbyName=${searchbyNames}">${i}</a></li>      
+                                            </c:forEach> 
+                                    </ul>
+
+                                </nav><!-- mt pagination end here -->
+
                             </div>
 
                         </div>

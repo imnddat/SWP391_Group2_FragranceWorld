@@ -147,9 +147,9 @@
                                                                
                                                             <div class="sub-drop">
                                                                 <ul>
-                                                                    <li><a href="ListProductViewController?id=1">Product Boy</a></li>
-                                                                    <li><a href="ListProductViewController?id=2">Product Girl</a></li>
-                                                                    <li><a href="ListProductViewController?id=3">Product Unisex</a></li>
+                                                                    <li><a href="ListProductViewController?id=1"> Man</a></li>
+                                                                    <li><a href="ListProductViewController?id=2"> Women</a></li>
+                                                                    <li><a href="ListProductViewController?id=3"> Unisex</a></li>
                                                                 </ul>
                                                             </div>
                                                            
@@ -203,12 +203,13 @@
                                                             <strong class="title"><a href="#" class="mt-subopener">PERFUME BRAND</a></strong>
                                                             <div class="sub-drop">
                                                                 <ul>
-                                                                    <li><a href="#?brandID">Gucci</a></li>
-                                                                    <li><a href="#">Dior</a></li>
-                                                                    <li><a href="#">Icss</a></li>
-                                                                    <li><a href="#">Food Storage Boxes</a></li>
-                                                                    <li><a href="#">Spice Jars</a></li>
-                                                                    <li><a href="#">Napskins</a></li>
+                                                                    <li><a href="ListProductViewController?brandID=Moncblanc">Moncblanc</a></li>
+                                                                    <li><a href="ListProductViewController?brandID=Dior">Dior</a></li>
+                                                                    <li><a href="ListProductViewController?brandID=Chanel">Chanel</a></li>
+                                                                    <li><a href="ListProductViewController?brandID=Armaf">Armaf</a></li>
+                                                                    <li><a href="ListProductViewController?brandID=Gucci">Gucci</a></li>
+                                                                    <li><a href="ListProductViewController?brandID=Versace">Versace</a></li>
+                                                                    <li><a href="ListProductViewController?brandID=Tom Ford">Tom Ford</a></li>
                                                                     
                                                                 </ul>
                                                             </div>

@@ -51,30 +51,52 @@ public class ListProductViewController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String xpage = req.getParameter("page");
         HttpSession session = req.getSession();
         ProductDAO dao = new ProductDAO();
-        String search = req.getParameter("search");
-        String brandid = req.getParameter("brandid");
-        String priceFrom = req.getParameter("priceFrom");
-        String priceTo = req.getParameter("priceTo");
-        String sortType = req.getParameter("sortType");
-        ArrayList<Product> searchlist = dao.getSearchListProductbySearch(search, brandid, priceFrom, priceTo, sortType);
-        //Brand searchbyBrand = dao.getBrandByProductId(id);
-        req.setAttribute("searchlist", searchlist);
-       
+        
+        
+       //searchby name
+        String searchbyName = req.getParameter("searchbyName")==null?"":req.getParameter("searchbyName");
+        Vector<Product> searchbyNames = (new ProductDAO()).getSearchName(searchbyName);
+        
+        //checkbox Brand
+        
+        String[] id_raw = req.getParameterValues("idbrands");
+        int[] idbrands = null;
+        if (id_raw != null) {
+            idbrands = new int[id_raw.length];
+            for (int i = 0; i < idbrands.length; i++) {
+                idbrands[i] = Integer.parseInt(id_raw[i]);
+            }
+        }
+        ProductDAO pb = new ProductDAO();
+        ArrayList<Product> listcheckbrand = pb.checkBoxBrand(idbrands);
+        req.setAttribute("listcheckbrand", listcheckbrand);
+        BrandDAO bd = new BrandDAO();
+        ArrayList<Brand> listbrand = bd.getAll();
+        boolean[] cid = new boolean[listbrand.size()];
+        for (int i = 0; i < cid.length; i++) {
+            if (ischeck(listbrand.get(i).getId(), idbrands)) {
+                cid[i] = true;
+            }
+            else  
+                cid[i] = false;
+                
+        }
+        
+        req.setAttribute("listbrand", listbrand);
+        req.setAttribute("cid", cid);
+        
+        
+  //sortby
+     String sortType = req.getParameter("sortType");
+        ArrayList<Product> sortby = dao.getSearchListProductbySearch(sortType);
+        req.setAttribute("sortby", sortby);
         
         
       //  String paramndex = req.getParameter("index")== null ? "1" : req.getParameter("index");
@@ -91,29 +113,14 @@ public class ListProductViewController extends HttpServlet {
         String brandSortMakebyFrom = req.getParameter("brandSortMakebyFrom") == null ? "" : req.getParameter("brandSortMakebyFrom");//chu
         // search by brand
         String brandSort = req.getParameter("brandSort") == null ? "" : req.getParameter("brandSort");//[3,5,6]
-       
-//        int bid = 0,cid=0,eid=0,gid=0,kid=0,aid=0;
-//        try {
-//            bid = Integer.parseInt(genderSearch);
-//            cid = Integer.parseInt(volumeSearchCapacity);
-//            eid = Integer.parseInt(volumeSort); 
-//            gid = Integer.parseInt(productSearchScent);
-//            kid = Integer.parseInt(brandSortMakebyFrom);
-//            aid = Integer.parseInt(brandSort);
-//        } catch (NumberFormatException e) {
-//        }
+
 
         try {
             //phan trang
             
             ArrayList<Product> list1 = dao.getALLProductByGender(genderSearch, volumeSearchCapacity, volumeSort, productSearchScent, brandSortMakebyFrom, brandSort);
-//            ArrayList<Product> listc = dao.getALLProductByGender(cid);
-//            ArrayList<Product> liste = dao.getALLProductByGender(eid);
-//            ArrayList<Product> listg = dao.getALLProductByGender(gid);
-//            ArrayList<Product> listk = dao.getALLProductByGender(kid);
-//            ArrayList<Product> lista = dao.getALLProductByGender(aid);
-//            ArrayList<Product> list1 = new ArrayList<>();
-//            list1 = dao.getListByPage(list1, bid, bid)
+
+//            list1 = dao.getListByPage(list1, bid, bid);
 
             int page = 0, numberpage = 3;
             int size = list1.size();
@@ -135,16 +142,39 @@ public class ListProductViewController extends HttpServlet {
             req.setAttribute("page", page);
             req.setAttribute("num", num);
             req.setAttribute("id", genderSearch);
+           // req.setAttribute("id", volumeSearchCapacity);
 
+            //searchbyName
+            req.setAttribute("searchbyName", searchbyNames);
+            
+            
+            
+            
             req.getRequestDispatcher("listProductView.jsp").forward(req, resp);
 
         } catch (Exception ex) {
             System.out.println("product error: " + ex.getMessage());
             resp.sendRedirect("/ListProductViewController");
         }
+        
+ 
+        
 
     }
 
+    private boolean ischeck(int d, int[] id){
+         if (id == null) {
+            return false;
+        } else {
+             for (int i = 0; i < id.length; i++) {
+                 if (id[i] == d) {
+                     return true;
+                 }
+             }
+              return false;
+        }
+    }
+    
    
 
     @Override
@@ -153,9 +183,6 @@ public class ListProductViewController extends HttpServlet {
         processRequest(request, response);
     }
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+   
 
 }

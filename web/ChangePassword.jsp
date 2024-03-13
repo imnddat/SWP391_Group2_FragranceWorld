@@ -42,7 +42,7 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <%-- Start form --%>
-                    <form action="${contextPath}/changePassword" method="POST" name="changePassword" id="changePassword">
+                    <form action="${contextPath}/ChangePasswordController" method="POST" name="changePassword" id="changePassword">
                         <%--Input old password--%>
                         <div class="row" style="margin-top: 3vh;">
                             <div class="col-md-4" style="text-align: right"><label class="label control-label">Old Password</label></div>
