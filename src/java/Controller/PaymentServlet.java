@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import DAO.OrderDAO;
+import Model.Cart;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
@@ -22,6 +24,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import ultil.vnpay.Config;
 
@@ -71,7 +74,6 @@ public class PaymentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         request.getRequestDispatcher("test/vnpay_pay.jsp").forward(request, response);
     }
 
@@ -162,6 +164,7 @@ public class PaymentServlet extends HttpServlet {
         Gson gson = new Gson();
         System.out.println("loi o dayyyyyyyyyy");
         response.getWriter().write(gson.toJson(job));
+        createOrder(request);
     }
 
     /**
@@ -169,6 +172,14 @@ public class PaymentServlet extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    private void createOrder(HttpServletRequest request){
+        OrderDAO order = new OrderDAO();
+        HttpSession session = request.getSession();
+        Cart cart = new Cart((List) session.getAttribute("cart"));
+        String address = (String) session.getAttribute("order_address");
+        order.createOrder(address, cart, "VN Pay");
+    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

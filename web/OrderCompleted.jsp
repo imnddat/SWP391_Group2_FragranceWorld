@@ -118,5 +118,6 @@
                 window.location.href = "#";
             }
         </script>
+        <%session.removeAttribute("orderid");%>
     </body>
 </html>
