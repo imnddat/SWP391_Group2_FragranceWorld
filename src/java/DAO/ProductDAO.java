@@ -98,9 +98,19 @@ public class ProductDAO extends DBConnection {
             }
             return products;
 
-        } catch (SQLException ex) {
+       } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductDAO.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return null;
     }

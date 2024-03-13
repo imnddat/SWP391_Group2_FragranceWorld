@@ -102,8 +102,8 @@
                                             <a href="javascript:void(0);" onclick="checkCurrentUser()" class="btn-type3">CHECKOUT</a>
                                         </div>
 
-                                      
-                                   </div><!-- mt side widget end here -->
+
+                                    </div><!-- mt side widget end here -->
                                 </div>
                                 <!-- mt drop sub end here -->
                             </div><!-- mt drop end here -->
@@ -117,51 +117,51 @@
                             </a>
                         </li>
                     </ul><!-- mt icon list end here -->
-                            <!-- navigation start here -->
-                            <nav id="nav">
-                                <ul>
-                                    <li>
-                                        <a class="drop-link" href="homepage1.html">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
-                                      
-                                    </li>
-                                    <li class="drop">
-                                        <a href="product-grid-view.html">PRODUCTS <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                        <!-- mt dropmenu start here -->
-                                        <div class="mt-dropmenu text-left">
-                                            <!-- mt frame start here -->
-                                            <div class="mt-frame">
-                                                <!-- mt f box start here -->
-                                                <div class="mt-f-box">
-                                                    <!-- mt col3 start here -->
-                                                    <div class="mt-col-3">
-                                                        <div class="sub-dropcont">
-                                                            <strong class="title"><a href="product-grid-view.html" class="mt-subopener">Gender Product</a></strong>
-                                                         
-                                                               
-                                                            <div class="sub-drop">
-                                                                <ul>
-                                                                    <li><a href="ListProductViewController?id=1"> Man</a></li>
-                                                                    <li><a href="ListProductViewController?id=2"> Women</a></li>
-                                                                    <li><a href="ListProductViewController?id=3"> Unisex</a></li>
-                                                                </ul>
-                                                            </div>
-                                                           
-                                                            
-                                                        </div>
-                                                        <div class="sub-dropcont">
-                                                            <strong class="title"><a href="#" class="mt-subopener">CAPACITY</a></strong>
-                                                            <div class="sub-drop">
-                                                                <ul>
-                                                                    <li><a href="ListProductViewController?volumeSearchCapacity=30">30ml</a></li>
-                                                                    <li><a href="ListProductViewController?volumeSearchCapacity=50">50ml</a></li>
-                                                                    <li><a href="ListProductViewController?volumeSearchCapacity=100">100ml</a></li>
-                                                                    
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                    <!-- navigation start here -->
+                    <nav id="nav">
+                        <ul>
+                            <li>
+                                <a class="drop-link" href="HomeController">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
+
+                            </li>
+                            <li class="drop">
+                                <a href="product-grid-view.html">PRODUCTS <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <!-- mt dropmenu start here -->
+                                <div class="mt-dropmenu text-left">
+                                    <!-- mt frame start here -->
+                                    <div class="mt-frame">
+                                        <!-- mt f box start here -->
+                                        <div class="mt-f-box">
+                                            <!-- mt col3 start here -->
+                                            <div class="mt-col-3">
+                                                <div class="sub-dropcont">
+                                                    <strong class="title"><a href="product-grid-view.html" class="mt-subopener">Gender Product</a></strong>
+
+
+                                                    <div class="sub-drop">
+                                                        <ul>
+                                                            <li><a href="ListProductViewController?id=1"> Man</a></li>
+                                                            <li><a href="ListProductViewController?id=2"> Women</a></li>
+                                                            <li><a href="ListProductViewController?id=3"> Unisex</a></li>
+                                                        </ul>
                                                     </div>
-                                                    <!-- mt col3 end here -->
-              
+
+
+                                                </div>
+                                                <div class="sub-dropcont">
+                                                    <strong class="title"><a href="#" class="mt-subopener">CAPACITY</a></strong>
+                                                    <div class="sub-drop">
+                                                        <ul>
+                                                            <li><a href="ListProductViewController?volumeSearchCapacity=30">30ml</a></li>
+                                                            <li><a href="ListProductViewController?volumeSearchCapacity=50">50ml</a></li>
+                                                            <li><a href="ListProductViewController?volumeSearchCapacity=100">100ml</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- mt col3 end here -->
+
                                             <!-- mt col3 start here -->
                                             <div class="mt-col-3">
                                                 <div class="sub-dropcont">
@@ -189,19 +189,20 @@
                                                 </div>
                                             </div>
                                             <!-- mt col3 end here -->
-                                            
+
                                             <!-- mt col3 start here -->
                                             <div class="mt-col-3">
                                                 <div class="sub-dropcont">
                                                     <strong class="title"><a href="#" class="mt-subopener">PERFUME BRAND</a></strong>
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="#?brandID">Gucci</a></li>
-                                                            <li><a href="#">Dior</a></li>
-                                                            <li><a href="#">Icss</a></li>
-                                                            <li><a href="#">Food Storage Boxes</a></li>
-                                                            <li><a href="#">Spice Jars</a></li>
-                                                            <li><a href="#">Napskins</a></li>
+                                                            <li><a href="ListProductViewController?brandID=Moncblanc">Moncblanc</a></li>
+                                                            <li><a href="ListProductViewController?brandID=Dior">Dior</a></li>
+                                                            <li><a href="ListProductViewController?brandID=Chanel">Chanel</a></li>
+                                                            <li><a href="ListProductViewController?brandID=Armaf">Armaf</a></li>
+                                                            <li><a href="ListProductViewController?brandID=Gucci">Gucci</a></li>
+                                                            <li><a href="ListProductViewController?brandID=Versace">Versace</a></li>
+                                                            <li><a href="ListProductViewController?brandID=Tom Ford">Tom Ford</a></li>
 
                                                         </ul>
                                                     </div>
@@ -225,7 +226,7 @@
                                 <span class="mt-mdropover"></span>
                             </li>
 
-                                            
+
                             <!-- Blog -->
                             <li>
                                 <a class="drop-link" href="blog-right-sidebar.html">Blog(LS) <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
