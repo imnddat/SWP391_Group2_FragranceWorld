@@ -44,6 +44,8 @@ public class HomeController extends HttpServlet {
                 session.setAttribute("wishlistsize", wishlist.size());
             } catch (SQLException ex) {
                 Logger.getLogger(ManageWishlist.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } 
         

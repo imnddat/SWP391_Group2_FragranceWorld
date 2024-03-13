@@ -121,7 +121,7 @@
                     <nav id="nav">
                         <ul>
                             <li>
-                                <a class="drop-link" href="homepage1.html">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
+                                <a class="drop-link" href="HomeController">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
 
                             </li>
                             <li class="drop">
@@ -308,7 +308,7 @@
                         <div class="text-center"><a href="signout" >Sign Out</a></div>-->
             <ul class="list-group">
                 <li class="text-center">
-                    <a href="profile"><h2>Edit profile</h2></a>
+                    <a href="profilesetting"><h2>Profile setting</h2></a>
                 </li>
                 <li class="text-center">
                     <a href="signout"><h2>Sign Out</h2></a>

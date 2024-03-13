@@ -36,6 +36,11 @@ public class User {
     public User() {
     }
 
+    public User(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
+    
     /**
      * Complete constructor
      *

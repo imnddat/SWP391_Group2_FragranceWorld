@@ -68,6 +68,10 @@
         <servlet-name>paymentcomplete</servlet-name>
         <servlet-class>Controller.PaymentComplete</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>profileSetting</servlet-name>
+        <servlet-class>Controller.profileSetting</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -137,7 +141,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>paymentcomplete</servlet-name>
-        <url-pattern>/paymentcomplete</url-pattern>      
+        <url-pattern>/paymentcomplete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profileSetting</servlet-name>
+        <url-pattern>/profilesetting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

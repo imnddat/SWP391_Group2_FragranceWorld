@@ -174,7 +174,7 @@ public class UserDAO extends DBConnection {
         } finally {
             closeResultSet(rs);
             closePreparedStatement(pre);
-            closeConnection(conn);
+            //closeConnection(conn);
         }
         return null;
     }
@@ -360,7 +360,6 @@ public class UserDAO extends DBConnection {
             e.printStackTrace();
         } finally {
             // Close resources (Connection, PreparedStatement, etc.)
-            // You should handle closing resources properly, preferably in a try-with-resources block
         }
 
         return updatedUser;
@@ -382,15 +381,17 @@ public class UserDAO extends DBConnection {
         }
     }
 
-    public ArrayList<Item> getUserWishList(int userId) throws SQLException {
+    public ArrayList<Item> getUserWishList(int userId) throws Exception {
         ProductDAO pdao = new ProductDAO();
         ArrayList<Item> itemList = new ArrayList<>();
-
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         String query = "SELECT p.*, w.volume FROM Wishlist w JOIN Products p ON w.productID = p.id WHERE w.userID = ?";
 
-        try ( PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+        try {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int productId = resultSet.getInt("id");
                 Product product = pdao.getProductsById(productId);
@@ -406,6 +407,10 @@ public class UserDAO extends DBConnection {
             System.out.println("loi khi lay wishlist");
             // Xử lý ngoại lệ hoặc throw lại nếu cần thiết
             throw e;
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
     }
 
@@ -484,7 +489,9 @@ public class UserDAO extends DBConnection {
 
     public static void main(String[] args) throws Exception {
         UserDAO dao = new UserDAO();
-        System.out.println(dao.getUserWishList(5));
+        User u = new User(null, null, "hanoi@gmail2.com", "hai chieu", null, null);
+        System.out.println(dao.getUserByMail("hanoi@gmail.com"));
+        dao.createUser(u);
         //System.out.println(dao.getUserLogin("son", "123"));
     }
 }
