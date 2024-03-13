@@ -3,7 +3,7 @@
     Created on : Jan 30, 2024, 11:16:23 PM
     Author     : Thinkpad
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +16,15 @@
         <!-- include the site stylesheet -->
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
         <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
         <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.css">
         <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/icon-fonts.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/icon-fonts.css">
         <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
         <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
     </head>
     <body>
         <!-- main container of all the page elements -->
@@ -62,11 +62,17 @@
             </div><!-- W1 end here -->
             <span id="back-top" class="fa fa-arrow-up"></span>
         </div>
+        
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
+        <script src="${pageContext.request.contextPath}/js/addToWishlist.js"></script>
+        
+        
         <!-- include jQuery -->
-        <script src="js/jquery.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
         <!-- include jQuery -->
-        <script src="js/plugins.js"></script>
+        <script src="${pageContext.request.contextPath}/js/plugins.js"></script>
         <!-- include jQuery -->
-        <script src="js/jquery.main.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery.main.js"></script>
     </body>
 </html>

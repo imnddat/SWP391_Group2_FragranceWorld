@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author Thinkpad
  */
 public class GenderDAO extends DBConnection{
-     public ArrayList<Gender> getAll() {
+     public ArrayList<Gender> getAll() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         ArrayList<Gender> genders = new ArrayList<>();
@@ -38,9 +38,9 @@ public class GenderDAO extends DBConnection{
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
                 
             } catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class
@@ -50,7 +50,7 @@ public class GenderDAO extends DBConnection{
         return null;
     }
     
-    public Gender getBrandById(int id) {
+    public Gender getBrandById(int id) throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Gender genders = null;
@@ -70,10 +70,9 @@ public class GenderDAO extends DBConnection{
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
-                
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);               
             } catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class
                         .getName()).log(Level.SEVERE, null, ex);

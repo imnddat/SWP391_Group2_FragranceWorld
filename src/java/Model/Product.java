@@ -27,8 +27,10 @@ public class Product {
     Gender genders;
     private ArrayList<Volume> volumes;
     private ArrayList<Sale> sales;
+
     
     public Product() {
+        
     }
 
     public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg) {

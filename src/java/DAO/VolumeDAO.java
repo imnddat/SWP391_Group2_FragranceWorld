@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class VolumeDAO extends DBConnection {
 
-    public Vector<Volume> getAll() {
+    public Vector<Volume> getAll() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<Volume> volume = new Vector<>();
@@ -44,9 +44,9 @@ public class VolumeDAO extends DBConnection {
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
 
             } catch (SQLException ex) {
                 Logger.getLogger(VolumeDAO.class

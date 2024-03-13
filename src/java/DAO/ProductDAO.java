@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import Model.Product;
 import Model.Sale;
 import Model.Volume;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import java.util.List;
  */
 public class ProductDAO extends DBConnection {
 
-    public Vector<Product> getAll() {
+    public Vector<Product> getAll() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<Product> products = new Vector<>();
@@ -55,9 +56,9 @@ public class ProductDAO extends DBConnection {
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class
@@ -69,7 +70,7 @@ public class ProductDAO extends DBConnection {
 
     //--------------------PRODUCT  VIEW -------------------------------------------
     //phan trang cua productview
-    public ArrayList<Product> getALLProduct() {
+    public ArrayList<Product> getALLProduct() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         ArrayList<Product> products = new ArrayList<>();
@@ -523,7 +524,7 @@ public class ProductDAO extends DBConnection {
 
     ////------------------------------HOSTSALE---------------------------------
     //hotsale.jsp
-    public Vector<Product> getProductHotSaleTopGirl() {
+    public Vector<Product> getProductHotSaleTopGirl() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<Product> products = new Vector<>();
@@ -555,9 +556,9 @@ public class ProductDAO extends DBConnection {
             ex.printStackTrace();
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class
@@ -567,7 +568,7 @@ public class ProductDAO extends DBConnection {
         return null;
     }
 
-    public Vector<Product> getProductHotSaleTopBoy() {
+    public Vector<Product> getProductHotSaleTopBoy() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<Product> products = new Vector<>();
@@ -599,9 +600,9 @@ public class ProductDAO extends DBConnection {
             ex.printStackTrace();
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class
@@ -611,7 +612,7 @@ public class ProductDAO extends DBConnection {
         return null;
     }
 
-    public Vector<Product> getProductHotSale1() {
+    public Vector<Product> getProductHotSale1() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<Product> products = new Vector<>();
@@ -641,9 +642,9 @@ public class ProductDAO extends DBConnection {
             ex.printStackTrace();
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class
@@ -653,7 +654,7 @@ public class ProductDAO extends DBConnection {
         return null;
     }
 
-    public Vector<Product> getProductHotSale2() {
+    public Vector<Product> getProductHotSale2() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<Product> products = new Vector<>();
@@ -683,9 +684,9 @@ public class ProductDAO extends DBConnection {
             ex.printStackTrace();
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class
@@ -800,13 +801,88 @@ public class ProductDAO extends DBConnection {
 
     }
 
+    public double getProductBasePrice(int productId, String volume) {
+    double price = 0.0;
+
+    try {
+        // Lấy ngày hiện tại
+        LocalDate currentDate = LocalDate.now();
+
+        // Truy vấn cơ sở dữ liệu để lấy giá sản phẩm dựa trên productId và volume
+        String query = "SELECT price FROM Volume WHERE productID = ? AND capacity = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, productId);
+            preparedStatement.setString(2, volume);
+            
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    price = resultSet.getDouble("price");
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.out.println("Lỗi không lấy được giá sản phẩm");
+    }
+
+    return price;
+}
+
+    
+    public double getProductPrice(int productId, String volume) {
+        double price = getProductBasePrice(productId, volume);
+
+        try {
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
+
+            // Truy vấn cơ sở dữ liệu để lấy giá sản phẩm dựa trên productId và volume
+            String query = "SELECT v.price, s.discount, se.startdate, se.enddate "
+                    + "FROM Volume v "
+                    + "LEFT JOIN sale s ON v.productID = s.productID "
+                    + "LEFT JOIN saleEvent se ON s.sid = se.sid "
+                    + "WHERE v.productID = ? AND v.capacity = ? AND (se.startdate IS NULL OR se.startdate <= ?) AND (se.enddate IS NULL OR se.enddate >= ?)";
+
+            try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, productId);
+                preparedStatement.setString(2, volume);
+                preparedStatement.setDate(3, java.sql.Date.valueOf(currentDate));
+                preparedStatement.setDate(4, java.sql.Date.valueOf(currentDate));
+
+                try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        double basePrice = resultSet.getDouble("price");
+                        Integer discount = (Integer) resultSet.getObject("discount");
+
+                        // Kiểm tra nếu có sự kiện giảm giá và ngày nằm trong khoảng startdate và enddate
+                        if (discount == null) {
+                            price = basePrice;
+                        } else {
+                            price = basePrice - (basePrice * (discount / 100));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("lỗi không lấy được giá sản phẩm");
+        }
+
+        return price;
+    }
+
+    public static void main(String[] args) {
+        //trace log
+        System.out.println(new ProductDAO().getProductsById(1));
+    }
+
     public Product getProductsById(int productId) {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Product product = null;
-        String sql = "select * from [product] where id = ?";
+        String sql = "select * from [Products] where id = ?";
         try {
             stm = connection.prepareStatement(sql);
+            stm.setInt(1, productId);
             rs = stm.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -818,12 +894,27 @@ public class ProductDAO extends DBConnection {
                 String scent = rs.getString("scent");
                 int brandID = rs.getInt("brandID");
                 String defaultImg = rs.getString("defaultImg");
+
                 product = new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg);
             }
             return product;
+
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductDAO.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return null;
     }

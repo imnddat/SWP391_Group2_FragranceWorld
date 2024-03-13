@@ -34,7 +34,6 @@
     <%-- Include header page --%>
     <jsp:include page="panner.jsp"/>
     <div class="main">
-
         <%-- Login form --%>
         <div class="container" style="align-self: center; min-height: 50vh; margin-top: 3vh;">
             <div class="row">

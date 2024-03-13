@@ -4,13 +4,19 @@
  */
 package DAO;
 
+import Model.Item;
+import Model.Product;
 import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,7 +39,7 @@ public class UserDAO extends DBConnection {
                         rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        rs.getString("name"),
+                        rs.getString("fullname"),
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getInt("roleID"),
@@ -52,45 +58,42 @@ public class UserDAO extends DBConnection {
     /**
      * get user from User table Using name and password
      *
+     * @param username
      * @param userName is an String
      * @param password is an String
      * @return <code>User</code> object.
      * @throws java.lang.Exception
      */
-    public User getUserLogin(String userName, String password) throws Exception {
-        Connection conn = null;
-        /* Result set returned by the sqlserver */
-        ResultSet rs = null;
-        /* Prepared statement for executing sql queries */
-        PreparedStatement pre = null;
-
-        String sql = "SELECT * FROM [User] WHERE username = ? and password = ? ";
+    public User getUserLogin(String username, String password) throws Exception {
         try {
-            conn = getConnection();
-            pre = conn.prepareStatement(sql);
-            pre.setString(1, userName);
-            pre.setString(2, password);
-            rs = pre.executeQuery();
-            if (rs.next()) {
-                User loginUser = new User(rs.getInt("id"),
-                        rs.getString("userName"),
-                        rs.getString("password"),
-                        rs.getString("email"),
-                        rs.getString("name"),
-                        rs.getString("address"),
-                        rs.getString("phone"),
-                        rs.getInt("roleID"),
-                        rs.getInt("banned"));
-                return loginUser;
+            // Thực hiện truy vấn để lấy thông tin người dùng từ bảng
+            String query = "SELECT * FROM [dbo].[User] WHERE username = ? AND password = ?";
+            try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+
+                try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                    // Nếu có kết quả từ truy vấn, tạo đối tượng User và trả về
+                    if (resultSet.next()) {
+                        User user = new User();
+                        user.setId(resultSet.getInt("id"));
+                        user.setUsername(resultSet.getString("username"));
+                        user.setPassword(resultSet.getString("password"));
+                        user.setEmail(resultSet.getString("email"));
+                        user.setName(resultSet.getString("fullname"));
+                        user.setAddress(resultSet.getString("address"));
+                        user.setPhone(resultSet.getString("phone"));
+                        user.setRoleID(resultSet.getInt("roleID"));
+                        user.setBanned(resultSet.getInt("banned"));
+                        return user;
+                    }
+                }
             }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(pre);
-            closeConnection(conn);
+        } catch (SQLException e) {
+//            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
         }
-        return null;
+
+        return null; // Trả về null nếu không tìm thấy người dùng
     }
 
     /**
@@ -119,7 +122,7 @@ public class UserDAO extends DBConnection {
                         rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        rs.getString("name"),
+                        rs.getString("fullname"),
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getInt("roleID"),
@@ -160,7 +163,7 @@ public class UserDAO extends DBConnection {
                         rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        rs.getString("name"),
+                        rs.getString("fullname"),
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getInt("roleID"),
@@ -171,7 +174,7 @@ public class UserDAO extends DBConnection {
         } finally {
             closeResultSet(rs);
             closePreparedStatement(pre);
-            closeConnection(conn);
+            //closeConnection(conn);
         }
         return null;
     }
@@ -193,7 +196,7 @@ public class UserDAO extends DBConnection {
                 + "   SET [username] = ?\n"
                 + "      ,[password] = ?\n"
                 + "      ,[email] = ?\n"
-                + "      ,[name] = ?\n"
+                + "      ,[fullname] = ?\n"
                 + "      ,[address] = ?\n"
                 + "      ,[phone] = ?\n"
                 + "      ,[roleID] = ?\n"
@@ -343,7 +346,7 @@ public class UserDAO extends DBConnection {
                 if (rs.next()) {
                     // Create a User object with the updated information
                     updatedUser = new User();
-                    updatedUser.setName(rs.getString("name"));
+                    updatedUser.setName(rs.getString("fullname"));
                     updatedUser.setDob(rs.getString("dob"));
                     updatedUser.setEmail(rs.getString("email"));
                     updatedUser.setPhone(rs.getString("phone"));
@@ -357,16 +360,138 @@ public class UserDAO extends DBConnection {
             e.printStackTrace();
         } finally {
             // Close resources (Connection, PreparedStatement, etc.)
-            // You should handle closing resources properly, preferably in a try-with-resources block
         }
 
         return updatedUser;
     }
 
-//    public static void main(String[] args) throws Exception {
-//        UserDAO dao = new UserDAO();
-//        for (User u : dao.getTrueAllUserPaging(1, "userMail", "fpt", "sortMail", "asc")) {
-//            System.out.println(u.getUserMail());
-//        }
-//    }
+    public void createUser(User user) {
+        String query = "INSERT INTO [dbo].[User]([username],[password],[email],[fullname],[address],[phone],[roleID],[banned]) "
+                + "VALUES (?,?,?,?,?,?,3,0)";
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getName());
+            preparedStatement.setString(5, user.getAddress());
+            preparedStatement.setString(6, user.getPhone());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    public ArrayList<Item> getUserWishList(int userId) throws Exception {
+        ProductDAO pdao = new ProductDAO();
+        ArrayList<Item> itemList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "SELECT p.*, w.volume FROM Wishlist w JOIN Products p ON w.productID = p.id WHERE w.userID = ?";
+
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int productId = resultSet.getInt("id");
+                Product product = pdao.getProductsById(productId);
+                String volume = resultSet.getString("volume");
+                Double price = pdao.getProductPrice(productId, volume);
+                Item item = new Item(product, price, volume);
+
+                // Thêm các thuộc tính sản phẩm khác nếu cần
+                itemList.add(item);
+            }
+            return itemList;
+        } catch (SQLException e) {
+            System.out.println("loi khi lay wishlist");
+            // Xử lý ngoại lệ hoặc throw lại nếu cần thiết
+            throw e;
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+    }
+
+    public boolean updateUserWishlist(int userId, int productId, String volume, String action) {
+        LocalDate date = LocalDate.now();
+        if (action.equalsIgnoreCase("deleteAll")) {
+            removeAllUserWishlist(userId);
+        } else if (action.equalsIgnoreCase("add")) {
+            addUserWishlist(userId, productId, volume, date);
+        } else if (action.equalsIgnoreCase("remove")) {
+            removeUserWishlist(userId, productId);
+        }
+        return false;
+    }
+
+    public boolean removeAllUserWishlist(int userId) {
+        // Chuỗi SQL để xóa tất cả Wishlist của một người dùng
+        String deleteSQL = "DELETE FROM Wishlist WHERE userId = ?";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            // Thiết lập tham số cho câu lệnh SQL
+            preparedStatement.setInt(1, userId);
+
+            // Thực hiện câu lệnh xóa
+            preparedStatement.executeUpdate();
+
+            // Kiểm tra xem có bản ghi nào bị xóa không
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Hoặc xử lý lỗi theo nhu cầu của bạn
+            return false;
+        }
+    }
+
+    public boolean addUserWishlist(int userId, int productId, String volume, LocalDate date) {
+        // Chuỗi SQL để thêm mới một mục vào Wishlist
+        String insertSQL = "INSERT INTO Wishlist (userID, productID, favoriteDate, volume) VALUES (?, ?, ?, ?)";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+            // Thiết lập tham số cho câu lệnh SQL
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, productId);
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            preparedStatement.setString(4, volume);
+
+            // Thực hiện câu lệnh INSERT
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Trả về true nếu có ít nhất một dòng được thêm vào bảng
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("không thêm được sản phẩm vào wishlist"); // Hoặc xử lý lỗi theo nhu cầu của bạn
+            return false;
+        }
+    }
+
+    public boolean removeUserWishlist(int userId, int productId) {
+        // Chuỗi SQL để xóa một mục từ Wishlist
+        String deleteSQL = "DELETE FROM Wishlist WHERE userID = ? AND productID = ?";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            // Thiết lập tham số cho câu lệnh SQL
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, productId);
+
+            // Thực hiện câu lệnh DELETE
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Trả về true nếu có ít nhất một dòng bị xóa
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Hoặc xử lý lỗi theo nhu cầu của bạn
+            return false;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        UserDAO dao = new UserDAO();
+        User u = new User(null, null, "hanoi@gmail2.com", "hai chieu", null, null);
+        System.out.println(dao.getUserByMail("hanoi@gmail.com"));
+        dao.createUser(u);
+        //System.out.println(dao.getUserLogin("son", "123"));
+    }
 }

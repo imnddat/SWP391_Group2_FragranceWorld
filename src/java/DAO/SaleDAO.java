@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author Thinkpad
  */
 public class SaleDAO extends DBConnection{
-      public ArrayList<Sale> getAll() {
+      public ArrayList<Sale> getAll() throws Exception {
         PreparedStatement stm = null;
         ResultSet rs = null;
         ArrayList<Sale> sale = new ArrayList<>();
@@ -40,9 +40,9 @@ public class SaleDAO extends DBConnection{
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stm.close();
-                rs.close();
-                connection.close();
+                closeResultSet(rs);
+                closePreparedStatement(stm);
+                closeConnection(connection);
                 
             } catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class
