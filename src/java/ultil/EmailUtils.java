@@ -8,13 +8,10 @@ import java.util.Properties;
 import java.util.Random;
 import javax.mail.*;
 import javax.mail.internet.*;
-/**
- *
- * @author NGUYEN MINH
- */
+
 public class EmailUtils {
-     private static final String EMAIL_USERNAME = "";
-    private static final String EMAIL_PASSWORD = "";
+     private static final String EMAIL_USERNAME = "ThinhLCTHE173302@fpt.edu.vn";
+    private static final String EMAIL_PASSWORD = "Thinhmache123@#";
 
     public static void sendEmail(String recipientEmail, String subject, String body) {
         // Set up mail server properties

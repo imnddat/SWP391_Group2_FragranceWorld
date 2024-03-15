@@ -52,6 +52,8 @@
                                        href="#account-general">General</a>
                                     <a class="list-group-item list-group-item-action" data-toggle="list"
                                        href="#account-change-password">Change password</a>
+                                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                                       href="#account-forgot-password">Forgot Password</a>
                                     <!--                            <a class="list-group-item list-group-item-action" data-toggle="list"
                                                                    href="#account-info">Info</a>
                                                                 <a class="list-group-item list-group-item-action" data-toggle="list"
@@ -101,207 +103,138 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <!--  Change pass word-->
                                     <div class="tab-pane fade" id="account-change-password">
                                         <div class="card-body pb-2">
-                                            <div class="form-group">
-                                                <label class="form-label">Current password</label>
-                                                <input type="password" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">New password</label>
-                                                <input type="password" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Repeat new password</label>
-                                                <input type="password" class="form-control">
-                                            </div>
+                                            <%
+                                          // Không cần khai báo session vì nó đã tự động có sẵn
+                                               String message1 = (String) session.getAttribute("message");
+                                               if (message1 != null) {
+                                               out.println("<p>" + message1 + "</p>");
+                                               session.removeAttribute("message");
+                                               }
+                                            %>
+                                            <%-- Start form --%>
+                                            <form action="ChangePasswordController" method="POST" >
+                                                <%--Input old password--%>
+                                                <div class="row" style="margin-top: 3vh;">
+                                                    <div class="col-md-4" style="text-align: right"><label class="label control-label">Old Password</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="password" class="form-control" name="oldPassword" placeholder="Enter old password" required>
+                                                    </div>
+                                                </div>
+                                                <%--Input new password--%>
+                                                <div class="row" style="margin-top: 3vh;">
+                                                    <div class="col-md-4" style="text-align: right"><label class="label control-label">New Password</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="password" class="form-control" name="newPassword" " placeholder="Enter new password" required>
+                                                    </div>
+                                                </div>
+                                                <%--Input confirm new password--%>
+                                                <div class="row" style="margin-top: 3vh;">
+                                                    <div class="col-md-4" style="text-align: right"><label class="label control-label">Confirm Password</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="password" class="form-control" name="confirmNewPassword"  placeholder="Confirm new password" required>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <%-- Submit form --%>
+                                                <div class="row">
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-md-4">
+                                                        <button type="submit" class="btn btn-success">Change password!</button>
+                                                        <button type="button" class="btn btn-default">Cancel</button>
+                                                    </div>
+                                                    <div class="col-md-4"></div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="account-info">
-                                        <div class="card-body pb-2">
-                                            <div class="form-group">
-                                                <label class="form-label">Bio</label>
-                                                <textarea class="form-control"
-                                                          rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
+
+                                    <!--Forgot password-->
+
+                                    <div class="tab-pane fade" id="account-forgot-password">
+                                        <% 
+                                            String message2 = (String) session.getAttribute("message");
+                                            if (message2 != null) {
+                                            out.println("<p>" + message2 + "</p>");
+                                            session.removeAttribute("message");
+                                             }
+                                            String email = request.getParameter("email"); // Lấy email từ request
+                                            String otp = request.getParameter("otp"); // Lấy otp từ request
+                                        %>
+                                        <form action="ResetPasswordController" method="POST">
+                                            <input type="hidden" name="email" value="<%= email %>">
+                                            <input type="hidden" name="otp" value="<%= otp %>">
+                                            <div class="row">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-6">
+                                                    <label class="label control-label">Enter your new pass</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                                        <input type="password" class="form-control"  name="newPassword"  required>
+                                                    </div>
+                                                    <label class="label control-label">Re-Enter your new pass</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                        <input type="password" class="form-control" id="" name="confirmnewPassword"  required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3"></div>
+                                            </div>  
+                                            <div class="row">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-6">
+                                                    <label class="label control-label">Enter your email</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                                        <input type="text" class="form-control" name="enteredUserMail" placeholder="">
+                                                    </div>
+                                                    <br>
+                                                    <div class="input-group">    
+                                                        <button type="submit" class="btn btn-success">Change password!</button>    
+                                                        <button type="button" class="btn btn-default">Cancel</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3"></div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Birthday</label>
-                                                <input type="text" class="form-control" value="May 3, 1995">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Country</label>
-                                                <select class="custom-select">
-                                                    <option>USA</option>
-                                                    <option selected>Canada</option>
-                                                    <option>UK</option>
-                                                    <option>Germany</option>
-                                                    <option>France</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <hr class="border-light m-0">
-                                        <div class="card-body pb-2">
-                                            <h6 class="mb-4">Contacts</h6>
-                                            <div class="form-group">
-                                                <label class="form-label">Phone</label>
-                                                <input type="text" class="form-control" value="+0 (123) 456 7891">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Website</label>
-                                                <input type="text" class="form-control" value>
-                                            </div>
-                                        </div>
+
+                                        </form>
                                     </div>
-                                    <div class="tab-pane fade" id="account-social-links">
-                                        <div class="card-body pb-2">
-                                            <div class="form-group">
-                                                <label class="form-label">Twitter</label>
-                                                <input type="text" class="form-control" value="https://twitter.com/user">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Facebook</label>
-                                                <input type="text" class="form-control" value="https://www.facebook.com/user">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Google+</label>
-                                                <input type="text" class="form-control" value>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">LinkedIn</label>
-                                                <input type="text" class="form-control" value>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Instagram</label>
-                                                <input type="text" class="form-control" value="https://www.instagram.com/user">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="account-connections">
-                                        <div class="card-body">
-                                            <button type="button" class="btn btn-twitter">Connect to
-                                                <strong>Twitter</strong></button>
-                                        </div>
-                                        <hr class="border-light m-0">
-                                        <div class="card-body">
-                                            <h5 class="mb-2">
-                                                <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i
-                                                        class="ion ion-md-close"></i> Remove</a>
-                                                <i class="ion ion-logo-google text-google"></i>
-                                                You are connected to Google:
-                                            </h5>
-                                            <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                               data-cfemail="f9979498818e9c9595b994989095d79a9694">[email&#160;protected]</a>
-                                        </div>
-                                        <hr class="border-light m-0">
-                                        <div class="card-body">
-                                            <button type="button" class="btn btn-facebook">Connect to
-                                                <strong>Facebook</strong></button>
-                                        </div>
-                                        <hr class="border-light m-0">
-                                        <div class="card-body">
-                                            <button type="button" class="btn btn-instagram">Connect to
-                                                <strong>Instagram</strong></button>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="account-notifications">
-                                        <div class="card-body pb-2">
-                                            <h6 class="mb-4">Activity</h6>
-                                            <div class="form-group">
-                                                <label class="switcher">
-                                                    <input type="checkbox" class="switcher-input" checked>
-                                                    <span class="switcher-indicator">
-                                                        <span class="switcher-yes"></span>
-                                                        <span class="switcher-no"></span>
-                                                    </span>
-                                                    <span class="switcher-label">Email me when someone comments on my article</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="switcher">
-                                                    <input type="checkbox" class="switcher-input" checked>
-                                                    <span class="switcher-indicator">
-                                                        <span class="switcher-yes"></span>
-                                                        <span class="switcher-no"></span>
-                                                    </span>
-                                                    <span class="switcher-label">Email me when someone answers on my forum
-                                                        thread</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="switcher">
-                                                    <input type="checkbox" class="switcher-input">
-                                                    <span class="switcher-indicator">
-                                                        <span class="switcher-yes"></span>
-                                                        <span class="switcher-no"></span>
-                                                    </span>
-                                                    <span class="switcher-label">Email me when someone follows me</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <hr class="border-light m-0">
-                                        <div class="card-body pb-2">
-                                            <h6 class="mb-4">Application</h6>
-                                            <div class="form-group">
-                                                <label class="switcher">
-                                                    <input type="checkbox" class="switcher-input" checked>
-                                                    <span class="switcher-indicator">
-                                                        <span class="switcher-yes"></span>
-                                                        <span class="switcher-no"></span>
-                                                    </span>
-                                                    <span class="switcher-label">News and announcements</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="switcher">
-                                                    <input type="checkbox" class="switcher-input">
-                                                    <span class="switcher-indicator">
-                                                        <span class="switcher-yes"></span>
-                                                        <span class="switcher-no"></span>
-                                                    </span>
-                                                    <span class="switcher-label">Weekly product updates</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="switcher">
-                                                    <input type="checkbox" class="switcher-input" checked>
-                                                    <span class="switcher-indicator">
-                                                        <span class="switcher-yes"></span>
-                                                        <span class="switcher-no"></span>
-                                                    </span>
-                                                    <span class="switcher-label">Weekly blog digest</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="text-right mt-3">
-                        <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-                        <button type="button" class="btn btn-default">Cancel</button>
-                    </div>
-
                 </div>
+            </div>
+            <div class="text-right mt-3">
+                <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+                <button type="button" class="btn btn-default">Cancel</button>
+            </div>
 
-                <%@include file = "footer.jsp" %>        
-
-            </div><!-- W1 end here -->
-            <span id="back-top" class="fa fa-arrow-up"></span>
         </div>
 
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript">
+        <%@include file = "footer.jsp" %>        
 
-        </script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <!-- include jQuery -->
-        <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-        <!-- include jQuery -->
-        <script src="${pageContext.request.contextPath}/js/plugins.js"></script>
-        <!-- include jQuery -->
-        <script src="${pageContext.request.contextPath}/js/jquery.main.js"></script>
-    </body>
+    </div><!-- W1 end here -->
+    <span id="back-top" class="fa fa-arrow-up"></span>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- include jQuery -->
+<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<!-- include jQuery -->
+<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
+<!-- include jQuery -->
+<script src="${pageContext.request.contextPath}/js/jquery.main.js"></script>
+</body>
 </html>

@@ -15,8 +15,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import ultil.MD5;
+import ultil.SendMail;
 
 /**
  *
@@ -70,7 +81,7 @@ public class UserDAO extends DBConnection {
             String query = "SELECT * FROM [dbo].[User] WHERE username = ? AND password = ?";
             try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
-                preparedStatement.setString(2, password);
+                  preparedStatement.setString(2, MD5.getMd5(password));
 
                 try ( ResultSet resultSet = preparedStatement.executeQuery()) {
                     // Nếu có kết quả từ truy vấn, tạo đối tượng User và trả về
@@ -96,13 +107,320 @@ public class UserDAO extends DBConnection {
         return null; // Trả về null nếu không tìm thấy người dùng
     }
 
-    /**
-     * get user from User table using userId
-     *
-     * @param userId is an int
-     * @return <code>User</code> object.
-     * @throws java.lang.Exception
-     */
+    
+    public String getUserRegister(String username, String pass, String email, String name, String address, String phone) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            String password = MD5.getMd5(pass);
+            //chuan bi string sql
+            String sql = " INSERT INTO [dbo].[User]([username],[password],[email],[fullname],[address],[phone],[roleID],[banned],[positionID],[dob],[status])\n"
+                    + "     VALUES ( ?,?,?, ?,?,?, '3', '0', '1','2021/03/03','1')";
+            conn = new DBConnection().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(sql);
+            //set bien dungs voiw thuw tu bien trong string tren
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, email);
+            ps.setString(4, name);
+            ps.setString(5, address);
+            ps.setString(6, phone);
+
+            //goi cau lenh execute
+            ps.executeUpdate();
+
+            SendMail.send(email, "Verify new user", "<h2>Welcome to my system</h2>"
+                    + "<a href=\"http://localhost:9999/FragranceWorld/verify-user?username="
+                    + username + " \" > Click here to verify your account!</a> ");
+            return username;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+//     public static void main(String[] args) {
+//        // Thử gọi hàm getUserRegister với các giá trị thích hợp để kiểm tra
+//        String username = "testuser";
+//        String password = "testpass";
+//        String email = "test@example.com";
+//        String name = "Test User";
+//        String address = "123 Test St";
+//        String phone = "1234567890";
+//
+//        // Gọi hàm getUserRegister và kiểm tra kết quả
+//        UserDAO us = new UserDAO();
+//        String result = us.getUserRegister(username, name, email, name, address, phone);
+//        if (result != null) {
+//            System.out.println("User registered successfully with username: " + result);
+//        } else {
+//            System.out.println("Failed to register user.");
+//        }
+//        }
+    
+    public boolean checkOldPassword(String username, String oldPassword) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM [dbo].[User] u where u.username = ? and u.password = ? ";
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, MD5.getMd5(oldPassword)); // Sử dụng MD5 để mã hóa mật khẩu cũ
+            rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+  
+    public static void main(String[] args) {
+        // Thay đổi giá trị username và oldPassword tùy ý
+        String username = "thinh123456";
+        String oldPassword = "123456";
+
+        // Tạo một đối tượng của lớp chứa hàm checkOldPassword
+        UserDAO yourClassName = new UserDAO(); // Thay YourClassName bằng tên lớp chứa hàm checkOldPassword
+
+        // Gọi hàm checkOldPassword và in kết quả
+        boolean passwordIsValid = yourClassName.checkOldPassword(username, oldPassword);
+        if (passwordIsValid) {
+            System.out.println("Mật khẩu cũ hợp lệ.");
+        } else {
+            System.out.println("Mật khẩu cũ không hợp lệ.");
+        }
+    }
+
+   
+
+    public void changePassword1(String username, String newPassword) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = " UPDATE [dbo].[User] SET [password] = ? WHERE username = ? ";
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, MD5.getMd5(newPassword)); // Mã hóa mật khẩu mới
+            ps.setString(2, username);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     public void updatePassword(String email, String newPassword) {
+         Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = " UPDATE [dbo].[User] SET [password] = ? WHERE email = ?";
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, MD5.getMd5(newPassword)); // Mã hóa mật khẩu mới
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+
+    public boolean checkEmailExists(String email) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String sql = " SELECT COUNT(*) FROM [dbo].[User] WHERE email = ? ";
+        try {
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean checkOTP(String email, String otp) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = " SELECT COUNT(*) FROM [dbo].[User] WHERE email = ? AND otp = ? ";
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, otp);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void saveOTP(String email, String otp) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = " UPDATE [dbo].[User] SET [otp] = ? WHERE email = ? ";
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, otp);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void resetOTP(String email) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = " UPDATE [dbo].[User] SET [otp] = ? WHERE email = ? ";
+        try {
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getEmailByOTP(String otp) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = " SELECT [email] FROM [dbo].[User] where otp = ? ";
+        try {
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, otp);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("email");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean checkOTPMatchesEmail(String email, String otp) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = " SELECT [otp] FROM [dbo].[User] where email = ? ";
+        try {
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String storedOTP = rs.getString("otp");
+                return otp.equals(storedOTP);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Phương thức để gửi mã OTP qua email
+    private void sendOTPByEmail(String email, String otp) {
+        String host = "smtp.gmail.com";
+        String port = "587";
+        String username = "mnguyenan94@gmail.com";
+        String password = "Thinhmache123@#";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", port);
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            message.setSubject("OTP Change Password");
+            message.setText("Your OTP: " + otp);
+            Transport.send(message);
+            System.out.println("Email sent successfully");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public User getUserByMobile(String phone) throws Exception {
+        Connection conn = null;
+        /* Result set returned by the sqlserver */
+        ResultSet rs = null;
+        /* Prepared statement for executing sql queries */
+        PreparedStatement pre = null;
+        String sql = " SELECT * FROM [User] WHERE phone = ? ";
+        try {
+            conn = getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, phone);
+            rs = pre.executeQuery();
+            while (rs.next()) {
+                return new User(rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("fullname"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getInt("roleID"),
+                        rs.getInt("banned"));
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(pre);
+            closeConnection(conn);
+        }
+        return null;
+    }
+    
+
+ 
     public User getUserById(int userId) throws Exception {
         Connection conn = null;
         /* Result set returned by the sqlserver */
@@ -139,13 +457,7 @@ public class UserDAO extends DBConnection {
         return null;
     }
 
-    /**
-     * get user from User table using userMail
-     *
-     * @param userMail is an String
-     * @return <code>User</code> object.
-     */
-    public User getUserByMail(String userMail) throws Exception {
+    public User getUserByMail(String userMail)  {
         Connection conn = null;
         /* Result set returned by the sqlserver */
         ResultSet rs = null;
@@ -169,13 +481,8 @@ public class UserDAO extends DBConnection {
                         rs.getInt("roleID"),
                         rs.getInt("banned"));
             }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(pre);
-            //closeConnection(conn);
-        }
+        } catch (SQLException ex) {
+        } 
         return null;
     }
 
@@ -487,11 +794,11 @@ public class UserDAO extends DBConnection {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        UserDAO dao = new UserDAO();
-        User u = new User(null, null, "hanoi@gmail2.com", "hai chieu", null, null);
-        System.out.println(dao.getUserByMail("hanoi@gmail.com"));
-        dao.createUser(u);
-        //System.out.println(dao.getUserLogin("son", "123"));
-    }
+//    public static void main(String[] args) throws Exception {
+//        UserDAO dao = new UserDAO();
+//        User u = new User(null, null, "hanoi@gmail2.com", "hai chieu", null, null);
+//        System.out.println(dao.getUserByMail("hanoi@gmail.com"));
+//        dao.createUser(u);
+//        //System.out.println(dao.getUserLogin("son", "123"));
+//    }
 }

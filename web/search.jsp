@@ -123,36 +123,44 @@
         <div id="tab3">
             <!-- tabs slider start here -->
             <div class="tabs-slider">
-                <!-- slide start here -->
-                <div class="slide">
-                    <!-- mt product1 center start here -->
-                    <div class="mt-product1 mt-paddingbottom20">
-                        <div class="box">
-                            <div class="b1">
-                                <div class="b2">
-                                    <a href="product-detail.html"><img src="http://placehold.it/215x215" alt="image description"></a>
-                                    <span class="caption">
-                                        <span class="new">NEW</span>
-                                    </span>
-                                    <ul class="mt-stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                    <ul class="links">
-                                        <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>
-                                        <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>
-                                        <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
-                                    </ul>
+                <c:forEach items="${requestScope.getProductByStar}" var="p" > 
+                    <!-- slide start here -->
+                    <form class="addToCartForm" action="cart" method="post">
+                        <div class="slide">
+                            <!-- mt product1 center start here -->
+                            <div class="mt-product1 mt-paddingbottom20">
+                                <div class="box">
+                                    <div class="b1">
+                                        <div class="b2">
+                                            <a href="product-detail.html"><img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215"></a>
+                                            <span class="caption">
+                                                <span class="new" style="color: red">HOT</span>
+                                            </span>
+                                            <ul class="mt-stars">
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star-o"></i></li>
+                                            </ul>
+                                            <ul class="links">
+                                                <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>
+                                                <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="txt">
+                                    <strong class="title"><a href="product-detail.html">${p.getNameProduct()}</a></strong>        
+                                    <span class="price">$${p.getVolumes().get(0).getPrice()}</span>
+                                    <input type="hidden" name="id" value="${p.getId()}" />
+                                    <input type="hidden" name="quantity" value="1" />
                                 </div>
                             </div>
+                            <!-- mt product1 center end here -->
                         </div>
-                        <div class="txt">
-                            <strong class="title"><a href="product-detail.html">Puff Chair</a></strong>
-                        </div>
-                    </div><!-- mt product1 center end here -->
-                </div>
+                    </form>
+                </c:forEach>
                 <!-- slide end here -->
 
             </div>
