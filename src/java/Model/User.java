@@ -29,6 +29,7 @@ public class User {
     private int banned;
     /*Banner User Entity*/
     private String dob;
+    private String otp;
     
     /**
      * Blank constructor
@@ -65,6 +66,7 @@ public class User {
         this.banned = banned;
     }
 
+    
     public User(int id, String username, String password, String email, String name, String address, String phone, int roleID, int banned, String dob) {
         this.id = id;
         this.username = username;
@@ -77,6 +79,22 @@ public class User {
         this.banned = banned;
         this.dob = dob;
     }
+
+    public User(int id, String username, String password, String email, String name, String address, String phone, int roleID, int banned, String dob, String otp) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.roleID = roleID;
+        this.banned = banned;
+        this.dob = dob;
+        this.otp = otp;
+    }
+    
+    
     
     public User(String username, String password, String email, String name, String address, String phone) {
         this.username = username;
@@ -257,6 +275,17 @@ public class User {
         this.dob = dob;
     }
 
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    
+    
+    
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", name=" + name + ", address=" + address + ", phone=" + phone + ", roleID=" + roleID + ", banned=" + banned + ", dob=" + dob + '}';

@@ -81,6 +81,7 @@ public class Register extends HttpServlet {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
+        String dob = request.getParameter("dob");
         
         
 //        String dob = request.getParameter("dob");
@@ -88,7 +89,7 @@ public class Register extends HttpServlet {
 //        java.util.Date dobUtil = sdf.parse(dob); // Chuyển đổi chuỗi thành java.util.Date
 //        long dobMillis = dobUtil.getTime(); // Lấy thời gian dưới dạng milliseconds
 //        java.sql.Date dobSql = new java.sql.Date(dobMillis); // Chuyển đổi thành java.sql.Date
-        String user = new UserDAO().getUserRegister(username, pass, email, name, address, phone);
+        String user = new UserDAO().getUserRegister(username, pass, email, name, address, phone,dob);
         request.setAttribute("registrationSuccess", "Please check your email!");
         // Forward to a JSP page for display
         request.getRequestDispatcher("message.jsp").forward(request, response);

@@ -13,7 +13,6 @@
         <meta charset="utf-8">
         <!-- set the viewport width and initial-scale on mobile devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <!-- include the site stylesheet -->
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
         <!-- include the site stylesheet -->
@@ -91,7 +90,7 @@
                                             <c:forEach begin="0" end="${listirand.size()-1}" var="i">
                                                 <li>
                                                     <label >
-                                                        <input  name="idbrands" value="${listirand.get(i).getId()}" type="checkbox"
+                                                        <input type="checkbox" name="idbrands" value="${listirand.get(i).getId()}" 
 
                                                                 <c:forEach var="b" items="${bvalues}">
                                                                     ${b == listirand.get(i).getId() ?"checked":""}
@@ -105,26 +104,26 @@
                                         </ul><!-- nice-form end here -->
                                     </form>
                                     <span class="sub-title">Filter by Price</span>
-                                    <form method="get" action="ListProductViewController">
+                                    <form action="ListProductViewController">
                                         <div class="price">
                                             <input type="checkbox" name="filter" value="" onclick="this.form.submit()" />
-                                            <label class="custom-control-label" for="price-all">All Price </label >
+                                            <label class="custom-control-label" >All Price </label >
                                         </div>
                                         <div class="price" >
                                             <input  type="checkbox" name="filter"  value="price-10-100" onclick="this.form.submit()" />
-                                            <label class="custom-control-label" for="price-10-100" >$10 - $100</label >
+                                            <label class="custom-control-label"  >$10 - $100</label >
                                         </div>
                                         <div class="price" >
                                             <input type="checkbox" name="filter" value="price-100-250" onclick="this.form.submit()"/>
-                                            <label class="custom-control-label" for="price-100-250" >$100 - $250</label >
+                                            <label class="custom-control-label"  >$100 - $250</label >
                                         </div>
                                         <div class="price">
                                             <input type="checkbox" name="filter" value="price-250-500" onclick="this.form.submit()" />
-                                            <label class="custom-control-label" for="price-250-500">$250 - $500</label  >
+                                            <label class="custom-control-label" >$250 - $500</label  >
                                         </div>
                                         <div class="price">
                                             <input  type="checkbox" name="filter" value="price-500up" onclick="this.form.submit()" />
-                                            <label  for="price-500up">$500+</label>
+                                            <label  >$500+</label>
                                         </div>
                                     </form>
                                 </section><!-- shop-widget filter-widget of the Page end here -->
@@ -158,7 +157,7 @@
                                     </div><!-- btn-box end here -->
                                     <!-- mt-textbox start here -->
                                     <div class="mt-textbox">
-                                        <p>View all product </p>
+                                        <p><a hrer="#">View all product</a></p>
                                     </div><!-- mt-textbox end here -->
                                 </header><!-- mt shoplist header end here -->
 

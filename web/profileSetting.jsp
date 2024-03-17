@@ -104,7 +104,9 @@
                                         </div>
                                     </div>
 
-
+                                    <!--  Change pass word-->
+                                    <!--  Change pass word-->
+                                    <!--  Change pass word-->
                                     <!--  Change pass word-->
                                     <div class="tab-pane fade" id="account-change-password">
                                         <div class="card-body pb-2">
@@ -153,6 +155,11 @@
                                         </div>
                                     </div>
 
+
+
+                                    <!--Forgot password-->
+                                    <!--Forgot password-->
+                                    <!--Forgot password-->
                                     <!--Forgot password-->
 
                                     <div class="tab-pane fade" id="account-forgot-password">
@@ -203,6 +210,12 @@
 
                                         </form>
                                     </div>
+
+                                    <!--  end end end         -->
+
+
+
+
 
                                 </div>
                             </div>

@@ -56,9 +56,7 @@ public class ListProductViewController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String xpage = req.getParameter("page")== null ||req.getParameter("page")== "" ? "1" : req.getParameter("page");
-        //
-        //    HttpSession session = req.getSession();
-        //   String service = req.getParameter("service");
+     
         ProductDAO dao = new ProductDAO();
 
         //searchby name
@@ -71,10 +69,10 @@ public class ListProductViewController extends HttpServlet {
         //    req.setAttribute("sortby", sortby);
 
         //checkbox price
-        String filter = req.getParameter("filter");
+        String filter = req.getParameter("filter") == null ? "filter" : req.getParameter("filter");
         double minP = 0;
         double maxP = 99999;
-        filter = "";
+        
         switch (filter) {
             case "price-10-100":
                 minP = 10;
@@ -99,6 +97,7 @@ public class ListProductViewController extends HttpServlet {
                 maxP = 99999;
                 break;
         }
+        
 
         //checkbox Brand
         String[] id_raw = req.getParameterValues("idbrands");
@@ -177,6 +176,7 @@ public class ListProductViewController extends HttpServlet {
             req.setAttribute("sortType", sortType);
             req.setAttribute("idbrands", idbrands);
             req.setAttribute("searchbyName", searchbyName);
+            req.setAttribute("filter", filter);
 
             req.getRequestDispatcher("listProductView.jsp").forward(req, resp);
 
@@ -191,6 +191,7 @@ public class ListProductViewController extends HttpServlet {
             System.out.println("Value of 'productSearchScent' parameter: " + req.getParameter("productSearchScent"));
             System.out.println("Value of 'brandSortMakebyFrom' parameter: " + req.getParameter("brandSortMakebyFrom"));
             System.out.println("Value of 'brandSort' parameter: " + req.getParameter("brandSort"));
+            System.out.println("Value of 'fillter' parameter: " + req.getParameter("filter"));
         } catch (Exception ex) {
             resp.getWriter().print(ex.getMessage());
             ex.printStackTrace();

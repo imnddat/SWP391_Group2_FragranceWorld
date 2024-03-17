@@ -66,15 +66,7 @@ public class UserDAO extends DBConnection {
         return newUserList;
     }
 
-    /**
-     * get user from User table Using name and password
-     *
-     * @param username
-     * @param userName is an String
-     * @param password is an String
-     * @return <code>User</code> object.
-     * @throws java.lang.Exception
-     */
+    
     public User getUserLogin(String username, String password) throws Exception {
         try {
             // Thực hiện truy vấn để lấy thông tin người dùng từ bảng
@@ -108,7 +100,7 @@ public class UserDAO extends DBConnection {
     }
 
     
-    public String getUserRegister(String username, String pass, String email, String name, String address, String phone) {
+    public String getUserRegister(String username, String pass, String email, String name, String address, String phone, String dob) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -116,8 +108,8 @@ public class UserDAO extends DBConnection {
 
             String password = MD5.getMd5(pass);
             //chuan bi string sql
-            String sql = " INSERT INTO [dbo].[User]([username],[password],[email],[fullname],[address],[phone],[roleID],[banned],[positionID],[dob],[status])\n"
-                    + "     VALUES ( ?,?,?, ?,?,?, '3', '0', '1','2021/03/03','1')";
+            String sql = " INSERT INTO [dbo].[User]([username],[password],[email],[fullname],[address],[phone],[roleID],[banned],[dob])\n"
+                    + "     VALUES ( ?,?,?, ?,?,?, '3', '0', ? )";
             conn = new DBConnection().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(sql);
             //set bien dungs voiw thuw tu bien trong string tren
@@ -127,6 +119,7 @@ public class UserDAO extends DBConnection {
             ps.setString(4, name);
             ps.setString(5, address);
             ps.setString(6, phone);
+            ps.setString(7, dob);
 
             //goi cau lenh execute
             ps.executeUpdate();
@@ -178,22 +171,22 @@ public class UserDAO extends DBConnection {
         return false;
     }
   
-    public static void main(String[] args) {
-        // Thay đổi giá trị username và oldPassword tùy ý
-        String username = "thinh123456";
-        String oldPassword = "123456";
-
-        // Tạo một đối tượng của lớp chứa hàm checkOldPassword
-        UserDAO yourClassName = new UserDAO(); // Thay YourClassName bằng tên lớp chứa hàm checkOldPassword
-
-        // Gọi hàm checkOldPassword và in kết quả
-        boolean passwordIsValid = yourClassName.checkOldPassword(username, oldPassword);
-        if (passwordIsValid) {
-            System.out.println("Mật khẩu cũ hợp lệ.");
-        } else {
-            System.out.println("Mật khẩu cũ không hợp lệ.");
-        }
-    }
+//    public static void main(String[] args) {
+//        // Thay đổi giá trị username và oldPassword tùy ý
+//        String username = "thinh123456";
+//        String oldPassword = "123456";
+//
+//        // Tạo một đối tượng của lớp chứa hàm checkOldPassword
+//        UserDAO yourClassName = new UserDAO(); // Thay YourClassName bằng tên lớp chứa hàm checkOldPassword
+//
+//        // Gọi hàm checkOldPassword và in kết quả
+//        boolean passwordIsValid = yourClassName.checkOldPassword(username, oldPassword);
+//        if (passwordIsValid) {
+//            System.out.println("Mật khẩu cũ hợp lệ.");
+//        } else {
+//            System.out.println("Mật khẩu cũ không hợp lệ.");
+//        }
+//    }
 
    
 
@@ -358,7 +351,7 @@ public class UserDAO extends DBConnection {
     private void sendOTPByEmail(String email, String otp) {
         String host = "smtp.gmail.com";
         String port = "587";
-        String username = "mnguyenan94@gmail.com";
+        String username = "ThinhLCTHE173302@fpt.edu.vn";
         String password = "Thinhmache123@#";
 
         Properties props = new Properties();
@@ -486,12 +479,6 @@ public class UserDAO extends DBConnection {
         return null;
     }
 
-    /**
-     * update a user from User table
-     *
-     * @param updatedUser is a <code>User</code> object
-     * @return a int.
-     */
     public int updateUser(User updatedUser) throws Exception {
         Connection conn = null;
         /* Result set returned by the sqlserver */
@@ -534,12 +521,7 @@ public class UserDAO extends DBConnection {
         return check;
     }
 
-    /**
-     * add a user to User table
-     *
-     * @param newUser is an <code>User</code> object
-     * @return a int.
-     */
+ 
     public int addUser(User newUser) throws Exception {
         Connection conn = null;
         ResultSet rs = null;
@@ -570,12 +552,7 @@ public class UserDAO extends DBConnection {
         return check;
     }
 
-    /**
-     * delete a user from User table
-     *
-     * @param user is an <code>User</code> object
-     * @return a int.
-     */
+   
     public int deleteUser(User user) throws Exception {
         Connection conn = null;
         ResultSet rs = null;

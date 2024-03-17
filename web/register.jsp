@@ -88,6 +88,9 @@
                                                         <div class="col-xs-12 col-sm-12">
                                                             <input type="text" placeholder="Your Name" class="input" name="name">
                                                         </div>
+                                                         <div class="col-xs-12 col-sm-12">
+                                                            <input type="text" placeholder="Date Of Birthday" class="input" name="dob">
+                                                        </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-6">
@@ -137,7 +140,6 @@
                             </div>
                         </div>
                     </section>
-                    
                     
                 </main><!-- Main of the Page end -->
                 <%@include file = "footer.jsp" %>

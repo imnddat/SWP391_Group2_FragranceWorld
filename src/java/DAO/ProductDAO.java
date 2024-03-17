@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Model.Product;
 import Model.Sale;
+import Model.SaleEvent;
 import Model.Volume;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -330,7 +331,7 @@ public class ProductDAO extends DBConnection {
         int[] a = {1, 2, 3};
         double minP = 0;
         double maxP = 99999;
-        String filter = "price-10-100";
+        String filter = "price-100-250";
         switch (filter) {
             case "price-10-100":
                 minP = 10;
@@ -338,34 +339,34 @@ public class ProductDAO extends DBConnection {
                 // set lại min vag max
                 break;
             case "price-100-250":
-                minP = 10;
-                maxP = 100;
+                minP = 100;
+                maxP = 250;
                 break;
             case "price-250-500":
-                minP = 10;
-                maxP = 100;
+                minP = 250;
+                maxP = 500;
                 break;
             case "price-500up":
 
-                minP = 10;
-                maxP = 100;
+                minP = 500;
+                maxP = 99999;
                 break;
             default:
                 minP = 0;
-                maxP = 10000;
+                maxP = 99999;
                 break;
         }
         System.out.println(
-                dao.getALLProductByGender("", "50", "", "", "", "price-250-500", a, "", minP, maxP).size());
+                dao.getALLProductByGender("", "50", "", "", "", "3", a, "", minP, maxP).size());
     }
 
     //--------------------------------PANNER---------------------------
     public ArrayList<Product> getALLProductByGender(String genderSearch, String volumeSearchCapacity,
             String productSearchScent, String brandSortMakebyFrom, String brandSort, String sortType, int[] id, String keyword, double minP, double maxP) {
-        System.out.println("dã vào hàm");
+//        System.out.println("dã vào hàm");
         //ti?n xu li data
         if (sortType == null || sortType.isEmpty()) {
-            sortType = "-1";// dang loi
+            sortType = "-1";
         }
         String sortTypeString = " order by p.nameProduct asc";
         switch (sortType) {
@@ -571,12 +572,12 @@ public class ProductDAO extends DBConnection {
         String sql = " select top(10) p.id,p.description,p.genderID, p.nameProduct,p.codeProduct,\n"
                 + "p.discount,p.scent ,p.brandID,p.defaultImg, v.price, s.discount\n"
                 + " from Volume v \n"
-                + "left join Products p on v.productID = p.id \n"
+                + "join Products p on v.productID = p.id \n"
                 + "join Sale s on p.id = s.productID \n"
                 + "join SaleEvent sv on s.sid = sv.sid \n"
                 + "where v.capacity = 30 and (s.sid in ( select sv.sid from SaleEvent \n"
                 + "where sv.startdate <= CONVERT(date, GETDATE()) and sv.enddate >= CONVERT(date, GETDATE()) \n"
-                + ") ) \n"
+                + " ) ) \n"
                 + "and p.nameProduct like ? \n"
                 + "order by s.discount desc ";
         try {
@@ -864,7 +865,7 @@ public class ProductDAO extends DBConnection {
             }
             return brand;
         } catch (SQLException ex) {
-            Logger.getLogger(VolumeDAO.class
+            Logger.getLogger(BrandDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -914,7 +915,7 @@ public class ProductDAO extends DBConnection {
             return sale;
 
         } catch (SQLException ex) {
-            Logger.getLogger(GenderDAO.class
+            Logger.getLogger(SaleDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -942,7 +943,7 @@ public class ProductDAO extends DBConnection {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Lỗi không lấy được giá sản phẩm");
+           // System.out.println("Lỗi không lấy được giá sản phẩm");
         }
 
         return price;
@@ -983,7 +984,7 @@ public class ProductDAO extends DBConnection {
                 }
             }
         } catch (Exception e) {
-            System.out.println("lỗi không lấy được giá sản phẩm");
+            //System.out.println("lỗi không lấy được giá sản phẩm");
         }
 
         return price;
@@ -1016,20 +1017,7 @@ public class ProductDAO extends DBConnection {
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stm != null) {
-                    stm.close();
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(ProductDAO.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } 
         return null;
     }
 
@@ -1051,51 +1039,6 @@ public class ProductDAO extends DBConnection {
         return null;
     }
 
-//    public ArrayList<Product> searchList(String search, int index, int pageSize) {
-//        ArrayList<Product> list = new ArrayList<>();
-//        String sql = " select * from Products p \n"
-//                + "  join Volume v on p.id = v.productID \n"
-//                + "  where p.nameProduct like ? \n"
-//                + "  order by p.nameProduct asc \n"
-//                + "  offset ? rows fetch next ? rows only ";
-//
-//        try {
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setString(1, "%" + search + "%");
-//            stm.setInt(2, (index - 1) * pageSize);
-//            stm.setInt(3, pageSize);
-//            ResultSet rs = stm.executeQuery();
-//
-//            while (rs.next()) {
-//                Product u = new Product();
-//                u.setId(rs.getInt(1));
-//                u.setNameProduct(rs.getString(2));
-//                u.setBrandID(rs.getInt(3));
-//                u.setVolumess(new Volume());
-//                list.add(u);
-//            }
-//            return list;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-//    public static void main(String[] args) {
-//        //trace log
-//        System.out.println(new ProductDAO().getProductsByKeywords(s));
-//    }
-//  public Vector<Product> sortProducts(Vector<Product> products, String sortBy) {
-//        if (sortBy.equals("priceLowHigh")) {
-//            products.sort(Comparator.comparing(Product::getPrice));
-//        }
-//
-//        if (sortBy.equals("priceHighLow")) {
-//            products.sort(Comparator.comparing(Product::getPrice, Comparator.reverseOrder()));
-//        }
-//
-//        if (sortBy.equals("latest")) {
-//            products.sort(Comparator.comparing(Product::getRelease_date, Comparator.reverseOrder()));
-//        }
-//        return products;
-//    }
+
+
 }
