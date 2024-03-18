@@ -105,7 +105,7 @@ public class CheckOut extends HttpServlet {
         if (list != null) {
             Cart cart = new Cart((List) list);
             OrderDAO order = new OrderDAO();
-            String name = request.getParameter("address");
+            String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String note = request.getParameter("note");

@@ -75,6 +75,16 @@
     <servlet>
         <servlet-name>EditUserProfile</servlet-name>
         <servlet-class>Controller.EditUserProfile</servlet-class>
+        <servlet-name>allOrders</servlet-name>
+        <servlet-class>Controller.ViewAllOrders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Order</servlet-name>
+        <servlet-class>Controller.Order</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PayLater</servlet-name>
+        <servlet-class>Controller.PayLater</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -154,6 +164,16 @@
     <servlet-mapping>
         <servlet-name>EditUserProfile</servlet-name>
         <url-pattern>/edituserprofile</url-pattern>
+        <servlet-name>allOrders</servlet-name>
+        <url-pattern>/allorders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Order</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayLater</servlet-name>
+        <url-pattern>/paylater</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
