@@ -130,9 +130,9 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-2">
                                         <strong class="price">
-                                            <button class="quantity-btn" data-action="decrease" data-product-id="${i.getProduct().getId()}" data-product-price="${i.getPrice()}">-</button>
+                                            <button class="quantity-btn" data-action="decrease" data-product-volume="${i.getVolume()}" data-product-id="${i.getProduct().getId()}" data-product-price="${i.getPrice()}">-</button>
                                             <input style="text-align: center; width: 30px" type="text" value="${i.getQuantity()}" class="quantity-input" readonly>
-                                            <button class="quantity-btn" data-action="increase" data-product-id="${i.getProduct().getId()}" data-product-price="${i.getPrice()}">+</button>
+                                            <button class="quantity-btn" data-action="increase" data-product-volume="${i.getVolume()}" data-product-id="${i.getProduct().getId()}" data-product-price="${i.getPrice()}">+</button>
                                         </strong>
                                     </div>
                                     <div class="col-xs-12 col-sm-2">
@@ -235,14 +235,21 @@
                                                 var action = $(this).data("action");
                                                 var productId = $(this).data("product-id");
                                                 var productPrice = $(this).data("product-price");
+                                                var productVolume = $(this).data("product-volume")
                                                 var quantityInput = $(this).siblings(".quantity-input");
                                                 var $totalItemPrice = $("#totalItemPrice_" + productId);
 
                                                 var currentQuantity = parseInt(quantityInput.val());
 
                                                 if (action === "increase") {
-                                                    quantityInput.val(currentQuantity + 1);
-                                                    console.log("New Quantity:", quantityInput.val());
+                                                    var maxQuantity = 5; // Giới hạn số lượng sản phẩm là 3
+                                                    if (currentQuantity < maxQuantity) {
+                                                        quantityInput.val(currentQuantity + 1);
+                                                        console.log("New Quantity:", quantityInput.val());
+                                                    } else {
+                                                        alert("Bạn đã đạt tới giới hạn số lượng mua cho sản phẩm này.");
+                                                        return; // Ngăn chặn việc tăng số lượng khi đã đạt đến giới hạn
+                                                    }
                                                 } else if (action === "decrease" && currentQuantity > 1) {
                                                     quantityInput.val(currentQuantity - 1);
                                                     console.log("New Quantity:", quantityInput.val());
@@ -261,12 +268,12 @@
                                                 // Tự động cập nhật thông tin giỏ hàng hoặc gửi yêu cầu Ajax đến máy chủ để cập nhật giỏ hàng.
                                                 // Ở đây chỉ cập nhật giao diện người dùng mẫu.
                                                 $totalItemPrice.text("€" + (quantityInput.val() * productPrice).toFixed(2));
-                                                updateCart(productId, quantityInput.val(), productPrice);
+                                                updateCart(productId, quantityInput.val(), productPrice, productVolume);
                                             });
 
 
 
-                                            function updateCart(productId, newQuantity, productPrice) {
+                                            function updateCart(productId, newQuantity, productPrice, productVolume) {
                                                 var contextPath = "<%= request.getContextPath() %>";
                                                 var servletPath = "/cart"; // Đường dẫn của Servlet cập nhật giỏ hàng
                                                 var fullPath = contextPath + servletPath;
@@ -277,7 +284,8 @@
                                                     data: {
                                                         id: productId,
                                                         quantity: newQuantity,
-                                                        price: productPrice
+                                                        price: productPrice,
+                                                        volume: productVolume
                                                     },
                                                     success: function (response) {
                                                         console.log("Cart updated successfully");
@@ -327,9 +335,9 @@
             console.log("currentUser:", currentUser);
         </script>
         <script src="${pageContext.request.contextPath}/js/checkCurrentUser.js"></script>
-        
 
-        
+
+
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->

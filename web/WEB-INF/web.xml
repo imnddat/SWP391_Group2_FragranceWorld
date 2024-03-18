@@ -72,6 +72,10 @@
         <servlet-name>profileSetting</servlet-name>
         <servlet-class>Controller.profileSetting</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditUserProfile</servlet-name>
+        <servlet-class>Controller.EditUserProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -146,6 +150,10 @@
     <servlet-mapping>
         <servlet-name>profileSetting</servlet-name>
         <url-pattern>/profilesetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserProfile</servlet-name>
+        <url-pattern>/edituserprofile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

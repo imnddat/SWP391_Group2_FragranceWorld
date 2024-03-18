@@ -226,6 +226,42 @@ public class UserDAO extends DBConnection {
 
         return check;
     }
+    
+    public int editUserProfile(User updatedUser) throws Exception {
+        Connection conn = null;
+        /* Result set returned by the sqlserver */
+        ResultSet rs = null;
+        /* Prepared statement for executing sql queries */
+        PreparedStatement pre = null;
+
+        String sql = " UPDATE [dbo].[User]\n"
+                + "   SET [username] = ?\n"
+                + "      ,[email] = ?\n"
+                + "      ,[fullname] = ?\n"
+                + "      ,[address] = ?\n"
+                + "      ,[phone] = ?\n"
+                + " WHERE id = ?";
+        int check = 0;
+        try {
+            conn = getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, updatedUser.getUsername());
+            pre.setString(2, updatedUser.getEmail());
+            pre.setString(3, updatedUser.getName());
+            pre.setString(4, updatedUser.getAddress());
+            pre.setString(5, updatedUser.getPhone());
+            pre.setInt(6, updatedUser.getId());
+            check = pre.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(pre);
+            closeConnection(conn);
+        }
+
+        return check;
+    }
 
     /**
      * add a user to User table

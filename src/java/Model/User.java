@@ -40,6 +40,15 @@ public class User {
         this.email = email;
         this.name = name;
     }
+
+    public User(int id, String username, String email, String name, String address, String phone) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
     
     /**
      * Complete constructor

@@ -69,37 +69,52 @@
                                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt
                                                  class="d-block ui-w-80">
                                             <div class="media-body ml-4">
-                                                <label class="btn btn-outline-primary">
-                                                    Upload new photo
-                                                    <input type="file" class="account-settings-fileinput">
-                                                </label> &nbsp;
-                                                <button type="button" class="btn btn-default md-btn-flat">Reset</button>
+                                                <!--                                                <label class="btn btn-outline-primary">
+                                                                                                    Upload new photo
+                                                                                                    <input type="file" class="account-settings-fileinput">
+                                                                                                </label> &nbsp;-->
+                                                <!--<button type="button" class="btn btn-default md-btn-flat">Update</button>-->
                                                 <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                             </div>
                                         </div>
                                         <hr class="border-light m-0">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label class="form-label">Username</label>
-                                                <input type="text" class="form-control mb-1" value="nmaxwell">
+                                                <label class="form-label">Username</label>                     
+                                                <input id="usernameInput" type="text" class="form-control mb-1" value="${sessionScope.currentUser.username}" readonly>
+                                                <p id="username-alert" class="text-danger"></p>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" value="Nelle Maxwell">
+                                                <label class="form-label">fullName</label>
+                                                <input id="fullNameInput" type="text" class="form-control" value="${sessionScope.currentUser.name}" readonly>
+                                                <p id="fullName-alert" class="text-danger"></p>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">E-mail</label>
-                                                <input type="text" class="form-control mb-1" value="nmaxwell@mail.com">
-                                                <div class="alert alert-warning mt-3">
-                                                    Your email is not confirmed. Please check your inbox.<br>
-                                                    <a href="javascript:void(0)">Resend confirmation</a>
-                                                </div>
+                                                <input id="emailInput" type="text" class="form-control mb-1" value="${sessionScope.currentUser.email}" readonly>
+                                                <p id="email-alert" class="text-danger"></p>
+                                                <!--                                                <div class="alert alert-warning mt-3">
+                                                                                                    Your email is not confirmed. Please check your inbox.<br>
+                                                                                                    <a href="javascript:void(0)">Resend confirmation</a>
+                                                                                                </div>-->
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label">Company</label>
-                                                <input type="text" class="form-control" value="Company Ltd.">
+                                                <label class="form-label">phone</label>
+                                                <input id="phoneInput" type="text" class="form-control" value="${sessionScope.currentUser.phone}" readonly>
+                                                <p id="phone-alert" class="text-danger"></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Address</label>
+                                                <input id="addressInput" type="text" class="form-control" value="${sessionScope.currentUser.address}" readonly>
+                                                <p id="adress-alert" class="text-danger"></p>
+                                            </div>
+                                            <div class="text-right mt-3" style="padding-right: 20px;">
+                                                <button id="editButton" type="button" class="btn btn-primary">Edit</button>&nbsp;
+                                                <button id="saveButton" type="button" class="btn btn-success" style="display:none;">Save Change</button>
+                                                <button id="cancelButton" type="button" class="btn btn-default" style="display:none;">Cancel</button>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="tab-pane fade" id="account-change-password">
                                         <div class="card-body pb-2">
@@ -277,10 +292,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-right mt-3">
-                        <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-                        <button type="button" class="btn btn-default">Cancel</button>
-                    </div>
 
                 </div>
 
@@ -297,6 +308,29 @@
 
         </script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        
+        <script>
+            // JavaScript code để kiểm tra session timeout và hiển thị cảnh báo
+            $(document).ready(function () {
+                // Kiểm tra nếu session timeout
+            <% if (request.getAttribute("sessionTimeout") != null) { %>
+                alert("Session đã hết hạn, vui lòng đăng nhập lại.");
+                // Chuyển hướng về trang login
+                window.location.replace("${pageContext.request.contextPath}/login");
+            <% } %>
+            });
+        </script>
+        
+        <script>
+            var originalValues = {
+                username: "${sessionScope.currentUser.username}",
+                fullName: "${sessionScope.currentUser.name}",
+                email: "${sessionScope.currentUser.email}",
+                phone: "${sessionScope.currentUser.phone}",
+                address: "${sessionScope.currentUser.address}"
+            };
+        </script>
+        <script src="${pageContext.request.contextPath}/js/profileEdit.js"></script>
         <!-- include jQuery -->
         <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
         <!-- include jQuery -->

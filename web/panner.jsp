@@ -121,7 +121,7 @@
                     <nav id="nav">
                         <ul>
                             <li>
-                                <a class="drop-link" href="HomeController">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
+                                <a class="" href="HomeController">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
 
                             </li>
                             <li class="drop">
@@ -362,6 +362,6 @@
 
 <script>
     var currentUser = '<%= session.getAttribute("currentUser") %>';
-    console.log("currentUser:", currentUser);
+    //console.log("currentUser:", currentUser);
 </script>
 <script src="${pageContext.request.contextPath}/js/checkCurrentUser.js"></script>
