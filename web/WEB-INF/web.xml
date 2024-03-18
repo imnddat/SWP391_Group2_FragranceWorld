@@ -75,6 +75,8 @@
     <servlet>
         <servlet-name>EditUserProfile</servlet-name>
         <servlet-class>Controller.EditUserProfile</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>allOrders</servlet-name>
         <servlet-class>Controller.ViewAllOrders</servlet-class>
     </servlet>
@@ -164,6 +166,8 @@
     <servlet-mapping>
         <servlet-name>EditUserProfile</servlet-name>
         <url-pattern>/edituserprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>allOrders</servlet-name>
         <url-pattern>/allorders</url-pattern>
     </servlet-mapping>
