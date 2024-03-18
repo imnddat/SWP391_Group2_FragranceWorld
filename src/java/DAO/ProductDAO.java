@@ -326,40 +326,39 @@ public class ProductDAO extends DBConnection {
         return VolumeAfterFilter;
     }
 
-    public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-        int[] a = {1, 2, 3};
-        double minP = 0;
-        double maxP = 99999;
-        String filter = "price-100-250";
-        switch (filter) {
-            case "price-10-100":
-                minP = 10;
-                maxP = 100;
-                // set lại min vag max
-                break;
-            case "price-100-250":
-                minP = 100;
-                maxP = 250;
-                break;
-            case "price-250-500":
-                minP = 250;
-                maxP = 500;
-                break;
-            case "price-500up":
-
-                minP = 500;
-                maxP = 99999;
-                break;
-            default:
-                minP = 0;
-                maxP = 99999;
-                break;
-        }
-        System.out.println(
-                dao.getALLProductByGender("", "50", "", "", "", "3", a, "", minP, maxP).size());
-    }
-
+//    public static void main(String[] args) {
+//        ProductDAO dao = new ProductDAO();
+//        int[] a = {1, 2, 3};
+//        double minP = 0;
+//        double maxP = 99999;
+//        String filter = "price-100-250";
+//        switch (filter) {
+//            case "price-10-100":
+//                minP = 10;
+//                maxP = 100;
+//                // set lại min vag max
+//                break;
+//            case "price-100-250":
+//                minP = 100;
+//                maxP = 250;
+//                break;
+//            case "price-250-500":
+//                minP = 250;
+//                maxP = 500;
+//                break;
+//            case "price-500up":
+//
+//                minP = 500;
+//                maxP = 99999;
+//                break;
+//            default:
+//                minP = 0;
+//                maxP = 99999;
+//                break;
+//        }
+//        System.out.println(
+//                dao.getALLProductByGender("", "50", "", "", "", "3", a, "", minP, maxP).size());
+//    }
     //--------------------------------PANNER---------------------------
     public ArrayList<Product> getALLProductByGender(String genderSearch, String volumeSearchCapacity,
             String productSearchScent, String brandSortMakebyFrom, String brandSort, String sortType, int[] id, String keyword, double minP, double maxP) {
@@ -573,11 +572,11 @@ public class ProductDAO extends DBConnection {
                 + "p.discount,p.scent ,p.brandID,p.defaultImg, v.price, s.discount\n"
                 + " from Volume v \n"
                 + "join Products p on v.productID = p.id \n"
-                + "join Sale s on p.id = s.productID \n"
-                + "join SaleEvent sv on s.sid = sv.sid \n"
-                + "where v.capacity = 30 and (s.sid in ( select sv.sid from SaleEvent \n"
-                + "where sv.startdate <= CONVERT(date, GETDATE()) and sv.enddate >= CONVERT(date, GETDATE()) \n"
-                + " ) ) \n"
+                + " join Sale s on p.id = s.productID \n"
+                + " join SaleEvent sv on s.sid = sv.sid \n"
+                + " where v.capacity = 30 and (s.sid in ( select sv.sid from SaleEvent \n"
+                + "  where sv.startdate <= CONVERT(date, GETDATE()) and sv.enddate >= CONVERT(date, GETDATE()) \n"
+                + ") )\n"
                 + "and p.nameProduct like ? \n"
                 + "order by s.discount desc ";
         try {
@@ -596,7 +595,7 @@ public class ProductDAO extends DBConnection {
                 int brandID = rs.getInt("brandID");
                 String defaultImg = rs.getString("defaultImg");
                 ArrayList<Volume> listV = getVolumesByProductId(id);
-                ArrayList<Sale> listS = getSaleByProductId(id);
+                Sale listS = getSaleByProductId(id);
                 products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, listV, listS));
             }
             return products;
@@ -869,7 +868,6 @@ public class ProductDAO extends DBConnection {
                     .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-
     }
     //lay ra cac loai gender
 
@@ -895,22 +893,23 @@ public class ProductDAO extends DBConnection {
         }
         return null;
 
-    }
-
-    public ArrayList<Sale> getSaleByProductId(int gid) {
+    } 
+ 
+    public Sale getSaleByProductId(int saleid) {
         PreparedStatement stm = null;
         ResultSet rs = null;
-        ArrayList<Sale> sale = new ArrayList<>();
-        String sql = " select * from Sale where productID = ? " + gid;
+       Sale sale = null;
+        String sql = " select * from Sale where productID = ? " ;
         try {
             stm = connection.prepareStatement(sql);
+            stm.setInt(1, saleid);
             rs = stm.executeQuery();
             while (rs.next()) {
                 int sid = rs.getInt("sid");
                 int productID = rs.getInt("productID");
                 int discount = rs.getInt("discount");
                 String content = rs.getString("content");
-                sale.add(new Sale(sid, productID, discount, content));
+            sale = new Sale(sid, productID, discount, content);
             }
             return sale;
 
@@ -921,6 +920,25 @@ public class ProductDAO extends DBConnection {
         return null;
 
     }
+//    public static void main(String[] args) {
+//            
+//              ProductDAO saleDAO = new ProductDAO();
+//
+//            // Gọi phương thức getSaleByProductId với saleid cần tìm
+//            int saleid = 2; // Thay thế số này bằng saleid thực tế của sản phẩm cần tìm
+//           Sale  sale = saleDAO.getSaleByProductId(saleid);
+//
+//            // In thông tin của Sale
+//            if (sale != null) {
+//                System.out.println("Sale found:");
+//                System.out.println("SID: " + sale.getSid());
+//                System.out.println("Product ID: " + sale.getProductID());
+//                System.out.println("Discount: " + sale.getDiscount());
+//                System.out.println("Content: " + sale.getContent());
+//            } else {
+//                System.out.println("Sale not found for product ID: " + saleid);
+//            }
+//    }
 
     public double getProductBasePrice(int productId, String volume) {
         double price = 0.0;
@@ -943,7 +961,7 @@ public class ProductDAO extends DBConnection {
                 }
             }
         } catch (Exception e) {
-           // System.out.println("Lỗi không lấy được giá sản phẩm");
+            // System.out.println("Lỗi không lấy được giá sản phẩm");
         }
 
         return price;
@@ -1017,7 +1035,7 @@ public class ProductDAO extends DBConnection {
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return null;
     }
 
@@ -1038,7 +1056,5 @@ public class ProductDAO extends DBConnection {
         }
         return null;
     }
-
-
 
 }

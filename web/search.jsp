@@ -181,7 +181,9 @@
                                         <div class="b2">
                                             <a href="product-detail.html"><img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215" ></a>
                                             <span class="caption">
-                                                <span class="off">${p.getSales().get(0).getDiscount()}%</span>
+                                                
+                                                <span class="off">${p.getSaless().getDiscount()}%</span>
+                                                
                                             </span>
                                             <ul class="mt-stars">
                                                 <li><i class="fa fa-star"></i></li>

@@ -11,7 +11,7 @@ import java.sql.Date;
  * @author Thinkpad
  */
 public class SaleEvent {
-     private int sidevent;
+     private int sid;
     private String title;
     private Date startdate;
     private Date enddate;
@@ -20,18 +20,18 @@ public class SaleEvent {
     }
 
     public SaleEvent(int sidevent, String title, Date startdate, Date enddate) {
-        this.sidevent = sidevent;
+        this.sid = sid;
         this.title = title;
         this.startdate = startdate;
         this.enddate = enddate;
     }
 
     public int getSid() {
-        return sidevent;
+        return sid;
     }
 
     public void setSid(int sid) {
-        this.sidevent = sid;
+        this.sid = sid;
     }
 
     public String getTitle() {
@@ -57,6 +57,6 @@ public class SaleEvent {
     public void setEnddate(Date enddate) {
         this.enddate = enddate;
     }
-    
-    
-}
+
+
+    }
