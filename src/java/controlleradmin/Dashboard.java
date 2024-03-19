@@ -5,20 +5,18 @@
 
 package controlleradmin;
 
-import daoadmin.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modeladmin.User;
 
 /**
  *
  * @author NguyenDucDat
  */
-public class StaffProfile extends HttpServlet {
+public class Dashboard extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +33,10 @@ public class StaffProfile extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StaffProfile</title>");  
+            out.println("<title>Servlet Dashboard</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StaffProfile at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Dashboard at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,18 +53,7 @@ public class StaffProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id_raw= request.getParameter("id");
-        int id;
-        UserDAO sd= new UserDAO();
-        try {
-            id = Integer.parseInt(id_raw);
-            User staff = sd.getUserById(id);
-            
-            request.setAttribute("staff", staff);
-            request.getRequestDispatcher("./view_admin/user/staffprofile.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        }
+        request.getRequestDispatcher("./view_admin/dashboard.jsp").forward(request, response);
     } 
 
     /** 

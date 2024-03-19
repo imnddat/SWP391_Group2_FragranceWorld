@@ -12,13 +12,17 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.util.List;
+import modeladmin.Position;
+import modeladmin.Role;
 import modeladmin.User;
 
 /**
  *
  * @author NguyenDucDat
  */
-public class StaffProfile extends HttpServlet {
+public class AddStaff extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +39,10 @@ public class StaffProfile extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StaffProfile</title>");  
+            out.println("<title>Servlet AddStaff</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StaffProfile at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AddStaff at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,18 +59,11 @@ public class StaffProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id_raw= request.getParameter("id");
-        int id;
-        UserDAO sd= new UserDAO();
-        try {
-            id = Integer.parseInt(id_raw);
-            User staff = sd.getUserById(id);
-            
-            request.setAttribute("staff", staff);
-            request.getRequestDispatcher("./view_admin/user/staffprofile.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        }
+        request.setCharacterEncoding("UTF-8");
+        UserDAO sd = new UserDAO();
+        List<Position> listp = sd.getAllPosition();
+        request.setAttribute("position", listp);
+        request.getRequestDispatcher("./view_admin/user/addstaff.jsp").forward(request, response);
     } 
 
     /** 
@@ -79,7 +76,26 @@ public class StaffProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String fullname = request.getParameter("fullname");
+        String dob_raw = request.getParameter("dob");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String pid_raw = request.getParameter("key");
+        Date dob;
+        int pid;
+        UserDAO ud = new UserDAO();
+        try {
+            pid=Integer.parseInt(pid_raw);
+            dob= Date.valueOf(dob_raw);
+            User u = new User(pid, username, password, new Position(pid, ""), fullname, dob, address, email, phone, new Role(2, ""), true, true);
+            ud.addStaff(u);
+            response.sendRedirect("liststaff");
+        } catch (Exception e) {
+        }
     }
 
     /** 

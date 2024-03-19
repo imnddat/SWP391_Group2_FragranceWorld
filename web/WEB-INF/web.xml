@@ -108,6 +108,18 @@
         <servlet-name>UserStatus</servlet-name>
         <servlet-class>controlleradmin.UserStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddStaff</servlet-name>
+        <servlet-class>controlleradmin.AddStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProduct</servlet-name>
+        <servlet-class>controlleradmin.ListProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Dashboard</servlet-name>
+        <servlet-class>controlleradmin.Dashboard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -218,6 +230,18 @@
     <servlet-mapping>
         <servlet-name>UserStatus</servlet-name>
         <url-pattern>/userstatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaff</servlet-name>
+        <url-pattern>/addstaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProduct</servlet-name>
+        <url-pattern>/listproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Dashboard</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

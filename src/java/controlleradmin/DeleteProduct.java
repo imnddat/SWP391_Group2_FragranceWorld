@@ -5,6 +5,7 @@
 
 package controlleradmin;
 
+import daoadmin.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -53,7 +54,16 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String id_raw=request.getParameter("id");
+        int id;
+        try {
+            id=Integer.parseInt(id_raw);
+            ProductDAO pd = new ProductDAO();
+            pd.deleteProduct(id);
+            response.sendRedirect("listproduct");         
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
     } 
 
     /** 

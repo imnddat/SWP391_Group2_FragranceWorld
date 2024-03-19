@@ -5,12 +5,16 @@
 
 package controlleradmin;
 
+import daoadmin.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import modeladmin.Position;
+import modeladmin.User;
 
 /**
  *
@@ -53,7 +57,23 @@ public class ListStaff extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        UserDAO sd = new UserDAO();
+        List<Position> listp = sd.getAllPosition();
+        request.setAttribute("position", listp);
+        String pid_raw = request.getParameter("key1");
+        String key = request.getParameter("key");
+        String status = request.getParameter("status");
+        int pid;
+        try {
+            pid = (pid_raw == null) ? 0 : Integer.parseInt(pid_raw);
+
+            List<User> slist = sd.searchStaff(key,pid,status);
+
+            request.setAttribute("slist", slist);
+            request.getRequestDispatcher("./view_admin/user/staff.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
     } 
 
     /** 

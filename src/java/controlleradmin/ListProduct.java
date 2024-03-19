@@ -5,20 +5,23 @@
 
 package controlleradmin;
 
-import daoadmin.UserDAO;
+import daoadmin.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modeladmin.User;
+import java.util.List;
+import modeladmin.Brand;
+import modeladmin.Gender;
+import modeladmin.Products;
 
 /**
  *
  * @author NguyenDucDat
  */
-public class StaffProfile extends HttpServlet {
+public class ListProduct extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +38,10 @@ public class StaffProfile extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StaffProfile</title>");  
+            out.println("<title>Servlet ListProduct</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StaffProfile at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ListProduct at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,17 +58,22 @@ public class StaffProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id_raw= request.getParameter("id");
-        int id;
-        UserDAO sd= new UserDAO();
+        ProductDAO pd = new ProductDAO();
+        List<Gender> listg = pd.getAllGender();
+        List<Brand> listb = pd.getAllBrand();
+        request.setAttribute("genders", listg);
+        request.setAttribute("brands", listb);
+        String gid_raw = request.getParameter("key1");
+        String bid_raw = request.getParameter("key2");
+        int gid, bid;
         try {
-            id = Integer.parseInt(id_raw);
-            User staff = sd.getUserById(id);
+            gid = (gid_raw == null) ? 0 : Integer.parseInt(gid_raw);
+            bid = (bid_raw == null) ? 0 : Integer.parseInt(bid_raw);
             
-            request.setAttribute("staff", staff);
-            request.getRequestDispatcher("./view_admin/user/staffprofile.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
+            List<Products> products = pd.search(gid, bid);
+            request.setAttribute("products", products);
+            request.getRequestDispatcher("./view_admin/product/products.jsp").forward(request, response);
+        } catch (Exception e) {
         }
     } 
 
