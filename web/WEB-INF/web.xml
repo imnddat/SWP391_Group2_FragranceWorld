@@ -9,10 +9,6 @@
         <servlet-class>Controller.HomeController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <servlet-class>Controller.ResetPasswordController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>Controller.ChangePasswordController</servlet-class>
     </servlet>
@@ -72,6 +68,22 @@
         <servlet-name>profileSetting</servlet-name>
         <servlet-class>Controller.profileSetting</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FeedbackController</servlet-name>
+        <servlet-class>Controller.FeedbackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>verifyUser</servlet-name>
+        <servlet-class>Controller.verifyUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPassword</servlet-name>
+        <servlet-class>Controller.ForgotPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyOTPServlet</servlet-name>
+        <servlet-class>Controller.VerifyOTPServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -79,10 +91,6 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <url-pattern>/ResetPasswordController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -146,6 +154,22 @@
     <servlet-mapping>
         <servlet-name>profileSetting</servlet-name>
         <url-pattern>/profilesetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackController</servlet-name>
+        <url-pattern>/FeedbackController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>verifyUser</servlet-name>
+        <url-pattern>/verifyUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPassword</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyOTPServlet</servlet-name>
+        <url-pattern>/verifyotp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

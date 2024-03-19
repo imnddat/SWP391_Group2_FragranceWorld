@@ -52,8 +52,7 @@
                                        href="#account-general">General</a>
                                     <a class="list-group-item list-group-item-action" data-toggle="list"
                                        href="#account-change-password">Change password</a>
-                                    <a class="list-group-item list-group-item-action" data-toggle="list"
-                                       href="#account-forgot-password">Forgot Password</a>
+                                    
                                     <!--                            <a class="list-group-item list-group-item-action" data-toggle="list"
                                                                    href="#account-info">Info</a>
                                                                 <a class="list-group-item list-group-item-action" data-toggle="list"
@@ -119,7 +118,14 @@
                                                }
                                             %>
                                             <%-- Start form --%>
-                                            <form action="ChangePasswordController" method="POST" >
+                                            <form action="ChangePasswordController" method="post" >
+                                                <%--Input User Name --%>
+                                                <div class="row" style="margin-top: 3vh;">
+                                                    <div class="col-md-4" style="text-align: right"><label class="label control-label">User Name</label></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" name="username" placeholder="User Name" required>
+                                                    </div>
+                                                </div>
                                                 <%--Input old password--%>
                                                 <div class="row" style="margin-top: 3vh;">
                                                     <div class="col-md-4" style="text-align: right"><label class="label control-label">Old Password</label></div>
@@ -136,7 +142,7 @@
                                                 </div>
                                                 <%--Input confirm new password--%>
                                                 <div class="row" style="margin-top: 3vh;">
-                                                    <div class="col-md-4" style="text-align: right"><label class="label control-label">Confirm Password</label></div>
+                                                    <div class="col-md-4" style="text-align: right"><label class="label control-label">Confirm New Password</label></div>
                                                     <div class="col-md-8">
                                                         <input type="password" class="form-control" name="confirmNewPassword"  placeholder="Confirm new password" required>
                                                     </div>
@@ -148,73 +154,14 @@
                                                     <div class="col-md-4">
                                                         <button type="submit" class="btn btn-success">Change password!</button>
                                                         <button type="button" class="btn btn-default">Cancel</button>
+                                                       
+                                                        <button type="submit" name="forgot" class="btn btn-success"><a href="ForgotPassword.jsp">Forgot password</a></button>
                                                     </div>
                                                     <div class="col-md-4"></div>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
-
-
-
-                                    <!--Forgot password-->
-                                    <!--Forgot password-->
-                                    <!--Forgot password-->
-                                    <!--Forgot password-->
-
-                                    <div class="tab-pane fade" id="account-forgot-password">
-                                        <% 
-                                            String message2 = (String) session.getAttribute("message");
-                                            if (message2 != null) {
-                                            out.println("<p>" + message2 + "</p>");
-                                            session.removeAttribute("message");
-                                             }
-                                            String email = request.getParameter("email"); // Lấy email từ request
-                                            String otp = request.getParameter("otp"); // Lấy otp từ request
-                                        %>
-                                        <form action="ResetPasswordController" method="POST">
-                                            <input type="hidden" name="email" value="<%= email %>">
-                                            <input type="hidden" name="otp" value="<%= otp %>">
-                                            <div class="row">
-                                                <div class="col-md-3"></div>
-                                                <div class="col-md-6">
-                                                    <label class="label control-label">Enter your new pass</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                                        <input type="password" class="form-control"  name="newPassword"  required>
-                                                    </div>
-                                                    <label class="label control-label">Re-Enter your new pass</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                        <input type="password" class="form-control" id="" name="confirmnewPassword"  required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3"></div>
-                                            </div>  
-                                            <div class="row">
-                                                <div class="col-md-3"></div>
-                                                <div class="col-md-6">
-                                                    <label class="label control-label">Enter your email</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                                        <input type="text" class="form-control" name="enteredUserMail" placeholder="">
-                                                    </div>
-                                                    <br>
-                                                    <div class="input-group">    
-                                                        <button type="submit" class="btn btn-success">Change password!</button>    
-                                                        <button type="button" class="btn btn-default">Cancel</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3"></div>
-                                            </div>
-
-                                        </form>
-                                    </div>
-
-                                    <!--  end end end         -->
-
-
-
 
 
                                 </div>

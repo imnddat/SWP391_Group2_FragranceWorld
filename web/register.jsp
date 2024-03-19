@@ -89,7 +89,7 @@
                                                             <input type="text" placeholder="Your Name" class="input" name="name">
                                                         </div>
                                                          <div class="col-xs-12 col-sm-12">
-                                                            <input type="text" placeholder="Date Of Birthday" class="input" name="dob">
+                                                            <input type="date" placeholder="Date Of Birthday" class="input" name="dob">
                                                         </div>
                                                     </div>
                                                     <div class="row">

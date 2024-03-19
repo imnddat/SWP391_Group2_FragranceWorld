@@ -4,22 +4,29 @@
  */
 package Controller;
 
-import DAO.UserDAO;
+import DAO.FeedbackDAO;
 import Model.User;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
+import java.util.Base64;
+import Model.Feedback;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import org.apache.commons.compress.utils.IOUtils;
 
 /**
  *
- * @author Admin
+ * @author Thinkpad
  */
-public class Register extends HttpServlet {
+public class FeedbackController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +45,10 @@ public class Register extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Register</title>");
+            out.println("<title>Servlet FeedbackController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Register at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet FeedbackController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,7 +66,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
     }
 
     /**
@@ -73,22 +80,37 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        
-        String username = request.getParameter("username");
-        String pass = request.getParameter("password");
-        String email = request.getParameter("email");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String phone = request.getParameter("phone");
-        String dob = request.getParameter("dob");
-        
-        
+        HttpSession session = request.getSession();
+        User acc = (User) request.getSession().getAttribute("acc");
+        FeedbackDAO dao = new FeedbackDAO();
 
-        String user = new UserDAO().getUserRegister(username, pass, email, name, address, phone,dob);
-        request.setAttribute("registrationSuccess", "Please check your email!");
-        // Forward to a JSP page for display
-        request.getRequestDispatcher("message.jsp").forward(request, response);
+//        Part p = request.getPart("image");
+//        InputStream inputStream = p.getInputStream();
+//        byte[] imageBytes = IOUtils.toByteArray(inputStream);
+//        String imageString = Base64.getEncoder().encodeToString(imageBytes);
+//        Feedback x = (Feedback)session.getAttribute("") ;       
+//        dao.updateImg(imageString, x.getUserID());       
+        if (acc == null) {
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        } else {
+            // Retrieve feedback information from the request parameters
+            String review = request.getParameter("review");
+            String feedbackDate = request.getParameter("feedbackDate");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng của ngày trong tham số request
+//            Date feedbackDate = null;
+//            try {
+//                feedbackDate = sdf.parse(feedbackDateStr);
+//            } catch (ParseException e) {
+//                e.printStackTrace(); // Xử lý ngoại lệ nếu có lỗi khi phân tích chuỗi thành ngày
+//            }
+            int star = Integer.parseInt(request.getParameter("star"));
+            int userID = acc.getId(); // Assuming acc.getId() returns the user ID
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            String img = request.getParameter("img");
+           // Feedback feedback = new Feedback(review, feedbackDate, star, userID, orderID, productID, img);
+           // dao.addReview(feedback);
+        }
     }
 
     /**

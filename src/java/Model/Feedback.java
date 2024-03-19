@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package Model;
 
 import java.sql.Date;
 
@@ -33,6 +33,17 @@ public class Feedback {
         this.productID = productID;
         this.ing = ing;
     }
+
+    public Feedback(String content, Date feedbackDate, int star, int userID, int orderID, int productID, String ing) {
+        this.content = content;
+        this.feedbackDate = feedbackDate;
+        this.star = star;
+        this.userID = userID;
+        this.orderID = orderID;
+        this.productID = productID;
+        this.ing = ing;
+    }
+     
 
     public int getId() {
         return id;

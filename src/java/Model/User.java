@@ -30,6 +30,7 @@ public class User {
     /*Banner User Entity*/
     private String dob;
     private String otp;
+    private String otp_expiry;
     
     /**
      * Blank constructor
@@ -66,6 +67,7 @@ public class User {
         this.banned = banned;
     }
 
+    
 
     public User(int id, String username, String password, String email, String name, String address, String phone, int roleID, int banned, String dob) {
         this.id = id;
@@ -281,6 +283,14 @@ public class User {
 
     public void setOtp(String otp) {
         this.otp = otp;
+    }
+
+    public String getOtp_expiry() {
+        return otp_expiry;
+    }
+
+    public void setOtp_expiry(String otp_expiry) {
+        this.otp_expiry = otp_expiry;
     }
 
 
