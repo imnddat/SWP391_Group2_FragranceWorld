@@ -69,6 +69,7 @@
         <servlet-class>Controller.profileSetting</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>FeedbackController</servlet-name>
         <servlet-class>Controller.FeedbackController</servlet-class>
     </servlet>
@@ -83,6 +84,55 @@
     <servlet>
         <servlet-name>VerifyOTPServlet</servlet-name>
         <servlet-class>Controller.VerifyOTPServlet</servlet-class>
+         </servlet>
+ <servlet>
+        <servlet-name>ListCustomer</servlet-name>
+        <servlet-class>controlleradmin.ListCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListStaff</servlet-name>
+        <servlet-class>controlleradmin.ListStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>controlleradmin.AddProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>controlleradmin.UpdateProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>controlleradmin.DeleteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffProfile</servlet-name>
+        <servlet-class>controlleradmin.StaffProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerProfile</servlet-name>
+        <servlet-class>controlleradmin.CustomerProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBan</servlet-name>
+        <servlet-class>controlleradmin.UserBan</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserStatus</servlet-name>
+        <servlet-class>controlleradmin.UserStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStaff</servlet-name>
+        <servlet-class>controlleradmin.AddStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProduct</servlet-name>
+        <servlet-class>controlleradmin.ListProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Dashboard</servlet-name>
+        <servlet-class>controlleradmin.Dashboard</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -156,6 +206,7 @@
         <url-pattern>/profilesetting</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>FeedbackController</servlet-name>
         <url-pattern>/FeedbackController</url-pattern>
     </servlet-mapping>
@@ -170,6 +221,55 @@
     <servlet-mapping>
         <servlet-name>VerifyOTPServlet</servlet-name>
         <url-pattern>/verifyotp</url-pattern>
+</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCustomer</servlet-name>
+        <url-pattern>/listcustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListStaff</servlet-name>
+        <url-pattern>/liststaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/updateproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/deleteproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffProfile</servlet-name>
+        <url-pattern>/staffprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerProfile</servlet-name>
+        <url-pattern>/customerprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBan</servlet-name>
+        <url-pattern>/userban</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserStatus</servlet-name>
+        <url-pattern>/userstatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaff</servlet-name>
+        <url-pattern>/addstaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProduct</servlet-name>
+        <url-pattern>/listproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Dashboard</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

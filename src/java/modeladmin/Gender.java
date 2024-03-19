@@ -2,22 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ModelAdmin;
+package modeladmin;
 
 /**
  *
  * @author NguyenDucDat
  */
-public class Position {
+public class Gender {
     private int id;
-    private String pname;
+    private String gendername;
 
-    public Position() {
+    public Gender() {
     }
 
-    public Position(int id, String pname) {
+    public Gender(int id, String gendername) {
         this.id = id;
-        this.pname = pname;
+        this.gendername = gendername;
     }
 
     public int getId() {
@@ -28,12 +28,12 @@ public class Position {
         this.id = id;
     }
 
-    public String getPname() {
-        return pname;
+    public String getGendername() {
+        return gendername;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setGendername(String gendername) {
+        this.gendername = gendername;
     }
     
     
