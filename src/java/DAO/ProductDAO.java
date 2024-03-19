@@ -6,6 +6,7 @@ package DAO;
 
 import Model.Gender;
 import Model.Brand;
+import Model.ImageProduct;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -823,7 +824,7 @@ public class ProductDAO extends DBConnection {
         PreparedStatement stm = null;
         ResultSet rs = null;
         ArrayList<Volume> volume = new ArrayList<>();
-        String sql = "select * from [Volume] where productID=" + pid;
+        String sql = "select * from [Volume] where productID = " + pid;
         try {
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
@@ -1056,5 +1057,75 @@ public class ProductDAO extends DBConnection {
         }
         return null;
     }
+    
+    
 
+   
+
+ 
+    public ArrayList<ImageProduct> getImageProduct(int productId) {
+         PreparedStatement stm = null;
+        ResultSet rs = null;
+        ArrayList<ImageProduct> imgproduct = new ArrayList<>();
+        String sql = "SELECT [id], [path], [productID] FROM [ImageProduct] WHERE productID =" + productId;
+      
+        try {
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String path = rs.getString("path");
+                int productID = rs.getInt("productID");
+                
+
+                imgproduct.add(new ImageProduct(id, path, productID));
+            }
+            return imgproduct;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VolumeDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+       
+    }
+
+   
+    public Vector<Product> getLastProduct() {
+    PreparedStatement stm = null;
+    ResultSet rs = null;
+    Vector<Product> products = new Vector<>();
+    String sql = "SELECT TOP(10) * FROM Products p " +
+                 "LEFT JOIN Volume pr ON p.id = pr.productID " +
+                 "WHERE capacity = 30 " +
+                 "ORDER BY pr.price DESC";
+    try {
+        stm = connection.prepareStatement(sql);
+        rs = stm.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String description = rs.getString("description");
+            int genderID = rs.getInt("genderID");
+            String nameProduct = rs.getString("nameProduct");
+            String codeProduct = rs.getString("codeProduct");
+            int discount = rs.getInt("discount");
+            String scent = rs.getString("scent");
+            int brandID = rs.getInt("brandID");
+            String defaultImg = rs.getString("defaultImg");
+            ArrayList<Volume> listV = getVolumesByProductId(id);
+
+            products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, listV));
+        }
+        return products;
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        // Đóng kết nối và các tài nguyên khác ở đây
+    }
+    return null;
 }
+
+
+   
+    }

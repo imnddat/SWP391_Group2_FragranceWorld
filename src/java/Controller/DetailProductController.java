@@ -6,16 +6,22 @@ package Controller;
  */
 
 
+
 import DAO.ProductDAO;
-import DAO.VolumeDAO;
+import Model.Brand;
+import Model.Gender;
+import Model.ImageProduct;
 import Model.Product;
+import Model.Sale;
 import Model.Volume;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -23,56 +29,56 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class DetailProductController extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-              String id = request.getParameter("Id");
-        String capacity = request.getParameter("capacity");
-        Product p = new ProductDAO().getProductById(id);
-        Volume v = new VolumeDAO().getVolumeByPidAndCap(id,capacity);
-        
-        request.setAttribute("p", p);
-        request.setAttribute("v", v);
+            ProductDAO dao = new ProductDAO();
+       
+
+        String spid = request.getParameter("productId");
+        int pid = -1;
+        try {
+            pid = Integer.parseInt(spid);
+        } catch (NumberFormatException e) {
+            // do nothing
+            return;
+        }
+        Product p = dao.getProductsById(pid);
+        Brand b = dao.getBrandByProductId(pid);
+        Gender g = dao.getGenderByProductId(pid);
+        ArrayList<ImageProduct> i = dao.getImageProduct(pid);
+        List<Volume> v = dao.getVolumesByProductId(pid);
+        Sale s = dao.getSaleByProductId(pid);
+        Vector<Product> product = (new ProductDAO()).getLastProduct();
+        //bestseller
+        request.setAttribute("MaxPriceProducts", product);
+        //bestseller
+        request.setAttribute("product", p);
+        request.setAttribute("volume", v);
+        request.setAttribute("price", v.get(0).getPrice());
+        request.setAttribute("priceId", v.get(0).getId());
+        request.setAttribute("brand", b.getName());
+        request.setAttribute("gender", g.getGender());
+        request.setAttribute("scent", p.getScent());
+        request.setAttribute("discount", s.getDiscount());
+        request.setAttribute("image", i.get(pid));
         request.getRequestDispatcher("productdetail.jsp").forward(request, response);
     } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

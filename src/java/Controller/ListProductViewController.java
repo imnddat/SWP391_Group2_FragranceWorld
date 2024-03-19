@@ -179,19 +179,19 @@ public class ListProductViewController extends HttpServlet {
             req.setAttribute("filter", filter);
 
             req.getRequestDispatcher("listProductView.jsp").forward(req, resp);
-
-            System.out.println("Value of 'page' parameter: " + req.getParameter("page"));
-            System.out.println("Value of 'searchbyName' parameter: " + req.getParameter("searchbyName"));
-            System.out.println("Value of 'sortType' parameter: " + req.getParameter("sortType"));
-            System.out.println("Value of 'filter' parameter: " + req.getParameter("filter"));
-            System.out.println("Value of 'idbrands' parameter: " + Arrays.toString(req.getParameterValues("idbrands")));
-            System.out.println("Value of 'id' parameter: " + req.getParameter("id"));
-            System.out.println("Value of 'volumeSearchCapacity' parameter: " + req.getParameter("volumeSearchCapacity"));
-            System.out.println("Value of 'volumeSort' parameter: " + req.getParameter("volumeSort"));
-            System.out.println("Value of 'productSearchScent' parameter: " + req.getParameter("productSearchScent"));
-            System.out.println("Value of 'brandSortMakebyFrom' parameter: " + req.getParameter("brandSortMakebyFrom"));
-            System.out.println("Value of 'brandSort' parameter: " + req.getParameter("brandSort"));
-            System.out.println("Value of 'fillter' parameter: " + req.getParameter("filter"));
+//
+//            System.out.println("Value of 'page' parameter: " + req.getParameter("page"));
+//            System.out.println("Value of 'searchbyName' parameter: " + req.getParameter("searchbyName"));
+//            System.out.println("Value of 'sortType' parameter: " + req.getParameter("sortType"));
+//            System.out.println("Value of 'filter' parameter: " + req.getParameter("filter"));
+//            System.out.println("Value of 'idbrands' parameter: " + Arrays.toString(req.getParameterValues("idbrands")));
+//            System.out.println("Value of 'id' parameter: " + req.getParameter("id"));
+//            System.out.println("Value of 'volumeSearchCapacity' parameter: " + req.getParameter("volumeSearchCapacity"));
+//            System.out.println("Value of 'volumeSort' parameter: " + req.getParameter("volumeSort"));
+//            System.out.println("Value of 'productSearchScent' parameter: " + req.getParameter("productSearchScent"));
+//            System.out.println("Value of 'brandSortMakebyFrom' parameter: " + req.getParameter("brandSortMakebyFrom"));
+//            System.out.println("Value of 'brandSort' parameter: " + req.getParameter("brandSort"));
+//            System.out.println("Value of 'fillter' parameter: " + req.getParameter("filter"));
         } catch (Exception ex) {
             resp.getWriter().print(ex.getMessage());
             ex.printStackTrace();

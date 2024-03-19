@@ -1,53 +1,93 @@
-<%-- 
-    Document   : enterotp
-    Created on : Mar 13, 2024, 9:04:56 PM
-    Author     : Thinkpad
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-         <!-- set the encoding of your site -->
-        <meta charset="utf-8">
-        <!-- set the viewport width and initial-scale on mobile devices -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-           <title>Enter OTP</title>
-        <!-- include the site stylesheet -->
-        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/animate.css">
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/icon-fonts.css">
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/main.css">
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/responsive.css">
+        <meta charset="UTF-8">
+        <title>Enter OTP</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f4f9; /* Light background color */
+                display: flex;
+                justify-content: center;
+                align-items: flex-start; /* Changed from center to flex-start */
+                height: 90vh; /* Reduced height to shift up */
+                margin: 0;
+                padding-top: 40px; /* Added top padding to shift the form up a bit */
+            }
+            .form-container {
+                width: 350px;
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            h2 {
+                color: #4CAF50; /* Greenish color for heading */
+                margin-bottom: 20px;
+            }
+            label {
+                display: block;
+                margin-bottom: 10px;
+                color: #333; /* Dark gray color */
+            }
+            input[type="text"], input[type="submit"] {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border: 1px solid #ddd;
+                box-sizing: border-box;
+            }
+            input[type="submit"] {
+                background-color: #4CAF50;
+                color: white;
+                cursor: pointer;
+                border: none;
+            }
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+            a {
+                color: #007bff;
+                text-decoration: none;
+                margin-top: 20px;
+                display: inline-block;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            p {
+                color: #ff0000; /* Red color for error messages */
+            }
+        </style>
     </head>
     <body>
-         <jsp:include page="panner.jsp"/>
+        <jsp:include page="panner.jsp"/>
         <div class="main">
             <div class="container" style="align-self: center; min-height: 50vh"> 
-              <div class="form-container">
-        <h2>Enter OTP to Reset Password</h2>
-        
-        <form action="resetPassword" method="post">
-            <input type="hidden" name="email" value="${sessionScope.resetEmail}">
-            
-            <label for="otp">Enter OTP:</label>
-            <input type="text" id="otp" name="otp" required>
-            
-            <input type="submit" value="Verify OTP and Reset Password">
-        </form>
-        
-        <p>${sessionScope.resetMessage}</p>
-        <p>${sessionScope.resetError}</p>
-        
-        <a href="ForgotPassword.jsp">Back to Forgot Password</a>
-    </div>   
-          </div>
+                <div class="form-container">
+                    <h2>Enter OTP to Reset Password</h2>
+                    <% String error = (String) request.getAttribute("error");
+   if (error != null) { %>
+                    <p style="color: red;"><%= error %></p>
+                    <% } %>
+
+                    <form action="verifyotp" method="post">
+                        <input type="email" name="email" placeholder="Your Email" required />
+                        <input type="text" name="otp" placeholder="Enter OTP" required />
+                        <input type="password" name="newPassword" placeholder="New Password" required />
+                        <button type="submit">Verify OTP and Reset Password</button>
+                    </form>
+
+                    <p>${sessionScope.resetMessage}</p>
+                    <p>${sessionScope.resetError}</p>
+
+                    <a href="ForgotPassword.jsp">Back to Forgot Password</a>
+                </div>
+            </div>
         </div>
         <jsp:include page="footer.jsp"/>
         <!-- include jQuery -->
