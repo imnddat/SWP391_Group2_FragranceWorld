@@ -70,7 +70,7 @@
                 </ul>
                 <h3>Staff</h3>
                 <ul>
-                    <li><a href="listproduct">List of Staff</a></li>
+                    <li><a href="liststaff">List of Staff</a></li>
                     <li><a href="addstaff">Add a new Staff</a></li>
                 </ul>
             </div>
@@ -82,7 +82,7 @@
                 </ul>
                 <h3>Sale event</h3>
                 <ul>
-                    <li><a href="#">List of promotional programs</a></li>
+                    <li><a href="listsaleevent">List of promotional programs</a></li>
                     <li><a href="#">Add promotion</a></li>
                 </ul>
             </div>

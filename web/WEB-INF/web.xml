@@ -120,6 +120,10 @@
         <servlet-name>Dashboard</servlet-name>
         <servlet-class>controlleradmin.Dashboard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.ListSaleEvent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -242,6 +246,10 @@
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListSaleEvent</servlet-name>
+        <url-pattern>/listsaleevent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
