@@ -67,12 +67,13 @@ public class HomeController extends HttpServlet {
             String keywords = request.getParameter("keywords")==null?"":request.getParameter("keywords");
             Vector<Product> products = (new ProductDAO()).getProductsByKeywords(keywords);
             Vector<Product> productsold = (new ProductDAO()).getProductBySold(keywords);
-        //    Vector<Product> productstar = (new ProductDAO()).getProductBySold(keywords);
+           Vector<Product> productstar = (new ProductDAO()).getProductByStar(keywords);
             Vector<Product> productsale = (new ProductDAO()).getProductBySale(keywords);
             
             
             request.setAttribute("allProducts", products);
             request.setAttribute("productbySold", productsold);
+            request.setAttribute("productbyStar", productstar);
             request.setAttribute("productbySale", productsale);
             
             Vector<Product> product = (new ProductDAO()).getProductMaxPrice();

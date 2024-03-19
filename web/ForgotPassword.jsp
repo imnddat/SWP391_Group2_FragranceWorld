@@ -1,56 +1,74 @@
-<%-- 
-    Document   : ForgotPassword
-    Created on : Mar 13, 2024, 6:09:19 PM
-    Author     : Thinkpad
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- set the encoding of your site -->
-        <meta charset="utf-8">
-        <!-- set the viewport width and initial-scale on mobile devices -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Forgot Password</title>
-        <!-- include the site stylesheet -->
-        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/animate.css">
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/icon-fonts.css">
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/main.css">
-        <!-- include the site stylesheet -->
-        <link rel="stylesheet" href="css/responsive.css">
-    </head>
-    <body>
-        <jsp:include page="panner.jsp"/>
-        <div class="main">
-            <div class="container" style="align-self: center; min-height: 50vh"> 
-                <div class="form-container">
-               <h2>Forgot Password</h2>
+<head>
+    <meta charset="UTF-8">
+    <title>Quên mật khẩu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the start of the container */
+            height: 90vh; /* Reduce height to shift the form up */
+            margin: 0;
+            padding-top: 40px; /* Add some padding at the top */
+        }
+        .form-container {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            margin-bottom: 10px;
+            display: block;
+            color: #333;
+        }
+        input[type="email"], input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        p {
+            color: #ff0000; /* Red color for error messages */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Quên mật khẩu</h2>
         
-        <form action="forgotPassword" method="post">
-            <label for="email">Enter your email:</label>
+        <form action="ForgotPassword" method="post">
+            <label for="email">Email của bạn:</label>
             <input type="email" id="email" name="email" required>
             
-            <input type="submit" value="Send OTP">
+            <input type="submit" value="Gửi OTP">
         </form>
         
         <p>${sessionScope.resetMessage}</p>
         <p>${sessionScope.resetError}</p>
-                
-            </div>
-        </div>
-        <jsp:include page="footer.jsp"/>
-        <!-- include jQuery -->
-        <script src="js/jquery.js"></script>
-        <!-- include jQuery -->
-        <script src="js/plugins.js"></script>
-        <!-- include jQuery -->
-        <script src="js/jquery.main.js"></script>
-    </body>
+    </div>
+</body>
 </html>

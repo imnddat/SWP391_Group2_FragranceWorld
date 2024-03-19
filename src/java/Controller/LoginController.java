@@ -111,7 +111,7 @@ public class LoginController extends HttpServlet {
             }
         } else {
             // Xử lý trường hợp đăng nhập không thành công
-            System.out.println("hahaah");         
+            //System.out.println("hahaah");         
             jsonResponse.addProperty("errorMessage", "Đăng nhập không thành công. Vui lòng thử lại.");
             //request.getRequestDispatcher("loginpage.jsp").forward(request, response);
         }
