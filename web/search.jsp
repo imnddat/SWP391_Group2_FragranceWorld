@@ -34,7 +34,7 @@
                                 <div class="box">
                                     <div class="b1">
                                         <div class="b2">                                        
-                                            <a href="product-detail.html">
+                                            <a href="ProductDetailController?productId=${p.getId()}">
                                                 <img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215">
                                             </a>                                          
                                             <span class="caption">
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>                               
                                 <div class="txt">
-                                    <strong class="title"><a href="product-detail.html" >${p.getNameProduct()}</a></strong> 
+                                    <strong class="title"><a href="ProductDetailController?productId=${p.getId()}" >${p.getNameProduct()}</a></strong> 
                                     <input type="hidden" name="id" value="${p.getId()}" />
                                     <input type="hidden" name="quantity" value="1" />
                                 </div>                              
@@ -85,7 +85,7 @@
                                 <div class="box">
                                     <div class="b1">
                                         <div class="b2">
-                                            <a href="product-detail.html"><img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215"></a>
+                                            <a href="ProductDetailController?productId=${p.getId()}"><img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215"></a>
                                             <span class="caption">
                                                 <span class="new" style="color: red">HOT</span>
                                             </span>
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                                 <div class="txt">
-                                    <strong class="title"><a href="product-detail.html">${p.getNameProduct()}</a></strong>        
+                                    <strong class="title"><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>        
                                     <span class="price">$${p.getVolumes().get(0).getPrice()}</span>
                                     <input type="hidden" name="id" value="${p.getId()}" />
                                     <input type="hidden" name="quantity" value="1" />
@@ -132,7 +132,7 @@
                                 <div class="box">
                                     <div class="b1">
                                         <div class="b2">
-                                            <a href="product-detail.html"><img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215"></a>
+                                            <a href="ProductDetailController?productId=${p.getId()}"><img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215"></a>
                                             <span class="caption">
                                                 <span class="new" style="color: red">HOT</span>
                                             </span>
@@ -151,7 +151,7 @@
                                     </div>
                                 </div>
                                 <div class="txt">
-                                    <strong class="title"><a href="product-detail.html">${p.getNameProduct()}</a></strong>        
+                                    <strong class="title"><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>        
                                     <span class="price">$${p.getVolumes().get(0).getPrice()}</span>
                                     <input type="hidden" name="id" value="${p.getId()}" />
                                     <input type="hidden" name="quantity" value="1" />
@@ -179,7 +179,7 @@
                                 <div class="box">
                                     <div class="b1">
                                         <div class="b2">
-                                            <a href="product-detail.html"><img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215" ></a>
+                                            <a href="ProductDetailController?productId=${p.getId()}"><img src="${p.getDefaultImg()}" alt="" style="height: 215; width: 215" ></a>
                                             <span class="caption">
                                                 
                                                 <span class="off">${p.getSaless().getDiscount()}%</span>
@@ -200,7 +200,7 @@
                                     </div>
                                 </div>
                                 <div class="txt">
-                                    <strong class="title"><a href="product-detail.html">${p.getNameProduct()}</a></strong>
+                                    <strong class="title"><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>
                                     <input type="hidden" name="id" value="${p.getId()}" />
                                     <input type="hidden" name="quantity" value="1" />
                                 </div>

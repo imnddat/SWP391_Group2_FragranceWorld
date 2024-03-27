@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4">
-                                        <strong class="product-name">${i.getProduct().getNameProduct()}(${i.getVolume()})</strong>
+                                        <strong class="product-name">${i.getProduct().getNameProduct()}(${i.getVolume()}ML)</strong>
                                     </div>
                                     <div class="col-xs-12 col-sm-2">
                                         <strong class="price"><i class="fa fa-eur"></i>${i.getPrice()}</strong>

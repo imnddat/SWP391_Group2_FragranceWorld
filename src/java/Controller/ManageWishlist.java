@@ -132,7 +132,7 @@ public class ManageWishlist extends HttpServlet {
         try {
             id = Integer.parseInt(pId);
             quantity = Integer.parseInt(pQuantity);
-            if (pVolume == null) {
+            if (pVolume == null || pVolume.isEmpty()) {
                 pVolume = "30";
                 price = pd.getProductPrice(id, pVolume);
             } else {

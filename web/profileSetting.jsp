@@ -185,16 +185,17 @@
                     </div>
 
                 </div>
+                                                <%@include file = "footer.jsp" %>
             </div>
-            <div class="text-right mt-3">
+<!--            <div class="text-right mt-3">
                 <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
                 <button type="button" class="btn btn-default">Cancel</button>
-            </div>
+            </div>-->
 
         </div>
 
-        <%@include file = "footer.jsp" %>        
-    </script>
+                
+    
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
@@ -218,12 +219,13 @@
             address: "${sessionScope.currentUser.address}"
         };
     </script>
+    <script src="${pageContext.request.contextPath}/js/profileEdit.js"></script>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
 
-            <script src="${pageContext.request.contextPath}/js/profileEdit.js"></script>
+    
     <!-- include jQuery -->
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <!-- include jQuery -->

@@ -112,7 +112,7 @@ public class UserDAO extends DBConnection {
             String password = MD5.getMd5(pass);
             //chuan bi string sql
             String sql = " INSERT INTO [dbo].[User]([username],[password],[email],[fullname],[address],[phone],[roleID],[banned],[dob])\n"
-                    + "     VALUES ( ?,?,?, ?,?,?, '3','0', ? )";
+                    + "     VALUES ( ?,?,?, ?,?,?, '1','0', ? )";
             conn = new DBConnection().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(sql);
             //set bien dungs voiw thuw tu bien trong string tren

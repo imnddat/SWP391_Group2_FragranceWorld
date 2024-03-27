@@ -92,10 +92,10 @@
                                                     <label >
                                                         <input type="checkbox" name="idbrands" value="${listirand.get(i).getId()}" 
 
-                                                                <c:forEach var="b" items="${bvalues}">
-                                                                    ${b == listirand.get(i).getId() ?"checked":""}
-                                                                </c:forEach>
-                                                                onclick="this.form.submit()"    >
+                                                               <c:forEach var="b" items="${bvalues}">
+                                                                   ${b == listirand.get(i).getId() ?"checked":""}
+                                                               </c:forEach>
+                                                               onclick="this.form.submit()"    >
                                                         <span class="fake-label">${listirand.get(i).getName()} 
                                                         </span>
                                                     </label>
@@ -167,7 +167,8 @@
                                 <ul class="mt-productlisthold list-inline"> 
 
 
-                                    <c:forEach items="${requestScope.listProduct}" var="p" > 
+                                    <c:forEach items="${requestScope.listProduct}" var="p" >
+
                                         <li>
 
                                             <!-- mt product1 large start here -->
@@ -175,7 +176,7 @@
                                                 <div class="box">
                                                     <div class="b1">
                                                         <div class="b2">
-                                                            <a href="product-detail.html"><img src="${p.defaultImg}" alt="image description"></a>
+                                                            <a href="ProductDetailController?productId=${p.getId()}"><img src="${p.defaultImg}" alt="image description"></a>
                                                             <ul class="mt-stars">
                                                                 <li><i class="fa fa-star"></i></li>
                                                                 <li><i class="fa fa-star"></i></li>
@@ -183,20 +184,29 @@
                                                                 <li><i class="fa fa-star-o"></i></li>
                                                             </ul>
                                                             <ul class="links">
-                                                                <li><a href="#"><i class="icon-handbag"></i><span>Add to Cart</span></a></li>
-                                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
-                                                                <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                                <form class="addToCartForm" action="cart" method="post">
+                                                                    <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>                                                         
+                                                                    <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                                    <input type="hidden" name="id" value="${p.getId()}" />
+                                                                    <input type="hidden" name="quantity" value="1" />
+                                                                    <input type="hidden" name="price" value="${p.getVolumes().get(0).getPrice()}" />
+                                                                    <input type="hidden" name="volume" value="${p.getVolumes().get(0).getCapacity()}" />
+                                                                </form>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="txt">
-                                                    <strong class="title"><a href="product-detail.html">${p.nameProduct}</a></strong>
+                                                    <strong class="title"><a href="ProductDetailController?productId=${p.getId()}">${p.nameProduct}</a></strong>
                                                     <span class="price"><i class="fa fa-eur"></i> <span>$${p.getVolumes().get(0).getPrice()}</span></span>
+
+
                                                 </div>
                                             </div><!-- mt product1 center end here -->
 
-                                        </li>	
+                                        </li>
+
                                     </c:forEach> 
                                 </ul><!-- mt productlisthold end here -->      
 
@@ -219,6 +229,9 @@
             </div><!-- W1 end here -->
             <span id="back-top" class="fa fa-arrow-up"></span>
         </div>
+
+        <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>    
+        <script src="${pageContext.request.contextPath}/js/addToWishlist.js"></script>
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->

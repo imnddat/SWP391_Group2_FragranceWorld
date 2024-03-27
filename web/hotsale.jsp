@@ -8,11 +8,11 @@
                     <!-- mt product4 start here -->
                     <div class="mt-product4 mt-paddingbottom20">
                         <div class="img">
-                            <a href="product-detail.html"><img alt="image description" src="${p.getDefaultImg()}" style="height: 80; width: 80"></a>
+                            <a href="ProductDetailController?productId=${p.getId()}"><img alt="image description" src="${p.getDefaultImg()}" style="height: 80; width: 80"></a>
                         </div>
                         <div class="text">
                             <div class="frame">
-                                <strong><a href="product-detail.html">${p.getNameProduct()}</a></strong>
+                                <strong><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>
                                 <ul class="mt-stars">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -33,11 +33,11 @@
                     <!-- mt product4 start here -->
                     <div class="mt-product4 mt-paddingbottom20">
                         <div class="img">
-                            <a href="product-detail.html"><img alt="image description" src="${p.getDefaultImg()}" style="height: 80; width: 80"></a>
+                            <a href="ProductDetailController?productId=${p.getId()}"><img alt="image description" src="${p.getDefaultImg()}" style="height: 80; width: 80"></a>
                         </div>
                         <div class="text">
                             <div class="frame">
-                                <strong><a href="product-detail.html">${p.getNameProduct()}</a></strong>
+                                <strong><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>
                                 <ul class="mt-stars">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -57,11 +57,11 @@
                     <!-- mt product4 start here -->
                     <div class="mt-product4 mt-paddingbottom20">
                         <div class="img">
-                            <a href="product-detail.html"><img alt="image description" src="${p.getDefaultImg()}" style="height: 80; width: 80"></a>
+                            <a href="ProductDetailController?productId=${p.getId()}"><img alt="image description" src="${p.getDefaultImg()}" style="height: 80; width: 80"></a>
                         </div>
                         <div class="text">
                             <div class="frame">
-                                <strong><a href="product-detail.html">${p.getNameProduct()}</a></strong>
+                                <strong><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>
                                 <ul class="mt-stars">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -81,11 +81,11 @@
                     <!-- mt product4 start here -->
                     <div class="mt-product4 mt-paddingbottom20">
                         <div class="img">
-                            <a href="product-detail.html"><img alt="image description" src="${p.getDefaultImg()}" style="height: 80; width: 80"></a>
+                            <a href="ProductDetailController?productId=${p.getId()}"><img alt="image description" src="${p.getDefaultImg()}" style="height: 80; width: 80"></a>
                         </div>
                         <div class="text">
                             <div class="frame">
-                                <strong><a href="product-detail.html">${p.getNameProduct()}</a></strong>
+                                <strong><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>
                                 <ul class="mt-stars">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>

@@ -978,8 +978,8 @@ public class ProductDAO extends DBConnection {
             // Truy vấn cơ sở dữ liệu để lấy giá sản phẩm dựa trên productId và volume
             String query = "SELECT v.price, s.discount, se.startdate, se.enddate "
                     + "FROM Volume v "
-                    + "LEFT JOIN sale s ON v.productID = s.productID "
-                    + "LEFT JOIN saleEvent se ON s.sid = se.sid "
+                    + "LEFT JOIN Sale s ON v.productID = s.productID "
+                    + "LEFT JOIN SaleEvent se ON s.sid = se.sid "
                     + "WHERE v.productID = ? AND v.capacity = ? AND (se.startdate IS NULL OR se.startdate <= ?) AND (se.enddate IS NULL OR se.enddate >= ?)";
 
             try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {

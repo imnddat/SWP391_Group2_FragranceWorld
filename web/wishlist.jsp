@@ -35,11 +35,11 @@
                 <%@include file = "panner.jsp" %>
 
                 <main id="mt-main">
-                    <section class="mt-contact-banner mt-banner-22 wow fadeInUp" data-wow-delay="0.4s" style="background-image: url(http://placehold.it/1920x325);">
+                    <section class="mt-contact-banner mt-banner-22 wow fadeInUp" data-wow-delay="0.4s" style="background-image: url(https://htmlbeans.com/html/schon/images/img-76.jpg);">
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <h1 class="text-center">Wish List</h1>
+                                    <h1 class="text-center">Wishlist</h1>
                                     <!-- Breadcrumbs of the Page -->
                                     <nav class="breadcrumbs">
                                         <ul class="list-unstyled">
@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-5">
-                                        <strong class="product-name">${i.getProduct().getNameProduct()}(${i.getVolume()})</strong>
+                                        <strong class="product-name">${i.getProduct().getNameProduct()}(${i.getVolume()}ML)</strong>
                                     </div>
                                     <div class="col-xs-12 col-sm-2">
                                         <strong class="price"><i class="fa fa-eur"></i> ${i.getPrice()}</strong>

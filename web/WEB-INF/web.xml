@@ -83,7 +83,7 @@
     <servlet>
         <servlet-name>PayLater</servlet-name>
         <servlet-class>Controller.PayLater</servlet-class>
-</servlet>
+    </servlet>
     <servlet>
         <servlet-name>FeedbackController</servlet-name>
         <servlet-class>Controller.FeedbackController</servlet-class>
@@ -99,8 +99,8 @@
     <servlet>
         <servlet-name>VerifyOTPServlet</servlet-name>
         <servlet-class>Controller.VerifyOTPServlet</servlet-class>
-         </servlet>
- <servlet>
+    </servlet>
+    <servlet>
         <servlet-name>ListCustomer</servlet-name>
         <servlet-class>controlleradmin.ListCustomer</servlet-class>
     </servlet>
@@ -147,6 +147,10 @@
     <servlet>
         <servlet-name>Dashboard</servlet-name>
         <servlet-class>controlleradmin.Dashboard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetailController</servlet-name>
+        <servlet-class>Controller.ProductDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -234,7 +238,7 @@
     <servlet-mapping>
         <servlet-name>PayLater</servlet-name>
         <url-pattern>/paylater</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FeedbackController</servlet-name>
         <url-pattern>/FeedbackController</url-pattern>
@@ -250,7 +254,7 @@
     <servlet-mapping>
         <servlet-name>VerifyOTPServlet</servlet-name>
         <url-pattern>/verifyotp</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListCustomer</servlet-name>
         <url-pattern>/listcustomer</url-pattern>
@@ -298,6 +302,10 @@
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailController</servlet-name>
+        <url-pattern>/ProductDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

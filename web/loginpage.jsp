@@ -90,7 +90,7 @@
                                                 <button type="submit" class="btn-type1">Login</button>
                                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:9999/FragranceWorld/LoginGoogleHandler&response_type=code
                                                    &client_id=784674948217-jtonajckjip23ebqt8c642n4g655gao2.apps.googleusercontent.com&approval_prompt=force" class="btn-type1">login with google</a>
-                                                <a href="registerpage.jsp"> <button type="submit" class="btn-type1">Register Me</button></a>
+                                                <a href="register" class="btn-type1">Register</a>
                                             </div>
 
 
