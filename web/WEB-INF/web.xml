@@ -69,8 +69,6 @@
         <servlet-class>Controller.profileSetting</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
-=======
         <servlet-name>EditUserProfile</servlet-name>
         <servlet-class>Controller.EditUserProfile</servlet-class>
     </servlet>
@@ -87,7 +85,6 @@
         <servlet-class>Controller.PayLater</servlet-class>
 </servlet>
     <servlet>
->>>>>>> 311ddc16934974a3828d3d4a2d8e4c71a280fc53
         <servlet-name>FeedbackController</servlet-name>
         <servlet-class>Controller.FeedbackController</servlet-class>
     </servlet>
@@ -150,7 +147,6 @@
     <servlet>
         <servlet-name>Dashboard</servlet-name>
         <servlet-class>controlleradmin.Dashboard</servlet-class>
-<<<<<<< HEAD
     </servlet>
     <servlet>
         <servlet-name>ListSaleEvent</servlet-name>
@@ -171,8 +167,6 @@
     <servlet>
         <servlet-name>ListProductSale</servlet-name>
         <servlet-class>controlleradmin.ListProductSale</servlet-class>
-=======
->>>>>>> 311ddc16934974a3828d3d4a2d8e4c71a280fc53
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -246,8 +240,6 @@
         <url-pattern>/profilesetting</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
-=======
         <servlet-name>EditUserProfile</servlet-name>
         <url-pattern>/edituserprofile</url-pattern>
     </servlet-mapping>
@@ -264,7 +256,6 @@
         <url-pattern>/paylater</url-pattern>
 </servlet-mapping>
     <servlet-mapping>
->>>>>>> 311ddc16934974a3828d3d4a2d8e4c71a280fc53
         <servlet-name>FeedbackController</servlet-name>
         <url-pattern>/FeedbackController</url-pattern>
     </servlet-mapping>
@@ -327,7 +318,6 @@
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
-<<<<<<< HEAD
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListSaleEvent</servlet-name>
@@ -348,8 +338,6 @@
     <servlet-mapping>
         <servlet-name>ListProductSale</servlet-name>
         <url-pattern>/listproductsale</url-pattern>
-=======
->>>>>>> 311ddc16934974a3828d3d4a2d8e4c71a280fc53
     </servlet-mapping>
     <session-config>
         <session-timeout>
