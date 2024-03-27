@@ -25,7 +25,7 @@ public class ProductDAO extends DBContext {
     //get all gender
     public List<Gender> getAllGender() {
         List<Gender> list = new ArrayList<>();
-        String sql = "select * from Gender";
+        String sql = "select * FROM [dbo].[Gender] ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -62,7 +62,7 @@ public class ProductDAO extends DBContext {
     //Get all brand
     public List<Brand> getAllBrand() {
         List<Brand> list = new ArrayList<>();
-        String sql = "select * from Brand";
+        String sql = "select * FROM [dbo].[Brand]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
