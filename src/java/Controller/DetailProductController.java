@@ -19,6 +19,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -32,6 +33,7 @@ public class DetailProductController extends HttpServlet {
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
             ProductDAO dao = new ProductDAO();
        
 
@@ -43,23 +45,26 @@ public class DetailProductController extends HttpServlet {
             // do nothing
             return;
         }
-        Product p = dao.getProductsById(pid);
+        Product product = new Product();
+         product = dao.getProductsById(pid);
         Brand b = dao.getBrandByProductId(pid);
         Gender g = dao.getGenderByProductId(pid);
         ArrayList<ImageProduct> i = dao.getImageProduct(pid);
         List<Volume> v = dao.getVolumesByProductId(pid);
         Sale s = dao.getSaleByProductId(pid);
-        Vector<Product> product = (new ProductDAO()).getLastProduct();
+        
+        
+        Vector<Product> product1 = (new ProductDAO()).getLastProduct();
         //bestseller
         request.setAttribute("MaxPriceProducts", product);
-        //bestseller
-        request.setAttribute("product", p);
+      
+        request.setAttribute("product", product1);
         request.setAttribute("volume", v);
         request.setAttribute("price", v.get(0).getPrice());
         request.setAttribute("priceId", v.get(0).getId());
         request.setAttribute("brand", b.getName());
         request.setAttribute("gender", g.getGender());
-        request.setAttribute("scent", p.getScent());
+        request.setAttribute("scent", product.getScent());
         request.setAttribute("discount", s.getDiscount());
         request.setAttribute("image", i.get(pid));
         request.getRequestDispatcher("productdetail.jsp").forward(request, response);

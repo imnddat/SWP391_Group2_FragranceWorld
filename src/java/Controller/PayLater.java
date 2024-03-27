@@ -2,14 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package Controller;
 
 import DAO.OrderDAO;
-import Model.Cart;
-import Model.Order;
+import Model.OrderWithItems;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -21,52 +27,41 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.PrintWriter;
 import ultil.vnpay.Config;
-
-
 
 /**
  *
  * @author Admin
  */
-public class PaymentServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class PayLater extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PaymentServlet</title>");
+            out.println("<title>Servlet PayLater</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PaymentServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PayLater at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -74,13 +69,30 @@ public class PaymentServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("test/vnpay_pay.jsp").forward(request, response);
-    }
+    throws ServletException, IOException {
+        OrderDAO od = new OrderDAO();
+        int id;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (Exception e) {
+            return;
+        }
+        OrderWithItems owi = od.getOrder(id);
+        HttpSession session = request.getSession();
+        session.setAttribute("order_name", owi.getReciverName());
+        session.setAttribute("order_address", owi.getAddress());
+        session.setAttribute("order_email", owi.getEmail());
+        session.setAttribute("order_phone", owi.getPhone());
+        session.setAttribute("order_note", owi.getNote());
+        session.setAttribute("order_id", owi.getId());
+        session.setAttribute("order_totalPrice", owi.getTotalPrice());
+        request.getRequestDispatcher("PayLater.jsp").forward(request, response);
+        
+        
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -88,21 +100,17 @@ public class PaymentServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //create order
-        createOrder(request);
-        
+    throws ServletException, IOException {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
-        //long amount = Integer.parseInt(request.getParameter("amount"))*100;
-        //System.out.println(request.getParameter("paymentAmount"));
-        long amount = ((long) Double.parseDouble(request.getParameter("amount"))) * 1000000;
-        //System.out.println("The price: "+amount);
+        HttpSession session = request.getSession();
+        long amount = ((long) ((double)session.getAttribute("order_totalPrice"))) * 1000000;
+        session.removeAttribute("order_totalPrice");
         String bankCode = "";
         
-        HttpSession session = request.getSession();
-        String vnp_TxnRef = Integer.toString((int)session.getAttribute("orderid"));
+        
+        String vnp_TxnRef = Integer.toString((int)session.getAttribute("order_id"));
         session.removeAttribute("orderid");
         String vnp_IpAddr = Config.getIpAddress(request);
 
@@ -170,33 +178,21 @@ public class PaymentServlet extends HttpServlet {
         Gson gson = new Gson();
         System.out.println("loi o dayyyyyyyyyy");
         response.getWriter().write(gson.toJson(job));
+        
+        session.removeAttribute("order_totalPrice");
+        session.removeAttribute("order_address");
+        session.removeAttribute("order_email");
+        session.removeAttribute("order_phone");
+        session.removeAttribute("order_note");
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
-    private void createOrder(HttpServletRequest request){
-        OrderDAO order = new OrderDAO();
-        HttpSession session = request.getSession();
-        Cart cart = new Cart((List) session.getAttribute("cart"));
-        Order orderr = (Order)session.getAttribute("orderObject");
-        int oid = order.createOrder(orderr, cart, "VN Pay");
-        session.removeAttribute("orderObject");
-        session.setAttribute("orderid", oid);
-    }
-    
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    public static void main(String[] args) {
-        String a = "318.0";
-        double amount = Double.parseDouble(a) * 100;
-        long result = (long) amount;
-        System.out.println(result);
-    }
 
 }

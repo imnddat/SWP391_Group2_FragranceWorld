@@ -19,6 +19,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -30,12 +31,13 @@ public class vnpayQuery extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Command:querydr
-
+        HttpSession session = req.getSession();
         String vnp_RequestId = Config.getRandomNumber(8);
         String vnp_Version = "2.1.0";
         String vnp_Command = "querydr";
         String vnp_TmnCode = Config.vnp_TmnCode;
-        String vnp_TxnRef = req.getParameter("order_id");
+        String vnp_TxnRef = Integer.toString((int)session.getAttribute("orderid"));
+        session.removeAttribute("orderid");
         String vnp_OrderInfo = "Kiem tra ket qua GD OrderId:" + vnp_TxnRef;
         //String vnp_TransactionNo = req.getParameter("transactionNo");
         String vnp_TransDate = req.getParameter("trans_date");

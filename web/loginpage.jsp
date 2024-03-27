@@ -31,14 +31,14 @@
         <!-- Main of the Page -->
         <main id="mt-main">
             <!-- Mt Content Banner of the Page -->
-            <section class="mt-contact-banner" style="background-image: url(http://placehold.it/1920x205);">
+            <section class="mt-contact-banner" style="background-image: url();">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 text-center">
                             <h1>login</h1>
                             <nav class="breadcrumbs">
                                 <ul class="list-unstyled">
-                                    <li><a href="index.html">home <i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="HomeController">home <i class="fa fa-angle-right"></i></a></li>
                                     <li>login</li>
                                 </ul>
                             </nav>
@@ -48,17 +48,18 @@
             </section>
             <!-- Mt Content Banner of the Page end -->
             <!-- Mt About Section of the Page -->
-            <section class="mt-about-sec" style="padding-bottom: 0;">
+<!--            <section class="mt-about-sec" style="padding-bottom: 0;">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="txt">
-                                <h2>login</h2>                           
+                                <h2>login</h2>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>-->
             <!-- Mt About Section of the Page -->
 
 
@@ -88,10 +89,10 @@
                                             <div>
                                                 <button type="submit" class="btn-type1">Login</button>
                                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:9999/FragranceWorld/LoginGoogleHandler&response_type=code
-		   &client_id=784674948217-jtonajckjip23ebqt8c642n4g655gao2.apps.googleusercontent.com&approval_prompt=force" class="btn-type1">login with google</a>
+                                                   &client_id=784674948217-jtonajckjip23ebqt8c642n4g655gao2.apps.googleusercontent.com&approval_prompt=force" class="btn-type1">login with google</a>
                                                 <a href="registerpage.jsp"> <button type="submit" class="btn-type1">Register Me</button></a>
                                             </div>
-                                            
+
 
                                         </fieldset>
                                     </form>
@@ -106,90 +107,13 @@
 
 
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <!-- banner frame start here -->
-                        <div class="banner-frame toppadding-zero">
-                            <!-- banner 5 white start here -->
-                            <div class="banner-5 white wow fadeInLeft" data-wow-delay="0.4s">
-                                <img src="http://placehold.it/590x565" alt="image description">
-                                <div class="holder">
-                                    <div class="texts">
-                                        <strong class="title">FURNITURE DESIGNS IDEAS</strong>
-                                        <h3><strong>New</strong> Collection</h3>
-                                        <p>Consectetur adipisicing elit. Beatae accusamus, optio, repellendus inventore</p>
-                                        <span class="price-add">$ 79.00</span>
-                                    </div>
-                                </div>
-                            </div><!-- banner 5 white end here -->
-                            <!-- banner 6 white start here -->
-                            <div class="banner-6 white wow fadeInRight" data-wow-delay="0.4s">
-                                <img src="http://placehold.it/275x565" alt="image description">
-                                <div class="holder">
-                                    <strong class="sub-title">SOFAS &amp; ARMCHAIRS</strong>
-                                    <h3>3 Seater Leather Sofa</h3>
-                                    <span class="offer">
-                                        <span class="price-less">$ 659.00</span>
-                                        <span class="prices">$ 499.00</span>
-                                    </span>
-                                    <a href="product-detail.html" class="btn-shop">
-                                        <span>shop now</span>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </div><!-- banner 5 white end here -->
-                            <!-- banner box two start here -->
-                            <div class="banner-box two">
-                                <!-- banner 7 right start here -->
-                                <div class="banner-7 right wow fadeInUp" data-wow-delay="0.4s">
-                                    <img src="http://placehold.it/295x275" alt="image description">
-                                    <div class="holder">
-                                        <h2><strong>ACRYLIC FABRIC <br>BEAN BAG</strong></h2>
-                                        <ul class="mt-stars">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <div class="price-tag">
-                                            <span class="price">$ 99.00</span>
-                                            <a class="shop-now" href="product-detail.html">SHOP NOW</a>
-                                        </div>
-                                    </div>
-                                </div><!-- banner 7 right end here -->
-                                <!-- banner 8 start here -->
-                                <div class="banner-8 wow fadeInDown" data-wow-delay="0.4s">
-                                    <img src="http://placehold.it/295x275" alt="image description">
-                                    <div class="holder">
-                                        <h2><strong>CHAIR WITH <br>ARMRESTS</strong></h2>
-                                        <ul class="mt-stars">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <div class="price-tag">
-                                            <span class="price-off">$ 129.00</span>
-                                            <span class="price">$ 99.00</span>
-                                            <a class="btn-shop" href="product-detail.html">
-                                                <span>HURRY UP!</span> 
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div><!-- banner 8 start here -->
-                            </div>
-                        </div><!-- banner frame end here -->
-                    </div>
-                </div>
-            </div>
+
         </main><!-- Main of the Page end -->
         <%@include file = "footer.jsp" %>   
-        
+
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/login.js"></script>
-        
+
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->

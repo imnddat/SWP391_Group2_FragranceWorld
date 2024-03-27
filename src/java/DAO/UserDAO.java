@@ -33,13 +33,17 @@ import ultil.SendMail;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.StringTokenizer;
+import java.sql.Time;
+import java.sql.Timestamp;
+
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author Thinkpad
  */
 public class UserDAO extends DBConnection {
-
+    
     public ArrayList<User> getUserAllUser() throws Exception {
         ArrayList<User> newUserList = new ArrayList();
         Connection conn = null;
@@ -275,7 +279,7 @@ public class UserDAO extends DBConnection {
             conn = new DBConnection().getConnection();
             ps = conn.prepareStatement(updateOtpSql);
             ps.setString(1, otp);
-            ps.setDate(2, otpExpiry);
+            ps.setTimestamp(2, new java.sql.Timestamp(otpExpiry.getTime()));
             ps.setString(3, email);
             ps.executeUpdate();
         } catch (Exception e) {
@@ -290,24 +294,44 @@ public class UserDAO extends DBConnection {
         }
         return true;
     }
-    public static void main(String[] args) {
-    String email = "lecongtruongthinh@gmail.com"; // Thay đổi địa chỉ email theo nhu cầu
-    String submittedOtp = "634212"; // Thay đổi OTP đã nhập theo nhu cầu
-
-    // Tạo một đối tượng của lớp chứa hàm verifyOTP
-    UserDAO object = new UserDAO(); // Thay YourClassName bằng tên của lớp chứa hàm verifyOTP
-
-    // Gọi hàm verifyOTP và in kết quả ra màn hình
-    boolean isOTPVerified = object.verifyOTP(email, submittedOtp);
-    if (isOTPVerified) {
-        System.out.println("OTP verification successful.");
-    } else {
-        System.out.println("OTP verification failed.");
-    }
-}
+//
+//    public static void main(String[] args) {
+//        String email = "lecongtruongthinh@gmail.com"; // Thay đổi địa chỉ email theo nhu cầu
+//        String submittedOtp = "416305"; // Thay đổi OTP đã nhập theo nhu cầu
+//
+//        // Tạo một đối tượng của lớp chứa hàm verifyOTP
+//        UserDAO object = new UserDAO(); // Thay YourClassName bằng tên của lớp chứa hàm verifyOTP
+//
+//        
+//        System.out.println(object.verifyOTP("lecongtruongthinh@gmail.com","416305"));
+//      
+//    }
 
 // Method to verify OTP
     public boolean verifyOTP(String email, String submittedOtp) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try(Connection conn = new DBConnection().getConnection()) {
+            String sql = "SELECT [otp],[otp_expiry] FROM [dbo].[User] where email = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+            String storedOtp = rs.getString("otp");
+            Timestamp otpExpiry = rs.getTimestamp("otp_expiry");
+            Date currentTime = new Date(System.currentTimeMillis());
+            
+            if (storedOtp.equals(submittedOtp) && currentTime.before(otpExpiry)) {
+                return true;
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+    public String verifyOTP1(String email, String submittedOtp) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -321,14 +345,15 @@ public class UserDAO extends DBConnection {
                 String storedOtp = rs.getString("otp");
                 Date otpExpiry = rs.getDate("otp_expiry");
                 Date currentTime = new Date(System.currentTimeMillis());
-                if (storedOtp.equals(submittedOtp) && currentTime.before(otpExpiry)) {
-                    return true;
-                }
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+                String formattedDate = sdf.format(currentTime);
+                    return formattedDate + "";
+               
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public boolean updatePassword(String email, String newPassword) {
@@ -380,13 +405,8 @@ public class UserDAO extends DBConnection {
                         rs.getInt("roleID"),
                         rs.getInt("banned"));
             }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(pre);
-            closeConnection(conn);
-        }
+        } catch (SQLException ex) {
+        } 
         return null;
     }
 
@@ -485,6 +505,42 @@ public class UserDAO extends DBConnection {
             pre.setInt(7, updatedUser.getRoleID());
             pre.setInt(8, updatedUser.getBanned());
             pre.setInt(9, updatedUser.getId());
+            check = pre.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(pre);
+            closeConnection(conn);
+        }
+
+        return check;
+    }
+
+    public int editUserProfile(User updatedUser) throws Exception {
+        Connection conn = null;
+        /* Result set returned by the sqlserver */
+        ResultSet rs = null;
+        /* Prepared statement for executing sql queries */
+        PreparedStatement pre = null;
+
+        String sql = " UPDATE [dbo].[User]\n"
+                + "   SET [username] = ?\n"
+                + "      ,[email] = ?\n"
+                + "      ,[fullname] = ?\n"
+                + "      ,[address] = ?\n"
+                + "      ,[phone] = ?\n"
+                + " WHERE id = ?";
+        int check = 0;
+        try {
+            conn = getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, updatedUser.getUsername());
+            pre.setString(2, updatedUser.getEmail());
+            pre.setString(3, updatedUser.getName());
+            pre.setString(4, updatedUser.getAddress());
+            pre.setString(5, updatedUser.getPhone());
+            pre.setInt(6, updatedUser.getId());
             check = pre.executeUpdate();
         } catch (Exception ex) {
             throw ex;

@@ -6,6 +6,7 @@ package Controller;
 
 import DAO.OrderDAO;
 import Model.Cart;
+import Model.Order;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -65,9 +66,9 @@ public class CheckOut extends HttpServlet {
         Object list = session.getAttribute("cart");
         if (o == null) {
 //            Kiểm tra người dùng có đăng nhập hay không
-            System.out.println("");
-//            response.sendRedirect("login");
-//            return;
+//            System.out.println("");
+            response.sendRedirect("login");
+            return;
         } else {
             User u = (User) o;
             request.setAttribute("name", u.getName());
@@ -104,18 +105,18 @@ public class CheckOut extends HttpServlet {
         if (list != null) {
             Cart cart = new Cart((List) list);
             OrderDAO order = new OrderDAO();
-            String name = request.getParameter("address");
+            String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String note = request.getParameter("note");
             String address = request.getParameter("address");
             String payment = request.getParameter("paymentOption");
-            orderId = order.createOrder(address, cart, payment);
-            request.setAttribute("orderid", orderId);
+            User user = (User)session.getAttribute("currentUser");
+            Order orderr = new Order(user.getId(),(double)session.getAttribute("ordertotal"), address, name, phone, email, note);
             if(payment.equalsIgnoreCase("VN Pay")){
                 //PaymentServlet ps = new PaymentServlet();
                 //ps.doPost(request, response);
-                session.setAttribute("orderid", orderId);
+                session.setAttribute("orderObject", orderr);
                 session.setAttribute("order_name", name);
                 session.setAttribute("order_email", email);
                 session.setAttribute("order_phone", phone);
@@ -124,6 +125,9 @@ public class CheckOut extends HttpServlet {
                 response.sendRedirect("payment");
                 return;
             }
+            orderId = order.createOrder(orderr, cart, payment);
+            session.setAttribute("orderid", orderId);
+            request.setAttribute("orderid", orderId);
         } else {
             System.out.println("Cart is empty!");
         }

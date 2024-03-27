@@ -52,9 +52,9 @@
                         </div>
                     </div>
 
-                                <%@include file = "bestseller.jsp" %>
+                    <%@include file = "bestseller.jsp" %>
 
-                                <%@include file = "hotsale.jsp" %>
+                    <%@include file = "hotsale.jsp" %>
                 </main><!-- mt main end here -->
 
                 <%@include file = "footer.jsp" %>        
@@ -62,12 +62,25 @@
             </div><!-- W1 end here -->
             <span id="back-top" class="fa fa-arrow-up"></span>
         </div>
-        
+
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        <script>
+            // JavaScript code để kiểm tra session timeout và hiển thị cảnh báo
+            $(document).ready(function () {
+                // Kiểm tra nếu session timeout
+            <% if (request.getAttribute("sessionTimeout") != null) { %>
+                alert("Session đã hết hạn, vui lòng đăng nhập lại.");
+                // Chuyển hướng về trang login
+                window.location.replace("${pageContext.request.contextPath}/login");
+            <% } %>
+            });
+        </script>
+
         <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
         <script src="${pageContext.request.contextPath}/js/addToWishlist.js"></script>
-        
-        
+
+
         <!-- include jQuery -->
         <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
         <!-- include jQuery -->

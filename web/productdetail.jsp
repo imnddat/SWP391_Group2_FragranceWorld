@@ -49,7 +49,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12">
-                                <form>
+                             
                                     <!-- Slider of the Page -->
                                     <div class="slider">
                                         <!-- Comment List of the Page -->
@@ -142,7 +142,7 @@
                                         <!-- Product Form of the Page end -->
                                     </div>
                                     <!-- Detail Holder of the Page end -->
-                                </form>
+                                
                             </div>
                         </div>
                     </div>
