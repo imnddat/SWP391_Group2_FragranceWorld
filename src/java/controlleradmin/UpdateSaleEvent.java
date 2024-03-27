@@ -3,27 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller;
+package controlleradmin;
 
-import DAO.OrderDAO;
-import Model.OrderWithItems;
-import Model.User;
-import com.google.gson.Gson;
+import daoadmin.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import modeladmin.SaleEvent;
 
 /**
  *
- * @author Admin
+ * @author NguyenDucDat
  */
-public class ViewAllOrders extends HttpServlet {
+public class UpdateSaleEvent extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +36,10 @@ public class ViewAllOrders extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewAllOrders</title>");  
+            out.println("<title>Servlet UpdateSaleEvent</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewAllOrders at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UpdateSaleEvent at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,11 +56,18 @@ public class ViewAllOrders extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        OrderDAO od = new OrderDAO();
-        int userID = 5;
-        int itemPerPage = 5;
-        request.setAttribute("totalPage", od.getNumberPages(itemPerPage, userID));
-        request.getRequestDispatcher("ViewAllOrders.jsp").forward(request, response);
+        String id_raw = request.getParameter("id");
+        int sid;
+        ProductDAO pd = new ProductDAO();
+        try {
+            sid = Integer.parseInt(id_raw);
+            SaleEvent s = pd.getSaleEventById(sid);
+            System.out.println(s);
+            request.setAttribute("event", s);
+            request.getRequestDispatcher("./view_admin/product/updatesaleevent.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
     } 
 
     /** 
@@ -77,23 +80,34 @@ public class ViewAllOrders extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         
-        OrderDAO od = new OrderDAO();
-        int pageOffset;
-        if (request.getParameter("pageOffset") == null){
-            pageOffset = 1;
-        }else{
-            pageOffset = Integer.parseInt(request.getParameter("pageOffset"));
+        String title=request.getParameter("title");
+        String eventcontent=request.getParameter("content");
+        String startdate_raw = request.getParameter("startdate");
+        String enddate_raw = request.getParameter("enddate");
+        String sid_raw = request.getParameter("sid");
+        System.out.println(title + eventcontent + startdate_raw + enddate_raw + sid_raw);
+        int sid;
+        Date startdate, enddate;
+        ProductDAO pd = new ProductDAO();
+        try {
+            sid = Integer.parseInt(sid_raw);
+            startdate = Date.valueOf(startdate_raw);
+            enddate = Date.valueOf(enddate_raw);
+            SaleEvent s = new SaleEvent();
+            s.setTitle(title);
+            s.setEventcontent(eventcontent);
+            s.setStartdate(startdate);
+            s.setEnddate(enddate);
+            s.setSid(sid);
+            
+            pd.updateSaleEvent(s);
+            
+            response.sendRedirect("listsaleevent");
+        } catch (NumberFormatException e) {
+            System.out.println(e);
         }
-        HttpSession session = request.getSession();
-        int userId = ((User)session.getAttribute("currentUser")).getId();
-        int itemPerPage = 5;
-        List<OrderWithItems> list = od.getOrdersWithOffset(userId, pageOffset,itemPerPage);
-        
-        String json = new Gson().toJson(list);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
     }
 
     /** 

@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -74,18 +76,86 @@ public class Register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        
-        String username = request.getParameter("username");
-        String pass = request.getParameter("password");
-        String email = request.getParameter("email");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String phone = request.getParameter("phone");
-        String dob = request.getParameter("dob");
-        
-        
 
-        String user = new UserDAO().getUserRegister(username, pass, email, name, address, phone,dob);
+        
+         UserDAO userDAO = new UserDAO();
+        String mess = "";
+        String username = request.getParameter("username").trim();
+        String pass = request.getParameter("password").trim();
+        String confirmPass = request.getParameter("confirmPass").trim();
+        String email = request.getParameter("email").trim();
+        String name = request.getParameter("name").trim();
+        String address = request.getParameter("address").trim();
+        String phone = request.getParameter("phone").trim();
+        String dob = request.getParameter("dob").trim();
+
+        //check blank input fields
+        if (username.length() == 0 || pass.length() == 0
+                || name.length() == 0
+                || email.length() == 0 || phone.length() == 0
+                || dob.length() == 0) {
+            mess = "You have to input all information!";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+        //check max length
+        if (username.length() > 63 || pass.length() > 255
+                || name.length() > 255
+                || email.length() > 255
+                || phone.length() > 10) {
+            mess = "Your input have reached max length!";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+        //check if comfirm pass is the same as pass
+        if (!pass.equals(confirmPass)) {
+            mess = "The confirm-password is not match with the password!";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        //check validate mail
+        String mailRegex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        if (!email.matches(mailRegex)) {
+            mess = "The Email is invalid !";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        //check if this email already existed in the system
+        if (userDAO.getUserByMail(email) != null) {
+            mess = "This email have already been used!";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        try {
+            //check if this Moblie already existed in the system
+            if (userDAO.getUserByMobile(phone) != null) {
+                mess = "The phone number is already been used";
+                request.setAttribute("mess", mess);
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+                return;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //check if the moblie is in right fomat and length
+        String moblieRegex = "(09|03|07|08|05)+([0-9]{8})";
+        if (!phone.matches(moblieRegex) || phone.length() != 10) {
+            mess = "The phone number is invalid";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        String user = new UserDAO().getUserRegister(username, pass, email, name, address, phone, dob);
         request.setAttribute("registrationSuccess", "Please check your email!");
         // Forward to a JSP page for display
         request.getRequestDispatcher("message.jsp").forward(request, response);

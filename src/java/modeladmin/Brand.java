@@ -45,6 +45,11 @@ public class Brand {
     public void setMakebyFrom(String makebyFrom) {
         this.makebyFrom = makebyFrom;
     }
+
+    @Override
+    public String toString() {
+        return "Brand{" + "id=" + id + ", name=" + name + ", makebyFrom=" + makebyFrom + '}';
+    }
     
     
 }

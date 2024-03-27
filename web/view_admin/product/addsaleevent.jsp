@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dashboard
-    Created on : Mar 19, 2024, 12:05:35 AM
+    Document   : addsaleevent
+    Created on : Mar 26, 2024, 11:43:19 PM
     Author     : NguyenDucDat
 --%>
 
@@ -41,14 +41,42 @@
             .content{
                 margin-left: 10%;
                 margin-right: 10%;
-                display: flex;
             }
-            .content_user, .content_prodcut{
-                width: 50%;
+
+            .content {
+                margin-top: 20px;
             }
-            
-            a{
-                text-decoration: none;
+
+            .content h2 {
+                color: #333;
+            }
+
+            .content_form {
+                margin-top: 10px;
+            }
+
+            .content_form label {
+                font-weight: bold;
+            }
+
+            .content_form input[type="text"],
+            .content_form textarea,
+            .content_form input[type="date"] {
+                width: 100%;
+                padding: 5px;
+                margin-bottom: 10px;
+            }
+
+            .content_form input[type="submit"] {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+            .content_form input[type="submit"]:hover {
+                background-color: #0056b3;
             }
         </style>
     </head>
@@ -56,38 +84,27 @@
         <div class="header">
             <h1>Fragrance World</h1>
             <div class="nav">
-                <span>Dashboard</span>
-
+                <a href="dashboard">Dashboard</a>
+                <span> | </span>
+                <a href="listsaleevent">Sale Event Management</a>
+                <span> | </span>
+                <span>Add new Sale Event</span>
             </div>
         </div>
-
         <div class="content">
-            <div class="content_user">
-                <h2>User Management</h2>
-                <h3>Customer</h3>
-                <ul>
-                    <li><a href="listcustomer">List of customers</a></li>
-                </ul>
-                <h3>Staff</h3>
-                <ul>
-                    <li><a href="liststaff">List of Staff</a></li>
-                    <li><a href="addstaff">Add a new Staff</a></li>
-                </ul>
-            </div>
-            <div class="content_prodcut">
-                <h2>Product Management</h2>
-                <h3>Product</h3>
-                <ul>
-                    <li><a href="listproduct">List of product</a></li>
-                    <li><a>Add product</a></li>
-                    <li><a href="#">Warehouse</a></li>
-                </ul>
-                <h3>Sale event</h3>
-                <ul>
-                    <li><a href="listsaleevent">List of promotional programs</a></li>
-                    <li><a href="#">Add promotion</a></li>
-                    <li><a href="#">Set product discounts</a></li>
-                </ul>
+            <h2>Add new Sale Event</h2>
+            <div class="content_form">
+                <form action="addsaleevent" method="post">
+                    <label>Title: </label>
+                    <input type="text" name="title"><br>
+                    <label>Content: </label>
+                    <textarea name="content" rows="3"></textarea><br>
+                    <label>Start Date: </label>
+                    <input type="date" name="startdate"><br>
+                    <label>End Date: </label>
+                    <input type="date" name="enddate"><br>
+                    <input class="btn btn-primary" type="submit" value="Add">
+                </form>
             </div>
         </div>
     </body>

@@ -53,10 +53,6 @@
         <servlet-class>Controller.testServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DetailProductController</servlet-name>
-        <servlet-class>Controller.DetailProductController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SignOut</servlet-name>
         <servlet-class>Controller.SignOut</servlet-class>
     </servlet>
@@ -152,6 +148,30 @@
         <servlet-name>ProductDetailController</servlet-name>
         <servlet-class>Controller.ProductDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.ListSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.DeleteSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.AddSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.UpdateSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProductSale</servlet-name>
+        <servlet-class>controlleradmin.ListProductSale</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailProductController</servlet-name>
+        <servlet-class>Controller.DetailProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -206,10 +226,6 @@
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DetailProductController</servlet-name>
-        <url-pattern>/DetailProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SignOut</servlet-name>
@@ -306,6 +322,26 @@
     <servlet-mapping>
         <servlet-name>ProductDetailController</servlet-name>
         <url-pattern>/ProductDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListSaleEvent</servlet-name>
+        <url-pattern>/listsaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSaleEvent</servlet-name>
+        <url-pattern>/seletesaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSaleEvent</servlet-name>
+        <url-pattern>/addsaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSaleEvent</servlet-name>
+        <url-pattern>/updatesaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProductSale</servlet-name>
+        <url-pattern>/listproductsale</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

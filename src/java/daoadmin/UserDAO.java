@@ -213,7 +213,7 @@ public class UserDAO extends DBContext {
                 + "  FROM [dbo].[User]\n"
                 + "  where roleID = 1 and 1=1";
         if (key != null && !key.equals("")) {
-            sql += " and username like '%" + key + "%' or fullname like '%" + key + "%'";
+            sql += " and username like '%" + key + "%' or fullname like N'%" + key + "%'";
         }
         if (status != null && !status.equals("")) {
             sql += " and banned = ?";
@@ -266,7 +266,7 @@ public class UserDAO extends DBContext {
                 + "  FROM [dbo].[User]\n"
                 + "  where roleID = 2 and 1=1";
         if (key != null && !key.equals("")) {
-            sql += " and (username like '%" + key + "%' or fullname like '%" + key + "%')";
+            sql += " and (username like '%" + key + "%' or fullname like N'%" + key + "%')";
         }
         if (pid != 0) {
             sql += " and positionID=" + pid;
@@ -407,12 +407,68 @@ public class UserDAO extends DBContext {
             st.setString(6, u.getAddress());
             st.setString(7, u.getEmail());
             st.setString(8, u.getPhone());
-            st.setInt(9, u.getRole().getId()); 
-            st.setBoolean(10, u.isStatus()); 
+            st.setInt(9, u.getRole().getId());
+            st.setBoolean(10, u.isStatus());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public boolean checkUsernameInDatabase(String username) {
+        String sql = "SELECT COUNT(*) FROM User WHERE username = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, username);
+            ResultSet rs = st.executeQuery();
+
+            // Lấy kết quả từ ResultSet
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; // Trả về true nếu username đã tồn tại, ngược lại trả về false
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false; // Trả về false nếu có lỗi xảy ra hoặc không tìm thấy username
+    }
+
+    public boolean checkEmailInDatabase(String email) {
+        String sql = "SELECT COUNT(*) FROM User WHERE email = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet resultSet = st.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+   
+
+    public boolean checkPhoneInDatabase(String phone) {
+        String sql = "SELECT COUNT(*) FROM User WHERE phone = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, phone);
+            ResultSet resultSet = st.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
     }
 
     public static void main(String[] args) {
