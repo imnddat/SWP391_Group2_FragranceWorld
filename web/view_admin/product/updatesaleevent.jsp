@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dashboard
-    Created on : Mar 19, 2024, 12:05:35 AM
+    Document   : updatesaleevent
+    Created on : Mar 27, 2024, 2:07:39 AM
     Author     : NguyenDucDat
 --%>
 
@@ -41,14 +41,35 @@
             .content{
                 margin-left: 10%;
                 margin-right: 10%;
-                display: flex;
             }
-            .content_user, .content_prodcut{
-                width: 50%;
+
+            /* Style for content section */
+            .content {
+                margin-top: 20px;
             }
-            
-            a{
-                text-decoration: none;
+
+            .content label {
+                font-weight: bold;
+            }
+
+            .content input[type="text"],
+            .content textarea,
+            .content input[type="date"] {
+                width: 100%;
+                padding: 5px;
+                margin-bottom: 10px;
+            }
+
+            .content input[type="submit"] {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+            .content input[type="submit"]:hover {
+                background-color: #0056b3;
             }
         </style>
     </head>
@@ -56,39 +77,27 @@
         <div class="header">
             <h1>Fragrance World</h1>
             <div class="nav">
-                <span>Dashboard</span>
-
+                <a href="dashboard">Dashboard</a>
+                <span> | </span>
+                <a href="listsaleevent">Sale Event Management</a>
+                <span> | </span>
+                <span>Update Sale Event</span>
             </div>
         </div>
-
         <div class="content">
-            <div class="content_user">
-                <h2>User Management</h2>
-                <h3>Customer</h3>
-                <ul>
-                    <li><a href="listcustomer">List of customers</a></li>
-                </ul>
-                <h3>Staff</h3>
-                <ul>
-                    <li><a href="liststaff">List of Staff</a></li>
-                    <li><a href="addstaff">Add a new Staff</a></li>
-                </ul>
-            </div>
-            <div class="content_prodcut">
-                <h2>Product Management</h2>
-                <h3>Product</h3>
-                <ul>
-                    <li><a href="listproduct">List of product</a></li>
-                    <li><a>Add product</a></li>
-                    <li><a href="#">Warehouse</a></li>
-                </ul>
-                <h3>Sale event</h3>
-                <ul>
-                    <li><a href="listsaleevent">List of promotional programs</a></li>
-                    <li><a href="#">Add promotion</a></li>
-                    <li><a href="#">Set product discounts</a></li>
-                </ul>
-            </div>
+            <c:set var="e" value="${requestScope.event}"></c:set>
+            <form action="updatesaleevent" method="post">
+                <input type="text" name="sid" value="${e.sid}" hidden=""><br>
+                <label>Title: </label>
+                <input type="text" name="title" value="${e.title}"><br>
+                <label>Content: </label>
+                <textarea name="content" rows="3" >${e.eventcontent}</textarea><br>
+                <label>Start Date: </label>
+                <input type="date" name="startdate" value="${e.startdate}"><br>
+                <label>End Date: </label>
+                <input type="date" name="enddate" value="${e.enddate}"><br>
+                <input class="btn btn-primary" type="submit" value="Update">
+            </form>
         </div>
     </body>
 </html>

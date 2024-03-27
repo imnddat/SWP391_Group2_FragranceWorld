@@ -10,16 +10,16 @@ package modeladmin;
  */
 public class Sale {
     private int sid;
-    private Products product;
+    private int pid;
     private int discount;
     private String content;
 
     public Sale() {
     }
 
-    public Sale(int sid, Products product, int discount, String content) {
+    public Sale(int sid, int pid, int discount, String content) {
         this.sid = sid;
-        this.product = product;
+        this.pid = pid;
         this.discount = discount;
         this.content = content;
     }
@@ -32,12 +32,12 @@ public class Sale {
         this.sid = sid;
     }
 
-    public Products getProduct() {
-        return product;
+    public int getPid() {
+        return pid;
     }
 
-    public void setProduct(Products product) {
-        this.product = product;
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
     public int getDiscount() {
@@ -55,6 +55,4 @@ public class Sale {
     public void setContent(String content) {
         this.content = content;
     }
-    
-    
 }

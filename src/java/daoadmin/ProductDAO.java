@@ -4,6 +4,8 @@
  */
 package daoadmin;
 
+import Model.Sale;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -263,18 +265,161 @@ public class ProductDAO extends DBContext {
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 SaleEvent se = new SaleEvent();
                 se.setSid(rs.getInt("sid"));
                 se.setTitle(rs.getString("title"));
                 se.setEventcontent(rs.getString("eventcontent"));
                 se.setStartdate(rs.getDate("startdate"));
-                se.setEndate(rs.getDate("enddate"));
+                se.setEnddate(rs.getDate("enddate"));
                 list.add(se);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return list;
+    }
+
+    //get sale event by id
+    public SaleEvent getSaleEventById(int sid) {
+        String sql = "SELECT [sid]\n"
+                + "      ,[title]\n"
+                + "      ,[eventcontent]\n"
+                + "      ,[startdate]\n"
+                + "      ,[enddate]\n"
+                + "  FROM [dbo].[SaleEvent]\n"
+                + "  where sid = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, sid);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                SaleEvent s = new SaleEvent(rs.getInt("sid"), rs.getString("title"), rs.getString("eventcontent"), rs.getDate("startdate"), rs.getDate("enddate"));
+                return s;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    //create new sale event
+    public void addNewSaleEvent(SaleEvent s) {
+        String sql = "INSERT INTO [dbo].[SaleEvent]\n"
+                + "           ([title]\n"
+                + "           ,[eventcontent]\n"
+                + "           ,[startdate]\n"
+                + "           ,[enddate])\n"
+                + "     VALUES (?,?,?,?) ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, s.getTitle());
+            st.setString(2, s.getEventcontent());
+            st.setDate(3, s.getStartdate());
+            st.setDate(4, s.getEnddate());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    //delete product
+    public void deleteSaleEvent(int sid) {
+        String sql = "DELETE FROM [dbo].[SaleEvent]\n"
+                + "      WHERE id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, sid);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    //update sale event
+    public void updateSaleEvent(SaleEvent s) {
+        String sql = "UPDATE [dbo].[SaleEvent]\n"
+                + "   SET [title] = ?\n"
+                + "      ,[eventcontent] = ?\n"
+                + "      ,[startdate] = ?\n"
+                + "      ,[enddate] = ?\n"
+                + " WHERE sid = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, s.getTitle());
+            st.setString(2, s.getEventcontent());
+            st.setDate(3, s.getStartdate());
+            st.setDate(4, s.getEnddate());
+            st.setInt(5, s.getSid());
+            st.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    //search sale event
+    public List<SaleEvent> searchSaleEvent(String key, Date from, Date to) {
+        List<SaleEvent> list = new ArrayList<>();
+        String sql = "SELECT [sid]\n"
+                + "      ,[title]\n"
+                + "      ,[eventcontent]\n"
+                + "      ,[startdate]\n"
+                + "      ,[enddate]\n"
+                + "  FROM [dbo].[SaleEvent]\n"
+                + "  where 1 = 1 ";
+        if (key != null && !key.equals("")) {
+            sql += " and title like N'%" + key + "%'";
+        }
+        if (from != null) {
+            sql += " and startdate>='" + from + "'";
+        }
+        if (to != null) {
+            sql += " and startdate<='" + to + "'";
+        }
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                SaleEvent se = new SaleEvent();
+                se.setSid(rs.getInt("sid"));
+                se.setTitle(rs.getString("title"));
+                se.setEventcontent(rs.getString("eventcontent"));
+                se.setStartdate(rs.getDate("startdate"));
+                se.setEnddate(rs.getDate("enddate"));
+                list.add(se);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    //get list product by sid
+    public List<Products> getListProductSale(int sid) {
+        List<Products> list = new ArrayList<>();
+        String sql = "select p.*, s.* \n"
+                + "from Products p\n"
+                + "join Sale s on p.id = s.productID\n"
+                + "where s.sid = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, sid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Sale s = new Sale();
+                s.setProductID(rs.getInt("productID"));
+               
+                Products product = new Products();
+                product.setNameProduct(rs.getString("nameProduct"));
+                product.setCodeProduct(rs.getString("codeProduct"));
+                product.setDefaultImg(rs.getString("defaultImg"));
+                int discount = rs.getInt("discount");
+                list.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
         return list;
     }
 

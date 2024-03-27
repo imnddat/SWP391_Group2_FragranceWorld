@@ -4,12 +4,15 @@
     Author     : NguyenDucDat
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- set the encoding of your site -->
+        <meta charset="utf-8">
+        <!-- set the viewport width and initial-scale on mobile devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><!-- comment -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -133,9 +136,9 @@
                 <label>Brand: </label>
                 <select name="brand">
                     <c:forEach items="${requestScope.brands}" var="b">
-                        <option value="${b.id}">${b.name}</option>    
+                        <option value="${b.getId()}">${b.name}</option>    
                     </c:forEach>
-                </select> <br>
+                </select> <br>  
                 <label>Gender: </label>
                 <select name="gender">
                     <c:forEach items="${requestScope.genders}" var="g">

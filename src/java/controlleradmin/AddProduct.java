@@ -12,8 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -68,6 +70,9 @@ public class AddProduct extends HttpServlet {
             throws ServletException, IOException {
         ProductDAO pd = new ProductDAO();
         List<Brand> listb = pd.getAllBrand();
+        for (Brand brand : listb) {
+            System.out.println(brand);
+        }
         List<Gender> listg = pd.getAllGender();
         request.setAttribute("genders", listg);
         request.setAttribute("brands", listb);
@@ -86,13 +91,45 @@ public class AddProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Xử lý dữ liệu gửi từ biểu mẫu HTML
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String code = request.getParameter("code");
-        int brandId = Integer.parseInt(request.getParameter("brand"));
-        int genderId = Integer.parseInt(request.getParameter("gender"));
-        String scent = request.getParameter("scent");
-        String defaultImg = ""; 
+        // Lấy dữ liệu từ trường name
+        Part namePart = request.getPart("name");
+        InputStream nameStream = namePart.getInputStream();
+        BufferedReader nameReader = new BufferedReader(new InputStreamReader(nameStream));
+        String name = nameReader.readLine();
+        
+        //description
+        Part descriptionPart = request.getPart("description");
+        InputStream descriptionStream = descriptionPart.getInputStream();
+        BufferedReader descriptionReader = new BufferedReader(new InputStreamReader(descriptionStream));
+        String description = descriptionReader.readLine();
+        
+        //code
+        Part codePart = request.getPart("code");
+        InputStream codeStream = codePart.getInputStream();
+        BufferedReader codeReader = new BufferedReader(new InputStreamReader(codeStream));
+        String code = codeReader.readLine();
+        
+        // Lấy dữ liệu từ trường brand
+        Part brandPart = request.getPart("brand");
+        InputStream brandStream = brandPart.getInputStream();
+        BufferedReader brandReader = new BufferedReader(new InputStreamReader(brandStream));
+        String brandValue = brandReader.readLine();
+        int brandId = Integer.parseInt(brandValue);
+       
+        // Lấy dữ liệu từ trường gender
+        Part genderPart = request.getPart("gender");
+        InputStream genderStream = genderPart.getInputStream();
+        BufferedReader genderReader = new BufferedReader(new InputStreamReader(genderStream));
+        String genderValue = genderReader.readLine();
+        int genderId = Integer.parseInt(genderValue);
+        
+        // Lấy dữ liệu từ trường scent
+        Part scentPart = request.getPart("scent");
+        InputStream scentStream = scentPart.getInputStream();
+        BufferedReader scentReader = new BufferedReader(new InputStreamReader(scentStream));
+        String scent = scentReader.readLine();
+        System.out.println(brandId + genderId + name + code + scent);
+        String defaultImg = "";
 
         // Xử lý tệp hình ảnh
         Part filePart = request.getPart("image");
@@ -113,7 +150,6 @@ public class AddProduct extends HttpServlet {
         product.setDescription(description);
         product.setCodeProduct(code);
 
-        
         Brand brand = new Brand();
         brand.setId(brandId);
         product.setBrand(brand);
@@ -125,11 +161,10 @@ public class AddProduct extends HttpServlet {
         product.setScent(scent);
         product.setDefaultImg(defaultImg);
 
-       
         ProductDAO pd = new ProductDAO();
         pd.addProduct(product);
 
-        response.sendRedirect("listproduct"); 
+        response.sendRedirect("listproduct");
     }
 
     /**

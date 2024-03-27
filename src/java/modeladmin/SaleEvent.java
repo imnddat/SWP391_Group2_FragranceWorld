@@ -5,6 +5,8 @@
 package modeladmin;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,17 +17,18 @@ public class SaleEvent {
     private String title;
     private String eventcontent;
     private Date startdate;
-    private Date endate;
-
+    private Date enddate;
+    private List<Products> products = new ArrayList<>();
+    
     public SaleEvent() {
     }
 
-    public SaleEvent(int sid, String title, String eventcontent, Date startdate, Date endate) {
+    public SaleEvent(int sid, String title, String eventcontent, Date startdate, Date enddate) {
         this.sid = sid;
         this.title = title;
         this.eventcontent = eventcontent;
         this.startdate = startdate;
-        this.endate = endate;
+        this.enddate = enddate;
     }
 
     public int getSid() {
@@ -60,13 +63,19 @@ public class SaleEvent {
         this.startdate = startdate;
     }
 
-    public Date getEndate() {
-        return endate;
+    public Date getEnddate() {
+        return enddate;
     }
 
-    public void setEndate(Date endate) {
-        this.endate = endate;
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
     }
-    
-    
+
+    public List<Products> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Products> products) {
+        this.products = products;
+    }
 }

@@ -44,7 +44,54 @@
                 margin-left: 10%;
                 margin-right: 10%;
             }
+
+            .content {
+                padding: 20px;
+            }
+
+            .content_search {
+                margin-bottom: 20px;
+            }
+
+            .content_search form {
+                margin-bottom: 10px;
+            }
+
+            .content_search input[type="text"],
+            .content_search input[type="date"],
+            .content_search input[type="submit"] {
+                margin-bottom: 10px;
+            }
+
+            .content_table table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .content_table th, .content_table td {
+                padding: 8px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            .content_table th {
+                background-color: #f2f2f2;
+            }
+
+            .content_table a {
+                text-decoration: none;
+/*                color: #333;*/
+                margin-right: 10px;
+            }
+            
         </style>
+        <script type="text/javascript">
+            function doDelete(id) {
+                if (confirm("are U sure to delete sale event with id =" + id)) {
+                    window.location = "deletesaleevent?id=" + id;
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="header">
@@ -52,36 +99,42 @@
             <div class="nav">
                 <a href="dashboard">Dashboard</a>
                 <span> | </span>
-                <span> Sale event</span>
+                <span> Sale Event</span>
             </div>
         </div>
 
-        <a href="#">Add new sale event</a>
-
         <div class="content">
             <div class="content_search">
-                <form>
-
+                <form accept-charset="UTF-8">
+                    <input type="text" name="key" placeholder="Input Title"><br>
+                    <label>From: </label> <input type="date" name="fromdate"> <br>
+                    <label>To: </label> <input type="date" name="todate"> <br>
+                    <input class="btn btn-primary" type="submit" value="Search">
                 </form>
             </div>
+
+            <a href="addsaleevent">Add new sale event</a>
+
             <div class="content_table">
                 <table>
                     <tr>
                         <th>#</th>
                         <th>Title</th>
-                        <th>Description</th>
                         <th>Date</th>
-
+                        <th>Action</th>
                     </tr>
                     <c:forEach items="${requestScope.ls}" var="s" varStatus="loop">
+                        <c:set var="id" value="${s.sid}"/>
                         <tr>
                             <td>${loop.index}</td>
-                            <td>${s.title}</td>
-                            <td>${s.eventcontent}</td>
+                            <td><a href="listproductsale?id=${id}">${s.title}</a></td>
                             <td>
-                                <fmt:formatDate value="${s.startdate}" pattern="dd/MM/yyyy"/> - <fmt:formatDate value="${s.endate}" pattern="dd/MM/yyyy"/>
+                                <fmt:formatDate value="${s.startdate}" pattern="dd/MM/yyyy"/> - <fmt:formatDate value="${s.enddate}" pattern="dd/MM/yyyy"/>
                             </td>
-
+                            <td>
+                                <a href="updatesaleevent?id=${id}">Update</a> 
+                                <a href="#" onclick="doDelete('${id}')">Delete</a>
+                            </td>
                         </tr>
                     </c:forEach>
 

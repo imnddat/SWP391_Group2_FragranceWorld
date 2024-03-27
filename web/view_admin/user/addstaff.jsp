@@ -112,8 +112,10 @@
             <h2>Add New Staff</h2>
             <div class="content_add">
                 <form action="addstaff" method="post">
-                    Username: <input type="text" name="username"> <br>
-                    Password: <input type="password" name="password"> <br> 
+                    Username: <input type="text" name="username" id="username">
+                    <span id="usernameError" style="color: red;"></span><br>
+                    Password: <input type="password" name="password" id="password">
+                    <span id="passwordError" style="color: red;"></span><br>
                     Position: 
                     <select name="key">   
                         <c:forEach items="${requestScope.position}" var="c">
@@ -123,12 +125,13 @@
                     Full Name: <input type="text" name="fullname"> <br>
                     DOB: <input type="date" name="dob"> <br>
                     Address: <input type="text" name="address"> <br>
-                    Email: <input type="email" name="email"> <br>
-                    Phone: <input type="tel" name="phone"> <br>
+                    Email: <input type="email" name="email" id="email">
+                    <span id="emailError" style="color: red;"></span><br>
+                    Phone: <input type="tel" name="phone" id="phone">
+                    <span id="phoneError" style="color: red;"></span><br>
                     <input type="submit" value="Add">
                 </form>
             </div>
         </div>
-
     </body>
 </html>

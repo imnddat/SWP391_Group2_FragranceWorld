@@ -69,7 +69,6 @@
         <servlet-class>Controller.profileSetting</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>FeedbackController</servlet-name>
         <servlet-class>Controller.FeedbackController</servlet-class>
     </servlet>
@@ -84,8 +83,8 @@
     <servlet>
         <servlet-name>VerifyOTPServlet</servlet-name>
         <servlet-class>Controller.VerifyOTPServlet</servlet-class>
-         </servlet>
- <servlet>
+    </servlet>
+    <servlet>
         <servlet-name>ListCustomer</servlet-name>
         <servlet-class>controlleradmin.ListCustomer</servlet-class>
     </servlet>
@@ -132,11 +131,26 @@
     <servlet>
         <servlet-name>Dashboard</servlet-name>
         <servlet-class>controlleradmin.Dashboard</servlet-class>
-
     </servlet>
     <servlet>
         <servlet-name>ListSaleEvent</servlet-name>
         <servlet-class>controlleradmin.ListSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.DeleteSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.AddSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.UpdateSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProductSale</servlet-name>
+        <servlet-class>controlleradmin.ListProductSale</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -210,7 +224,6 @@
         <url-pattern>/profilesetting</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>FeedbackController</servlet-name>
         <url-pattern>/FeedbackController</url-pattern>
     </servlet-mapping>
@@ -225,7 +238,7 @@
     <servlet-mapping>
         <servlet-name>VerifyOTPServlet</servlet-name>
         <url-pattern>/verifyotp</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListCustomer</servlet-name>
         <url-pattern>/listcustomer</url-pattern>
@@ -273,11 +286,26 @@
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListSaleEvent</servlet-name>
         <url-pattern>/listsaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSaleEvent</servlet-name>
+        <url-pattern>/seletesaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSaleEvent</servlet-name>
+        <url-pattern>/addsaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSaleEvent</servlet-name>
+        <url-pattern>/updatesaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProductSale</servlet-name>
+        <url-pattern>/listproductsale</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

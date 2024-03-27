@@ -100,7 +100,5 @@ public class Products {
     public String toString() {
         return "Products{" + "id=" + id + ", description=" + description + ", gender=" + gender + ", nameProduct=" + nameProduct + ", codeProduct=" + codeProduct + ", scent=" + scent + ", brand=" + brand + ", defaultImg=" + defaultImg + '}';
     }
-
-    
     
 }

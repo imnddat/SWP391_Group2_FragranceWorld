@@ -85,6 +85,7 @@ public class AddStaff extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String pid_raw = request.getParameter("key");
+        System.out.println(username + password + fullname);
         Date dob;
         int pid;
         UserDAO ud = new UserDAO();
