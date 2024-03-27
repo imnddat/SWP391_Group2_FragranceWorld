@@ -451,6 +451,7 @@ public class UserDAO extends DBContext {
 
         return false;
     }
+   
 
     public boolean checkPhoneInDatabase(String phone) {
         String sql = "SELECT COUNT(*) FROM User WHERE phone = ?";
