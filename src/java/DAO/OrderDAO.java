@@ -199,6 +199,15 @@ public class OrderDAO extends DBConnection {
         return page;
     }
     
+    public void cancelOrder(int orderId){
+        String query = "UPDATE [dbo].[Order] SET [status] = 'cancel' WHERE id = ?;";
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, Integer.toString(orderId));
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Error in OrderDAO:cancelOrder: \n" + e.toString());
+        }
+    }
     public static void main(String[] args) {
     }
 }

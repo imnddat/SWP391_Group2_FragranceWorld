@@ -50,61 +50,7 @@
                         </div>
 
                         <div id="content">
-                            <div class="row border rowItem">
-                                <div class="col-xs-12 col-sm-1">
-                                    <strong class="product-name">1</strong>
-                                </div>
-                                <div class="col-xs-12 col-sm-4">
-                                    <div class="row rowItem">
-                                        <div class="col-xs-12 col-sm-3">
-                                            <div class="img-holder">
-                                                <img src="images/image_2024-01-17_235614124.png" alt="image description">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-9">
-                                            <strong class="product-name">
-                                                Nước hoa a
-                                            </strong>
-                                        </div>
-                                    </div>
-                                    <!-- item2 -->
-                                    <div class="row rowItem">
-                                        <div class="col-xs-12 col-sm-3">
-                                            <div class="img-holder">
-                                                <img src="images/image_2024-01-17_235614124.png" alt="image description">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-9">
-                                            <strong class="product-name">
-                                                Nước hoa b
-                                            </strong>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-1">
-                                    <strong class="product-name">100.000</strong>
-                                </div>
-                                <div class="col-xs-12 col-sm-2">
-                                    <strong class="product-name">
-                                        13/03/2024
-                                    </strong>
-                                </div>
-                                <div class="col-xs-12 col-sm-2">
-                                    <strong class="product-name">
-                                        Pay in Cash
-                                    </strong>
-                                </div>
-                                <div class="col-xs-12 col-sm-1">
-                                    <strong class="product-name">
-                                        Complete
-                                    </strong>
-                                </div>
-                                <div class="col-xs-12 col-sm-1">
-                                    <strong class="product-name">
-                                        <button>Detail</button>
-                                    </strong>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="row rowItem">
                             <div class="col-xs-12 col-sm-10"></div>
