@@ -65,9 +65,7 @@
         </style>
     </head>
     <body>
-        <jsp:include page="panner.jsp"/>
-        <div class="main">
-            <div class="container" style="align-self: center; min-height: 50vh"> 
+      
                 <div class="form-container">
                     <h2>Enter OTP to Reset Password</h2>
                     <% String error = (String) request.getAttribute("error");
@@ -87,14 +85,7 @@
 
                     <a href="ForgotPassword.jsp">Back to Forgot Password</a>
                 </div>
-            </div>
-        </div>
-        <jsp:include page="footer.jsp"/>
-        <!-- include jQuery -->
-        <script src="js/jquery.js"></script>
-        <!-- include jQuery -->
-        <script src="js/plugins.js"></script>
-        <!-- include jQuery -->
-        <script src="js/jquery.main.js"></script>
+          
+      
     </body>
 </html>
