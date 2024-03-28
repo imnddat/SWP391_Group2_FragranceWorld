@@ -875,7 +875,7 @@ public class ProductDAO extends DBConnection {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Gender gender = null;
-        String sql = "select * from Products where genderID = " + gid;
+        String sql = "SELECT * FROM [SWPgroup2].[dbo].[Products] where genderID =  " + gid;
         try {
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();

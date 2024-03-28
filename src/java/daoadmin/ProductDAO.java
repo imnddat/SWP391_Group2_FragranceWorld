@@ -30,7 +30,7 @@ public class ProductDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Gender g = new Gender(rs.getInt("id"), rs.getString("gendername"));
+                Gender g = new Gender(rs.getInt("id"), rs.getString("gender"));
                 list.add(g);
             }
         } catch (SQLException e) {
@@ -42,7 +42,7 @@ public class ProductDAO extends DBContext {
     //Get Gender by id
     public Gender getGenderById(int id) {
         String sql = "SELECT [id]\n"
-                + "      ,[gendername]\n"
+                + "      ,[gender]\n"
                 + "  FROM [dbo].[Gender]\n"
                 + "  where id = ?";
         try {
@@ -50,7 +50,7 @@ public class ProductDAO extends DBContext {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Gender g = new Gender(rs.getInt("id"), rs.getString("gendername"));
+                Gender g = new Gender(rs.getInt("id"), rs.getString("gender"));
                 return g;
             }
         } catch (SQLException e) {

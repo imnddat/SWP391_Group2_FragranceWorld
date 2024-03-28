@@ -14,7 +14,9 @@
                                 <span class="bar small"></span>
                                 <span class="bar"></span>
                             </a>
-                        </li>                                  
+                        </li> 
+                        <!-- search -->
+                        <li><a href="#" class="icon-magnifier"></a></li>
                         <li class="drop">
                             <%--                            <c:set var="wsize" value="${empty sessionScope.wishlistsize ? 0 : sessionScope.wishlistsize}"/>
                                                         <a href="#" class="icon-heart wishlist-opener"><span style="margin-bottom: -3px;" class="num" id="wishlist-size">${wsize}</span></a>--%>
@@ -314,8 +316,30 @@
         </c:if>
         <!-- mt side widget end here -->
     </div>
+
     <!-- mt holder end here -->
 </div><!-- mt side menu end here -->
+
+
+<!-- mt search popup start here -->
+<div class="mt-search-popup">
+    <div class="mt-holder">
+        <a href="#" class="search-close"><span></span><span></span></a>
+        <div class="mt-frame">
+
+            <fieldset>
+                <form action="ListProductViewController" id="searchbyName" method="GET">
+                    <input type="text" placeholder="Search..." name="searchbyName" value="${searchbyNames}">
+                    <span class="icon-microphone"></span>
+                    <button type="submit">Search By Name</button>
+<!--                    <button class="icon-magnifier" type="submit"></button>-->
+                </form>
+            </fieldset>
+
+        </div>
+    </div>
+</div><!-- mt search popup end here -->
+
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>

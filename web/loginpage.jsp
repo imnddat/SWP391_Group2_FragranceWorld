@@ -91,6 +91,9 @@
                                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:9999/FragranceWorld/LoginGoogleHandler&response_type=code
                                                    &client_id=784674948217-jtonajckjip23ebqt8c642n4g655gao2.apps.googleusercontent.com&approval_prompt=force" class="btn-type1">login with google</a>
                                                 <a href="register" class="btn-type1">Register</a>
+                                                <p class="btn-type1">
+                                                        <a href="ForgotPassword.jsp" style="color: white">Forgot Password</a>
+                                                    </p>
                                             </div>
 
 
