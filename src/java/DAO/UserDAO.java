@@ -445,6 +445,42 @@ public class UserDAO extends DBConnection {
         }
         return null;
     }
+    
+    public User getUserByUsername(String username) throws Exception {
+        Connection conn = null;
+        /* Result set returned by the sqlserver */
+        ResultSet rs = null;
+        /* Prepared statement for executing sql queries */
+        PreparedStatement pre = null;
+
+        String sql = "SELECT * FROM [User] WHERE username = ?";
+        User user = null;
+        try {
+            conn = getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, username);
+            rs = pre.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getInt("id"),
+                        rs.getString("userName"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("fullname"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getInt("roleID"),
+                        rs.getInt("banned"));
+                return user;
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(pre);
+            closeConnection(conn);
+        }
+        return null;
+    }
 
     public User getUserByMail(String userMail) {
         Connection conn = null;
