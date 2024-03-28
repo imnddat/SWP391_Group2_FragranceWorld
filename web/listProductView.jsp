@@ -215,7 +215,7 @@
                                     <ul class="list-inline">
                                         <c:set var="k" value="${requestScope.searchbyName}"/> 
                                         <c:forEach begin="${1}" end="${requestScope.num}" step="1" var="i">
-                                            <li><a class="${i==page?"active":""}" href="ListProductViewController?sortType=1&id=${requestScope.id}&volumeSearchCapacity=${requestScope.volumeSearchCapacity}&productSearchScent=${requestScope.productSearchScent}&brandSortMakebyFrom=${requestScope.brandSortMakebyFrom}&brandSort=${requestScope.brandSort}&page=${i}&searchbyName=${searchbyNames}&idbrands=${param.idbrands}">${i}</a></li>      
+                                            <li><a class="${i==page?"active":""}" href="ListProductViewController?sortType=1&id=${requestScope.id}&volumeSearchCapacity=${requestScope.volumeSearchCapacity}&productSearchScent=${requestScope.productSearchScent}&brandSortMakebyFrom=${requestScope.brandSortMakebyFrom}&brandSort=${requestScope.brandSort}&page=${i}&searchbyName=${searchbyNames}">${i}</a></li>      
                                             </c:forEach> 
                                     </ul>
                                 </nav><!-- mt pagination end here -->
