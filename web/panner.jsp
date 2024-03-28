@@ -121,7 +121,7 @@
                     <nav id="nav">
                         <ul>
                             <li>
-                                <a class="" href="HomeController">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
+                                <a class="" href="${pageContext.request.contextPath}">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
 
                             </li>
                             <li class="drop">
@@ -196,13 +196,13 @@
                                                     <strong class="title"><a href="#" class="mt-subopener">PERFUME BRAND</a></strong>
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="ListProductViewController?brandID=Moncblanc">Moncblanc</a></li>
-                                                            <li><a href="ListProductViewController?brandID=Dior">Dior</a></li>
-                                                            <li><a href="ListProductViewController?brandID=Chanel">Chanel</a></li>
-                                                            <li><a href="ListProductViewController?brandID=Armaf">Armaf</a></li>
-                                                            <li><a href="ListProductViewController?brandID=Gucci">Gucci</a></li>
-                                                            <li><a href="ListProductViewController?brandID=Versace">Versace</a></li>
-                                                            <li><a href="ListProductViewController?brandID=Tom Ford">Tom Ford</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Moncblanc">Moncblanc</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Dior">Dior</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Chanel">Chanel</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Armaf">Armaf</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Gucci">Gucci</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Versace">Versace</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Tom Ford">Tom Ford</a></li>
 
                                                         </ul>
                                                     </div>
@@ -294,12 +294,7 @@
                     <span class="mt-side-subtitle">CREATE NEW ACCOUNT</span>
                     <p>Create your very own account</p>
                 </header>
-                <form action="#">
-                    <fieldset>
-                        <input type="text" placeholder="Username or email address" class="input">
-                        <button type="submit" class="btn-type1">Register</button>
-                    </fieldset>
-                </form>
+                <a href="register" class="btn-type1">Register</a>
             </div>
         </c:if>
 

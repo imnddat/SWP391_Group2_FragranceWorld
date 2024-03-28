@@ -63,6 +63,9 @@ public class Order extends HttpServlet {
             return;
         }
         OrderWithItems owi = od.getOrder(id);
+        if(owi == null){
+            response.sendRedirect("404.jsp");
+        }
         request.setAttribute("name", owi.getReciverName());
         request.setAttribute("address", owi.getAddress());
         request.setAttribute("email", owi.getEmail());

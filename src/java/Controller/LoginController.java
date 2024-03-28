@@ -99,19 +99,17 @@ public class LoginController extends HttpServlet {
                 //request.getRequestDispatcher("loginpage.jsp").forward(request, response);
             } else {
                 session.setAttribute("currentUser", user);
-                if (user.getRoleID() == 1) {
+                if (user.getRoleID() == 3) {
                     //chuyển hướng đến trang addmin
-                    //response.sendRedirect("adminHome");
-                    //request.getRequestDispatcher("adminHome.jsp").forward(request, response);
-                } else if (user.getRoleID() == 3) {
-                    //response.sendRedirect(request.getContextPath() + "/HomeController");
+                    jsonResponse.addProperty("redirectURL", request.getContextPath() + "/dashboard");
+                } else if (user.getRoleID() == 1) {
+                    //chuyển hướng cho Custommer
                     jsonResponse.addProperty("redirectURL", request.getContextPath() + "/HomeController");
-                    //request.getRequestDispatcher("view/homePage.jsp").forward(request, response);
                 }
             }
         } else {
             // Xử lý trường hợp đăng nhập không thành công
-            System.out.println("hahaah");         
+            //System.out.println("");         
             jsonResponse.addProperty("errorMessage", "Đăng nhập không thành công. Vui lòng thử lại.");
             //request.getRequestDispatcher("loginpage.jsp").forward(request, response);
         }

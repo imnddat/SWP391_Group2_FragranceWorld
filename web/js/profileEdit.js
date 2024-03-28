@@ -82,19 +82,33 @@ document.getElementById("saveButton").onclick = function () {
                 alert("Update thành công");
                 location.reload(); // Reset lại trang
             } else {
-                $("#username-alert").text(response.usernamealert);
-                $("#fullName-alert").text(response.fullNamealert);
-                $("#email-alert").text(response.emailalert);
-                $("#phone-alert").text(response.phonealert);
-                $("#adress-alert").text(response.addressalert);
+                if (response.usernamealert) {
+                    $("#username-alert").text(response.usernamealert);
+                    //hiển thị alert
+                    console.log("toi o day nhe");
+                    document.getElementById("username-alert").style.display = "inline-block";
+                }
+                if (response.fullNamealert) {
+                    $("#fullName-alert").text(response.fullNamealert);
+                    //hiển thị alert
+                    document.getElementById("fullName-alert").style.display = "inline-block";
+                }
+                if (response.emailalert) {
+                    $("#email-alert").text(response.emailalert);
+                    //hiển thị alert
+                    document.getElementById("email-alert").style.display = "inline-block";
+                }
+                if (response.phonealert) {
+                    $("#phone-alert").text(response.phonealert);
+                    //hiển thị alert
+                    document.getElementById("phone-alert").style.display = "inline-block";
+                }
+                if (response.addressalert) {
+                    $("#adress-alert").text(response.addressalert);
+                    //hiển thị alert
+                    document.getElementById("adress-alert").style.display = "inline-block";
+                }
 
-                //hiển thị alert
-                document.getElementById("username-alert").style.display = "inline-block";
-                document.getElementById("fullName-alert").style.display = "inline-block";
-                document.getElementById("email-alert").style.display = "inline-block";
-                document.getElementById("phone-alert").style.display = "inline-block";
-                document.getElementById("adress-alert").style.display = "inline-block";
-                // Xử lý trường hợp khác nếu cần
                 // Ví dụ: Hiển thị thông báo lỗi
                 console.error("Update không thành công: " + response);
             }

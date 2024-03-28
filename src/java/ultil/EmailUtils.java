@@ -1,4 +1,5 @@
 package ultil;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -8,13 +9,11 @@ import java.util.Properties;
 import java.util.Random;
 import javax.mail.*;
 import javax.mail.internet.*;
-/**
- *
- * @author NGUYEN MINH
- */
+
 public class EmailUtils {
-     private static final String EMAIL_USERNAME = "";
-    private static final String EMAIL_PASSWORD = "";
+
+    private static final String EMAIL_USERNAME = "thinhlcthe173302@fpt.edu.vn";
+    private static final String EMAIL_PASSWORD = "nejc lcjq wsaj zoka";
 
     public static void sendEmail(String recipientEmail, String subject, String body) {
         // Set up mail server properties
@@ -47,7 +46,7 @@ public class EmailUtils {
             System.err.println("Failed to send the email to " + recipientEmail);
         }
     }
-    
+
     // Define the characters to choose from (64 unique characters)
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 

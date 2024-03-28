@@ -101,6 +101,7 @@ public class ViewAllOrders extends HttpServlet {
             response.getWriter().write(json);
         } catch (Exception e) {
         }
+
     }
 
     /**

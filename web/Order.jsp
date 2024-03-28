@@ -69,7 +69,7 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="txt-holder">
                                     <div class="text-wrap txt text-right pull-right">
-                                        <button onclick="modifyOrder()"><i class="fas fa-edit" style="color: blue;"></i></button>
+                                        <!--<button onclick="modifyOrder()"><i class="fas fa-edit" style="color: blue;"></i></button>-->
                                         <button onclick="cancelOrder()"><i class="fa-solid fa-ban" style="color: red;"></i></button>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                                     <strong class="title">ORDER ID</strong>
                                                 </div>
                                                 <div class="text-wrap txt text-right pull-right">
-                                                    <strong class="title">${requestScope.orderid}</strong>
+                                                    <strong id="orderId" class="title">${requestScope.orderid}</strong>
                                                 </div>
                                             </div>
                                         </li>

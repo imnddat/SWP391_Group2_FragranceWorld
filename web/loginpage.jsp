@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <!-- set the viewport width and initial-scale on mobile devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SWPgroup2</title>
+        <title>Login</title>
         <!-- include the site stylesheet -->
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
         <!-- include the site stylesheet -->
@@ -54,6 +54,7 @@
                         <div class="col-xs-12">
                             <div class="txt">
                                 <h2>login</h2>
+
                             </div>
                         </div>
                     </div>
@@ -89,7 +90,7 @@
                                                 <button type="submit" class="btn-type1">Login</button>
                                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:9999/FragranceWorld/LoginGoogleHandler&response_type=code
                                                    &client_id=784674948217-jtonajckjip23ebqt8c642n4g655gao2.apps.googleusercontent.com&approval_prompt=force" class="btn-type1">login with google</a>
-                                                <a href="registerpage.jsp"> <button type="submit" class="btn-type1">Register Me</button></a>
+                                                <a href="register" class="btn-type1">Register</a>
                                             </div>
 
 
