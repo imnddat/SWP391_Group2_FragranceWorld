@@ -111,8 +111,7 @@ public class ListProductViewController extends HttpServlet {
                 bvalues.add(id_raw[i]);
             }
         }
-
-        req.setAttribute("bvalues", bvalues);
+        
         // ProductDAO pb = new ProductDAO();
         //ArrayList<Product> listcheckbrand = pb.checkBoxBrand(idbrands);
         //req.setAttribute("listcheckbrand", listcheckbrand);
@@ -125,10 +124,8 @@ public class ListProductViewController extends HttpServlet {
             } else {
                 cid[i] = false;
             }
-
         }
-        req.setAttribute("listbrand", listbrand);
-        req.setAttribute("cid", cid);
+       
 
         //  String paramndex = req.getParameter("index")== null ? "1" : req.getParameter("index");
         //String genderSearch = req.getParameter("id");
@@ -149,9 +146,9 @@ public class ListProductViewController extends HttpServlet {
             ArrayList<Product> list1 = dao.getALLProductByGender(genderSearch, volumeSearchCapacity, productSearchScent, brandSortMakebyFrom, brandSort, sortType, idbrands, searchbyName, minP, maxP);
 
 //            list1 = dao.getListByPage(list1, bid, bid);
-            int page = 0, numberpage = 3;
+            int page = 0, numberpage = 6;
             int size = list1.size();
-            int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);
+            int num = (size % 6 == 0 ? (size / 6) : ((size / 6)) + 1);
             System.out.println(size);
 
             if (xpage == null) {
@@ -177,6 +174,9 @@ public class ListProductViewController extends HttpServlet {
             req.setAttribute("idbrands", idbrands);
             req.setAttribute("searchbyName", searchbyName);
             req.setAttribute("filter", filter);
+            req.setAttribute("listbrand", listbrand);
+            req.setAttribute("cid", cid);
+            req.setAttribute("bvalues", bvalues);
 
             req.getRequestDispatcher("listProductView.jsp").forward(req, resp);
 //

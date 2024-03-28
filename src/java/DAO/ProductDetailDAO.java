@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class ProductDetailDAO extends DBConnection {
 
     public ProductDetailDAO() {
-        super("jdbc:sqlserver://localhost:1433;databaseName=SWPgroup2", "sa", "123");
+        super("jdbc:sqlserver://localhost:1433;databaseName=SWPgroup2", "sa", "123456");
     }
 
     public List<List<String>> executeSQL(String query) {

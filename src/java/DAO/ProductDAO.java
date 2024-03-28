@@ -414,8 +414,7 @@ public class ProductDAO extends DBConnection {
         }
         sql += "  and p.id in (select v.[productID] from Volume v where v.[capacity] like '%" + volumeSearchCapacity + "%' and v.price between " + minP + " and " + maxP + " ) " + sortTypeString;
         // + order by
-        System.out.println(sql);
-
+        
         try {
             //set biến
             stm = connection.prepareStatement(sql);
