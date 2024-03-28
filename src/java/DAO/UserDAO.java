@@ -43,7 +43,7 @@ import java.text.SimpleDateFormat;
  * @author Thinkpad
  */
 public class UserDAO extends DBConnection {
-    
+
     public ArrayList<User> getUserAllUser() throws Exception {
         ArrayList<User> newUserList = new ArrayList();
         Connection conn = null;
@@ -177,6 +177,29 @@ public class UserDAO extends DBConnection {
 //            System.out.println("Failed to register user.");
 //        }
 //        }
+    public boolean checkUsernameExists(String username) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean exists = false;
+        try {
+            String sql = "SELECT COUNT(*) FROM [dbo].[User] u where u.username = ?";
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                exists = rs.getInt(1) > 0; // Kiểm tra số lượng bản ghi trả về
+            }
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
     public boolean checkOldPassword(String username, String oldPassword) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -311,51 +334,50 @@ public class UserDAO extends DBConnection {
     public boolean verifyOTP(String email, String submittedOtp) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try(Connection conn = new DBConnection().getConnection()) {
+        try ( Connection conn = new DBConnection().getConnection()) {
             String sql = "SELECT [otp],[otp_expiry] FROM [dbo].[User] where email = ?";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-            String storedOtp = rs.getString("otp");
-            Timestamp otpExpiry = rs.getTimestamp("otp_expiry");
-            Date currentTime = new Date(System.currentTimeMillis());
-            
-            if (storedOtp.equals(submittedOtp) && currentTime.before(otpExpiry)) {
-                return true;
-            }
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return false;
-}
-
-    public String verifyOTP1(String email, String submittedOtp) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            String sql = "SELECT [otp],[otp_expiry] FROM [dbo].[User] where email = ?";
-            conn = new DBConnection().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
             if (rs.next()) {
                 String storedOtp = rs.getString("otp");
-                Date otpExpiry = rs.getDate("otp_expiry");
+                Timestamp otpExpiry = rs.getTimestamp("otp_expiry");
                 Date currentTime = new Date(System.currentTimeMillis());
-                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
-                String formattedDate = sdf.format(currentTime);
-                    return formattedDate + "";
-               
+
+                if (storedOtp.equals(submittedOtp) && currentTime.before(otpExpiry)) {
+                    return true;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 
+//    public String verifyOTP1(String email, String submittedOtp) {
+//        Connection conn = null;
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        try {
+//            String sql = "SELECT [otp],[otp_expiry] FROM [dbo].[User] where email = ?";
+//            conn = new DBConnection().getConnection();
+//            ps = conn.prepareStatement(sql);
+//            ps.setString(1, email);
+//            rs = ps.executeQuery();
+//            if (rs.next()) {
+//                String storedOtp = rs.getString("otp");
+//                Date otpExpiry = rs.getDate("otp_expiry");
+//                Date currentTime = new Date(System.currentTimeMillis());
+//                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+//                String formattedDate = sdf.format(currentTime);
+//                    return formattedDate + "";
+//               
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
     public boolean updatePassword(String email, String newPassword) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -406,7 +428,7 @@ public class UserDAO extends DBConnection {
                         rs.getInt("banned"));
             }
         } catch (SQLException ex) {
-        } 
+        }
         return null;
     }
 

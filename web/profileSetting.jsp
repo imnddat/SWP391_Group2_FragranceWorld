@@ -166,10 +166,12 @@
                                                 <%-- Submit form --%>
                                                 <div class="row">
                                                     <div class="col-md-4"></div>
-                                                    <div class="col-md-4">
-                                                        <button type="submit" class="btn btn-success">Change password!</button>
-                                                        <button type="button" class="btn btn-default">Cancel</button>
-
+                                                    <div class="col-md-4"  style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex;">
+                                                        <button type="submit" class="btn btn-success" >Change password!</button>
+                                                        <button type="button" class="btn btn-default" >Cancel</button>
+                                                        </div>
+                                                        
                                                         <button type="submit" name="forgot" class="btn btn-success"><a href="ForgotPassword.jsp">Forgot password</a></button>
                                                     </div>
                                                     <div class="col-md-4"></div>
