@@ -234,11 +234,13 @@
                                 <a class="drop-link" href="blog-right-sidebar.html">Blog(LS) <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
                                 <div class="s-drop">
                                     <ul>
-                                        <li><a href="blog-fullwidth-page.html">Blog ve dior</a></li>
-                                        <li><a href="blog-right-sidebar2.html">blog ve gucci</a></li>
-                                        <li><a href="blog-postlist-3-masonry.html">blog postlist masonry</a></li>
-                                        <li><a href="blog-post-detail-sidebar.html">blog post detail sidebar</a></li>
-                                        <li><a href="blog-post-detail-full-width.html">blog post detail full width</a></li>
+                                        <li><a href="BlogDior.jsp">Dior Blog</a></li>
+                                        <li><a href="BlogGucci.jsp">Gucci Blog</a></li>
+                                        <li><a href="BlogTomFord.jsp">Tom Ford Blog</a></li>
+                                        <li><a href="BlogGucci.jsp">Chanel Blog</a></li>
+                                        <li><a href="BlogVersace.jsp">Versace Blog</a></li>
+                                        <li><a href="BlogMoncblanc.jsp">Moncblanc Blog</a></li>
+                                        <li><a href="BlogArmaf.jsp">Armaf Blog</a></li>
                                     </ul>
                                 </div>
                             </li>
