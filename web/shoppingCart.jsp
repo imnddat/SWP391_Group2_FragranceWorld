@@ -136,7 +136,7 @@
                                         </strong>
                                     </div>
                                     <div class="col-xs-12 col-sm-2">
-                                        <strong id="totalItemPrice_${i.getProduct().getId()}" class="price"><i class="fa fa-eur"></i> ${i.getPrice()*i.getQuantity()}</strong>
+                                        <strong id="totalItemPrice_${i.getProduct().getId()}_${i.getVolume()}" class="price"><i class="fa fa-eur"></i> ${i.getPrice()*i.getQuantity()}</strong>
                                         <input type="hidden" style="text-align: center; width: 30px" type="text" value="${i.getQuantity()}" class="quantity-input" readonly>
                                         <i class="fa fa-close quantity-btn" data-action="delete" data-product-id="${i.getProduct().getId()}" data-product-price="${i.getPrice()}"></i>
                                     </div>
@@ -235,14 +235,14 @@
                                                 var action = $(this).data("action");
                                                 var productId = $(this).data("product-id");
                                                 var productPrice = $(this).data("product-price");
-                                                var productVolume = $(this).data("product-volume")
+                                                var productVolume = $(this).data("product-volume"); 
                                                 var quantityInput = $(this).siblings(".quantity-input");
-                                                var $totalItemPrice = $("#totalItemPrice_" + productId);
+                                                var $totalItemPrice = $("#totalItemPrice_" + productId + "_" + productVolume);
 
                                                 var currentQuantity = parseInt(quantityInput.val());
 
                                                 if (action === "increase") {
-                                                    var maxQuantity = 5; // Giới hạn số lượng sản phẩm là 3
+                                                    var maxQuantity = 10; // Giới hạn số lượng sản phẩm là 3
                                                     if (currentQuantity < maxQuantity) {
                                                         quantityInput.val(currentQuantity + 1);
                                                         console.log("New Quantity:", quantityInput.val());

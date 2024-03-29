@@ -20,7 +20,7 @@
                                     <li><i class="fa fa-star-o"></i></li>
                                 </ul>
                             </div>
-                            <del class="off">$115,00</del>
+                            <del class="off">$80,00</del>
                             <span class="price">$${p.getVolumes().get(0).getPrice()}</span>
                         </div>
                     </div><!-- mt product4 end here -->     
@@ -45,7 +45,7 @@
                                     <li><i class="fa fa-star-o"></i></li>
                                 </ul>
                             </div>
-                            <del class="off">$115,00</del>
+                            <del class="off">$90,00</del>
                             <span class="price">$${p.getVolumes().get(0).getPrice()}</span>
                         </div>
                     </div><!-- mt product4 end here -->     
@@ -69,7 +69,7 @@
                                     <li><i class="fa fa-star-o"></i></li>
                                 </ul>
                             </div>
-                            <del class="off">$115,00</del>
+                            <del class="off">$80,00</del>
                             <span class="price">$${p.getVolumes().get(0).getPrice()}</span>
                         </div>
                     </div><!-- mt product4 end here -->     
@@ -93,7 +93,7 @@
                                     <li><i class="fa fa-star-o"></i></li>
                                 </ul>
                             </div>
-                            <del class="off">$115,00</del>
+                            <del class="off">$80,00</del>
                             <span class="price">$${p.getVolumes().get(0).getPrice()}</span>
                         </div>
                     </div><!-- mt product4 end here -->     
