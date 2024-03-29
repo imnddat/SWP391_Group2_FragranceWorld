@@ -414,8 +414,7 @@ public class ProductDAO extends DBConnection {
         }
         sql += "  and p.id in (select v.[productID] from Volume v where v.[capacity] like '%" + volumeSearchCapacity + "%' and v.price between " + minP + " and " + maxP + " ) " + sortTypeString;
         // + order by
-        System.out.println(sql);
-
+        
         try {
             //set biến
             stm = connection.prepareStatement(sql);
@@ -876,7 +875,7 @@ public class ProductDAO extends DBConnection {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Gender gender = null;
-        String sql = "select * from Products where genderID = " + gid;
+        String sql = "SELECT * FROM [SWPgroup2].[dbo].[Products] where genderID =  " + gid;
         try {
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();

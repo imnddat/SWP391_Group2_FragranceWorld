@@ -83,20 +83,20 @@
 
                                     <span class="sub-title">Filter by Brands</span>
                                     <!-- nice-form start here -->
-                                    <c:set var="listirand" value="${requestScope.listbrand}"/> 
+                                    <c:set var="listbrand" value="${requestScope.listbrand}"/> 
                                     <c:set var="cid" value="${requestScope.cid}"/> 
                                     <form action="ListProductViewController">
                                         <ul class="list-unstyled nice-form">
-                                            <c:forEach begin="0" end="${listirand.size()-1}" var="i">
+                                            <c:forEach begin="0" end="${listbrand.size()-1}" var="i">
                                                 <li>
                                                     <label >
-                                                        <input type="checkbox" name="idbrands" value="${listirand.get(i).getId()}" 
+                                                        <input type="checkbox" name="idbrands" value="${listbrand.get(i).getId()}" 
 
                                                                <c:forEach var="b" items="${bvalues}">
-                                                                   ${b == listirand.get(i).getId() ?"checked":""}
+                                                                   ${b == listbrand.get(i).getId() ?"checked":""}
                                                                </c:forEach>
                                                                onclick="this.form.submit()"    >
-                                                        <span class="fake-label">${listirand.get(i).getName()} 
+                                                        <span class="fake-label">${listbrand.get(i).getName()} 
                                                         </span>
                                                     </label>
                                                 </li>
@@ -219,9 +219,7 @@
                                             </c:forEach> 
                                     </ul>
                                 </nav><!-- mt pagination end here -->
-
                             </div>
-
                         </div>
                     </div>
                 </main><!-- mt main end here -->

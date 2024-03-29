@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- mt logo start here -->
-                    <div class="mt-logo"><a href="#"><img src="images/mt-logo.png" alt="schon"></a></div>
+                    <div class="mt-logo"><a href="#"><img src="images/mt-logo.png" alt="schon"></a></div>  
                     <!-- mt icon list start here -->
                     <ul class="mt-icon-list">
                         <li class="hidden-lg hidden-md">
@@ -14,7 +14,9 @@
                                 <span class="bar small"></span>
                                 <span class="bar"></span>
                             </a>
-                        </li>                                  
+                        </li> 
+                        <!-- search -->
+                        <li><a href="#" class="icon-magnifier"></a></li>
                         <li class="drop">
                             <%--                            <c:set var="wsize" value="${empty sessionScope.wishlistsize ? 0 : sessionScope.wishlistsize}"/>
                                                         <a href="#" class="icon-heart wishlist-opener"><span style="margin-bottom: -3px;" class="num" id="wishlist-size">${wsize}</span></a>--%>
@@ -232,11 +234,13 @@
                                 <a class="drop-link" href="blog-right-sidebar.html">Blog(LS) <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
                                 <div class="s-drop">
                                     <ul>
-                                        <li><a href="blog-fullwidth-page.html">Blog ve dior</a></li>
-                                        <li><a href="blog-right-sidebar2.html">blog ve gucci</a></li>
-                                        <li><a href="blog-postlist-3-masonry.html">blog postlist masonry</a></li>
-                                        <li><a href="blog-post-detail-sidebar.html">blog post detail sidebar</a></li>
-                                        <li><a href="blog-post-detail-full-width.html">blog post detail full width</a></li>
+                                        <li><a href="BlogDior.jsp">Dior Blog</a></li>
+                                        <li><a href="BlogGucci.jsp">Gucci Blog</a></li>
+                                        <li><a href="BlogTomFord.jsp">Tom Ford Blog</a></li>
+                                        <li><a href="BlogGucci.jsp">Chanel Blog</a></li>
+                                        <li><a href="BlogVersace.jsp">Versace Blog</a></li>
+                                        <li><a href="BlogMoncblanc.jsp">Moncblanc Blog</a></li>
+                                        <li><a href="BlogArmaf.jsp">Armaf Blog</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -314,8 +318,30 @@
         </c:if>
         <!-- mt side widget end here -->
     </div>
+
     <!-- mt holder end here -->
 </div><!-- mt side menu end here -->
+
+
+<!-- mt search popup start here -->
+<div class="mt-search-popup">
+    <div class="mt-holder">
+        <a href="#" class="search-close"><span></span><span></span></a>
+        <div class="mt-frame">
+
+            <fieldset>
+                <form action="ListProductViewController" id="searchbyName" method="GET">
+                    <input type="text" placeholder="Search..." name="searchbyName" value="${searchbyNames}">
+                    <span class="icon-microphone"></span>
+                    <button type="submit">Search By Name</button>
+<!--                    <button class="icon-magnifier" type="submit"></button>-->
+                </form>
+            </fieldset>
+
+        </div>
+    </div>
+</div><!-- mt search popup end here -->
+
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>

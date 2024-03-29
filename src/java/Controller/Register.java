@@ -133,6 +133,14 @@ public class Register extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
             return;
         }
+        
+         if (userDAO.checkUsernameExists(username)) {
+        // Username đã tồn tại, trả về thông báo lỗi
+         mess = "This username is already taken. Please choose another one.";
+        request.setAttribute("mess", mess);
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+        return;
+    }
 
         try {
             //check if this Moblie already existed in the system

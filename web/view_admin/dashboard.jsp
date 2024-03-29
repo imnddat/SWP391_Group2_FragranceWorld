@@ -79,7 +79,7 @@
                 <h3>Product</h3>
                 <ul>
                     <li><a href="listproduct">List of product</a></li>
-                    <li><a>Add product</a></li>
+                    <li><a href="addproduct">Add product</a></li>
                     <li><a href="#">Warehouse</a></li>
                 </ul>
                 <h3>Sale event</h3>
