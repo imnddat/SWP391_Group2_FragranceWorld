@@ -245,7 +245,7 @@
                                 </div>
                             </li>
                             <!-- About us -->
-                            <li><a href="about-us.html">About</a></li>
+<!--                            <li><a href="about-us.html">About</a></li>
                             <li>
                                 <a class="drop-link" href="contact-us.html">Contact <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
                                 <div class="s-drop">
@@ -254,7 +254,7 @@
                                         <li><a href="contact-us2.html">Contact 2</a></li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li>-->
                         </ul>
                     </nav>
                     <!-- mt icon list end here -->

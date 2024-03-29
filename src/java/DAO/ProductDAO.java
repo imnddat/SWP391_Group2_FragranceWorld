@@ -414,7 +414,7 @@ public class ProductDAO extends DBConnection {
         }
         sql += "  and p.id in (select v.[productID] from Volume v where v.[capacity] like '%" + volumeSearchCapacity + "%' and v.price between " + minP + " and " + maxP + " ) " + sortTypeString;
         // + order by
-        
+
         try {
             //set biến
             stm = connection.prepareStatement(sql);
@@ -458,8 +458,9 @@ public class ProductDAO extends DBConnection {
         String sql = "  select p.id,p.description,p.genderID, p.nameProduct,p.codeProduct,\n"
                 + "p.discount,p.scent ,p.brandID,p.defaultImg,v.price\n"
                 + "  from Products p\n"
-                + " inner join Volume v on p.id = v.productID\n"
-                + " where [nameProduct] like ?  ";
+                + " inner join Volume v on p.id = v.productID where v.capacity = 30\n"
+                + " and [nameProduct] like ?  ";
+
         try {
             stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + s + "%");
@@ -893,13 +894,13 @@ public class ProductDAO extends DBConnection {
         }
         return null;
 
-    } 
- 
+    }
+
     public Sale getSaleByProductId(int saleid) {
         PreparedStatement stm = null;
         ResultSet rs = null;
-       Sale sale = null;
-        String sql = " select * from Sale where productID = ? " ;
+        Sale sale = null;
+        String sql = " select * from Sale where productID = ? ";
         try {
             stm = connection.prepareStatement(sql);
             stm.setInt(1, saleid);
@@ -909,7 +910,7 @@ public class ProductDAO extends DBConnection {
                 int productID = rs.getInt("productID");
                 int discount = rs.getInt("discount");
                 String content = rs.getString("content");
-            sale = new Sale(sid, productID, discount, content);
+                sale = new Sale(sid, productID, discount, content);
             }
             return sale;
 
@@ -1056,18 +1057,13 @@ public class ProductDAO extends DBConnection {
         }
         return null;
     }
-    
-    
 
-   
-
- 
     public ArrayList<ImageProduct> getImageProduct(int productId) {
-         PreparedStatement stm = null;
+        PreparedStatement stm = null;
         ResultSet rs = null;
         ArrayList<ImageProduct> imgproduct = new ArrayList<>();
         String sql = "SELECT [id], [path], [productID] FROM [ImageProduct] WHERE productID =" + productId;
-      
+
         try {
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
@@ -1075,7 +1071,6 @@ public class ProductDAO extends DBConnection {
                 int id = rs.getInt("id");
                 String path = rs.getString("path");
                 int productID = rs.getInt("productID");
-                
 
                 imgproduct.add(new ImageProduct(id, path, productID));
             }
@@ -1086,45 +1081,42 @@ public class ProductDAO extends DBConnection {
                     .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-       
+
     }
 
-   
     public Vector<Product> getLastProduct() {
-    PreparedStatement stm = null;
-    ResultSet rs = null;
-    Vector<Product> products = new Vector<>();
-    String sql = "SELECT TOP(10) * FROM Products p " +
-                 "LEFT JOIN Volume pr ON p.id = pr.productID " +
-                 "WHERE capacity = 30 " +
-                 "ORDER BY pr.price DESC";
-    try {
-        stm = connection.prepareStatement(sql);
-        rs = stm.executeQuery();
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String description = rs.getString("description");
-            int genderID = rs.getInt("genderID");
-            String nameProduct = rs.getString("nameProduct");
-            String codeProduct = rs.getString("codeProduct");
-            int discount = rs.getInt("discount");
-            String scent = rs.getString("scent");
-            int brandID = rs.getInt("brandID");
-            String defaultImg = rs.getString("defaultImg");
-            ArrayList<Volume> listV = getVolumesByProductId(id);
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Vector<Product> products = new Vector<>();
+        String sql = "SELECT TOP(10) * FROM Products p "
+                + "LEFT JOIN Volume pr ON p.id = pr.productID "
+                + "WHERE capacity = 30 "
+                + "ORDER BY pr.price DESC";
+        try {
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String description = rs.getString("description");
+                int genderID = rs.getInt("genderID");
+                String nameProduct = rs.getString("nameProduct");
+                String codeProduct = rs.getString("codeProduct");
+                int discount = rs.getInt("discount");
+                String scent = rs.getString("scent");
+                int brandID = rs.getInt("brandID");
+                String defaultImg = rs.getString("defaultImg");
+                ArrayList<Volume> listV = getVolumesByProductId(id);
 
-            products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, listV));
+                products.add(new Product(id, description, genderID, nameProduct, codeProduct, discount, scent, brandID, defaultImg, listV));
+            }
+            return products;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Đóng kết nối và các tài nguyên khác ở đây
         }
-        return products;
-
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    } finally {
-        // Đóng kết nối và các tài nguyên khác ở đây
+        return null;
     }
-    return null;
+
 }
-
-
-   
-    }
