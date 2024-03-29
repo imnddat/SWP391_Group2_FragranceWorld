@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import javax.mail.Part;
 
 /**
  *
@@ -56,7 +57,7 @@ public class viewUserProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("viewUserProfile.jsp").forward(request, response);
     } 
 
     /** 
@@ -75,7 +76,11 @@ public class viewUserProfile extends HttpServlet {
        String phone = request.getParameter("phone");
        String address = request.getParameter("address");
        String username = request.getParameter("username");
-       
+//       Part photo = request.getPart("photo");
+//       String path = "/static/files" + photo.getSubmittedFileName();
+//       String filname = request.getServletContext().getContextPath(path);
+//       photo.writeTo(filname);
+//       
        UserDAO dao = new UserDAO();
        User user = dao.updateProfileUser(name, dob, email, phone, address, username);
        if(user!=null){

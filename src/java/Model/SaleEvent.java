@@ -19,7 +19,7 @@ public class SaleEvent {
     public SaleEvent() {
     }
 
-    public SaleEvent(int sid, String title, Date startdate, Date enddate) {
+    public SaleEvent(int sidevent, String title, Date startdate, Date enddate) {
         this.sid = sid;
         this.title = title;
         this.startdate = startdate;
@@ -57,6 +57,6 @@ public class SaleEvent {
     public void setEnddate(Date enddate) {
         this.enddate = enddate;
     }
-    
-    
-}
+
+
+    }

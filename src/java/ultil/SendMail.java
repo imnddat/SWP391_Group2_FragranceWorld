@@ -4,21 +4,21 @@
  */
 package ultil;
 
-/**
- *
- * @author ducanh
- */
+
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SendMail {
 
     public static void send(String to, String sub,
             String msg) {
-        String user = "";
-        String pass = "";
-        Properties props = new Properties();
+        String user = "Thinhlcthe173302@fpt.edu.vn";
+        String pass = "nejc lcjq wsaj zoka";
+        Properties props = System.getProperties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
@@ -41,8 +41,12 @@ public class SendMail {
             e.printStackTrace();
         }
     }
-    
+
 //    public static void main(String[] args) {
-//        send("nhivty01082003@gmail.com", "cuc cut", "dau buoi");
+//        String recipient = "mnguyenan94@gmail.com";
+//        String subject = "Test Email";
+//        String message = "This is a test email.";
+//
+//        send(recipient, subject, message);
 //    }
 }

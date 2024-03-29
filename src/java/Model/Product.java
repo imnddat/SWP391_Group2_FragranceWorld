@@ -27,6 +27,7 @@ public class Product {
     Gender genders;
     private ArrayList<Volume> volumes;
     private ArrayList<Sale> sales;
+    Sale saless;
 
     
     public Product() {
@@ -45,6 +46,35 @@ public class Product {
         this.defaultImg = defaultImg;
     }
 
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, Brand brands) {
+        this.id = id;
+        this.description = description;
+        this.genderID = genderID;
+        this.nameProduct = nameProduct;
+        this.codeProduct = codeProduct;
+        this.discount = discount;
+        this.scent = scent;
+        this.brandID = brandID;
+        this.defaultImg = defaultImg;
+        this.brands = brands;
+    }
+
+    public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, ArrayList<Volume> volumes, Sale saless) {
+        this.id = id;
+        this.description = description;
+        this.genderID = genderID;
+        this.nameProduct = nameProduct;
+        this.codeProduct = codeProduct;
+        this.discount = discount;
+        this.scent = scent;
+        this.brandID = brandID;
+        this.defaultImg = defaultImg;
+        this.volumes = volumes;
+        this.saless = saless;
+    }
+
+    
+    
     public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, Brand brands, ArrayList<Volume> volumes) {
         this.id = id;
         this.description = description;
@@ -102,6 +132,7 @@ public class Product {
         this.volumes = volumes;
         this.sales = sales;
     }
+    
 
     public Product(int id, String description, int genderID, String nameProduct, String codeProduct, int discount, String scent, int brandID, String defaultImg, Brand brands, Gender genders, ArrayList<Volume> volumes) {
         this.id = id;
@@ -118,9 +149,6 @@ public class Product {
         this.volumes = volumes;
     }
 
-  
-
-    
  
 
     public int getId() {
@@ -228,11 +256,14 @@ public class Product {
         this.genders = genders;
     }
 
+    public Sale getSaless() {
+        return saless;
+    }
+
+    public void setSaless(Sale saless) {
+        this.saless = saless;
+    }
+
     
 
-
-   
-    
-    
-    
 }

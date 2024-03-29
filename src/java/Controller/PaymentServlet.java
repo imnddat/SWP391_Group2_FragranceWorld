@@ -4,6 +4,9 @@
  */
 package Controller;
 
+import DAO.OrderDAO;
+import Model.Cart;
+import Model.Order;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
@@ -22,6 +25,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import ultil.vnpay.Config;
 
@@ -71,7 +75,6 @@ public class PaymentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         request.getRequestDispatcher("test/vnpay_pay.jsp").forward(request, response);
     }
 
@@ -86,6 +89,9 @@ public class PaymentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //create order
+        createOrder(request);
+        
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
@@ -94,8 +100,10 @@ public class PaymentServlet extends HttpServlet {
         long amount = ((long) Double.parseDouble(request.getParameter("amount"))) * 1000000;
         //System.out.println("The price: "+amount);
         String bankCode = "";
-
-        String vnp_TxnRef = Config.getRandomNumber(8);
+        
+        HttpSession session = request.getSession();
+        String vnp_TxnRef = Integer.toString((int)session.getAttribute("orderid"));
+        session.removeAttribute("orderid");
         String vnp_IpAddr = Config.getIpAddress(request);
 
         String vnp_TmnCode = Config.vnp_TmnCode;
@@ -169,6 +177,16 @@ public class PaymentServlet extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    private void createOrder(HttpServletRequest request){
+        OrderDAO order = new OrderDAO();
+        HttpSession session = request.getSession();
+        Cart cart = new Cart((List) session.getAttribute("cart"));
+        Order orderr = (Order)session.getAttribute("orderObject");
+        int oid = order.createOrder(orderr, cart, "VN Pay");
+        session.removeAttribute("orderObject");
+        session.setAttribute("orderid", oid);
+    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

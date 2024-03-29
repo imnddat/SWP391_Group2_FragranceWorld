@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class BrandDAO extends DBConnection {
 
-    public ArrayList<Brand> getAll() throws Exception {
+    public ArrayList<Brand> getAll()  {
         PreparedStatement stm = null;
         ResultSet rs = null;
         ArrayList<Brand> brands = new ArrayList<>();
@@ -39,17 +39,7 @@ public class BrandDAO extends DBConnection {
         } catch (SQLException ex) {
             Logger.getLogger(BrandDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                closeResultSet(rs);
-                closePreparedStatement(stm);
-                closeConnection(connection);
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } 
         return null;
     }
     
@@ -72,17 +62,7 @@ public class BrandDAO extends DBConnection {
         } catch (SQLException ex) {
             Logger.getLogger(BrandDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                closeResultSet(rs);
-                closePreparedStatement(stm);
-                closeConnection(connection);
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } 
         return null;
     }
     

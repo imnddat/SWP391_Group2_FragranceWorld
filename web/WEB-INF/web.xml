@@ -9,10 +9,6 @@
         <servlet-class>Controller.HomeController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <servlet-class>Controller.ResetPasswordController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>Controller.ChangePasswordController</servlet-class>
     </servlet>
@@ -57,16 +53,124 @@
         <servlet-class>Controller.testServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DetailProductController</servlet-name>
-        <servlet-class>Controller.DetailProductController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SignOut</servlet-name>
         <servlet-class>Controller.SignOut</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>paymentcomplete</servlet-name>
         <servlet-class>Controller.PaymentComplete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>profileSetting</servlet-name>
+        <servlet-class>Controller.profileSetting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditUserProfile</servlet-name>
+        <servlet-class>Controller.EditUserProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>allOrders</servlet-name>
+        <servlet-class>Controller.ViewAllOrders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Order</servlet-name>
+        <servlet-class>Controller.Order</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PayLater</servlet-name>
+        <servlet-class>Controller.PayLater</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackController</servlet-name>
+        <servlet-class>Controller.FeedbackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>verifyUser</servlet-name>
+        <servlet-class>Controller.verifyUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPassword</servlet-name>
+        <servlet-class>Controller.ForgotPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyOTPServlet</servlet-name>
+        <servlet-class>Controller.VerifyOTPServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCustomer</servlet-name>
+        <servlet-class>controlleradmin.ListCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListStaff</servlet-name>
+        <servlet-class>controlleradmin.ListStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>controlleradmin.AddProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>controlleradmin.UpdateProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>controlleradmin.DeleteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffProfile</servlet-name>
+        <servlet-class>controlleradmin.StaffProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerProfile</servlet-name>
+        <servlet-class>controlleradmin.CustomerProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBan</servlet-name>
+        <servlet-class>controlleradmin.UserBan</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserStatus</servlet-name>
+        <servlet-class>controlleradmin.UserStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStaff</servlet-name>
+        <servlet-class>controlleradmin.AddStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProduct</servlet-name>
+        <servlet-class>controlleradmin.ListProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Dashboard</servlet-name>
+        <servlet-class>controlleradmin.Dashboard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetailController</servlet-name>
+        <servlet-class>Controller.ProductDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.ListSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.DeleteSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.AddSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSaleEvent</servlet-name>
+        <servlet-class>controlleradmin.UpdateSaleEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProductSale</servlet-name>
+        <servlet-class>controlleradmin.ListProductSale</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailProductController</servlet-name>
+        <servlet-class>Controller.DetailProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -75,10 +179,6 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <url-pattern>/ResetPasswordController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -128,16 +228,120 @@
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DetailProductController</servlet-name>
-        <url-pattern>/DetailProductController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SignOut</servlet-name>
         <url-pattern>/signout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>paymentcomplete</servlet-name>
-        <url-pattern>/paymentcomplete</url-pattern>      
+        <url-pattern>/paymentcomplete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profileSetting</servlet-name>
+        <url-pattern>/profilesetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserProfile</servlet-name>
+        <url-pattern>/edituserprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>allOrders</servlet-name>
+        <url-pattern>/allorders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Order</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayLater</servlet-name>
+        <url-pattern>/paylater</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackController</servlet-name>
+        <url-pattern>/FeedbackController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>verifyUser</servlet-name>
+        <url-pattern>/verifyUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPassword</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyOTPServlet</servlet-name>
+        <url-pattern>/verifyotp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCustomer</servlet-name>
+        <url-pattern>/listcustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListStaff</servlet-name>
+        <url-pattern>/liststaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/updateproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/deleteproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffProfile</servlet-name>
+        <url-pattern>/staffprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerProfile</servlet-name>
+        <url-pattern>/customerprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBan</servlet-name>
+        <url-pattern>/userban</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserStatus</servlet-name>
+        <url-pattern>/userstatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaff</servlet-name>
+        <url-pattern>/addstaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProduct</servlet-name>
+        <url-pattern>/listproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Dashboard</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailController</servlet-name>
+        <url-pattern>/ProductDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListSaleEvent</servlet-name>
+        <url-pattern>/listsaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSaleEvent</servlet-name>
+        <url-pattern>/seletesaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSaleEvent</servlet-name>
+        <url-pattern>/addsaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSaleEvent</servlet-name>
+        <url-pattern>/updatesaleevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProductSale</servlet-name>
+        <url-pattern>/listproductsale</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

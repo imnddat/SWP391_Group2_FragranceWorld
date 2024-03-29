@@ -99,7 +99,7 @@ public class ManageCart extends HttpServlet {
         try {
             id = Integer.parseInt(pId);
             quantity = Integer.parseInt(pQuantity);
-            if (pVolume == null) {
+            if (pVolume == null || pVolume.isEmpty()) {
                 pVolume = "30";
                 price = pd.getProductPrice(id, pVolume);
             } else {
@@ -109,7 +109,7 @@ public class ManageCart extends HttpServlet {
             //double price = p.getPrice();
             if (quantity == 0) {
                 cart.removeItem(id);
-            } else {
+            } else {              
                 Item item = new Item(p, quantity, price, pVolume);
                 cart.addItem(item);
             }

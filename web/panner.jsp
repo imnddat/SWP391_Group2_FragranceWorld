@@ -121,7 +121,7 @@
                     <nav id="nav">
                         <ul>
                             <li>
-                                <a class="drop-link" href="homepage1.html">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
+                                <a class="" href="HomeController">HOME <i class="fa fa-angle-down hidden-lg hidden-md" aria-hidden="true"></i></a>
 
                             </li>
                             <li class="drop">
@@ -140,9 +140,9 @@
 
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="ListProductViewController?id=1">Product Boy</a></li>
-                                                            <li><a href="ListProductViewController?id=2">Product Girl</a></li>
-                                                            <li><a href="ListProductViewController?id=3">Product Unisex</a></li>
+                                                            <li><a href="ListProductViewController?id=1"> Man</a></li>
+                                                            <li><a href="ListProductViewController?id=2"> Women</a></li>
+                                                            <li><a href="ListProductViewController?id=3"> Unisex</a></li>
                                                         </ul>
                                                     </div>
 
@@ -196,12 +196,13 @@
                                                     <strong class="title"><a href="#" class="mt-subopener">PERFUME BRAND</a></strong>
                                                     <div class="sub-drop">
                                                         <ul>
-                                                            <li><a href="#?brandID">Gucci</a></li>
-                                                            <li><a href="#">Dior</a></li>
-                                                            <li><a href="#">Icss</a></li>
-                                                            <li><a href="#">Food Storage Boxes</a></li>
-                                                            <li><a href="#">Spice Jars</a></li>
-                                                            <li><a href="#">Napskins</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Moncblanc">Moncblanc</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Dior">Dior</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Chanel">Chanel</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Armaf">Armaf</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Gucci">Gucci</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Versace">Versace</a></li>
+                                                            <li><a href="ListProductViewController?brandSort=Tom Ford">Tom Ford</a></li>
 
                                                         </ul>
                                                     </div>
@@ -293,19 +294,23 @@
                     <span class="mt-side-subtitle">CREATE NEW ACCOUNT</span>
                     <p>Create your very own account</p>
                 </header>
-                <form action="#">
-                    <fieldset>
-                        <input type="text" placeholder="Username or email address" class="input">
-                        <button type="submit" class="btn-type1">Register</button>
-                    </fieldset>
-                </form>
+                <a href="register" class="btn-type1">Register</a>
             </div>
         </c:if>
 
         <c:if test="${sessionScope.currentUser ne null}">
             <strong class="mt-side-title"> Xin chao ${sessionScope.currentUser.name}</strong>
-            <a href="profile">Edit profile</a>
-            <a href="signout">Sign Out</a>
+            <!--            <div class="text-center"><a href="profile" >Edit profile</a></div>
+                        <div class="text-center"><a href="signout" >Sign Out</a></div>-->
+            <ul class="list-group">
+                <li class="text-center">
+                    <a href="profilesetting"><h2>Profile setting</h2></a>
+                </li>
+                <li class="text-center">
+                    <a href="signout"><h2>Sign Out</h2></a>
+                </li>
+            </ul>
+
         </c:if>
         <!-- mt side widget end here -->
     </div>
@@ -325,7 +330,7 @@
                                                         var deleteAllUrl = contextPath + servletPath;
                                                         var action1 = "deleteAll";
 
-                                                        // S? d?ng AJAX ?? g?i yêu c?u xóa
+                                                        // S? d?ng AJAX ?? g?i y?u c?u x?a
                                                         $.ajax({
                                                             type: "GET",
                                                             url: deleteAllUrl,
@@ -333,7 +338,7 @@
                                                                 action: action1
                                                             },
                                                             success: function () {
-                                                                // C?p nh?t giao di?n ng??i dùng ho?c th?c hi?n các hành ??ng c?n thi?t sau khi xóa
+                                                                // C?p nh?t giao di?n ng??i d?ng ho?c th?c hi?n c?c h?nh ??ng c?n thi?t sau khi x?a
                                                                 console.log("Delete successful");
                                                                 $("#wishlist-size").text(0);
                                                                 $(".wishlistItem").empty();
@@ -344,7 +349,7 @@
                                                         });
                                                     }
 
-                                                    // Ng?n ch?n hành vi m?c ??nh c?a th? <a>
+                                                    // Ng?n ch?n h?nh vi m?c ??nh c?a th? <a>
                                                     event.preventDefault();
                                                     return false;
                                                 }
@@ -352,6 +357,6 @@
 
 <script>
     var currentUser = '<%= session.getAttribute("currentUser") %>';
-    console.log("currentUser:", currentUser);
+    //console.log("currentUser:", currentUser);
 </script>
 <script src="${pageContext.request.contextPath}/js/checkCurrentUser.js"></script>

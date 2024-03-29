@@ -11,11 +11,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import Model.Constants;
 import Model.User;
 import Model.UserGoogleDTO;
+import jakarta.servlet.http.HttpSession;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginGoogleHandler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,16 +26,63 @@ public class LoginGoogleHandler extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {      
         String code = request.getParameter("code");
         String accessToken = getToken(code);
         UserGoogleDTO user = getUserInfo(accessToken);
         System.out.println(user);
-        // Chuyển hướng đến Servlet2
+        // xu li login
+        HttpSession session = request.getSession();
+        JsonObject jsonResponse = new JsonObject();
+        String email = user.getEmail();
+        String fullname = user.getName();
+        UserDAO udao = new UserDAO();
+        User user1=null;
+        System.out.println("2 email:"+email);
+        System.out.println("3 fullname: "+fullname);
+        try {
+            //kiem tra xem user có trong database chua
+             user1 = udao.getUserByMail(email);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginGoogleHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("3:" + user1);
         
+        if (session.getAttribute("currentUser") != null) {
+            //xóa tất cả session!
+            session.invalidate();
+            session = request.getSession();
+        }
+        
+        if(user1==null){
+            User u = new User(null, null, email, fullname, null, null);
+            try {
+                udao.createUser(u);
+            } catch (Exception ex) {
+                System.out.println("không add được user");
+                Logger.getLogger(LoginGoogleHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            session.setAttribute("currentUser", u);
+            response.sendRedirect(request.getContextPath()+"/HomeController");
+        }else{
+            if (user1.getBanned() == 1) {
+                jsonResponse.addProperty("errorMessage", "Access denied!");
+                request.getRequestDispatcher("loginpage.jsp").forward(request, response);
+            } else {
+                session.setAttribute("currentUser", user1);
+                if (user1.getRoleID() == 1) {
+                    //chuyển hướng đến trang addmin
+                    //response.sendRedirect("adminHome");
+                    //request.getRequestDispatcher("adminHome.jsp").forward(request, response);
+                } else if (user1.getRoleID() == 3) {
+                    response.sendRedirect(request.getContextPath() + "/HomeController");
+                    //jsonResponse.addProperty("redirectURL", request.getContextPath() + "/HomeController");
+                    //request.getRequestDispatcher("view/homePage.jsp").forward(request, response);
+                }
+            }
+        }
         //request.getRequestDispatcher("/HomeController").forward(request, response);
-        response.sendRedirect(request.getContextPath()+"/HomeController");
+        
 
 //        request.setAttribute("id", userGoogleDTO.getId());
 //        request.setAttribute("name", userGoogleDTO.getName());

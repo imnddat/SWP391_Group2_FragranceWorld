@@ -13,7 +13,6 @@
         <meta charset="utf-8">
         <!-- set the viewport width and initial-scale on mobile devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <!-- include the site stylesheet -->
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
         <!-- include the site stylesheet -->
@@ -60,63 +59,76 @@
                                 <!-- shop-widget filter-widget of the Page start here -->
                                 <section class="shop-widget filter-widget bg-grey">
                                     <h2>FILTER</h2>
+
+                                    <!-- search by name -->    
+                                    <form action="ListProductViewController" id="searchbyName">
+                                        <div class="input-group" style="display: flex">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Search by name"
+                                                name="searchbyName"
+                                                value="${searchbyNames}"
+                                                />
+                                            <div class="input-group-append">
+                                                <button class="search-button btn btn-primary" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <br>
+
+
                                     <span class="sub-title">Filter by Brands</span>
                                     <!-- nice-form start here -->
-                                    <form method="get" action="ListProductViewController">
+                                    <c:set var="listirand" value="${requestScope.listbrand}"/> 
+                                    <c:set var="cid" value="${requestScope.cid}"/> 
+                                    <form action="ListProductViewController">
                                         <ul class="list-unstyled nice-form">
-                                            <li>
-                                                <label for="check-1">
-                                                    <input id="check-1" name="brandID" value="" type="checkbox">
-                                                    <span class="fake-input"></span>
-                                                    <span class="fake-label">Alll</span>
-                                                </label>
-                                                <span class="num">2</span>
-                                            </li>
-                                            <li>
-                                                <label for="check-1">
-                                                    <input id="check-1" name="brandID" value="id brands" type="checkbox">
-                                                    <span class="fake-input"></span>
-                                                    <span class="fake-label">Casali</span>
-                                                </label>
-                                                <span class="num">2</span>
-                                            </li>
+                                            <c:forEach begin="0" end="${listirand.size()-1}" var="i">
+                                                <li>
+                                                    <label >
+                                                        <input type="checkbox" name="idbrands" value="${listirand.get(i).getId()}" 
 
+                                                               <c:forEach var="b" items="${bvalues}">
+                                                                   ${b == listirand.get(i).getId() ?"checked":""}
+                                                               </c:forEach>
+                                                               onclick="this.form.submit()"    >
+                                                        <span class="fake-label">${listirand.get(i).getName()} 
+                                                        </span>
+                                                    </label>
+                                                </li>
+                                            </c:forEach>                                          
                                         </ul><!-- nice-form end here -->
                                     </form>
                                     <span class="sub-title">Filter by Price</span>
-                                    <form method="get" action="ListProductViewController">
-                                        <div class="price-range">
-
-                                            <div class="range-slider">
-                                                <span class="dot"></span>
-                                                <span class="dot dot2"></span>
-                                            </div>
-                                            <span class="price">
-                                               From: <input type="number" name="priceFrom"> To <input type="number" name="priceTo"><br>   
-                                            </span>
-                                            <button type="submit" class="filter-btn">Filter</a></button>
-
+                                    <form action="ListProductViewController">
+                                        <div class="price">
+                                            <input type="checkbox" name="filter" value="" onclick="this.form.submit()" />
+                                            <label class="custom-control-label" >All Price </label >
                                         </div>
-                                        <div>
-                                            Search: <input type="text" name="search"><br>
+                                        <div class="price" >
+                                            <input  type="checkbox" name="filter"  value="price-10-100" onclick="this.form.submit()" />
+                                            <label class="custom-control-label"  >$10 - $100</label >
+                                        </div>
+                                        <div class="price" >
+                                            <input type="checkbox" name="filter" value="price-100-250" onclick="this.form.submit()"/>
+                                            <label class="custom-control-label"  >$100 - $250</label >
+                                        </div>
+                                        <div class="price">
+                                            <input type="checkbox" name="filter" value="price-250-500" onclick="this.form.submit()" />
+                                            <label class="custom-control-label" >$250 - $500</label  >
+                                        </div>
+                                        <div class="price">
+                                            <input  type="checkbox" name="filter" value="price-500up" onclick="this.form.submit()" />
+                                            <label  >$500+</label>
                                         </div>
                                     </form>
                                 </section><!-- shop-widget filter-widget of the Page end here -->
                                 <!-- shop-widget of the Page start here -->
-                                <section class="shop-widget">
-                                    <h2>PERFUME BRAND</h2>
-                                    <form method="get" action="ListProductViewController">
-                                        <!-- category list start here -->
-                                        <ul class="list-unstyled category-list">
-                                            <li>
-                                                <a href="#">
-                                                    <span class="name">CHAIRS</span>
-                                                    <span class="num">12</span>
-                                                </a>
-                                            </li>
-                                        </ul><!-- category list end here -->
-                                    </form>
-                                </section><!-- shop-widget of the Page end here -->
+
 
                             </aside><!-- sidebar of the Page end here -->
 
@@ -132,10 +144,10 @@
                                                 </a>
                                                 <div class="drop">
                                                     <ul class="list-unstyled">
-                                                        <li value=" oder by p.[nameProduct] asc "><a href="/teenconroller?sortid=1">Name: Low to Hight </a></li>
-                                                        <li value=" oder by p.[nameProduct] desc "><a href="/teenconroller?sortid=2">Name: Hight to Low </a></li>
-                                                        <li value=" ORDER BY vp.price ASC "><a href="/teenconroller?sortid=3">Price: Low to Hight</a></li>
-                                                        <li value=" ORDER BY vp.price DESC "><a href="/teenconroller?sortid=3">Price: Hight to Low</a></li>
+                                                        <li ><a href="./ListProductViewController?sortType=1&id=${requestScope.id}&volumeSearchCapacity=${requestScope.volumeSearchCapacity}&productSearchScent=${requestScope.productSearchScent}&brandSortMakebyFrom=${requestScope.brandSortMakebyFrom}&brandSort=${requestScope.brandSort}&page=1&searchbyName=${searchbyNames}">Name: A-Z </a></li>
+                                                        <li ><a href="./ListProductViewController?sortType=2&id=${requestScope.id}&volumeSearchCapacity=${requestScope.volumeSearchCapacity}&productSearchScent=${requestScope.productSearchScent}&brandSortMakebyFrom=${requestScope.brandSortMakebyFrom}&brandSort=${requestScope.brandSort}&page=1&searchbyName=${searchbyNames}">Name: Z-A</a></li>
+                                                        <li ><a href="./ListProductViewController?sortType=3&id=${requestScope.id}&volumeSearchCapacity=${requestScope.volumeSearchCapacity}&productSearchScent=${requestScope.productSearchScent}&brandSortMakebyFrom=${requestScope.brandSortMakebyFrom}&brandSort=${requestScope.brandSort}&page=1&searchbyName=${searchbyNames}">Price: Low to Hight</a></li>
+                                                        <li ><a href="ListProductViewController?sortType=4&id=${requestScope.id}&volumeSearchCapacity=${requestScope.volumeSearchCapacity}&productSearchScent=${requestScope.productSearchScent}&brandSortMakebyFrom=${requestScope.brandSortMakebyFrom}&brandSort=${requestScope.brandSort}&page=1&searchbyName=${searchbyNames}">Price: Hight to Low</a> </li>
                                                     </ul>
                                                 </div>
                                             </li>
@@ -145,16 +157,18 @@
                                     </div><!-- btn-box end here -->
                                     <!-- mt-textbox start here -->
                                     <div class="mt-textbox">
-                                        <p>View all product </p>
+                                        <p><a hrer="#">View all product</a></p>
                                     </div><!-- mt-textbox end here -->
                                 </header><!-- mt shoplist header end here -->
 
-
-
                                 <!-- mt productlisthold start here -->
 
-                                <c:forEach items="${requestScope.listProduct}" var="p" >   
-                                    <ul class="mt-productlisthold list-inline">     
+
+                                <ul class="mt-productlisthold list-inline"> 
+
+
+                                    <c:forEach items="${requestScope.listProduct}" var="p" >
+
                                         <li>
 
                                             <!-- mt product1 large start here -->
@@ -162,7 +176,7 @@
                                                 <div class="box">
                                                     <div class="b1">
                                                         <div class="b2">
-                                                            <a href="product-detail.html"><img src="${p.defaultImg}" alt="image description"></a>
+                                                            <a href="ProductDetailController?productId=${p.getId()}"><img src="${p.defaultImg}" alt="image description"></a>
                                                             <ul class="mt-stars">
                                                                 <li><i class="fa fa-star"></i></li>
                                                                 <li><i class="fa fa-star"></i></li>
@@ -170,32 +184,42 @@
                                                                 <li><i class="fa fa-star-o"></i></li>
                                                             </ul>
                                                             <ul class="links">
-                                                                <li><a href="#"><i class="icon-handbag"></i><span>Add to Cart</span></a></li>
-                                                                <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
-                                                                <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                                <form class="addToCartForm" action="cart" method="post">
+                                                                    <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>                                                         
+                                                                    <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                                    <input type="hidden" name="id" value="${p.getId()}" />
+                                                                    <input type="hidden" name="quantity" value="1" />
+                                                                    <input type="hidden" name="price" value="${p.getVolumes().get(0).getPrice()}" />
+                                                                    <input type="hidden" name="volume" value="${p.getVolumes().get(0).getCapacity()}" />
+                                                                </form>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="txt">
-                                                    <strong class="title"><a href="product-detail.html">${p.nameProduct}</a></strong>
+                                                    <strong class="title"><a href="ProductDetailController?productId=${p.getId()}">${p.nameProduct}</a></strong>
                                                     <span class="price"><i class="fa fa-eur"></i> <span>$${p.getVolumes().get(0).getPrice()}</span></span>
+
+
                                                 </div>
                                             </div><!-- mt product1 center end here -->
 
-                                        </li>	 
-                                    </ul><!-- mt productlisthold end here -->      
-                                </c:forEach> 
+                                        </li>
 
+                                    </c:forEach> 
+                                </ul><!-- mt productlisthold end here -->      
 
                                 <!-- mt pagination start here -->
-                                <c:forEach begin="${1}" end="${requestScope.num}" step="1" var="i">
-                                    <nav class="mt-pagination">
-                                        <ul class="list-inline">
-                                            <li><a class="${i==page?"active":""}" href="ListProductViewController?id=${requestScope.id}&page=${i}">${i}</a></li>       
-                                        </ul>
-                                    </nav><!-- mt pagination end here -->
-                                </c:forEach> 
+                                <nav class="mt-pagination">
+                                    <ul class="list-inline">
+                                        <c:set var="k" value="${requestScope.searchbyName}"/> 
+                                        <c:forEach begin="${1}" end="${requestScope.num}" step="1" var="i">
+                                            <li><a class="${i==page?"active":""}" href="ListProductViewController?sortType=1&id=${requestScope.id}&volumeSearchCapacity=${requestScope.volumeSearchCapacity}&productSearchScent=${requestScope.productSearchScent}&brandSortMakebyFrom=${requestScope.brandSortMakebyFrom}&brandSort=${requestScope.brandSort}&page=${i}&searchbyName=${searchbyNames}">${i}</a></li>      
+                                            </c:forEach> 
+                                    </ul>
+                                </nav><!-- mt pagination end here -->
+
                             </div>
 
                         </div>
@@ -205,6 +229,9 @@
             </div><!-- W1 end here -->
             <span id="back-top" class="fa fa-arrow-up"></span>
         </div>
+
+        <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>    
+        <script src="${pageContext.request.contextPath}/js/addToWishlist.js"></script>
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->

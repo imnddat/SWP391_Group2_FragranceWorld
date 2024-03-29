@@ -14,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,69 +34,6 @@ public class ChangePasswordController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       try (PrintWriter out = response.getWriter()) {
-            UserDAO userDAO = new UserDAO();
-            
-            String password = "";
-            if (request.getParameter("oldPassword")==null){
-                sendDispatcher(request, response, "ChangePassword.jsp");
-            } else password = request.getParameter("oldPassword").trim();  /*Old password , get from request*/
-            
-            String newPassword = "";   
-            if (request.getParameter("newPassword")==null){
-                sendDispatcher(request, response, "ChangePassword.jsp");
-            } else newPassword = request.getParameter("newPassword").trim();  /*New password , get from request*/
-            User currUser = (User) request.getSession().getAttribute("currUser");   /*Current User from session*/
-            /**
-             * If the user enter the wrong old password: redirect back to 
-             * changePassword.jsp and include a message
-             */
-            if (!currUser.getPassword().equals(password)) {
-                request.setAttribute("message", "Old Password incorrect.");
-                request.setAttribute("color", "red");
-                sendDispatcher(request, response, "ChangePassword.jsp");
-            } 
-            /**
-             * If the user enter the new password too long: redirect back to 
-             * changePassword.jsp and include a message
-             */
-            else if (newPassword.length()>255){
-                request.setAttribute("message", "New Password is too long.");
-                request.setAttribute("color", "red");
-                sendDispatcher(request, response, "ChangePassword.jsp");
-            }
-            /**
-             * If the new password is the same as the old password: redirect back to 
-             * changePassword.jsp and include a message
-             */
-            else if (newPassword.equals(password)){
-                request.setAttribute("message", "New Password can't be same as old password.");
-                request.setAttribute("color", "red");
-                sendDispatcher(request, response, "ChangePassword.jsp");
-            }
-            /**
-             * Else: process to change password, redirect back to 
-             * changePassword.jsp and include a message
-             */
-            else {
-                currUser.setPassword(newPassword);
-                int i = userDAO.updateUser(currUser);
-                if (i != 0) {
-                    request.setAttribute("message", "Password changed successfully.");
-                    request.setAttribute("color", "green");
-                    sendDispatcher(request, response, "ChangePassword.jsp");
-                } else {
-                    request.setAttribute("message", "Password changed failed.");
-                    request.setAttribute("color", "red");
-                    sendDispatcher(request, response, "ChangePassword.jsp");
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMess", ex.toString());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
-        
     }
 
     /**
@@ -139,7 +77,28 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+         String username = request.getParameter("username");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        String confirmNewPassword = request.getParameter("confirmNewPassword");
+
+        HttpSession session = request.getSession();
+        UserDAO dao = new UserDAO();
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            session.setAttribute("message", "New password and confirm new password do not match.");
+            response.sendRedirect("profileSetting.jsp");
+            return;
+        }
+
+        if (dao.checkOldPassword(username, oldPassword)) {
+            dao.changePassword1(username, newPassword);
+            session.setAttribute("message", "Password changed successfully.");
+            response.sendRedirect("profileSetting.jsp");
+        } else {
+            session.setAttribute("message", "Old password is incorrect.");
+            response.sendRedirect("profileSetting.jsp");
+        }
     }
 
     /** 

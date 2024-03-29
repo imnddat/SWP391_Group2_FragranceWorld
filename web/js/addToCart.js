@@ -44,7 +44,7 @@ $(document).ready(function () {
                         console.log("img1:", cart[i].productImg);
                         console.log("Name1:", cart[i].productName);
                         console.log("Price1:", cart[i].productPrice);
-                        console.log("Quantity123:", cart[i].productQuantity);
+//                        console.log("Quantity123:", cart[i].productQuantity);
                         var cartRowHtml = `
     <div class="cart-row">
         <a href="#" class="img"><img src="` + cart[i].productImg + `" alt="image" class="img-responsive"></a>

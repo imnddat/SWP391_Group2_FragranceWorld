@@ -62,10 +62,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="txt">
-                                        <h2>register</h2>
-                                        <p>Morbi in erat malesuada, sollicitudin massa at, tristique nisl. Maecenas id eros scelerisque, vulputate tortor quis, efficitur arcu sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Umco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit sse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat <strong>Vestibulum sit amet metus euismod, condimentum lectus id, ultrices sem.</strong></p>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -82,11 +79,15 @@
                                                 <h2 style="margin: 0 0 5px;">register</h2>
                                                 <p>Don’t have an account?</p>
                                             </header>
+                                            <p style="color: red">${requestScope.mess}</p>  
                                             <form action="register" method="post" style="margin: 0 0 80px;">
                                                 <fieldset>
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
                                                             <input type="text" placeholder="Your Name" class="input" name="name">
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12">
+                                                            <input type="date" placeholder="Date Of Birthday" class="input" name="dob">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -110,13 +111,17 @@
                                                             <input type="password" placeholder="Password" class="input" name="password">
                                                         </div>
                                                         <div class="col-xs-12 col-sm-6">
-                                                            <input type="password" placeholder="Re-type Password" class="input" name="retypepassword">
+                                                            <input type="password" placeholder="Re-type Password" class="input" name="confirmPass">
                                                         </div>
                                                     </div>
                                                     <div class="box">
                                                         <a href="#" class="help">Help?</a>
                                                     </div>
                                                     <button type="submit" class="btn-type1">Register Me</button>
+
+                                                    <p class="btn-type1">
+                                                        <a href="ForgotPassword.jsp" style="color: white">Forgot Password</a>
+                                                    </p>
                                                 </fieldset>
                                             </form>
                                             <header>
@@ -137,8 +142,7 @@
                             </div>
                         </div>
                     </section>
-                    
-                    
+
                 </main><!-- Main of the Page end -->
                 <%@include file = "footer.jsp" %>
             </div>

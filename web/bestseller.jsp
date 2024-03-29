@@ -19,19 +19,19 @@
                                     <div class="box">
                                         <div class="b1">
                                             <div class="b2">
-                                                <a href="product-detail.html"><img src="${p.getDefaultImg()}" alt="image description" style="height: 275; width: 285"></a>
+                                                <a href="ProductDetailController?productId=${p.getId()}"><img src="${p.getDefaultImg()}" alt="image description" style="height: 275; width: 285"></a>
                                                 <span class="caption">
                                                     <span class="best-price">Best Price</span>
                                                 </span>
                                                 <ul class="links add">
-                                                    <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">dd to Cart</button></span></a></li>
+                                                    <li><a href="#"><i class="icon-handbag"></i><span><button style="border: none" type="submit">Add to Cart</button></span></a></li>
                                                     <li><a href="#" class="addtowishlist"><i class="icomoon icon-heart-empty"></i></a></li>                                                           
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="txt">
-                                        <strong class="title"><a href="product-detail.html">${p.getNameProduct()}</a></strong>
+                                        <strong class="title"><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>
                                         <span class="price"><i class="fa fa-eur"></i> <span>${p.getVolumes().get(0).getPrice()}</span></span>
                                         
                                         <input type="hidden" name="id" value="${p.getId()}" />

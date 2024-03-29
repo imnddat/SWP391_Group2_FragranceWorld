@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +26,7 @@
         <link rel="stylesheet" href="css/main.css">
         <!-- include the site stylesheet -->
         <link rel="stylesheet" href="css/responsive.css">
+        <script src="js/productDetail.js" defer></script>
     </head>
     <body>
         <!-- main container of all the page elements -->
@@ -39,48 +41,48 @@
             <div class="w1">
                 <%@include file = "panner.jsp" %>
                 <!-- mt side menu start here -->
-                <div class="mt-side-menu">
-                    <!-- mt holder start here -->
-                    <div class="mt-holder">
-                        <a href="#" class="side-close"><span></span><span></span></a>
-                        <strong class="mt-side-title">MY ACCOUNT</strong>
-                        <!-- mt side widget start here -->
-                        <div class="mt-side-widget">
-                            <header>
-                                <span class="mt-side-subtitle">SIGN IN</span>
-                                <p>Welcome back! Sign in to Your Account</p>
-                            </header>
-                            <form action="#">
-                                <fieldset>
-                                    <input type="text" placeholder="Username or email address" class="input">
-                                    <input type="password" placeholder="Password" class="input">
-                                    <div class="box">
-                                        <span class="left"><input class="checkbox" type="checkbox" id="check1"><label for="check1">Remember Me</label></span>
-                                        <a href="#" class="help">Help?</a>
+                <!--                <div class="mt-side-menu">
+                                     mt holder start here 
+                                    <div class="mt-holder">
+                                        <a href="#" class="side-close"><span></span><span></span></a>
+                                        <strong class="mt-side-title">MY ACCOUNT</strong>
+                                         mt side widget start here 
+                                        <div class="mt-side-widget">
+                                            <header>
+                                                <span class="mt-side-subtitle">SIGN IN</span>
+                                                <p>Welcome back! Sign in to Your Account</p>
+                                            </header>
+                                            <form action="#">
+                                                <fieldset>
+                                                    <input type="text" placeholder="Username or email address" class="input">
+                                                    <input type="password" placeholder="Password" class="input">
+                                                    <div class="box">
+                                                        <span class="left"><input class="checkbox" type="checkbox" id="check1"><label for="check1">Remember Me</label></span>
+                                                        <a href="#" class="help">Help?</a>
+                                                    </div>
+                                                    <button type="submit" class="btn-type1">Login</button>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                         mt side widget end here 
+                                        <div class="or-divider"><span class="txt">or</span></div>
+                                         mt side widget start here 
+                                        <div class="mt-side-widget">
+                                            <header>
+                                                <span class="mt-side-subtitle">CREATE NEW ACCOUNT</span>
+                                                <p>Create your very own account</p>
+                                            </header>
+                                            <form action="#">
+                                                <fieldset>
+                                                    <input type="text" placeholder="Username or email address" class="input">
+                                                    <button type="submit" class="btn-type1">Register</button>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                         mt side widget end here 
                                     </div>
-                                    <button type="submit" class="btn-type1">Login</button>
-                                </fieldset>
-                            </form>
-                        </div>
-                        <!-- mt side widget end here -->
-                        <div class="or-divider"><span class="txt">or</span></div>
-                        <!-- mt side widget start here -->
-                        <div class="mt-side-widget">
-                            <header>
-                                <span class="mt-side-subtitle">CREATE NEW ACCOUNT</span>
-                                <p>Create your very own account</p>
-                            </header>
-                            <form action="#">
-                                <fieldset>
-                                    <input type="text" placeholder="Username or email address" class="input">
-                                    <button type="submit" class="btn-type1">Register</button>
-                                </fieldset>
-                            </form>
-                        </div>
-                        <!-- mt side widget end here -->
-                    </div>
-                    <!-- mt holder end here -->
-                </div><!-- mt side menu end here -->
+                                     mt holder end here 
+                                </div> mt side menu end here -->
                 <!-- mt search popup start here -->
                 <div class="mt-search-popup">
                     <div class="mt-holder">
@@ -114,27 +116,20 @@
                                         <!-- Comment List of the Page end -->
                                         <!-- Product Slider of the Page -->
                                         <div class="product-slider">
-                                            <div class="slide">
-                                                <img src="${p.getDefaultImg()}" alt="image descrption">
-                                            </div>
-                                            <div class="slide">
-                                                <img src="${p.getDefaultImg()}" alt="image descrption">
-                                            </div>
-                                            <div class="slide">
-                                                <img src="${p.getDefaultImg()}" alt="image descrption">
-                                            </div>
-                                            <div class="slide">
-                                                <img src="${p.getDefaultImg()}" alt="image descrption">
-                                            </div>
+                                            <c:forEach items="${image}" var="i">
+                                                <div class="slide">
+                                                    <img src="images/${i}" alt="image descrption">
+                                                </div>
+                                            </c:forEach>
                                         </div>
                                         <!-- Product Slider of the Page end -->
                                         <!-- Pagg Slider of the Page -->
                                         <ul class="list-unstyled slick-slider pagg-slider">
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
-                                            <li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>
+                                            <c:forEach items="${image}" var="i">
+                                                <div class="slide">
+                                                    <li><div class="img"><img src="images/${i}" alt="image description"></div></li>
+                                                </div>
+                                            </c:forEach>
                                         </ul>
                                         <!-- Pagg Slider of the Page end -->
                                     </div>
@@ -147,7 +142,7 @@
                                             <li>Products</li>
                                         </ul>
                                         <!-- Breadcrumbs of the Page end -->
-                                        <h2>${p.getNameProduct()}</h2>
+                                        <h2>${product.nameProduct}</h2>
                                         <!-- Rank Rating of the Page -->
                                         <div class="rank-rating">
                                             <ul class="list-unstyled rating-list">
@@ -162,23 +157,48 @@
                                         <ul class="list-unstyled list">
                                             <li><a href="#"><i class="fa fa-share-alt"></i>SHARE</a></li>
                                             <li><a href="#"><i class="fa fa-exchange"></i>COMPARE</a></li>
-                                            <li><a href="#"><i class="fa fa-heart"></i>ADD TO WISHLIST</a></li>
+                                            <form class="addToCartForm">
+                                                <li><a href="#" class="addtowishlist"><i class="fa fa-heart"></i>ADD TO WISHLIST</a></li>
+                                                <input type="hidden" name="id" value="${product.id}"/>                                        
+                                                <input type="hidden" name="quantity" value="1"/>
+                                            </form>
                                         </ul>
-                                        <div class="txt-wrap">
-                                            <p>${p.getDescription()}</p>
+                                        <div class="total-price" style="font-size: 18px"> 
+                                            <p>Hãng: ${brand}</p>
+                                            <p>Giới tính: ${gender}</p>
+                                            <p>Mùi hương: ${scent}</p>
                                         </div>
-                                        <div class="text-holder">
-                                            <span class="price">${v.getPrice()} <del>${v.getPrice()+ 10}</del></span>
+                                        <br>
+                                        <div class="button-holder">
+                                            <p style="font-size: 18px">Lựa chọn dung tích:   </p>
+                                            <c:forEach items="${volume}" var="v">
+                                                <button onclick="updatePrice(this)" value='${v.capacity}' price='${v.price}' style="font-size: 18px">
+                                                    ${v.capacity} ML
+                                                </button>
+                                            </c:forEach>
+                                            </p>
                                         </div>
+                                        <br>
+                                        <br>
+                                        <div class="text-holder" style="display: flex;">
+                                            <span id="field-price" class="price" >$ ${price} </span>
+                                            <%--                                            <del id="field-discount" value="${discount}">${discount * price}</del>--%>
+                                        </div>
+
+
                                         <!-- Product Form of the Page -->
-                                        <form action="#" class="product-form">
+                                        <form action="#" class="product-form addToCartForm">
                                             <fieldset>
                                                 <div class="row-val">
                                                     <label for="qty">qty</label>
-                                                    <input type="number" id="qty" placeholder="1">
+                                                    <input type="number" id="qty" placeholder="1" min="1" max="10">
                                                 </div>
                                                 <div class="row-val">
                                                     <button type="submit">ADD TO CART</button>
+                                                    <input type="hidden" name="id" value="${product.id}"/>
+                                                    <input type="hidden" name="quantity" id="quantity" value="1"/>
+                                                    <input type="hidden" name="price" id="price"/>
+                                                    <input type="hidden" name="volume" id="volume"/>
                                                 </div>
                                             </fieldset>
                                         </form>
@@ -195,69 +215,35 @@
                                 <div class="col-xs-12">
                                     <ul class="mt-tabs text-center text-uppercase">
                                         <li><a href="#tab1" class="active">DESCRIPTION</a></li>
+
                                         <li><a href="#tab3">REVIEWS (12)</a></li>
                                     </ul>
                                     <div class="tab-content">
                                         <div id="tab1">
-                                            <p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair. </p>
-                                            <p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair. <br>Solid oak construction.<br> Back in plywood (2  faces oak veneer) or upholstered in fabric, leather or eco-leather.<br> Seat upholstered in fabric, leather or eco-leather. <br> H 830 x L 585 x P 540 mm.</p>
-                                        </div>
-                                        
+                                            <p>${product.description}</p>									</div>
+
                                         <div id="tab3">
                                             <div class="product-comment">
-                                                <div class="mt-box">
-                                                    <div class="mt-hold">
-                                                        <ul class="mt-star">
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                        </ul>
-                                                        <span class="name">John Wick</span>
-                                                        <time datetime="2016-01-01">09:10 Nov, 19 2016</time>
-                                                    </div>
-                                                    <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit sse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                                                <div class="col-md-6">
+                                                    <h4 class="mb-4">${totalReview} review for ${detail.name}</h4>
+
+                                                    <c:forEach items="${listReview}" var="lr">           
+                                                        <div class="media mb-4">
+                                                            <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                                            <div class="media-body">                                        
+                                                                <h6>${lr.name}<small> - <i>${lr.date}</i></small></h6>
+                                                                <div class="text-primary mb-2">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star-half-alt"></i>
+                                                                    <i class="far fa-star"></i>
+                                                                </div>
+                                                                <p>${lr.review}</p>
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>    
                                                 </div>
-                                                <div class="mt-box">
-                                                    <div class="mt-hold">
-                                                        <ul class="mt-star">
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                        </ul>
-                                                        <span class="name">John Wick</span>
-                                                        <time datetime="2016-01-01">09:10 Nov, 19 2016</time>
-                                                    </div>
-                                                    <p>Usmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit sse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-                                                </div>
-                                                <form action="#" class="p-commentform">
-                                                    <fieldset>
-                                                        <h2>Add  Comment</h2>
-                                                        <div class="mt-row">
-                                                            <label>Rating</label>
-                                                            <ul class="mt-star">
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star-o"></i></li>
-                                                                <li><i class="fa fa-star-o"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="mt-row">
-                                                            <label>Name</label>
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                        <div class="mt-row">
-                                                            <label>E-Mail</label>
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                        <div class="mt-row">
-                                                            <label>Review</label>
-                                                            <textarea class="form-control"></textarea>
-                                                        </div>
-                                                        <button type="submit" class="btn-type4">ADD REVIEW</button>
-                                                    </fieldset>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -265,11 +251,52 @@
                             </div>
                         </div>
                     </div>
+                    <!-- related products start here -->
+                    <div class="related-products wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="container">
+                            <<h2>LATEST PRODUCT</h2>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="bestseller-slider">
+                                        <c:forEach items="${requestScope.MaxPriceProducts}" var="p">                              
+                                            <div class="slide">
+
+                                                <div class="mt-product1 large">
+                                                    <div class="box">
+                                                        <div class="b1">
+                                                            <div class="b2">
+                                                                <a href="ProductDetailController?productId=${p.getId()}"><img src="${p.getDefaultImg()}" alt="image description" style="height: 275; width: 285"></a>
+                                                                <span class="caption">
+                                                                    <span class="best-price">Best Price</span>
+                                                                </span>
+                                                                <ul class="links add">
+                                                                    <li><a href="#"><i class="icon-handbag"></i></a></li>
+                                                                    <li><a href="#"><i class="icomoon icon-heart-empty"></i></a></li>
+                                                                    <li><a href="#"><i class="icomoon icon-exchange"></i></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="txt">
+                                                        <strong class="title"><a href="ProductDetailController?productId=${p.getId()}">${p.getNameProduct()}</a></strong>
+                                                        <span class="price"><i class="fa fa-eur"></i> <span>${p.getVolumes().get(0).getPrice()}</span></span>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </c:forEach>                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- related products end here -->
+                    </div>
                 </main><!-- mt main end here -->
                 <%@include file = "footer.jsp" %>  	
             </div><!-- W1 end here -->
             <span id="back-top" class="fa fa-arrow-up"></span>
         </div>
+        <script src="js/productDetail.js"></script>
+        <script src="${pageContext.request.contextPath}/js/addToCart.js"></script>
+        <script src="${pageContext.request.contextPath}/js/addToWishlist.js"></script>
         <!-- include jQuery -->
         <script src="js/jquery.js"></script>
         <!-- include jQuery -->
