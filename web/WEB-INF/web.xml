@@ -172,6 +172,10 @@
         <servlet-name>DetailProductController</servlet-name>
         <servlet-class>Controller.DetailProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelOrder</servlet-name>
+        <servlet-class>Controller.CancelOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -342,6 +346,10 @@
     <servlet-mapping>
         <servlet-name>ListProductSale</servlet-name>
         <url-pattern>/listproductsale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrder</servlet-name>
+        <url-pattern>/cancelorder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -6,7 +6,6 @@
 package Controller;
 
 import DAO.OrderDAO;
-import Model.OrderWithItems;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class Order extends HttpServlet {
+public class CancelOrder extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +34,10 @@ public class Order extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Order</title>");  
+            out.println("<title>Servlet CancelOrder</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Order at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CancelOrder at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,31 +54,7 @@ public class Order extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        OrderDAO od = new OrderDAO();
-        int id;
-        try {
-            id = Integer.parseInt(request.getParameter("id"));
-        } catch (Exception e) {
-            return;
-        }
-        OrderWithItems owi = od.getOrder(id);
-        if(owi == null){
-            response.sendRedirect("404.jsp");
-        }
-        request.setAttribute("name", owi.getReciverName());
-        request.setAttribute("address", owi.getAddress());
-        request.setAttribute("email", owi.getEmail());
-        request.setAttribute("phone", owi.getPhone());
-        request.setAttribute("note", owi.getNote());
-        request.setAttribute("orderid", owi.getId());
-        request.setAttribute("orderdate", owi.getOrderDate());
-        request.setAttribute("paymentmedthod", owi.getPaymentMedthod());
-        request.setAttribute("status", owi.getStatus());
-        request.setAttribute("itemList", owi.getOrderDetailList());
-        request.setAttribute("totalPrice", owi.getTotalPrice());
         
-        
-        request.getRequestDispatcher("Order.jsp").forward(request, response);
     } 
 
     /** 
@@ -92,7 +67,17 @@ public class Order extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int orderId = 0;
+        OrderDAO od = new OrderDAO();
+        try {
+            orderId = Integer.parseInt(request.getParameter("id"));
+        } catch (Exception e) {
+        }
+        if (orderId == 0 || od.getOrder(orderId) == null){
+            response.sendRedirect("404.jsp");
+        }else{
+            od.cancelOrder(orderId);
+        }
     }
 
     /** 
