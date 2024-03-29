@@ -236,7 +236,7 @@
                                     <ul>
                                         <li><a href="BlogDior.jsp">Dior Blog</a></li>
                                         <li><a href="BlogGucci.jsp">Gucci Blog</a></li>
-                                        <li><a href="BlogTomFord.jsp">Tom Ford Blog</a></li>
+                                        <li><a href="BlogTomford.jsp">Tom Ford Blog</a></li>
                                         <li><a href="BlogGucci.jsp">Chanel Blog</a></li>
                                         <li><a href="BlogVersace.jsp">Versace Blog</a></li>
                                         <li><a href="BlogMoncblanc.jsp">Moncblanc Blog</a></li>

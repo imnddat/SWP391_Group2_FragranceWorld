@@ -80,12 +80,12 @@
                 <ul>
                     <li><a href="listproduct">List of product</a></li>
                     <li><a href="addproduct">Add product</a></li>
-                    <li><a href="#">Warehouse</a></li>
+                    
                 </ul>
                 <h3>Sale event</h3>
                 <ul>
-                    <li><a href="listsaleevent">List of promotional programs</a></li>
-                    <li><a href="#">Add promotion</a></li>
+                    <li><a href="listsaleevent">List of sale event</a></li>
+                    <li><a href="addsaleevent">Add new sale event</a></li>
                     <li><a href="#">Set product discounts</a></li>
                 </ul>
             </div>
