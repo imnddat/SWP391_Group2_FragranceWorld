@@ -68,6 +68,10 @@
         <servlet-name>paymentcomplete</servlet-name>
         <servlet-class>Controller.PaymentComplete</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>Controller.ForgotPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -137,7 +141,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>paymentcomplete</servlet-name>
-        <url-pattern>/paymentcomplete</url-pattern>      
+        <url-pattern>/paymentcomplete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

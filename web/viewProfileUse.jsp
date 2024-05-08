@@ -87,19 +87,16 @@
                             <div class="row mt-2">
                                 <div class="col-md-6">
                                     <label for="username">Username</label>
-                                    <input name="username" type="text" class="form-control"  placeholder="Username" value="${profile.username}" readonly>
+                                    <input name="username" type="text" class="form-control"  placeholder="Username" value="${sessionScope.user.username}" readonly>
                                 </div>
 
                                 <div class="d-flex justify-content-between align-items-center mb-3 p-1 py-5">
                                     <a href="changepassword" class="d-flex flex-row align-items-center back ">
                                         <h6>Change Password</h6>    
                                         <i class="fa fa-long-arrow-right mr-1 mb-1"></i>
-
                                     </a>
-
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-md-8">
                             <div class="p-3 py-5">
@@ -110,54 +107,42 @@
                                     </a>
                                     <h6 class="text-right">Edit Profile</h6>
                                 </div>
-                                <form method="post" action="profile" onsubmit="showSuccessMessage();">
+                                <form method="post" action="viewUserProfile" onsubmit="showSuccessMessage();">
                                     <div class="row mt-2">
                                         <div class="col-md-6">
                                             <label for="name">Name</label>
-                                            <input name="name" type="text" class="form-control" id="name" placeholder="Name" value="${sessionScope.user.name}}">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="dob">Date of Birth</label>
-                                            <input name="dob" type="date" class="form-control" id="date" value="${sessionScope.user.dob}" placeholder="Date of birth">
-                                        </div>
+                                            <input name="name" type="text" class="form-control" id="name" placeholder="Name"
+                                                   value="${sessionScope.user.name}}">
+                                        </div> 
                                     </div>
+                                   
                                     <div class="row mt-3">
                                         <div class="col-md-6">
                                             <label for="email">Email</label>
-                                            <input name="email" type="email" class="form-control" id="email" placeholder="Email" value="${sessionScope.user.mail}">
+                                            <input name="email" type="email" class="form-control" id="email" placeholder="Email"
+                                                   value="${sessionScope.user.mail}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="phone">Phone Number</label>
-                                            <input name="phone" type="tel" class="form-control" id="phone" value="${sessionScope.user.phone}" placeholder="Phone number">
+                                            <input name="phone" type="tel" class="form-control" id="phone"
+                                                   value="${sessionScope.user.phone}" placeholder="Phone number">
                                         </div>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-6">
                                             <label for="address">Address</label>
-                                            <input name="address" type="text" class="form-control" id="address" placeholder="Address" value="${sessionScope.user.address}">
+                                            <input name="address" type="text" class="form-control" id="address" placeholder="Address"
+                                                   value="${sessionScope.user.address}">
                                         </div>
                                         <div class="col-md-6">
 
-                                            <input name="username" type="text" class="form-control" id="username" placeholder="Username" value="${sessionScope.user.username}" hidden>
+                                            <input name="username" type="text" class="form-control" id="username" placeholder="Username"
+                                                   value="${sessionScope.user.username}" hidden>
                                         </div>
                                     </div>
-                                    <div class="row mt-3">
-                                        <div class="form-group col-md-6">
-                                            <label for="question">Security Question</label>
-                                            <select name="question" class="form-control" required>
-                                                <option value="" disabled>Select Security Question</option>
-                                                <option value="What is your favorite color?" ${profile.question == 'What is your favorite color?' ? 'selected' : ''}>What is your favorite color?</option>
-                                                <option value="What is your mother's maiden name?" ${profile.question == 'What is your mother\'s maiden name?' ? 'selected' : ''}>What is your mother's maiden name?</option>
-                                                <option value="What is the name of your first pet?" ${profile.question == 'What is the name of your first pet?' ? 'selected' : ''}>What is the name of your first pet?</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="answer">Answer</label>
-                                            <input name="answer" type="text" class="form-control" id="answer" value="${profile.answer}" placeholder="Answer">
-                                        </div>
-                                    </div>
+                                   
                                     <div class="mt-5 text-right">
-                                        <button class="btn btn-primary profile-button" type="Submit">Save Profile</button>
+                                        <button class="btn btn-primary profile-button" type="Submit" value="Update">Save Profile</button>
                                     </div>
                                     <a href="home.jsp">Back to HomePage</a>
                                 </form>
@@ -171,11 +156,12 @@
 
             </div><!-- W1 end here -->
             <span id="back-top" class="fa fa-arrow-up"></span>
-        </div>
+
         <script>
             function showSuccessMessage() {
                 const successMessage = document.getElementById('successMessage');
                 successMessage.style.display = 'block';
+                 alert("Form submitted successfully!");
             }
             $(document).ready(function () {
                 $('#showPassword').click(function () {

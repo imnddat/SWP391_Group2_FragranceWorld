@@ -295,8 +295,7 @@
                 </header>
                 <form action="#">
                     <fieldset>
-                        <input type="text" placeholder="Username or email address" class="input">
-                        <button type="submit" class="btn-type1">Register</button>
+                        <a href="registerpage.jsp" class="btn-type1">Register</a>
                     </fieldset>
                 </form>
             </div>
@@ -304,6 +303,9 @@
 
         <c:if test="${sessionScope.currentUser ne null}">
             <strong class="mt-side-title"> Xin chao ${sessionScope.currentUser.name}</strong>
+             <a href="ChangePassword.jsp">Chang Pass</a>
+              <a href="ForgotPasswordController">forgot pass</a>
+               <a href="ResetPassword.jsp">reser pass</a>
             <a href="profile">Edit profile</a>
             <a href="signout">Sign Out</a>
         </c:if>

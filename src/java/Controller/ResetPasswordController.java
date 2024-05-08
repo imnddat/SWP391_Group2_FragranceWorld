@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller;
 
 import DAO.UserDAO;
@@ -14,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,77 +22,25 @@ import java.util.logging.Logger;
  * @author Thinkpad
  */
 public class ResetPasswordController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       try (PrintWriter out = response.getWriter()) {
-            String service = request.getParameter("service");
-            UserDAO userDAO = new UserDAO();
-            //get email from page and send a resetPass mail to the address
-            if (service.equalsIgnoreCase("resetPassword")) {
-                String userMail = request.getParameter("enteredUserMail").trim();
-                String mess = "";
-                //check email if it is true
-                if (userMail.length() == 0 || userMail == null) {
-                    mess = "You have to input your email";
-                    request.setAttribute("mess", mess);
-                    request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
-                    return;
-                } else if (userDAO.getUserByMail(userMail) == null) {//if email have yet existed in the system
-                    mess = "Email not existed!";
-                    request.setAttribute("mess", mess);
-                    request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
-                    return;
-                } else {// send reset email to the customer email
-                  //  SystemEmail se = new SystemEmail();
-                    long milis = System.currentTimeMillis(); //save send email time to the link (to check in valid time)
-                    String resetPassLink = "http://localhost:8080/QuizPracticingSystem/login/resetPass.jsp?userMail="
-                            + userMail + "&createTime=" + milis;
-                   // se.sendEmail(userMail, "Reset password link", resetPassLink);
-                    mess = "An reset password link have been sent to your email address";
-                    request.setAttribute("mess", mess);
-                    request.getRequestDispatcher("login/resetPass.jsp").forward(request, response);
-                    return;
-                }
-            }
-
-            //get new pass and save to the database
-            if (service.equalsIgnoreCase("resetPage")) {
-                String mess;
-                String userMail = request.getParameter("userMail");
-                String newPass = request.getParameter("newPass");
-                String confirmNewPass = request.getParameter("confirmNewPass");
-                User user = userDAO.getUserByMail(userMail);
-                if (newPass.equals(confirmNewPass)) { // if cofirm password match the password then change pass
-                    user.setPassword(newPass);
-                    userDAO.updateUser(user);
-                    mess = "Your password have been reset";
-                    request.setAttribute("mess", mess);
-                    request.getRequestDispatcher("login/resetPass.jsp").forward(request, response);
-                    return;
-                } else { // if cofirm password dont match the password then print out alert mess
-                    mess = "Confirm password dont match";
-                    request.setAttribute("mess", mess);
-                    request.getRequestDispatcher("login/resetPass.jsp").forward(request, response);
-                    return;
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(ResetPasswordController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -100,12 +48,13 @@ public class ResetPasswordController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -113,12 +62,56 @@ public class ResetPasswordController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String otp = request.getParameter("otp");
+       // String userMail = request.getParameter("userMail");
+       String email = (String) session.getAttribute("email");
+        String newPassword = request.getParameter("newPassword");
+        String confirmnewPassword = request.getParameter("confirmnewPassword");
+
+        UserDAO dao = new UserDAO();
+    if (!newPassword.equals(confirmnewPassword)) {
+            session.setAttribute("message", "New password and confirm new password do not match.");
+            response.sendRedirect("ResetPassword.jsp");
+        }else{
+           session.setAttribute("message", "Vui Lòng nhập otp");
+            response.sendRedirect("enterotp.jsp");
+        }
+    
+        // Kiểm tra OTP có hợp lệ và đúng với email tương ứng
+        String emailotp = dao.getEmailByOTP(otp);
+        if (emailotp != null && dao.checkOTPMatchesEmail(emailotp, otp)) {
+            // Chuyển hướng người dùng đến trang resetPassword.jsp để đặt mật khẩu mới
+            session.setAttribute("emailotp", emailotp); // Lưu email vào session
+            response.sendRedirect("ResetPassword.jsp");
+        } else {
+            // Xử lý trường hợp OTP không hợp lệ hoặc không tìm thấy email
+            session.setAttribute("message", "OTP không hợp lệ hoặc đã hết hạn. Vui lòng thử lại.");
+            response.sendRedirect("ResetPassword.jsp");
+        }
+        
+    if (email != null && newPassword != null) {
+        
+        dao.updatePassword(email, newPassword); 
+        dao.resetOTP(email);
+        session.setAttribute("message", "Mật khẩu đã được đặt lại thành công. Vui lòng đăng nhập.");
+        response.sendRedirect("loginpage.jsp");
+    } 
+    
+    else {
+        session.setAttribute("message", "Error.");
+        response.sendRedirect("ForgotPassword.jsp");
+    }
+        
+        
+        
+        
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

@@ -12,7 +12,6 @@
         <meta charset="utf-8">
         <!-- set the viewport width and initial-scale on mobile devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SWPgroup2</title>
         <!-- include the site stylesheet -->
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
         <!-- include the site stylesheet -->
@@ -51,19 +50,15 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-12">
-                <div class="txt">
-                  <h1>register</h1>
+                  <div class="txt" style="text-align: center">
+                  <h1>Welcome to Shop Brand </h1>
                 </div>
               </div>
             </div>
           </div>
         </section>
         <!-- Mt About Section of the Page -->
-        
-        
-        
-        
-        
+            
         <!-- Mt Detail Section of the Page -->
         <section class="mt-detail-sec toppadding-zero">
           <div class="container">
@@ -75,53 +70,51 @@
                         <h2 style="margin: 0 0 5px;">register</h2>
                         <p>Don’t have an account?</p>
                       </header>
-                      <form action="#" style="margin: 0 0 80px;">
+                        <form action="register" method="post" style="margin: 0 0 80px;">
                         <fieldset>
                           <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                              <input type="text" placeholder="First Name" class="input">
+                              <input type="text" placeholder="Full Name" name="name" class="input" required>
+                            </div>
+<!--                            <div class="col-xs-12 col-sm-6">
+                              <input type="text" placeholder="DOB" name="dob" class="input" required>
+                            </div>-->
+                          </div>
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                              <input type="text" placeholder="Username" name="username" class="input" required>
                             </div>
                             <div class="col-xs-12 col-sm-6">
-                              <input type="text" placeholder="Last Name" class="input">
+                              <input type="text" placeholder="Your Email" name="email" required class="input">
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                              <input type="text" placeholder="Username" class="input">
+                              <input type="text" placeholder="Your Phone" name="phone" required class="input">
                             </div>
                             <div class="col-xs-12 col-sm-6">
-                              <input type="text" placeholder="Your Email" class="input">
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                              <input type="text" placeholder="Your Phone" class="input">
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                              <textarea placeholder="Address" class="input"></textarea>
+                              <textarea placeholder="Address" name="address" required class="input"></textarea>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                              <input type="password" placeholder="Re-type Password" class="input">
+                                <input type="password" placeholder="Re-type Password" name="password" required class="input">
                             </div>
                             <div class="col-xs-12 col-sm-6">
-                              <input type="password" placeholder="Password" class="input">
+                              <input type="password" placeholder="Password" name="password" required class="input">
                             </div>
                           </div>
                           <div class="box">
-                            <a href="#" class="help">Help?</a>
+                            <a href="about" class="help">Help?</a>
                           </div>
-                          <button type="submit" class="btn-type1">Register Me</button>
+                            <button type="submit" value="register" class="btn-type1">Register Me</button>
                         </fieldset>
                       </form>
                       <header>
                         <h2 style="margin: 0 0 5px;">register with social</h2>
                         <p>Create an account using social</p>
                       </header>
-                        
-                        
-                        
+
                       <ul class="mt-socialicons">
                         <li class="mt-facebook"><a href="#"><i class="fa fa-facebook-f"></i></a></li>
                         <li class="mt-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -136,82 +129,11 @@
             </div>
           </div>
         </section>
+       
         <!-- Mt Detail Section of the Page end -->
         <div class="container">
           <div class="row">
-            <div class="col-xs-12">
-              <!-- banner frame start here -->
-              <div class="banner-frame toppadding-zero">
-                <!-- banner 5 white start here -->
-                <div class="banner-5 white wow fadeInLeft" data-wow-delay="0.4s">
-                  <img src="http://placehold.it/590x565" alt="image description">
-                  <div class="holder">
-                    <div class="texts">
-                      <strong class="title">FURNITURE DESIGNS IDEAS</strong>
-                      <h3><strong>New</strong> Collection</h3>
-                      <p>Consectetur adipisicing elit. Beatae accusamus, optio, repellendus inventore</p>
-                      <span class="price-add">$ 79.00</span>
-                    </div>
-                  </div>
-                </div><!-- banner 5 white end here -->
-                <!-- banner 6 white start here -->
-                <div class="banner-6 white wow fadeInRight" data-wow-delay="0.4s">
-                  <img src="http://placehold.it/275x565" alt="image description">
-                  <div class="holder">
-                    <strong class="sub-title">SOFAS &amp; ARMCHAIRS</strong>
-                    <h3>3 Seater Leather Sofa</h3>
-                    <span class="offer">
-                      <span class="price-less">$ 659.00</span>
-                      <span class="prices">$ 499.00</span>
-                    </span>
-                    <a href="product-detail.html" class="btn-shop">
-                      <span>shop now</span>
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                  </div>
-                </div><!-- banner 5 white end here -->
-                <!-- banner box two start here -->
-                <div class="banner-box two">
-                  <!-- banner 7 right start here -->
-                  <div class="banner-7 right wow fadeInUp" data-wow-delay="0.4s">
-                    <img src="http://placehold.it/295x275" alt="image description">
-                    <div class="holder">
-                      <h2><strong>ACRYLIC FABRIC <br>BEAN BAG</strong></h2>
-                      <ul class="mt-stars">
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star-o"></i></li>
-                      </ul>
-                      <div class="price-tag">
-                        <span class="price">$ 99.00</span>
-                        <a class="shop-now" href="product-detail.html">SHOP NOW</a>
-                      </div>
-                    </div>
-                  </div><!-- banner 7 right end here -->
-                  <!-- banner 8 start here -->
-                  <div class="banner-8 wow fadeInDown" data-wow-delay="0.4s">
-                    <img src="http://placehold.it/295x275" alt="image description">
-                    <div class="holder">
-                      <h2><strong>CHAIR WITH <br>ARMRESTS</strong></h2>
-                      <ul class="mt-stars">
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star-o"></i></li>
-                      </ul>
-                      <div class="price-tag">
-                        <span class="price-off">$ 129.00</span>
-                        <span class="price">$ 99.00</span>
-                        <a class="btn-shop" href="product-detail.html">
-                          <span>HURRY UP!</span> 
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div><!-- banner 8 start here -->
-                </div>
-              </div><!-- banner frame end here -->
+            <div class="col-xs-12">         
             </div>
           </div>
         </div>
